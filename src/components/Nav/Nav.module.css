@@ -1,0 +1,23 @@
+.navigation {
+    margin-top: 0;
+    position: fixed;
+    top: 0px;
+    left: 0%;
+    right: 00px;
+    background-color: rgb(194, 197, 226);
+}
+
+.navigation ul {
+    margin-top: 0;
+    display: flex;
+    list-style: none;
+}
+
+.navigation li {
+    margin-top: 0;
+}
+
+/* 
+.nav Link {
+    color: red
+} */
