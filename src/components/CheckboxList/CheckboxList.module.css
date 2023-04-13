@@ -1,0 +1,5 @@
+.checkbox {
+    font-size: 12px;
+    max-height: 170px;
+    overflow: scroll;
+}
