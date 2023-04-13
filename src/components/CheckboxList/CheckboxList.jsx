@@ -1,19 +1,18 @@
+import Checkbox from '../Checkbox/Checkbox';
 import CheckboxListCss from './CheckboxList.module.css';
 
-function CheckboxList({ points, onChange }) {
+function CheckboxList({ points, onChange, checkedArray }) {
     return (
         <div className={CheckboxListCss.checkbox}>
             <fieldset>
                 {points.map((point) => (
-                    <div key={point.id}>
-                        <label>
-                            {point.name}
-                            <input
-                                type='checkbox'
-                                onChange={(e) => onChange(e.target.checked, point.name)}
-                            />
-                        </label>
-                    </div>
+                    <Checkbox
+                        key={point.id}
+                        label={point.name}
+                        onChange={onChange}
+                        checked={checkedArray.includes(point.id)}
+                        leftAligned={true}
+                    />
                 ))}
             </fieldset>
         </div>

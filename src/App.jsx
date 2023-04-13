@@ -4,7 +4,6 @@ import MainLayout from './components/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
 import Appointment from './pages/Appointment/Appointment';
 import DoctorsContext from './pages/Doctors/DoctorsContext';
-import Doctors from './pages/Doctors/Doctors';
 import Doc from './pages/Doctors/Doctor/Doc';
 import Services from './pages/Services/Services';
 import About from './pages/About/About';
@@ -20,15 +19,8 @@ function App() {
                 <Route path='/' element={<MainLayout />}>
                     <Route index element={<Home />} />
                     <Route path='/doctors'>
-                        <Route
-                            index
-                            element={
-                                <DoctorsContext>
-                                    <Doctors />
-                                </DoctorsContext>
-                            }
-                        />
-                        <Route path='/doctors/:name' element={<Doc />} />
+                        <Route index element={<DoctorsContext />} />
+                        <Route path=':name' element={<Doc />} />
                     </Route>
                     <Route path='/services' element={<Services />} />
                     <Route path='/about' element={<About />} />

@@ -1,82 +1,61 @@
 import { useContext } from 'react';
 import { DocSearchContext } from 'src/context/DocSearchContext';
-import SearchBar from 'src/components/SearchBar/SearchBar';
+import SpecFilter from './SpecFilter';
 import DropDown from 'src/components/DropDown/DropDown';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
+import Checkbox from 'src/components/Checkbox/Checkbox';
 import { specialties } from 'src/data/Specialties';
 import { clinics } from 'src/data/Clinics';
 import DoctorFilterCss from './DoctorFilter.module.css';
 
-function DoctorFilter() {
+function DoctorFilter({ specSearchState }) {
     const [searchParams, setSearchParams] = useContext(DocSearchContext);
 
     return (
         <div className={DoctorFilterCss.filter}>
             <form>
                 <fieldset>
-                    <div>
-                        <label>
-                            Admission to VMS
-                            <input
-                                type='checkbox'
-                                onChange={(e) =>
-                                    setSearchParams({
-                                        ...searchParams,
-                                        worksWithVhi: e.target.checked,
-                                    })
-                                }
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label htmlFor=''>
-                            Works with kids
-                            <input
-                                type='checkbox'
-                                onChange={(e) =>
-                                    setSearchParams({
-                                        ...searchParams,
-                                        worksWithKids: e.target.checked,
-                                    })
-                                }
-                            />
-                        </label>
-                    </div>
+                    <Checkbox
+                        label={'Admission to VMS'}
+                        onChange={(checked) =>
+                            setSearchParams({ ...searchParams, worksWithVhi: checked })
+                        }
+                        checked={searchParams.worksWithVhi}
+                    />
+                    <Checkbox
+                        label={'Works with kids'}
+                        onChange={(checked) =>
+                            setSearchParams({ ...searchParams, worksWithKids: checked })
+                        }
+                        checked={searchParams.worksWithKids}
+                    />
                     <DropDown label={'Clinic'}>
                         <CheckboxList
-                            points={clinics.map((clinic) => ({
-                                ...clinic,
-                                name: clinic.address,
-                            }))}
-                            onChange={handleClinicChange}
+                            points={clinics}
+                            checkedArray={searchParams.clinic.map((c) => c.id)}
+                            onChange={handleChange('clinic', clinics)}
                         />
                     </DropDown>
                     <DropDown label={'Specialization'}>
-                        {/* <SearchBar onChange={()=>} placeholder={'Search by specialization'} /> */}
-                        <CheckboxList points={specialties} onChange={handleSpecChange} />
+                        <SpecFilter
+                            specSearchState={specSearchState}
+                            points={specialties}
+                            checkedArray={searchParams.speciality.map((s) => s.id)}
+                            onChange={handleChange('speciality', specialties)}
+                        />
                     </DropDown>
                 </fieldset>
             </form>
         </div>
     );
 
-    function handleClinicChange() {
-        setSearchParams({
-            ...searchParams,
-        });
-    }
-
-    function handleSpecChange(checked, specName) {
-        const speciality = checked
-            ? [
-                  ...searchParams.speciality,
-                  specialties.find((spec) => spec.name === specName),
-              ]
-            : searchParams.speciality.filter((spec) => spec.name !== specName);
-        setSearchParams({
-            ...searchParams,
-            speciality,
-        });
+    function handleChange(paramName, data) {
+        return function (checked, paramChanged) {
+            const param = checked
+                ? [...searchParams[paramName], data.find((p) => p.name === paramChanged)]
+                : searchParams[paramName].filter((p) => p.name !== paramChanged);
+            setSearchParams({ ...searchParams, [paramName]: param });
+        };
     }
 }
 

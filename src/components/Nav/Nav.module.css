@@ -15,9 +15,19 @@
 
 .navigation li {
     margin-top: 0;
+    margin-bottom: 0;
+    padding: 4px;
 }
 
-/* 
-.nav Link {
-    color: red
-} */
+
+.navigation a {
+    text-decoration: none;
+}
+
+.navigation a:active {
+    color: inherit;
+}
+
+.navigation a:visited {
+    color: inherit;
+}

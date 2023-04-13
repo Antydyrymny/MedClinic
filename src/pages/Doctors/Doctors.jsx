@@ -1,35 +1,39 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { DocSearchContext } from 'src/context/DocSearchContext';
 import { Link } from 'react-router-dom';
 import { doctors } from 'src/data/Doctors';
 import { specialties } from 'src/data/Specialties';
 import { clinics } from 'src/data/Clinics';
 import SearchBar from 'src/components/SearchBar/SearchBar';
+import Button from 'src/components/Button/Button';
 import DoctorFilter from './components/DoctorFilter';
 import DoctorsCss from './Doctors.module.css';
 
 function Doctors() {
     const [searchParams, setSearchParams] = useContext(DocSearchContext);
+    const [specSearch, setSpecSearch] = useState('');
     const docsExpanded = expandDoctors(doctors);
     const docsFiltered = filterDoctors(docsExpanded);
 
     return (
         <section>
             <h1>Doctors</h1>
-            <SearchBar onChange={handleSearchChange} placeholder={'Find a doctor'} />
-            <DoctorFilter />
+            <SearchBar
+                value={searchParams.name}
+                onChange={handleSearchChange}
+                placeholder={'Find a doctor'}
+            />
+            <DoctorFilter specSearchState={{ specSearch, setSpecSearch }} />
             <ul>
                 {docsFiltered.map((doc) => (
                     <div key={doc.id} className={DoctorsCss.doctor}>
-                        <Link
-                            to={`/doctors/${doc.name.split(' ').join('-')}`}
-                            state={doc}
-                        >
+                        <Link to={`/doctors/${doc.name.split(' ').join('-')}`}>
                             {doc.name}
                         </Link>
                     </div>
                 ))}
             </ul>
+            <Button text={'Clear Filter'} onClick={clearFilter} colored={false} />
         </section>
     );
 
@@ -51,7 +55,17 @@ function Doctors() {
                 (name && !doc.name.toLowerCase().includes(name.toLowerCase())) ||
                 (worksWithVhi && !doc.worksWithVhi) ||
                 (worksWithKids && !doc.worksWithKids) ||
-                (clinic.length && !doc.clinic.map((cl) => cl.address).includes(clinic)) ||
+                // Works in ANY of the clinics
+                (clinic.length &&
+                    !clinic.reduce((docWorksInClinic, curClinic) => {
+                        if (
+                            docWorksInClinic ||
+                            doc.clinic.map((c) => c.name).includes(curClinic.name)
+                        ) {
+                            return true;
+                        } else return false;
+                    }, false)) ||
+                // Has ALL the specializations
                 (speciality.length &&
                     speciality.reduce((docLacksSpec, curSpec) => {
                         if (
@@ -69,6 +83,17 @@ function Doctors() {
 
     function handleSearchChange(search) {
         setSearchParams({ ...searchParams, name: search });
+    }
+
+    function clearFilter() {
+        setSearchParams({
+            name: '',
+            worksWithVhi: false,
+            worksWithKids: false,
+            clinic: [],
+            speciality: [],
+        });
+        setSpecSearch('');
     }
 }
 
