@@ -1,22 +1,14 @@
-import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import useRedirect from 'src/hooks/useRedirect';
+import { useParams } from 'react-router-dom';
 import { doctors } from 'src/data/Doctors';
 import { specialties } from 'src/data/Specialties';
 import DocCss from './Doc.module.css';
 
 function Doc() {
-    const navigate = useNavigate();
     const { name } = useParams();
     const doctor = doctors.find((doc) => doc.name === name.split('-').join(' '));
-    useEffect(() => {
-        if (!doctor) {
-            navigate('/Not-Found', { replace: true });
-        }
-    }, [doctor, navigate]);
-
-    if (!doctor) {
-        return null;
-    }
+    useRedirect('/Not-Found', !doctor);
+    if (!doctor) return null;
     const docSpecs = specialties.filter((spec) => doctor.specialtyId.includes(spec.id));
     return (
         <section className='doc'>

@@ -9,7 +9,7 @@ function Nav() {
                     <Link to='/'>Home</Link>
                 </li>
                 <li>
-                    <Link to='/app'>Make an appointment</Link>
+                    <Link to='/app/step1'>Make an appointment</Link>
                 </li>
                 <li>
                     <Link to='/doctors'>Doctors</Link>

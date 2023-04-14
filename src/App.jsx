@@ -1,8 +1,14 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import useClearLocalStorageOnURLMove from './hooks/useClearLocalStorageOnURLMove ';
 import './App.css';
 import MainLayout from './components/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
-import Appointment from './pages/Appointment/Appointment';
+import AppointmentLayout from './pages/Appointment/AppointmentLayout';
+import { appointmentKey } from './data/LocalStorageKeys';
+import AppStep1 from './pages/Appointment/AppStep1';
+import AppStep2 from './pages/Appointment/AppStep2';
+import AppStep3 from './pages/Appointment/AppStep3';
+import AppStep4 from './pages/Appointment/AppStep4';
 import DoctorsContext from './pages/Doctors/DoctorsContext';
 import Doc from './pages/Doctors/Doctor/Doc';
 import Services from './pages/Services/Services';
@@ -12,6 +18,7 @@ import NotFound from './pages/NotFound/NotFound';
 
 function App() {
     const env = import.meta.env.VITE_API_URL;
+    useClearLocalStorageOnURLMove(appointmentKey, '/app');
 
     return (
         <>
@@ -27,7 +34,13 @@ function App() {
                     <Route path='/contacts' element={<Contacts />} />
                     <Route path='*' element={<NotFound />} />
                 </Route>
-                <Route path='/app' element={<Appointment />} />
+                <Route element={<AppointmentLayout />}>
+                    <Route path='/app/step1' element={<AppStep1 />} />
+                    <Route path='/app/step2' element={<AppStep2 />} />
+                    <Route path='/app/step3' element={<AppStep3 />} />
+                    <Route path='/app/step4' element={<AppStep4 />} />
+                    <Route path='/app/*' element={<Navigate to='/app/step1' replace />} />
+                </Route>
             </Routes>
         </>
     );
