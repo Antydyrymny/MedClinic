@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DocSearchContext } from 'src/context/DocSearchContext';
 import Doctors from './Doctors';
 
-const emptyOptions = {
+const doctorFilterSchema = {
     name: '',
     worksWithVhi: false,
     worksWithKids: false,
@@ -11,7 +11,7 @@ const emptyOptions = {
 };
 
 function DoctorsContext() {
-    const [searchParams, setSearchParams] = useState(emptyOptions);
+    const [searchParams, setSearchParams] = useState(doctorFilterSchema);
     return (
         <DocSearchContext.Provider value={[searchParams, setSearchParams]}>
             <Doctors />

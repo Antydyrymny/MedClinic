@@ -1,0 +1,22 @@
+.circle {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin: 0 2em 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.done {
+    background-color: #288DE6;
+}
+
+.active {
+    background-color: #01EEC8;
+}
+
+.empty {
+    background-color: #CED4E0;
+}

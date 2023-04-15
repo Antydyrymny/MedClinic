@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    margin: 2em 0 2em 0;
+    padding: 0;
+    border: 0;
+}
+
+.active,
+.empty {
+    height: 4px;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+.active {
+    background: linear-gradient(90deg, #2F7EEB 0%, #01EEC8 100%);
+}
+
+.empty {
+    background-color: #F0F4FC;
+}

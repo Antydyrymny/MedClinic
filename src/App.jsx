@@ -4,7 +4,7 @@ import './App.css';
 import MainLayout from './components/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
 import AppointmentLayout from './pages/Appointment/AppointmentLayout';
-import { appointmentKey } from './data/LocalStorageKeys';
+import { appointmentKey, previousPage } from './data/LocalStorageKeys';
 import AppStep1 from './pages/Appointment/AppStep1';
 import AppStep2 from './pages/Appointment/AppStep2';
 import AppStep3 from './pages/Appointment/AppStep3';
@@ -18,7 +18,7 @@ import NotFound from './pages/NotFound/NotFound';
 
 function App() {
     const env = import.meta.env.VITE_API_URL;
-    useClearLocalStorageOnURLMove(appointmentKey, '/app');
+    useClearLocalStorageOnURLMove([appointmentKey, previousPage], '/app');
 
     return (
         <>

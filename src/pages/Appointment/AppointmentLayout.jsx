@@ -1,24 +1,60 @@
+import { useEffect } from 'react';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
-import { Outlet, Link } from 'react-router-dom';
+import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
+import useRedirect from 'src/hooks/useRedirect';
+import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
+import { Outlet } from 'react-router-dom';
+import Progress from './components/Progress';
 import { appointmentKey } from 'src/data/LocalStorageKeys';
 import AppointLayoutCss from './AppointmentLayout.module.css';
 
+const appointmentSchema = {
+    count: 0,
+    VHI: false,
+    followUp: false,
+    child: false,
+    openedTab: 'Doctor',
+    doctorId: null,
+    specialityId: null,
+    clinicId: null,
+    date: '',
+    time: '',
+};
+// Regular appointment/VHI coverage
+// Initial appointment/Follow-up appointment
+// Adult/Child
 function AppointmentLayout() {
-    const [state, setState] = useLocalStorageState(appointmentKey, { count: 0 });
+    const [appParams, setAppParams] = useLocalStorageState(
+        appointmentKey,
+        appointmentSchema
+    );
+    // Clear data on page refresh
+    const [wasRefreshed, setWasRefreshed] = useInformOfPageRefresh();
+    useEffect(() => {
+        if (wasRefreshed) setAppParams(appointmentSchema);
+    }, [wasRefreshed, setAppParams]);
+    useRedirect('/app/step1', wasRefreshed);
+    useEffect(() => {
+        if (wasRefreshed) setWasRefreshed(false);
+    }, [wasRefreshed, setWasRefreshed]);
+    if (wasRefreshed) return null;
 
     return (
-        <>
-            <div>Appointment</div>
-            <div>{state.count}</div>
-            <button onClick={() => setState({ ...state, count: state.count + 1 })}>
-                Increment
+        <section className={AppointLayoutCss.app}>
+            <h1>Schedule an appointment online</h1>
+            <div>{appParams.count}</div>
+            <button
+                onClick={() => setAppParams({ ...appParams, count: appParams.count + 1 })}
+            >
+                click
             </button>
-            <br />
-            <Link to={'/app/step1'}>Step1</Link>
-            <br />
-            <Link to={'/app/step2'}>Step2</Link>
-            <Outlet context={state.count} />
-        </>
+            <div className={AppointLayoutCss.wrapper}>
+                <AppointmentFilterContext.Provider value={appParams}>
+                    <Progress />
+                    <Outlet />
+                </AppointmentFilterContext.Provider>
+            </div>
+        </section>
     );
 }
 

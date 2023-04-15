@@ -16,7 +16,7 @@ function DoctorFilter({ specSearchState }) {
             <form>
                 <fieldset>
                     <Checkbox
-                        label={'Admission to VMS'}
+                        label={'VHI coverage'}
                         onChange={(checked) =>
                             setSearchParams({ ...searchParams, worksWithVhi: checked })
                         }

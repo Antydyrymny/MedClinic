@@ -1,0 +1,19 @@
+.line {
+    height: 2px;
+    min-width: 5%;
+    max-width: 17%;
+    margin: 0 2em 0 2em;
+    flex: 1;
+}
+
+.done {
+    background-color: #288DE6;
+}
+
+.active {
+    background: linear-gradient(90deg, rgb(47, 126, 235) 0%, rgb(1, 238, 200) 100%);
+}
+
+.empty {
+    background-color: #CED4E0;
+}
