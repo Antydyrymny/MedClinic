@@ -1,6 +1,6 @@
 .line {
     height: 2px;
-    min-width: 5%;
+    min-width: 50px;
     max-width: 17%;
     margin: 0 2em 0 2em;
     flex: 1;

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import NavLine from './NavLine';
-import NavCircle from './NavCircle';
+import NavCircle from '../NavCircle/NavCircle';
 import NavBlockCss from './NavBlock.module.css';
 
 function NavBlock({ to, label, color, number }) {

@@ -33,7 +33,7 @@ function Doctors() {
                     </div>
                 ))}
             </ul>
-            <Button text={'Clear Filter'} onClick={clearFilter} colored={false} />
+            <Button text={'Clear Filter'} onClick={clearFilter} />
         </section>
     );
 

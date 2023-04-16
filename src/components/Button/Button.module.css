@@ -1,0 +1,34 @@
+.btn {
+    padding: 1.1rem;
+    width: 10rem;
+    text-align: center;
+    border-radius: 1.7rem;
+    cursor: pointer;
+    /* Disable selection */
+    -moz-user-select: none;
+    /* firefox */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE*/
+    user-select: none;
+    /* Standard syntax */
+}
+
+.empty {
+    border: 1px solid #e1e9fc;
+}
+
+.empty:hover {
+    border: 1px solid #5b83db;
+}
+
+.active {
+    background: linear-gradient(90deg, #01EEC8 0%, #2F7EEB 100%);
+    color: #fff;
+}
+
+.done {
+    background: linear-gradient(57deg, rgb(47, 126, 235) 0%, rgb(24, 190, 231) 100%);
+    color: #fff;
+}

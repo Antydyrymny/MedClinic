@@ -1,5 +1,5 @@
-import AppointmentNav from './AppointmentNav';
-import ProgressBar from './ProgressBar';
+import AppointmentNav from '../AppointmentNav/AppointmentNav';
+import ProgressBar from '../ProgressBar/ProgressBar';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';

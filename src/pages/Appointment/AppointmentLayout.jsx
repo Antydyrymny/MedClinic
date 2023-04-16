@@ -4,13 +4,12 @@ import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
 import useRedirect from 'src/hooks/useRedirect';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import { Outlet } from 'react-router-dom';
-import Progress from './components/Progress';
+import Progress from './components/Progress/Progress';
 import { appointmentKey } from 'src/data/LocalStorageKeys';
 import AppointLayoutCss from './AppointmentLayout.module.css';
 
 const appointmentSchema = {
-    count: 0,
-    VHI: false,
+    Vhi: false,
     followUp: false,
     child: false,
     openedTab: 'Doctor',
@@ -20,9 +19,7 @@ const appointmentSchema = {
     date: '',
     time: '',
 };
-// Regular appointment/VHI coverage
-// Initial appointment/Follow-up appointment
-// Adult/Child
+
 function AppointmentLayout() {
     const [appParams, setAppParams] = useLocalStorageState(
         appointmentKey,
@@ -41,18 +38,16 @@ function AppointmentLayout() {
 
     return (
         <section className={AppointLayoutCss.app}>
-            <h1>Schedule an appointment online</h1>
-            <div>{appParams.count}</div>
-            <button
-                onClick={() => setAppParams({ ...appParams, count: appParams.count + 1 })}
-            >
-                click
-            </button>
             <div className={AppointLayoutCss.wrapper}>
-                <AppointmentFilterContext.Provider value={appParams}>
-                    <Progress />
-                    <Outlet />
-                </AppointmentFilterContext.Provider>
+                <h1 className={AppointLayoutCss.heading}>
+                    Schedule an appointment online
+                </h1>
+                <div className={AppointLayoutCss.contentWrapper}>
+                    <AppointmentFilterContext.Provider value={[appParams, setAppParams]}>
+                        <Progress />
+                        <Outlet />
+                    </AppointmentFilterContext.Provider>
+                </div>
             </div>
         </section>
     );

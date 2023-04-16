@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { AppointmentCurStepContext } from 'src/context/AppointmentCurStepContext';
-import NavBlock from './NavBlock';
-import NavLine from './NavLine';
-import DoneSvg from 'src/components/DoneSvg';
+import NavBlock from '../NavBlock/NavBlock';
+import NavLine from '../NavLine/NavLine';
+import DoneSvg from '/src/assets/Pictogram/DoneSvg';
 import AppNavCss from './AppointmentNav.module.css';
 
 function AppointmentNav() {
