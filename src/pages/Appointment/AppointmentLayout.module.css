@@ -7,18 +7,41 @@
     background-color: #f0f4fc;
 }
 
-
-.wrapper {
-    width: 80%;
-}
-
 .heading {
     margin: 3rem 0 3rem 0;
     text-align: left;
+}
+
+.wrapper {
+    width: calc(100% - 380px)
 }
 
 .contentWrapper {
     padding: 2rem 3rem 5rem 3rem;
     background-color: white;
     border-radius: 0.7rem;
+}
+
+@media (max-width: 1650px) {
+    .wrapper {
+        width: calc(100% - 280px);
+    }
+}
+
+@media (max-width: 1400px) {
+    .wrapper {
+        width: calc(100% - 90px);
+    }
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        width: calc(100% - 60px);
+    }
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        width: calc(100% - 30px);
+    }
 }

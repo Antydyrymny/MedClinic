@@ -1,9 +1,8 @@
 .navigation {
     margin-top: 0;
-    position: fixed;
-    top: 0px;
-    left: 0%;
-    right: 00px;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: rgb(194, 197, 226);
 }
 

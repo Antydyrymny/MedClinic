@@ -45,20 +45,3 @@ function AppStep1() {
 }
 
 export default AppStep1;
-//  onClick, text, colored;
-// {
-//     option1, option2, right, onClick, heading;
-// }
-// Regular appointment/VHI coverage
-// Initial appointment/Follow-up appointment
-// Adult/Child
-//   count: 0,
-//     VHI: false,
-//     followUp: false,
-//     child: false,
-//     openedTab: 'Doctor',
-//     doctorId: null,
-//     specialityId: null,
-//     clinicId: null,
-//     date: '',
-//     time: '',

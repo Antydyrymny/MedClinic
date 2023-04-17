@@ -1,15 +1,12 @@
 import AppointmentNav from '../AppointmentNav/AppointmentNav';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
 import { previousPage } from 'src/data/LocalStorageKeys';
 import { AppointmentCurStepContext } from 'src/context/AppointmentCurStepContext';
 import ProgressCss from './Progress.module.css';
 
-function Progress() {
-    const location = useLocation();
-    const currentStep = +location.pathname.at(-1);
+function Progress({ currentStep, permitStep3, permitStep4 }) {
     const [prevStep, setPrevStep] = useLocalStorageState(previousPage, 1);
 
     useEffect(() => {
@@ -19,7 +16,7 @@ function Progress() {
     return (
         <div className={ProgressCss.wrapper}>
             <AppointmentCurStepContext.Provider value={prevStep}>
-                <AppointmentNav />
+                <AppointmentNav permitStep3={permitStep3} permitStep4={permitStep4} />
                 <ProgressBar />
             </AppointmentCurStepContext.Provider>
         </div>

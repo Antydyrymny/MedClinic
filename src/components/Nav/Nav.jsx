@@ -1,9 +1,22 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import NavCss from './Nav.module.css';
 
 function Nav() {
+    const [scroll, setScroll] = useState('0px');
+    useEffect(() => {
+        function handleScroll() {
+            setScroll(document.documentElement.scrollTop);
+        }
+        document.addEventListener('scroll', handleScroll);
+        return () => document.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <nav className={NavCss.navigation}>
+        <nav
+            className={NavCss.navigation}
+            style={scroll > 100 ? { position: 'fixed' } : null}
+        >
             <ul>
                 <li>
                     <Link to='/'>Home</Link>
