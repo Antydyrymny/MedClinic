@@ -5,40 +5,51 @@ function SpecCard({ specialityName, lowestPrice, doctors, onClick }) {
         <div className={SpecCardCss.wrapper} onClick={onClick}>
             <h2 className={SpecCardCss.heading}>{specialityName}</h2>
             <div className={SpecCardCss.priceBar}>
-                <p className={SpecCardCss.priceTitle}>{'Price'}</p>
+                <p className={SpecCardCss.priceTitle}>{'Appointment price'}</p>
                 <p className={SpecCardCss.price}>{`from ${lowestPrice} usd`}</p>
             </div>
             <div className={SpecCardCss.photos}>
                 {doctors.length < 3 ? (
                     doctors.map((d, index) => (
-                        <div key={d.id} className={SpecCardCss.photoBorder}>
+                        <div
+                            key={d.id}
+                            className={SpecCardCss.photoBorder}
+                            style={{
+                                zIndex: (index + 1).toString(),
+                                left: (-6 * index).toString() + 'px',
+                            }}
+                        >
                             <img
                                 src={d.smallPhoto}
                                 alt={d.name}
-                                className={`${SpecCardCss.photo} ${
-                                    index !== 0 ? SpecCardCss.offset : null
-                                }`}
-                                style={{ zIndex: index + 1 }}
+                                className={SpecCardCss.photo}
                             />
                         </div>
                     ))
                 ) : (
                     <>
                         {doctors.slice(0, 3).map((d, index) => (
-                            <div key={d.id} className={SpecCardCss.photoBorder}>
+                            <div
+                                key={d.id}
+                                className={SpecCardCss.photoBorder}
+                                style={{
+                                    zIndex: (index + 1).toString(),
+                                    left: (-6 * index).toString() + 'px',
+                                }}
+                            >
                                 <img
                                     src={d.smallPhoto}
                                     alt={d.name}
-                                    className={`${SpecCardCss.photo} ${
-                                        index !== 0 ? SpecCardCss.offset : null
-                                    }`}
-                                    style={{ zIndex: index + 1 }}
+                                    className={SpecCardCss.photo}
                                 />
                             </div>
                         ))}
                         <div
-                            className={SpecCardCss.photoBorder}
-                            style={{ zIndex: 4 }}
+                            className={SpecCardCss.counter}
+                            style={{
+                                zIndex: '4',
+                                left: '-18px',
+                            }}
                         >{`+${doctors.length - 3}`}</div>
                     </>
                 )}

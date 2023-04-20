@@ -8,6 +8,7 @@
     transition: border-color .2s ease;
     border-radius: 0.5rem;
     cursor: pointer;
+    position: relative;
 }
 
 .wrapper:hover {
@@ -23,15 +24,16 @@
 .priceBar {
     display: flex;
     justify-content: flex-start;
+    gap: 0.5rem
 }
 
 .priceTitle {
     line-height: 140%;
     color: #a6acb4;
+    font-weight: 400;
 }
 
 .price {
-    font-size: 1.1rem;
     font-weight: 600;
     line-height: 140%;
     background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%), #545A66;
@@ -44,22 +46,26 @@
     display: flex;
 }
 
-.photoBorder {
+.photoBorder,
+.counter {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
-    color: #a6acb4;
-    background: #F0F4FC;
     border-radius: 50%;
+    background-color: #e3e9fc;
+}
+
+.counter {
+    color: #a6acb4;
+    background-color: #F0F4FC;
 }
 
 .photo {
-    margin: 0;
     width: 36px;
     height: 36px;
     border-radius: 50%;
-}
-
-.photo .offset {
-    position: relative;
-    left: -5px;
+    background-color: white;
 }
