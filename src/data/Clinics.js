@@ -1,4 +1,4 @@
-export const clinics = [
+export const clinicsFetched = [
     {
         id: 1,
         address: '15 Oxford St, London W1D 2EB, UK',

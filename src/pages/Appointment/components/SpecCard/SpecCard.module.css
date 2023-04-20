@@ -1,0 +1,65 @@
+.wrapper {
+    box-sizing: border-box;
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid #e1e9fc;
+    transition: border-color .2s ease;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.wrapper:hover {
+    border-color: #007aff;
+}
+
+.heading {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #545a66;
+}
+
+.priceBar {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.priceTitle {
+    line-height: 140%;
+    color: #a6acb4;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 140%;
+    background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%), #545A66;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.photos {
+    display: flex;
+}
+
+.photoBorder {
+    width: 40px;
+    height: 40px;
+    color: #a6acb4;
+    background: #F0F4FC;
+    border-radius: 50%;
+}
+
+.photo {
+    margin: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.photo .offset {
+    position: relative;
+    left: -5px;
+}

@@ -1,14 +1,24 @@
 import { useEffect } from 'react';
+import {
+    DoctorsAllContext,
+    SpecialitiesContext,
+    ClinicsContext,
+} from 'src/context/FetchDataContext';
+import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
 import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
 import { permitVisitApp3, permitVisitApp4 } from 'src/utils/PermitVisit';
-import { ClearAppDataOnRefresh } from 'src/utils/ClearAppDataOnRefresh';
+import { clearAppData } from 'src/utils/ClearAppData';
 import useRedirect from 'src/hooks/useRedirect';
-import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import { Outlet, useLocation } from 'react-router-dom';
 import { appointmentSchema } from 'src/data/AppointmentSchemas';
 import Progress from './components/Progress/Progress';
-import { appointmentKey } from 'src/data/LocalStorageKeys';
+import {
+    appointmentKey,
+    doctorsKey,
+    specialitiesKey,
+    clinicsKey,
+} from 'src/data/LocalStorageKeys';
 import AppointLayoutCss from './AppointmentLayout.module.css';
 
 function AppointmentLayout() {
@@ -16,6 +26,10 @@ function AppointmentLayout() {
         appointmentKey,
         appointmentSchema
     );
+    const [doctors, setDoctors] = useLocalStorageState(doctorsKey, null);
+    const [specialties, setSpecialties] = useLocalStorageState(specialitiesKey, null);
+    const [clinics, setClinics] = useLocalStorageState(clinicsKey, null);
+
     const location = useLocation();
     const currentStep = +location.pathname.at(-1);
 
@@ -31,7 +45,7 @@ function AppointmentLayout() {
     const [wasRefreshed, setWasRefreshed] = useInformOfPageRefresh();
     useEffect(() => {
         if (wasRefreshed) {
-            ClearAppDataOnRefresh(appParams, setAppParams, currentStep);
+            clearAppData(appParams, setAppParams, currentStep);
             setWasRefreshed(false);
         }
     }, [wasRefreshed, setWasRefreshed, appParams, setAppParams, currentStep]);
@@ -49,7 +63,15 @@ function AppointmentLayout() {
                             permitStep3={permitStep3}
                             permitStep4={permitStep4}
                         />
-                        <Outlet />
+                        <DoctorsAllContext.Provider value={[doctors, setDoctors]}>
+                            <SpecialitiesContext.Provider
+                                value={[specialties, setSpecialties]}
+                            >
+                                <ClinicsContext.Provider value={[clinics, setClinics]}>
+                                    <Outlet />
+                                </ClinicsContext.Provider>
+                            </SpecialitiesContext.Provider>
+                        </DoctorsAllContext.Provider>
                     </AppointmentFilterContext.Provider>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
+import { clearAppData } from 'src/utils/ClearAppData';
 import ToggleSwitch from 'src/components/ToggleSwitch/ToggleSwitch';
 import Button from 'src/components/Button/Button';
 import AppStep1Css from './AppStep1.module.css';
@@ -40,7 +41,10 @@ function AppStep1() {
     );
 
     function setBooleanParam(param) {
-        return (boolean) => setAppParams({ ...appParams, [param]: boolean });
+        return (boolean) => {
+            clearAppData(appParams, setAppParams, 2);
+            setAppParams((p) => ({ ...p, [param]: boolean }));
+        };
     }
 }
 

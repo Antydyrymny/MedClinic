@@ -1,4 +1,4 @@
-export const doctors = [
+export const doctorsFetched = [
     {
         id: 1,
         name: 'Alice Johnson',

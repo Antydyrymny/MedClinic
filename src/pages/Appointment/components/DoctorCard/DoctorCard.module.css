@@ -1,8 +1,8 @@
 .wrapper {
-    padding: 1.1rem;
+    box-sizing: border-box;
+    padding: 0.5rem 0.9rem 0.5rem 0.9rem;
     display: flex;
     flex-direction: column;
-    row-gap: 1.5rem;
     justify-content: space-around;
     border: 1px solid #e1e9fc;
     transition: border-color .2s ease;
@@ -10,9 +10,14 @@
     cursor: pointer;
 }
 
+.wrapper:hover {
+    border-color: #007aff;
+}
+
 .photoInfo,
 .clinicInfo,
-.priceInfo {
+.priceInfo,
+.multipleClinics {
     display: flex;
     gap: 2rem;
 }
@@ -63,6 +68,10 @@
 .clinic {
     color: #545a66;
     font-size: 0.8rem;
+}
+
+.multipleClinics .clinic {
+    max-width: 100px;
 }
 
 .price {

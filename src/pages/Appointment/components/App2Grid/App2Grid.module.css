@@ -1,13 +1,27 @@
-.wrapper {
+.docWrapper {
+    padding-top: 1rem;
+    padding-right: 0.7rem;
     display: grid;
-    grid-template-rows: repeat(2, 15rem);
+    grid-template-rows: repeat(2, 13rem);
     grid-template-columns: repeat(3, 1fr);
     gap: 1.3rem;
     overflow-y: scroll;
+    height: 538px;
+}
+
+.specWrapper {
+    padding-top: 1rem;
+    padding-right: 0.7rem;
+    display: grid;
+    grid-template-rows: repeat(2, 10rem);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.3rem;
+    overflow-y: scroll;
+    height: 538px;
 }
 
 @media (max-width: 1116px) {
-    .wrapper {
+    .docWrapper {
         grid-template-columns: 1fr;
     }
 }

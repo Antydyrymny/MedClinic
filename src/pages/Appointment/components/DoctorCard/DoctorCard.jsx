@@ -1,15 +1,18 @@
 import CardCss from './DoctorCard.module.css';
 
-function DoctorCard({ name, photo, specialities, clinics, price }) {
-    console.log(clinics);
+function DoctorCard({ name, photo, specialities, clinics, price, onClick }) {
     return (
-        <div className={CardCss.wrapper}>
+        <div className={CardCss.wrapper} onClick={onClick}>
             <div className={CardCss.photoInfo}>
                 <img className={CardCss.photo} src={photo} alt={name} />
                 <div className={CardCss.nameAndSpec}>
                     <p className={CardCss.name}>{name}</p>
                     <p className={CardCss.spec}>
-                        {specialities.map((spec) => spec.name)}
+                        {specialities
+                            .map((spec) => spec.name + ', ')
+                            .join('')
+                            .split('')
+                            .slice(0, -2)}
                     </p>
                 </div>
             </div>
@@ -18,11 +21,13 @@ function DoctorCard({ name, photo, specialities, clinics, price }) {
                 {clinics.length === 1 ? (
                     <p className={CardCss.clinic}>{clinics[0].address}</p>
                 ) : (
-                    clinics.map((clinic) => (
-                        <p key={clinic.ind} className={CardCss.clinic}>
-                            {clinic.address}
-                        </p>
-                    ))
+                    <div className={CardCss.multipleClinics}>
+                        {clinics.map((clinic) => (
+                            <p key={clinic.id} className={CardCss.clinic}>
+                                {clinic.address}
+                            </p>
+                        ))}
+                    </div>
                 )}
             </div>
             <div className={CardCss.priceInfo}>

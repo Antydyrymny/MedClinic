@@ -1,10 +1,12 @@
+import { useContext } from 'react';
+import { DoctorsAllContext, SpecialitiesContext } from 'src/context/FetchDataContext';
 import useRedirect from 'src/hooks/useRedirect';
 import { useParams } from 'react-router-dom';
-import { doctors } from 'src/data/Doctors';
-import { specialties } from 'src/data/Specialties';
 import DocCss from './Doc.module.css';
 
 function Doc() {
+    const [doctors, setDoctors] = useContext(DoctorsAllContext);
+    const [specialties, setSpecialties] = useContext(SpecialitiesContext);
     const { name } = useParams();
     const doctor = doctors.find((doc) => doc.name === name.split('-').join(' '));
     useRedirect('/Not-Found', !doctor);

@@ -1,4 +1,4 @@
-export const specialties = [
+export const specialtiesFetched = [
     {
         id: 1,
         name: 'Pediatrics',
