@@ -118,3 +118,4 @@ function excludePaths(obj, paths) {
 
 //   return newObj;
 // }
+console.log(Math.pow(-3, 2));

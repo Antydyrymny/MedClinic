@@ -1,0 +1,16 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    margin: 1rem 0 1rem 0;
+}
+
+.options {
+    height: 3.9rem;
+    padding-right: 2rem;
+}
+
+.searchBar {
+    padding-bottom: 0.4rem;
+    height: 3.5rem;
+}

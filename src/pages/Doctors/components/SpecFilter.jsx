@@ -1,11 +1,14 @@
+import { useMemo } from 'react';
 import SearchBar from 'src/components/SearchBar/SearchBar';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
+import { filterSpecialities } from 'src/utils/FilterSpecialities';
 import SpecFilterCss from './SpecFilter.module.css';
 
-function SpecFilter({ points, onChange, checkedArray, specSearchState }) {
+function SpecFilter({ specialties, onChange, checkedArray, specSearchState }) {
     const { specSearch, setSpecSearch } = specSearchState;
-    const pointsFiltered = points.filter((p) =>
-        specSearch ? p.name.toLowerCase().includes(specSearch.toLowerCase()) : true
+    const specsFiltered = useMemo(
+        () => filterSpecialities(specialties, specSearch),
+        [specialties, specSearch]
     );
     return (
         <>
@@ -16,7 +19,7 @@ function SpecFilter({ points, onChange, checkedArray, specSearchState }) {
                 showForm={false}
             />
             <CheckboxList
-                points={pointsFiltered}
+                points={specsFiltered}
                 onChange={onChange}
                 checkedArray={checkedArray}
             />

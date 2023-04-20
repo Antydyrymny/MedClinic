@@ -1,7 +1,7 @@
 export const appointmentSchema = {
-    Vhi: false,
+    worksWithVhi: false,
     followUp: false,
-    child: false,
+    worksWithKids: false,
     openedTab: 'Doctor',
     doctorId: null,
     specialityId: null,
@@ -9,6 +9,6 @@ export const appointmentSchema = {
     date: '',
     time: '',
 };
-export const step1Schema = ['Vhi', 'followUp', 'child'];
+export const step1Schema = ['worksWithVhi', 'followUp', 'worksWithKids'];
 export const step2Schema = ['openedTab', 'doctorId', 'specialityId'];
 export const step3Schema = ['date', 'time', 'clinicId'];

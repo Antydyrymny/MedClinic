@@ -14,8 +14,8 @@ function AppStep1() {
                 heading={'Form of payment'}
                 option1={'Regular appointment'}
                 option2={'VHI coverage'}
-                right={appParams.Vhi}
-                onClick={setBooleanParam('Vhi')}
+                right={appParams.worksWithVhi}
+                onClick={setBooleanParam('worksWithVhi')}
             />
             <ToggleSwitch
                 heading={'Type of visit'}
@@ -28,8 +28,8 @@ function AppStep1() {
                 heading={'Age'}
                 option1={'Adult'}
                 option2={'Child'}
-                right={appParams.child}
-                onClick={setBooleanParam('child')}
+                right={appParams.worksWithKids}
+                onClick={setBooleanParam('worksWithKids')}
             />
             <Button
                 text={'Next step'}

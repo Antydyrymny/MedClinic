@@ -1,0 +1,76 @@
+.wrapper {
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    justify-content: space-around;
+    border: 1px solid #e1e9fc;
+    transition: border-color .2s ease;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.photoInfo,
+.clinicInfo,
+.priceInfo {
+    display: flex;
+    gap: 2rem;
+}
+
+.photoInfo {
+    align-items: center;
+}
+
+.photo {
+    width: 66px;
+    height: 66px;
+    border: 4px solid #f1f4f9;
+    border-radius: 50%;
+}
+
+.nameAndSpec {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-weight: 800;
+    line-height: 130%;
+    color: #545a66;
+}
+
+.spec {
+    font-weight: 400;
+    color: #a6acb4;
+}
+
+.clinicInfo {
+    align-items: flex-start;
+}
+
+.priceInfo {
+    align-items: center;
+}
+
+.clinicTitle,
+.priceTitle {
+    color: #a6acb4;
+    font-weight: 400;
+    width: 69px;
+    font-size: 0.8rem;
+}
+
+.clinic {
+    color: #545a66;
+    font-size: 0.8rem;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 140%;
+    background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%), #545A66;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
