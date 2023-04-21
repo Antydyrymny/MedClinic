@@ -5,9 +5,10 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
-import Loader from 'src/assets/Pictogram/Loader';
+import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import App2ParamSelect from './components/App2ParamSelect/App2ParamSelect';
 import App2Grid from './components/App2Grid/App2Grid';
+import BackButton from './components/BackButton/BackButton';
 import { doctorsFetched } from 'src/data/Doctors';
 import { specialtiesFetched } from 'src/data/Specialties';
 import { clinicsFetched } from 'src/data/Clinics';
@@ -76,7 +77,11 @@ function AppStep2() {
                 docsPerSpec={docsPerSpec}
                 onClick={handleParamChoice}
             />
-            {/* <Loader /> */}
+
+            {/* <LoadingSpinner /> */}
+            <div className={AppStep2Css.back}>
+                <BackButton to={'app/step1'} />
+            </div>
         </div>
     );
 

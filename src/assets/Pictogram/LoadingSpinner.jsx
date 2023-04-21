@@ -1,6 +1,6 @@
-import styles from './Loader.module.scss';
+import styles from './LoadingSpinner.module.scss';
 
-function Loader() {
+function LoadingSpinner() {
     return (
         <div className={styles.wrapper}>
             <div className={styles.animationWrapper}>
@@ -37,4 +37,4 @@ function Loader() {
     );
 }
 
-export default Loader;
+export default LoadingSpinner;

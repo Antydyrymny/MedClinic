@@ -1,27 +1,31 @@
-.docWrapper {
-    padding-top: 1rem;
-    padding-right: 0.7rem;
+.docWrapper,
+.specWrapper {
     display: grid;
-    grid-auto-rows: 12.5rem;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.3rem;
     overflow-y: scroll;
     height: 538px;
+    padding-top: 1rem;
+    padding-right: 0.7rem;
+
+}
+
+.docWrapper {
+    grid-auto-rows: 12.5rem;
 }
 
 .specWrapper {
-    padding-top: 1rem;
-    padding-right: 0.7rem;
-    display: grid;
     grid-auto-rows: 10rem;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.3rem;
-    overflow-y: scroll;
-    height: 538px;
 }
 
 @media (max-width: 1116px) {
     .docWrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1116px) {
+    .specWrapper {
         grid-template-columns: 1fr;
     }
 }
