@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import useClearLocalStorageOnURLMove from './hooks/useClearLocalStorageOnURLMove ';
 import './App.css';
-import MainLayout from './components/MainLayout/MainLayout';
+import MainLayout from './pages/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
 import AppointmentLayout from './pages/Appointment/AppointmentLayout';
 import { appointmentKey, previousPageKey } from './data/LocalStorageKeys';

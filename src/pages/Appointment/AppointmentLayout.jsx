@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     DoctorsAllContext,
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
+import { LoadingContext } from 'src/context/LoadingContext';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
 import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
@@ -26,6 +27,7 @@ function AppointmentLayout() {
         appointmentKey,
         appointmentSchema
     );
+    const [loading, setLoading] = useState(true);
     const [doctors, setDoctors] = useLocalStorageState(doctorsKey, null);
     const [specialties, setSpecialties] = useLocalStorageState(specialitiesKey, null);
     const [clinics, setClinics] = useLocalStorageState(clinicsKey, null);
@@ -63,15 +65,19 @@ function AppointmentLayout() {
                             permitStep3={permitStep3}
                             permitStep4={permitStep4}
                         />
-                        <DoctorsAllContext.Provider value={[doctors, setDoctors]}>
-                            <SpecialitiesContext.Provider
-                                value={[specialties, setSpecialties]}
-                            >
-                                <ClinicsContext.Provider value={[clinics, setClinics]}>
-                                    <Outlet />
-                                </ClinicsContext.Provider>
-                            </SpecialitiesContext.Provider>
-                        </DoctorsAllContext.Provider>
+                        <LoadingContext.Provider value={[loading, setLoading]}>
+                            <DoctorsAllContext.Provider value={[doctors, setDoctors]}>
+                                <SpecialitiesContext.Provider
+                                    value={[specialties, setSpecialties]}
+                                >
+                                    <ClinicsContext.Provider
+                                        value={[clinics, setClinics]}
+                                    >
+                                        <Outlet />
+                                    </ClinicsContext.Provider>
+                                </SpecialitiesContext.Provider>
+                            </DoctorsAllContext.Provider>
+                        </LoadingContext.Provider>
                     </AppointmentFilterContext.Provider>
                 </div>
             </div>

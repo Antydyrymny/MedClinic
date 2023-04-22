@@ -9,7 +9,7 @@ function SpecCard({ specialityName, lowestPrice, doctors, onClick }) {
                 <p className={SpecCardCss.price}>{`from ${lowestPrice} usd`}</p>
             </div>
             <div className={SpecCardCss.photos}>
-                {doctors.length < 3 ? (
+                {doctors.length < 4 ? (
                     doctors.map((d, index) => (
                         <div
                             key={d.id}

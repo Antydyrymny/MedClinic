@@ -1,18 +1,28 @@
 import { useContext } from 'react';
 import { DoctorsAllContext, SpecialitiesContext } from 'src/context/FetchDataContext';
+import { LoadingContext } from 'src/context/LoadingContext';
 import useRedirect from 'src/hooks/useRedirect';
 import { useParams } from 'react-router-dom';
+import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import DocCss from './Doc.module.css';
 
 function Doc() {
+    const loading = useContext(LoadingContext);
     const [doctors, setDoctors] = useContext(DoctorsAllContext);
     const [specialties, setSpecialties] = useContext(SpecialitiesContext);
     const { name } = useParams();
-    const doctor = doctors.find((doc) => doc.name === name.split('-').join(' '));
-    useRedirect('/Not-Found', !doctor);
-    if (!doctor) return null;
-    const docSpecs = specialties.filter((spec) => doctor.specialtyId.includes(spec.id));
-    return (
+    const doctor = loading
+        ? null
+        : doctors.find((doc) => doc.name === name.split('-').join(' '));
+    useRedirect('/Not-Found', !doctor && !loading);
+    if (!doctor && !loading) return null;
+    const docSpecs = loading
+        ? null
+        : specialties.filter((spec) => doctor.specialtyId.includes(spec.id));
+
+    return loading ? (
+        <LoadingSpinner />
+    ) : (
         <section className='doc'>
             <h1>{doctor.name}</h1>
             <div className='docInfo'>

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Nav from '../Nav/Nav';
+import Nav from 'src/components/Nav/Nav';
 import MainLayoutCss from './MainLayout.module.css';
 
 function MainLayout() {

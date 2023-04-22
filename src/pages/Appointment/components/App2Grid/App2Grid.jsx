@@ -15,7 +15,9 @@ function App2Grid({ openedTab, docsFiltered, specsFiltered, docsPerSpec, onClick
                             key={doc.id}
                             onClick={() => {
                                 onClick('Doctor', doc.id);
-                                navigate('/app/step3');
+                                navigate('/app/step3', {
+                                    state: { docsAvailable: [doc] },
+                                });
                             }}
                             name={doc.name}
                             photo={doc.smallPhoto}
@@ -40,7 +42,19 @@ function App2Grid({ openedTab, docsFiltered, specsFiltered, docsPerSpec, onClick
                             doctors={docsPerSpec.get(spec.name)}
                             onClick={() => {
                                 onClick('Speciality', spec.id);
-                                navigate('/app/step3');
+                                navigate('/app/step3', {
+                                    state: {
+                                        specName: spec.name,
+                                        docsAvailable: docsPerSpec.get(spec.name),
+                                        price: docsPerSpec
+                                            .get(spec.name)
+                                            .reduce(
+                                                (lowest, doc) =>
+                                                    Math.min(lowest, doc.price),
+                                                Infinity
+                                            ),
+                                    },
+                                });
                             }}
                         />
                     ))}

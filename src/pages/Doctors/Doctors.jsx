@@ -6,6 +6,8 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
+import { LoadingContext } from 'src/context/LoadingContext';
+import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import SearchBar from 'src/components/SearchBar/SearchBar';
 import Button from 'src/components/Button/Button';
 import DoctorFilter from './components/DoctorFilter';
@@ -15,14 +17,18 @@ import DoctorsCss from './Doctors.module.css';
 
 function Doctors() {
     const [searchParams, setSearchParams] = useContext(DocSearchContext);
+    const loading = useContext(LoadingContext);
     const [doctors, setDoctors] = useContext(DoctorsAllContext);
     const [specialties, setSpecialties] = useContext(SpecialitiesContext);
     const [clinics, setClinics] = useContext(ClinicsContext);
     const [specSearch, setSpecSearch] = useState('');
-    const docsExpanded = useMemo(() => expandDoctors(doctors, specialties, clinics), []);
+    const docsExpanded = useMemo(
+        () => (loading ? null : expandDoctors(doctors, specialties, clinics)),
+        [clinics, doctors, specialties, loading]
+    );
     const docsFiltered = useMemo(
-        () => filterDoctors(docsExpanded, searchParams),
-        [docsExpanded, searchParams]
+        () => (loading ? null : filterDoctors(docsExpanded, searchParams)),
+        [docsExpanded, searchParams, loading]
     );
 
     return (
@@ -33,21 +39,27 @@ function Doctors() {
                 onChange={handleSearchChange}
                 placeholder={'Find a doctor'}
             />
-            <DoctorFilter
-                specSearchState={{ specSearch, setSpecSearch }}
-                specialties={specialties}
-                clinics={clinics}
-            />
-            <ul>
-                {docsFiltered.map((doc) => (
-                    <div key={doc.id} className={DoctorsCss.doctor}>
-                        <Link to={`/doctors/${doc.name.split(' ').join('-')}`}>
-                            {doc.name}
-                        </Link>
-                    </div>
-                ))}
-            </ul>
-            <Button text={'Clear Filter'} onClick={clearFilter} />
+            {loading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    <DoctorFilter
+                        specSearchState={{ specSearch, setSpecSearch }}
+                        specialties={specialties}
+                        clinics={clinics}
+                    />
+                    <ul>
+                        {docsFiltered.map((doc) => (
+                            <div key={doc.id} className={DoctorsCss.doctor}>
+                                <Link to={`/doctors/${doc.name.split(' ').join('-')}`}>
+                                    {doc.name}
+                                </Link>
+                            </div>
+                        ))}
+                    </ul>
+                    <Button text={'Clear Filter'} onClick={clearFilter} />
+                </>
+            )}{' '}
         </section>
     );
 

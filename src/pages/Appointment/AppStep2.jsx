@@ -5,6 +5,7 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
+import { LoadingContext } from 'src/context/LoadingContext';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import App2ParamSelect from './components/App2ParamSelect/App2ParamSelect';
 import App2Grid from './components/App2Grid/App2Grid';
@@ -20,6 +21,7 @@ import AppStep2Css from './AppStep2.module.css';
 
 function AppStep2() {
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
+    const [loading, setLoading] = useContext(LoadingContext);
     const [doctors, setDoctors] = useContext(DoctorsAllContext);
     const [specialties, setSpecialties] = useContext(SpecialitiesContext);
     const [clinics, setClinics] = useContext(ClinicsContext);
@@ -27,23 +29,55 @@ function AppStep2() {
     const [specSearch, setSpecSearch] = useState('');
     // TODO fetch data
     useEffect(() => {
-        if (!doctors) setDoctors(doctorsFetched);
-        if (!specialties) setSpecialties(specialtiesFetched);
-        if (!clinics) setClinics(clinicsFetched);
-    });
+        if (!doctors)
+            setDoctors(
+                doctorsFetched.slice().sort((a, b) => {
+                    if (a.name > b.name) return 1;
+                    else return -1;
+                })
+            );
+        if (!specialties)
+            setSpecialties(
+                specialtiesFetched.slice().sort((a, b) => {
+                    if (a.name > b.name) return 1;
+                    else return -1;
+                })
+            );
+        if (!clinics)
+            setClinics(
+                clinicsFetched.slice().sort((a, b) => {
+                    if (a.name > b.name) return 1;
+                    else return -1;
+                })
+            );
+        setLoading(false);
+    }, [
+        clinics,
+        doctors,
+        setClinics,
+        setDoctors,
+        setLoading,
+        setSpecialties,
+        specialties,
+    ]);
     // Calculate and memo items to show
     const openedTab = appParams.openedTab;
 
     const docsExpanded = useMemo(
-        () => expandDoctors(doctors, specialties, clinics),
-        [doctors, specialties, clinics]
+        () => (loading ? null : expandDoctors(doctors, specialties, clinics)),
+        [loading, doctors, specialties, clinics]
     );
 
-    const docsFiltered = useMemo(() => {
-        return filterDoctors(docsExpanded, { name: docSearch, ...appParams });
-    }, [docsExpanded, appParams, docSearch]);
+    const docsFiltered = useMemo(
+        () =>
+            loading
+                ? null
+                : filterDoctors(docsExpanded, { name: docSearch, ...appParams }),
+        [loading, docsExpanded, appParams, docSearch]
+    );
 
     const docsPerSpec = useMemo(() => {
+        if (loading) return;
         const specs = new Map();
         specialties.forEach((s) =>
             specs.set(
@@ -52,36 +86,44 @@ function AppStep2() {
             )
         );
         return specs;
-    }, [docsExpanded, appParams, specialties]);
+    }, [loading, docsExpanded, appParams, specialties]);
 
     const specsFiltered = useMemo(
         () =>
-            filterSpecialities(specialties, specSearch).filter(
-                (spec) => docsPerSpec.get(spec.name).length
-            ),
-        [specialties, specSearch, docsPerSpec]
+            loading
+                ? null
+                : filterSpecialities(specialties, specSearch).filter(
+                      (spec) => docsPerSpec.get(spec.name).length
+                  ),
+        [loading, specialties, specSearch, docsPerSpec]
     );
 
     return (
         <div className={AppStep2Css.wrapper}>
-            <App2ParamSelect
-                openedTab={openedTab}
-                onClick={openTab}
-                docSearchProp={[docSearch, setDocSearch]}
-                specSearchProp={[specSearch, setSpecSearch]}
-            />
-            <App2Grid
-                openedTab={openedTab}
-                docsFiltered={docsFiltered}
-                specsFiltered={specsFiltered}
-                docsPerSpec={docsPerSpec}
-                onClick={handleParamChoice}
-            />
+            {loading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    <App2ParamSelect
+                        openedTab={openedTab}
+                        onClick={openTab}
+                        docSearchProp={[docSearch, setDocSearch]}
+                        specSearchProp={[specSearch, setSpecSearch]}
+                    />
+                    <App2Grid
+                        openedTab={openedTab}
+                        docsFiltered={docsFiltered}
+                        specsFiltered={specsFiltered}
+                        docsPerSpec={docsPerSpec}
+                        onClick={handleParamChoice}
+                    />
 
-            {/* <LoadingSpinner /> */}
-            <div className={AppStep2Css.back}>
-                <BackButton to={'app/step1'} />
-            </div>
+                    {/* <LoadingSpinner /> */}
+                    <div className={AppStep2Css.back}>
+                        <BackButton to={'app/step1'} />
+                    </div>
+                </>
+            )}
         </div>
     );
 
