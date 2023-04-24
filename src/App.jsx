@@ -4,7 +4,11 @@ import './App.css';
 import MainLayout from './pages/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
 import AppointmentLayout from './pages/Appointment/AppointmentLayout';
-import { appointmentKey, previousPageKey } from './data/LocalStorageKeys';
+import {
+    appointmentKey,
+    previousPageKey,
+    appointmentStep3State,
+} from './data/LocalStorageKeys';
 import AppStep1 from './pages/Appointment/AppStep1';
 import AppStep2 from './pages/Appointment/AppStep2';
 import AppStep3 from './pages/Appointment/AppStep3';
@@ -18,8 +22,11 @@ import Contacts from './pages/Contacts/Contacts';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
-    const env = import.meta.env.VITE_API_URL;
-    useClearLocalStorageOnURLMove([appointmentKey, previousPageKey], '/app');
+    // const env = import.meta.env.VITE_API_URL;
+    useClearLocalStorageOnURLMove(
+        [appointmentKey, previousPageKey, appointmentStep3State],
+        '/app'
+    );
 
     return (
         <>

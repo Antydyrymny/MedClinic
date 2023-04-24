@@ -13,6 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #545a6699;
     text-transform: uppercase;
     cursor: pointer;
     /* Disable selection */
@@ -27,7 +28,7 @@
 }
 
 .active {
-    /* border-bottom: 2px solid #5b83db; */
+    color: #2f7eeb;
     border-bottom-width: 2px;
     border-bottom-style: solid;
     border-image: linear-gradient(90deg, rgb(0, 129, 233) 0%, rgb(0, 193, 231) 100%) 1;

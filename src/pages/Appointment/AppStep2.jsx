@@ -5,7 +5,7 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
-import { LoadingContext } from 'src/context/LoadingContext';
+import { appointmentStep3State } from 'src/data/LocalStorageKeys';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import App2ParamSelect from './components/App2ParamSelect/App2ParamSelect';
 import App2Grid from './components/App2Grid/App2Grid';
@@ -21,7 +21,7 @@ import AppStep2Css from './AppStep2.module.css';
 
 function AppStep2() {
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
-    const [loading, setLoading] = useContext(LoadingContext);
+    const [loading, setLoading] = useState(true);
     const [doctors, setDoctors] = useContext(DoctorsAllContext);
     const [specialties, setSpecialties] = useContext(SpecialitiesContext);
     const [clinics, setClinics] = useContext(ClinicsContext);
@@ -51,15 +51,7 @@ function AppStep2() {
                 })
             );
         setLoading(false);
-    }, [
-        clinics,
-        doctors,
-        setClinics,
-        setDoctors,
-        setLoading,
-        setSpecialties,
-        specialties,
-    ]);
+    }, [clinics, doctors, setClinics, setDoctors, setSpecialties, specialties]);
     // Calculate and memo items to show
     const openedTab = appParams.openedTab;
 
@@ -117,8 +109,6 @@ function AppStep2() {
                         docsPerSpec={docsPerSpec}
                         onClick={handleParamChoice}
                     />
-
-                    {/* <LoadingSpinner /> */}
                     <div className={AppStep2Css.back}>
                         <BackButton to={'app/step1'} />
                     </div>
@@ -128,12 +118,12 @@ function AppStep2() {
     );
 
     function openTab(tabName) {
-        clearAppData(appParams, setAppParams, 3);
-        setAppParams((p) => ({ ...p, openedTab: tabName }));
+        setAppParams({ ...appParams, openedTab: tabName });
     }
 
     function handleParamChoice(paramName, paramData) {
         clearAppData(appParams, setAppParams, 3);
+        localStorage.removeItem(appointmentStep3State);
         if (paramName === 'Doctor') setAppParams((p) => ({ ...p, doctorId: paramData }));
         else if (paramName === 'Speciality')
             setAppParams((p) => ({ ...p, specialityId: paramData }));

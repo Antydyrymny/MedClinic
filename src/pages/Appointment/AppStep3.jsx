@@ -1,55 +1,49 @@
-import { useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
-import {
-    DoctorsAllContext,
-    SpecialitiesContext,
-    ClinicsContext,
-} from 'src/context/FetchDataContext';
-import { expandDoctors } from 'src/utils/ExpandDoctors';
-import { filterDoctors } from 'src/utils/FilterDoctors';
+import { bookedTimesFetched } from 'src/data/BookedTimes';
+import useLocalStorageState from 'src/hooks/useLocalStorageState';
+import { appointmentStep3State } from 'src/data/LocalStorageKeys';
+import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
+import DoctorStep3 from './components/DoctorStep3/DoctorStep3';
+import SpecStep3 from './components/SpecStep3/SpecStep3';
 import AppStep3Css from './AppStep3.module.css';
 
 function AppStep3() {
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
-    const [doctors, setDoctors] = useContext(DoctorsAllContext);
-    const [specialties, setSpecialties] = useContext(SpecialitiesContext);
-    const [clinics, setClinics] = useContext(ClinicsContext);
+    const [loading, setLoading] = useState(true);
+    const [bookedTimesData, setBookedTimesData] = useState(null);
     const location = useLocation();
+    const step3Data = useLocalStorageState(appointmentStep3State, location.state)[0];
+    if (!step3Data) localStorage.removeItem(appointmentStep3State);
     const showDoctorsPage = !!appParams.doctorId;
-    let step3Data = null;
-    if (!location.state) {
-        // If no state in localStorage page will be redirected by hook in AppointmentLayout
-        if (!doctors || (!appParams.doctorId && !appParams.specialityId)) return null;
-        // if no state in navigator link - recalculate data
-        else if (showDoctorsPage) {
-            const doctor = doctors.find((doc) => doc.id === appParams.doctorId);
-            step3Data = { docsAvailable: expandDoctors([doctor], specialties, clinics) };
-        } else {
-            const docsExpanded = expandDoctors(doctors, specialties, clinics);
-            const spec = specialties.find((s) => s.id === appParams.specialityId);
-            const docsBySpec = filterDoctors(docsExpanded, {
-                ...appParams,
-                speciality: [spec],
-            });
-            const lowestPrice = docsBySpec.reduce(
-                (price, doc) => Math.min(price, doc.price),
-                Infinity
-            );
-            step3Data = {
-                specName: spec.name,
-                docsAvailable: docsBySpec,
-                price: lowestPrice,
-            };
-        }
-    } else step3Data = location.state;
 
-    return (
-        <div className={AppStep3Css.test}>
-            {step3Data.docsAvailable.map((d) => (
-                <div key={d.id}>{d.name}</div>
-            ))}
-        </div>
+    useEffect(() => {
+        if (step3Data)
+            setBookedTimesData(
+                bookedTimesFetched.filter((bookedEnrty) =>
+                    step3Data.docsAvailable
+                        .map((doc) => doc.id)
+                        .includes(bookedEnrty.docId)
+                )
+            );
+        setLoading(false);
+    }, [step3Data]);
+
+    return !step3Data ? null : loading ? (
+        <LoadingSpinner />
+    ) : showDoctorsPage ? (
+        <DoctorStep3
+            step3Data={step3Data}
+            bookedTimesData={bookedTimesData}
+            appParamsData={[appParams, setAppParams]}
+        />
+    ) : (
+        <SpecStep3
+            step3Data={step3Data}
+            bookedTimesData={bookedTimesData}
+            appParamsData={[appParams, setAppParams]}
+        />
     );
 }
 

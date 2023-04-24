@@ -4,8 +4,9 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
-import { LoadingContext } from 'src/context/LoadingContext';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
 import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
 import { permitVisitApp3, permitVisitApp4 } from 'src/utils/PermitVisit';
@@ -20,6 +21,8 @@ import {
     specialitiesKey,
     clinicsKey,
 } from 'src/data/LocalStorageKeys';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en-gb';
 import AppointLayoutCss from './AppointmentLayout.module.css';
 
 function AppointmentLayout() {
@@ -27,7 +30,6 @@ function AppointmentLayout() {
         appointmentKey,
         appointmentSchema
     );
-    const [loading, setLoading] = useState(true);
     const [doctors, setDoctors] = useLocalStorageState(doctorsKey, null);
     const [specialties, setSpecialties] = useLocalStorageState(specialitiesKey, null);
     const [clinics, setClinics] = useLocalStorageState(clinicsKey, null);
@@ -52,6 +54,8 @@ function AppointmentLayout() {
         }
     }, [wasRefreshed, setWasRefreshed, appParams, setAppParams, currentStep]);
 
+    dayjs.locale('en-gb');
+
     return (
         <section className={AppointLayoutCss.app}>
             <div className={AppointLayoutCss.wrapper}>
@@ -65,19 +69,17 @@ function AppointmentLayout() {
                             permitStep3={permitStep3}
                             permitStep4={permitStep4}
                         />
-                        <LoadingContext.Provider value={[loading, setLoading]}>
-                            <DoctorsAllContext.Provider value={[doctors, setDoctors]}>
-                                <SpecialitiesContext.Provider
-                                    value={[specialties, setSpecialties]}
-                                >
-                                    <ClinicsContext.Provider
-                                        value={[clinics, setClinics]}
-                                    >
+                        <DoctorsAllContext.Provider value={[doctors, setDoctors]}>
+                            <SpecialitiesContext.Provider
+                                value={[specialties, setSpecialties]}
+                            >
+                                <ClinicsContext.Provider value={[clinics, setClinics]}>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <Outlet />
-                                    </ClinicsContext.Provider>
-                                </SpecialitiesContext.Provider>
-                            </DoctorsAllContext.Provider>
-                        </LoadingContext.Provider>
+                                    </LocalizationProvider>
+                                </ClinicsContext.Provider>
+                            </SpecialitiesContext.Provider>
+                        </DoctorsAllContext.Provider>
                     </AppointmentFilterContext.Provider>
                 </div>
             </div>
