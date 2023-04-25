@@ -32,7 +32,7 @@ function LoadingSpinner() {
                     <div className={styles.dot} />
                 </div>
             </div>
-            <div className={styles.text}>Loading Data</div>
+            <div className={styles.text}>Loading Data...</div>
         </div>
     );
 }

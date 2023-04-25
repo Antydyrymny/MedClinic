@@ -108,6 +108,7 @@ function AppStep2() {
                         specsFiltered={specsFiltered}
                         docsPerSpec={docsPerSpec}
                         onClick={handleParamChoice}
+                        setAppParams={setAppParams}
                     />
                     <div className={AppStep2Css.back}>
                         <BackButton to={'app/step1'} />

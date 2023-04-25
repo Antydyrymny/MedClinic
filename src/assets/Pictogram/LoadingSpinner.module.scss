@@ -1,5 +1,5 @@
 .wrapper {
-    height: 3rem;
+    height: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +14,7 @@
 }
 
 .animationWrapper {
-    scale: 0.25;
+    scale: 0.3;
     height: 100%;
     align-items: center;
     background: #03203c;
@@ -35,7 +35,7 @@ $dot-size: 10px;
 $dot-space: 15px;
 $dot-start: calc((($dot-count / 2 + 1) * ($dot-size + $dot-space)) / 2);
 
-$animation-time: 1.5s;
+$animation-time: 2s;
 $animation-distance: 25px;
 
 .loader {

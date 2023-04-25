@@ -3,7 +3,14 @@ import DoctorCard from '../DoctorCard/DoctorCard';
 import SpecCard from '../SpecCard/SpecCard';
 import App2GridCss from './App2Grid.module.css';
 
-function App2Grid({ openedTab, docsFiltered, specsFiltered, docsPerSpec, onClick }) {
+function App2Grid({
+    openedTab,
+    docsFiltered,
+    specsFiltered,
+    docsPerSpec,
+    onClick,
+    setAppParams,
+}) {
     const navigate = useNavigate();
 
     return (
@@ -15,6 +22,10 @@ function App2Grid({ openedTab, docsFiltered, specsFiltered, docsPerSpec, onClick
                             key={doc.id}
                             onClick={() => {
                                 onClick('Doctor', doc.id);
+                                setAppParams((p) => ({
+                                    ...p,
+                                    specialityId: doc.speciality[0].id,
+                                }));
                                 navigate('/app/step3', {
                                     state: { docsAvailable: [doc] },
                                 });

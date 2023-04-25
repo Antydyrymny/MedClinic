@@ -18,7 +18,9 @@ export function getExcludedDates(bookedDates, doctors, onlineAppointment, clinic
                 : doctors.reduce((noDocsForCurClinicsToday, doc) => {
                       if (
                           !noDocsForCurClinicsToday ||
-                          clinicsPicked.includes(doc.clinicSchedule[dayjs(date).day()])
+                          clinicsPicked.includes(
+                              doc.clinicSchedule[dayjs(date).day() - 1]
+                          )
                       )
                           noDocsForCurClinicsToday = false;
                       return noDocsForCurClinicsToday;
