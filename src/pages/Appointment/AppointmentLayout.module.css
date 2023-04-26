@@ -9,8 +9,11 @@
 }
 
 .heading {
-    margin: 3rem 0 3rem 0;
+    margin: 2rem 0 1.5rem 0;
     text-align: left;
+    color: #545a66;
+    font-weight: 300;
+    font-size: 2.5rem;
 }
 
 .wrapper {
@@ -19,7 +22,7 @@
 }
 
 .contentWrapper {
-    padding: 2rem 3rem 5rem 3rem;
+    padding: 1rem 2.5rem 3.5rem 2.5rem;
     background-color: white;
     border-radius: 0.7rem;
 }

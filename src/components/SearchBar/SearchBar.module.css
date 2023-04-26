@@ -3,10 +3,13 @@
     display: flex;
     align-items: center;
     padding-left: 1rem;
+    box-sizing: border-box;
 }
 
 .searchInput {
     width: 100%;
+    font-size: 1rem;
+    color: #213043;
     margin-left: 1rem;
     border: 0;
     color: inherit;
@@ -14,6 +17,7 @@
 
 .searchInput::placeholder {
     opacity: 0.9;
+    color: #545a6699;
 }
 
 .searchInput:focus {

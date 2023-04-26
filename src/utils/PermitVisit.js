@@ -10,7 +10,7 @@ export function permitVisitApp3(currentData) {
 }
 
 export function permitVisitApp4(currentData) {
-    // Has required data from step 3
+    // Has all required data from step 3
     return Object.entries(currentData)
         .filter(([key, value]) => step3Schema.includes(key))
         .reduce((valid, [key, value]) => {

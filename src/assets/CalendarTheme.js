@@ -1,7 +1,18 @@
+import dayjs from 'dayjs';
 import { createTheme } from '@mui/material';
 
 export const calendarTheme = createTheme({
     components: {
+        MuiDateCalendar: {
+            defaultProps: {
+                disablePast: true,
+                maxDate: dayjs().month(dayjs().month() + 2),
+                dayOfWeekFormatter: dayOfWeekFormatter,
+                // disableHighlightToday: true,
+                reduceAnimations: true,
+                views: ['month', 'day'],
+            },
+        },
         MuiPickersDay: {
             styleOverrides: {
                 root: {
@@ -14,3 +25,7 @@ export const calendarTheme = createTheme({
         },
     },
 });
+
+function dayOfWeekFormatter(day) {
+    return day.charAt(0).toUpperCase() + day.charAt(1);
+}

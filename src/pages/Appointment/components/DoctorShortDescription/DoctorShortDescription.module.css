@@ -1,0 +1,35 @@
+.wrapper {
+    display: flex;
+}
+
+.imgWrapper {
+    margin-right: 1rem;
+}
+
+.photo {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 2px solid #f1f4f9;
+}
+
+
+.name {
+    color: #545a66;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.spec {
+    color: #a6acb4;
+    font-weight: 400;
+}
+
+.price {
+    font-weight: 600;
+    line-height: 140%;
+    background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%), #545A66;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

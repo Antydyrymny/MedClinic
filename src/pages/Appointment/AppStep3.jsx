@@ -7,6 +7,7 @@ import { appointmentStep3State } from 'src/data/LocalStorageKeys';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import DoctorStep3 from './components/DoctorStep3/DoctorStep3';
 import SpecStep3 from './components/SpecStep3/SpecStep3';
+import BackButton from './components/BackButton/BackButton';
 import AppStep3Css from './AppStep3.module.css';
 
 function AppStep3() {
@@ -30,20 +31,31 @@ function AppStep3() {
         setLoading(false);
     }, [step3Data]);
 
-    return !step3Data ? null : loading ? (
-        <LoadingSpinner />
-    ) : showDoctorsPage ? (
-        <DoctorStep3
-            step3Data={step3Data}
-            bookedTimesData={bookedTimesData}
-            appParamsData={[appParams, setAppParams]}
-        />
-    ) : (
-        <SpecStep3
-            step3Data={step3Data}
-            bookedTimesData={bookedTimesData}
-            appParamsData={[appParams, setAppParams]}
-        />
+    return !step3Data ? null : (
+        <div className={AppStep3Css.wrapper}>
+            {loading ? (
+                <LoadingSpinner />
+            ) : (
+                <>
+                    {showDoctorsPage ? (
+                        <DoctorStep3
+                            step3Data={step3Data}
+                            bookedTimesData={bookedTimesData}
+                            appParamsData={[appParams, setAppParams]}
+                        />
+                    ) : (
+                        <SpecStep3
+                            step3Data={step3Data}
+                            bookedTimesData={bookedTimesData}
+                            appParamsData={[appParams, setAppParams]}
+                        />
+                    )}
+                    <div className={AppStep3Css.back}>
+                        <BackButton to={'/app/step2'} />
+                    </div>
+                </>
+            )}
+        </div>
     );
 }
 

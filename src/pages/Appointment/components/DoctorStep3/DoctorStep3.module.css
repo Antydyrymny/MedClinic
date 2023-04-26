@@ -1,7 +1,48 @@
-.datepicker {
-    /* padding: 0.25rem; */
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.online {
+    grid-column: 1 / 2;
+    margin-bottom: 2rem;
+}
+
+.heading {
+    margin: 1rem 0 2rem 0;
+}
+
+.main {
+    min-height: 25rem;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+}
+
+.doctorSpecClinic {}
+
+.date {
     width: 20rem;
-    height: 18rem;
+}
+
+.datepicker {
+    height: 19rem;
+    scale: 1.1;
+    padding: 0.25rem;
+    box-sizing: border-box;
     border: 1px solid #E3E9FC;
     border-radius: 1rem;
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        display: block;
+    }
+
+    .main {
+        display: block;
+    }
+
+    .doctorSpecClinic {}
 }

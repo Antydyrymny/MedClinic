@@ -111,7 +111,7 @@ function AppStep2() {
                         setAppParams={setAppParams}
                     />
                     <div className={AppStep2Css.back}>
-                        <BackButton to={'app/step1'} />
+                        <BackButton to={'/app/step1'} />
                     </div>
                 </>
             )}
@@ -127,7 +127,7 @@ function AppStep2() {
         localStorage.removeItem(appointmentStep3State);
         if (paramName === 'Doctor') setAppParams((p) => ({ ...p, doctorId: paramData }));
         else if (paramName === 'Speciality')
-            setAppParams((p) => ({ ...p, specialityId: paramData }));
+            setAppParams((p) => ({ ...p, specialityId: paramData, doctorId: null }));
     }
 }
 

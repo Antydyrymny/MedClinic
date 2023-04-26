@@ -19,7 +19,7 @@ function DoctorShortDescription({ doctor }) {
                         .split('')
                         .slice(0, -2)}
                 </p>
-                <p className={DocDescrCss.price}>{doctor.price}</p>
+                <p className={DocDescrCss.price}>{doctor.price + ' usd'}</p>
             </div>
         </div>
     );

@@ -11,7 +11,7 @@ function OptionSelect({ options, onClick, active, disabled = [] }) {
                     }
                     className={`${OptionSelectCss.tab} ${
                         active === optionName ? OptionSelectCss.active : null
-                    }`}
+                    } ${disabled.includes(optionName) ? OptionSelectCss.disabled : null}`}
                 >
                     {optionName}
                 </div>
