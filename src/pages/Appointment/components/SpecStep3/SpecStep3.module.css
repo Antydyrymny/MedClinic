@@ -1,0 +1,116 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.online {
+    grid-column: 1 / 2;
+    padding-right: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.main {
+    min-height: 25rem;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3.5rem;
+}
+
+.specClinicDate {}
+
+.heading {
+    font-family: 'Lato Light', sans-serif;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 230%;
+    letter-spacing: .07rem;
+    text-transform: uppercase;
+    color: #a6acb4;
+}
+
+.clinics,
+.specInfo {
+    margin-bottom: 2rem;
+}
+
+.date {
+    justify-self: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+.datepicker {
+    margin: 0;
+    max-width: 21rem;
+    height: 19.5rem;
+    justify-self: center;
+    box-sizing: border-box;
+    border: 1px solid #E3E9FC;
+    border-radius: 1rem;
+}
+
+.dateHeading,
+.spec {
+    margin-bottom: 0.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #545a66;
+    line-height: 140%;
+}
+
+.dateHeading {
+    margin-bottom: 1rem;
+}
+
+.price {
+    line-height: 140%;
+    background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+    }
+
+    .online {
+        padding: 0;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
+    }
+
+    .clinics {
+        margin: 2rem 0;
+    }
+
+    .date {
+        justify-self: center;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+
+    .datepicker {
+        scale: 1;
+        width: 19rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .datepicker {
+        scale: 0.9;
+        width: 19rem;
+        margin-bottom: 1rem;
+    }
+}

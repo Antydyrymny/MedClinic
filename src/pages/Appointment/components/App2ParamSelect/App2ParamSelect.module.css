@@ -7,10 +7,32 @@
 
 .options {
     height: 100%;
-    padding-right: 2rem;
+    padding-right: 1.5rem;
 }
 
 .searchBar {
-    /* padding-bottom: 1.4rem; */
     height: 100%;
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .options {
+        padding: 0;
+    }
+
+    .options,
+    .searchBar {
+        width: 100%;
+        flex: 1;
+    }
+
+    .searchBar {
+        min-height: 2rem;
+    }
 }

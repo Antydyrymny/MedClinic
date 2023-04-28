@@ -1,5 +1,3 @@
-@media (max-width: 1200px) {
-    .wrapper {
-        display: none;
-    }
+.wrapper {
+    position: relative;
 }

@@ -8,7 +8,7 @@ function ProgressBar() {
     const emptyComponentWidth = 100 - activeComponentWidth;
 
     return (
-        <div className={ProgressBarCss.container}>
+        <div className={ProgressBarCss.wrapper}>
             <div
                 className={ProgressBarCss.active}
                 style={{ width: `${activeComponentWidth}%` }}

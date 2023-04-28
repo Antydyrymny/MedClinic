@@ -19,7 +19,7 @@
 .priceInfo,
 .multipleClinics {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .photoInfo {
@@ -76,7 +76,6 @@
 
 .price {
     font-size: 1.1rem;
-    font-weight: 600;
     line-height: 140%;
     background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%), #545A66;
     background-clip: text;

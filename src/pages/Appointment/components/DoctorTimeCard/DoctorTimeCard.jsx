@@ -5,8 +5,12 @@ import DoctorTimeCardCSS from './DoctorTimeCard.module.css';
 function DoctorTimeCard({ doctor, clinic, times, onClick }) {
     return (
         <div className={DoctorTimeCardCSS.wrapper}>
-            <DoctorShortDescription doctor={doctor} />
-            <TimeList clinic={clinic} times={times} onClick={onClick} />
+            <div className={DoctorTimeCardCSS.doctor}>
+                <DoctorShortDescription doctor={doctor} />
+            </div>
+            <div className={DoctorTimeCardCSS.time}>
+                <TimeList clinic={clinic} times={times} onClick={onClick} />
+            </div>
         </div>
     );
 }

@@ -22,6 +22,7 @@ function SpecFilter({ specialties, onChange, checkedArray, specSearchState }) {
                 points={specsFiltered}
                 onChange={onChange}
                 checkedArray={checkedArray}
+                square={true}
             />
         </>
     );

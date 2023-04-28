@@ -9,10 +9,11 @@
 }
 
 .heading {
+    font-family: 'Lato Light', sans-serif;
     margin: 2rem 0 1.5rem 0;
     text-align: left;
     color: #545a66;
-    font-weight: 300;
+    font-weight: 100;
     font-size: 2.5rem;
 }
 
@@ -48,5 +49,20 @@
 @media (max-width: 1000px) {
     .wrapper {
         width: calc(100% - 30px);
+    }
+}
+
+@media (max-width: 500px) {
+    .heading {
+        display: none;
+    }
+
+    .contentWrapper {
+        margin: 0;
+        padding: 1rem 1rem;
+    }
+
+    .wrapper {
+        width: 100%;
     }
 }

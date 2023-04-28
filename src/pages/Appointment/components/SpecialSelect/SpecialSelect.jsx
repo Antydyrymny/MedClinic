@@ -7,8 +7,16 @@ function SpecialSelect({ options, activeId, onClick }) {
     return (
         <div className={SpecialSelectCss.wrapper} onClick={() => setChoosing(!choosing)}>
             <div className={SpecialSelectCss.mainBar}>
-                {options.find((option) => option.id === activeId).name}
-                <DropDownSvg />
+                <div className={SpecialSelectCss.name}>
+                    {options.find((option) => option.id === activeId).name}
+                </div>
+                <div
+                    className={`${SpecialSelectCss.arrow} ${
+                        choosing ? SpecialSelectCss.arrowChoosing : null
+                    }`}
+                >
+                    <DropDownSvg />
+                </div>
             </div>
             {!choosing ? null : (
                 <div className={SpecialSelectCss.options}>

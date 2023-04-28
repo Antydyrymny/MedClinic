@@ -6,6 +6,7 @@
     overflow-y: scroll;
     height: 538px;
     padding-right: 0.7rem;
+    padding-bottom: 0.1rem;
 }
 
 .docWrapper {

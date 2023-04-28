@@ -7,7 +7,9 @@
 }
 
 .heading {
-    font-size: 1em;
+    font-family: 'Lato Light', sans-serif;
+    margin-bottom: 0.3rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     color: #a6acb4;
     letter-spacing: .1em;

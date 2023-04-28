@@ -1,5 +1,4 @@
-import dayjs from 'dayjs';
-import { getExcludedDates } from './GetExcludedDates';
+import { getAvailableTimesPerDocForDate } from './GetAvailableTimesPerDocForDate';
 
 export function onOnlineChange(appParams, setAppParams) {
     return (tabName) =>
@@ -15,41 +14,38 @@ export function onClinicCheck({
     setClinicsPicked,
     appParams,
     setAppParams,
-    bookedDates,
+    bookedData,
     doctors,
 }) {
     return (boolean, clinicName) => {
-        let newClinicsPicked = null;
-        if (!boolean && clinicsPicked.length === 1) return;
+        let newClinicsPicked = [];
+        if (clinicsPicked.length === 1 && !boolean) return;
         else if (boolean) {
             newClinicsPicked = [
                 ...clinicsPicked,
-                clinics.find((c) => c.name === clinicName).id,
+                clinics.find((c) => c.name === clinicName),
             ];
-            setClinicsPicked(newClinicsPicked);
         } else if (!boolean) {
             newClinicsPicked = clinicsPicked.filter(
-                (clinic) => clinics.find((c) => c.id === clinic).name !== clinicName
+                (clinic) => clinic.name !== clinicName
             );
-            setClinicsPicked(newClinicsPicked);
         }
-        // If changing clinics makes chosen date unavailable - set chosen date to null
+        setClinicsPicked(newClinicsPicked);
+        // If date is set and it is an in clinic appointment and
+        // changing clinics makes chosen date unavailable -
+        // set chosen date to null
         if (
             !boolean &&
-            getExcludedDates(
-                bookedDates,
+            appParams.date &&
+            !appParams.onlineAppointment &&
+            !getAvailableTimesPerDocForDate({
+                date: appParams.date,
                 doctors,
-                appParams.onlineAppointment,
-                newClinicsPicked
-            )(dayjs(appParams.date))
+                bookedData,
+                onlineAppointment: appParams.onlineAppointment,
+                clinicsPicked: newClinicsPicked,
+            }).length
         )
             setAppParams({ ...appParams, date: null });
     };
-}
-
-export function getCLinicForDate(entry, appParams, clinics) {
-    return clinics.find(
-        (clinic) =>
-            clinic.id === entry.doctor.clinicSchedule[dayjs(appParams.date).day() - 1]
-    );
 }

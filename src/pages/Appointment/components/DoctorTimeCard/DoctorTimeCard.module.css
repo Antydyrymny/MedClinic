@@ -1,7 +1,40 @@
 .wrapper {
     display: flex;
+    border: 1px solid #E3E9FC;
+    border-radius: 1rem;
+    padding: 1rem;
+    gap: 3rem;
+    min-width: 15rem;
 }
 
-@media (min-width: 1400px) {
-    .wrapper {}
+.doctor {
+    width: 35%;
+    min-width: 10rem;
+}
+
+.time {
+    flex: 1;
+    overflow: hidden;
+    min-width: 5rem;
+}
+
+
+
+@media (max-width: 500px) {
+    .wrapper {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        max-width: 20rem;
+    }
+
+    .wrapper,
+    .doctor,
+    .time {
+        min-width: none;
+    }
+
+    .doctor {
+        width: 100%;
+    }
 }

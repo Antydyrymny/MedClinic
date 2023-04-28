@@ -6,28 +6,28 @@ import { calendarTheme } from 'src/assets/CalendarTheme';
 import DoctorTimeList from '../DoctorTimesList/DoctorTimeList';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
-import { getBookedDates } from 'src/utils/GetBookedDates';
-import { getExcludedDates } from 'src/utils/GetExcludedDates';
+import { filterDoctors } from 'src/utils/FilterDoctors';
+import { getShouldDisableDateFunc } from 'src/utils/getShouldDisableDateFunc';
 import { getAvailableTimesPerDocForDate } from 'src/utils/GetAvailableTimesPerDocForDate';
-import { onOnlineChange, onClinicCheck, getCLinicForDate } from 'src/utils/Step3Handlers';
+import { onOnlineChange, onClinicCheck } from 'src/utils/Step3Handlers';
 import SpecStep3Css from './SpecStep3.module.css';
 
-function SpecStep3({ step3Data, bookedTimesData, appParamsData }) {
+function SpecStep3({ step3Data, bookedData, appParamsData }) {
     const [appParams, setAppParams] = appParamsData;
     const doctors = step3Data.docsAvailable;
     const onlineOptions = doctors.find((doc) => doc.worksOnline)
         ? ['In clinic', 'Online']
         : ['In clinic', ''];
     const clinics = Array.from(
-        doctors.reduce((clinicsSet, doc) => {
-            doc.clinic.forEach((c) => clinicsSet.add(c));
-            return clinicsSet;
-        }, new Set())
+        doctors
+            .reduce((clinicsMap, doc) => {
+                doc.clinic.forEach((c) => clinicsMap.set(c.name, c));
+                return clinicsMap;
+            }, new Map())
+            .values()
     );
-    const [clinicsPicked, setClinicsPicked] = useState(clinics.map((c) => c.id));
-    const bookedDates = getBookedDates(doctors, bookedTimesData).map((date) =>
-        dayjs(date)
-    );
+    const [clinicsPicked, setClinicsPicked] = useState(clinics);
+    const docsAvailable = filterDoctors(doctors, { clinic: clinicsPicked });
 
     return (
         <div className={SpecStep3Css.wrapper}>
@@ -44,22 +44,24 @@ function SpecStep3({ step3Data, bookedTimesData, appParamsData }) {
                     <div className={SpecStep3Css.specInfo}>
                         <h4 className={SpecStep3Css.heading}>Chosen Speciality</h4>
                         <h3 className={SpecStep3Css.spec}>{step3Data.specName}</h3>
-                        <p className={SpecStep3Css.price}>{step3Data.price + ' usd'}</p>
+                        <p className={SpecStep3Css.price}>
+                            {'from ' + step3Data.price + ' usd'}
+                        </p>
                     </div>
                     {appParams.onlineAppointment ? null : (
                         <div className={SpecStep3Css.clinics}>
                             <h4 className={SpecStep3Css.heading}>Available clinics</h4>
                             <CheckboxList
                                 points={clinics}
-                                checkedArray={clinicsPicked}
+                                checkedArray={clinicsPicked.map((c) => c.id)}
                                 onChange={onClinicCheck({
                                     clinics,
                                     clinicsPicked,
                                     setClinicsPicked,
                                     appParams,
                                     setAppParams,
-                                    bookedDates,
-                                    doctors,
+                                    bookedData,
+                                    doctors: docsAvailable,
                                 })}
                             />
                         </div>
@@ -76,12 +78,12 @@ function SpecStep3({ step3Data, bookedTimesData, appParamsData }) {
                                             date: dayjs(newDate).toString(),
                                         });
                                     }}
-                                    shouldDisableDate={getExcludedDates(
-                                        bookedDates,
-                                        doctors,
-                                        appParams.onlineAppointment,
-                                        clinicsPicked
-                                    )}
+                                    shouldDisableDate={getShouldDisableDateFunc({
+                                        bookedData,
+                                        doctors: docsAvailable,
+                                        onlineAppointment: appParams.onlineAppointment,
+                                        clinicsPicked,
+                                    })}
                                 />
                             </ThemeProvider>
                         </div>
@@ -95,14 +97,13 @@ function SpecStep3({ step3Data, bookedTimesData, appParamsData }) {
                         </h3>
                         <div className={SpecStep3Css.doctorList}>
                             <DoctorTimeList
-                                entries={getAvailableTimesPerDocForDate(
-                                    appParams.date,
-                                    doctors,
-                                    bookedTimesData
-                                ).map((entry) => ({
-                                    ...entry,
-                                    clinic: getCLinicForDate(entry, appParams, clinics),
-                                }))}
+                                entries={getAvailableTimesPerDocForDate({
+                                    date: appParams.date,
+                                    doctors: docsAvailable,
+                                    clinicsPicked,
+                                    bookedData,
+                                    onlineAppointment: appParams.onlineAppointment,
+                                })}
                                 onClick={(time, clinicId) =>
                                     setAppParams({
                                         ...appParams,

@@ -1,0 +1,55 @@
+.wrapper {
+    max-width: 21rem;
+    height: 2rem;
+    padding: 0.5rem 0.3rem 0.5rem 0.7rem;
+    position: relative;
+}
+
+.wrapper,
+.options {
+    border: 1px solid #E3E9FC;
+    border-radius: 0.5rem;
+}
+
+.mainBar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    width: 90%;
+}
+
+.arrow {
+    cursor: pointer;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    transition: transform .2s ease;
+}
+
+.arrowChoosing {
+    transform: rotate(180deg);
+}
+
+.options {
+    position: absolute;
+    height: 8rem;
+    width: 100%;
+    overflow-y: auto;
+    top: 3rem;
+    left: 0;
+    background-color: white;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.optionBar {
+    cursor: pointer;
+    padding: 0.5rem 0.3rem 0.5rem 0.7rem;
+}
+
+.optionBar:hover {
+    background-color: #dee2e6;
+}

@@ -2,8 +2,17 @@ import dayjs from 'dayjs';
 import { createTheme } from '@mui/material';
 
 export const calendarTheme = createTheme({
+    typography: {
+        fontSize: 17,
+        fontFamily: 'Lato Light, sans-serif',
+    },
     components: {
         MuiDateCalendar: {
+            styleOverrides: {
+                root: {
+                    padding: 0,
+                },
+            },
             defaultProps: {
                 disablePast: true,
                 maxDate: dayjs().month(dayjs().month() + 2),

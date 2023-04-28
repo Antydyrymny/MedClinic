@@ -13,7 +13,7 @@ import AppStep3Css from './AppStep3.module.css';
 function AppStep3() {
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
     const [loading, setLoading] = useState(true);
-    const [bookedTimesData, setBookedTimesData] = useState(null);
+    const [bookedData, setbookedData] = useState(null);
     const location = useLocation();
     const step3Data = useLocalStorageState(appointmentStep3State, location.state)[0];
     if (!step3Data) localStorage.removeItem(appointmentStep3State);
@@ -21,7 +21,7 @@ function AppStep3() {
 
     useEffect(() => {
         if (step3Data)
-            setBookedTimesData(
+            setbookedData(
                 bookedTimesFetched.filter((bookedEnrty) =>
                     step3Data.docsAvailable
                         .map((doc) => doc.id)
@@ -40,13 +40,13 @@ function AppStep3() {
                     {showDoctorsPage ? (
                         <DoctorStep3
                             step3Data={step3Data}
-                            bookedTimesData={bookedTimesData}
+                            bookedData={bookedData}
                             appParamsData={[appParams, setAppParams]}
                         />
                     ) : (
                         <SpecStep3
                             step3Data={step3Data}
-                            bookedTimesData={bookedTimesData}
+                            bookedData={bookedData}
                             appParamsData={[appParams, setAppParams]}
                         />
                     )}

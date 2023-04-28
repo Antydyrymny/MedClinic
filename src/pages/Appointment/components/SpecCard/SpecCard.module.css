@@ -34,7 +34,6 @@
 }
 
 .price {
-    font-weight: 600;
     line-height: 140%;
     background: linear-gradient(90deg, #2F7EEB 0%, #18BEE7 100%), #545A66;
     background-clip: text;

@@ -1,5 +1,6 @@
 .wrapper {
     height: 100%;
+    min-height: 2rem;
     display: flex;
     align-items: center;
     padding-left: 1rem;
@@ -7,6 +8,7 @@
 }
 
 .searchInput {
+    height: 100%;
     width: 100%;
     font-size: 1rem;
     color: #213043;

@@ -24,6 +24,7 @@ function DoctorFilter({ specSearchState, specialties, clinics }) {
                             })
                         }
                         checked={searchParams.worksWithVhi}
+                        square={true}
                     />
                     <Checkbox
                         label={'Works with kids'}
@@ -36,6 +37,7 @@ function DoctorFilter({ specSearchState, specialties, clinics }) {
                             })
                         }
                         checked={searchParams.worksWithKids}
+                        square={true}
                     />
                     <DropDown label={'Clinic'}>
                         <CheckboxList
@@ -46,6 +48,7 @@ function DoctorFilter({ specSearchState, specialties, clinics }) {
                                 clinics,
                                 searchParams
                             )}
+                            square={true}
                         />
                     </DropDown>
                     <DropDown label={'Specialization'}>

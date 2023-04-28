@@ -1,0 +1,16 @@
+.input {
+    display: none;
+}
+
+.label {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    color: #545a66;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.checked {
+    color: #288de6;
+}

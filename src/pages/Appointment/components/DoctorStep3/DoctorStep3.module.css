@@ -5,11 +5,19 @@
 
 .online {
     grid-column: 1 / 2;
+    padding-right: 1.5rem;
     margin-bottom: 2rem;
 }
 
 .heading {
-    margin: 1rem 0 2rem 0;
+    font-family: 'Lato Light', sans-serif;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 230%;
+    letter-spacing: .07rem;
+    text-transform: uppercase;
+    color: #a6acb4;
 }
 
 .main {
@@ -17,32 +25,80 @@
     grid-column: 1 / -1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 3rem;
+    gap: 3.5rem;
 }
 
 .doctorSpecClinic {}
 
+.doctor {
+    margin-bottom: 1rem;
+}
+
 .date {
-    width: 20rem;
+    justify-self: flex-start;
+    display: flex;
+    flex-direction: column;
 }
 
 .datepicker {
-    height: 19rem;
     scale: 1.1;
-    padding: 0.25rem;
+    margin: 0 0 2rem 0;
+    width: 100%;
+    height: 19.5rem;
+    justify-self: center;
     box-sizing: border-box;
     border: 1px solid #E3E9FC;
     border-radius: 1rem;
 }
 
+.dateHeading {
+    padding-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #545a66;
+}
+
+
+
 @media (max-width: 1000px) {
     .wrapper {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
     }
 
     .main {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 0rem;
     }
 
-    .doctorSpecClinic {}
+    .online {
+        padding: 0;
+    }
+
+    .clinics {
+        margin: 2rem 0;
+    }
+
+    .date {
+        justify-self: center;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+
+    .datepicker {
+        scale: 1;
+        width: 19rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .datepicker {
+        scale: 0.9;
+        width: 19rem;
+        margin-bottom: 1rem;
+    }
 }

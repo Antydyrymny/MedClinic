@@ -1,7 +1,11 @@
 .btn {
     padding: 1.1rem;
     width: 10rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
     text-align: center;
+    align-items: center;
     border-radius: 1.7rem;
     cursor: pointer;
     /* Disable selection */
@@ -31,4 +35,12 @@
 .done {
     background: linear-gradient(57deg, rgb(47, 126, 235) 0%, rgb(24, 190, 231) 100%);
     color: #fff;
+}
+
+@media (max-width: 1000px) {
+    .btn {
+        width: auto;
+        max-width: 10rem;
+        min-width: 7rem;
+    }
 }

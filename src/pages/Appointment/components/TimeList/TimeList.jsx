@@ -6,7 +6,7 @@ function TimeList({ clinic, times, onClick }) {
 
     return (
         <div className={TimeListCss.wrapepr}>
-            <div className={TimeListCss.clinic}>{clinic.address}</div>
+            {!clinic ? null : <div className={TimeListCss.clinic}>{clinic.address}</div>}
             <div className={TimeListCss.times}>
                 {times.map((time, ind) => (
                     <div

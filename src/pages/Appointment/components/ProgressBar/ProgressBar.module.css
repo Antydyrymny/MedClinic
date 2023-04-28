@@ -1,4 +1,4 @@
-.container {
+.wrapper {
     display: flex;
     margin: 0.4rem 0 2rem 0;
     padding: 0;
@@ -18,4 +18,15 @@
 
 .empty {
     background-color: #F0F4FC;
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+    }
 }

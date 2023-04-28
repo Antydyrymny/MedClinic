@@ -5,8 +5,14 @@
     gap: 0.6rem;
 }
 
+.clinic {
+    font-size: 0.9rem;
+    padding-bottom: 0.6rem;
+}
+
 .time {
-    padding: 0.9rem 1.1rem;
+    margin-bottom: 0.6rem;
+    padding: 1.1rem 0.7rem;
     border: 1px solid #E3E9FC;
     border-radius: 0.5rem;
     font-size: 1.1rem;

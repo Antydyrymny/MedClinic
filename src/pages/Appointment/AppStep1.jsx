@@ -11,32 +11,40 @@ function AppStep1() {
     const navigate = useNavigate();
     return (
         <div className={AppStep1Css.wrapper}>
-            <ToggleSwitch
-                heading={'Form of payment'}
-                option1={'Regular appointment'}
-                option2={'VHI coverage'}
-                right={appParams.worksWithVhi}
-                onClick={setBooleanParam('worksWithVhi')}
-            />
-            <ToggleSwitch
-                heading={'Type of visit'}
-                option1={'Initial appointment'}
-                option2={'Follow-up appointment'}
-                right={appParams.followUp}
-                onClick={setBooleanParam('followUp')}
-            />
-            <ToggleSwitch
-                heading={'Age'}
-                option1={'Adult'}
-                option2={'Child'}
-                right={appParams.worksWithKids}
-                onClick={setBooleanParam('worksWithKids')}
-            />
-            <Button
-                text={'Next step'}
-                colored={'active'}
-                onClick={() => navigate('/app/step2')}
-            />
+            <div className={AppStep1Css.toggle}>
+                <ToggleSwitch
+                    heading={'Form of payment'}
+                    option1={'Regular appointment'}
+                    option2={'VHI coverage'}
+                    right={appParams.worksWithVhi}
+                    onClick={setBooleanParam('worksWithVhi')}
+                />
+            </div>
+            <div className={AppStep1Css.toggle}>
+                <ToggleSwitch
+                    heading={'Type of visit'}
+                    option1={'Initial appointment'}
+                    option2={'Follow-up appointment'}
+                    right={appParams.followUp}
+                    onClick={setBooleanParam('followUp')}
+                />
+            </div>
+            <div className={AppStep1Css.toggle}>
+                <ToggleSwitch
+                    heading={'Age'}
+                    option1={'Adult'}
+                    option2={'Child'}
+                    right={appParams.worksWithKids}
+                    onClick={setBooleanParam('worksWithKids')}
+                />
+            </div>
+            <div className={AppStep1Css.next}>
+                <Button
+                    text={'Next step'}
+                    colored={'active'}
+                    onClick={() => navigate('/app/step2')}
+                />
+            </div>
         </div>
     );
 

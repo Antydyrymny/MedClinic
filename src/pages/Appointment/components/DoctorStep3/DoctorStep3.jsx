@@ -1,30 +1,26 @@
 import { useState } from 'react';
-import { getBookedDates } from 'src/utils/GetBookedDates';
-import { getExcludedDates } from 'src/utils/GetExcludedDates';
-import { getAvailableTimesPerDocForDate } from 'src/utils/GetAvailableTimesPerDocForDate';
-import OptionSelect from 'src/components/OptionSelect/OptionSelect';
-import CheckboxList from 'src/components/CheckboxList/CheckboxList';
-import TimeList from '../TimeList/TimeList';
+import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { ThemeProvider } from '@emotion/react';
 import { calendarTheme } from 'src/assets/CalendarTheme';
-import dayjs from 'dayjs';
-import { onOnlineChange, onClinicCheck, getCLinicForDate } from 'src/utils/Step3Handlers';
-import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescription';
+import OptionSelect from 'src/components/OptionSelect/OptionSelect';
+import CheckboxList from 'src/components/CheckboxList/CheckboxList';
+import TimeList from '../TimeList/TimeList';
 import SpecialSelect from '../SpecialSelect/SpecialSelect';
+import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescription';
+import { getShouldDisableDateFunc } from 'src/utils/getShouldDisableDateFunc';
+import { getAvailableTimesPerDocForDate } from 'src/utils/GetAvailableTimesPerDocForDate';
+import { onOnlineChange, onClinicCheck } from 'src/utils/Step3Handlers';
 import DoctorStep3Css from './DoctorStep3.module.css';
 
-function DoctorStep3({ step3Data, bookedTimesData, appParamsData }) {
+function DoctorStep3({ step3Data, bookedData, appParamsData }) {
     const [appParams, setAppParams] = appParamsData;
     const doctor = step3Data.docsAvailable[0];
     const onlineOptions = doctor.worksOnline
         ? ['In clinic', 'Online']
         : ['In clinic', ''];
     const clinics = doctor.clinic;
-    const [clinicsPicked, setClinicsPicked] = useState(clinics.map((c) => c.id));
-    const bookedDates = getBookedDates([doctor], bookedTimesData).map((date) =>
-        dayjs(date)
-    );
+    const [clinicsPicked, setClinicsPicked] = useState(clinics);
 
     return (
         <div className={DoctorStep3Css.wrapper}>
@@ -39,7 +35,9 @@ function DoctorStep3({ step3Data, bookedTimesData, appParamsData }) {
             <div className={DoctorStep3Css.main}>
                 <div className={DoctorStep3Css.doctorSpecClinic}>
                     <h4 className={DoctorStep3Css.heading}>Chosen doctor</h4>
-                    <DoctorShortDescription doctor={doctor} />
+                    <div className={DoctorStep3Css.doctor}>
+                        <DoctorShortDescription doctor={doctor} />
+                    </div>
                     {appParams.onlineAppointment ? null : (
                         <>
                             {doctor.speciality.length < 2 ? null : (
@@ -57,14 +55,14 @@ function DoctorStep3({ step3Data, bookedTimesData, appParamsData }) {
                                 </h4>
                                 <CheckboxList
                                     points={clinics}
-                                    checkedArray={clinicsPicked}
+                                    checkedArray={clinicsPicked.map((c) => c.id)}
                                     onChange={onClinicCheck({
                                         clinics,
                                         clinicsPicked,
                                         setClinicsPicked,
                                         appParams,
                                         setAppParams,
-                                        bookedDates,
+                                        bookedData,
                                         doctors: [doctor],
                                     })}
                                 />
@@ -84,12 +82,12 @@ function DoctorStep3({ step3Data, bookedTimesData, appParamsData }) {
                                         date: dayjs(newDate).toString(),
                                     });
                                 }}
-                                shouldDisableDate={getExcludedDates(
-                                    bookedDates,
-                                    [doctor],
-                                    appParams.onlineAppointment,
-                                    clinicsPicked
-                                )}
+                                shouldDisableDate={getShouldDisableDateFunc({
+                                    bookedData,
+                                    doctors: [doctor],
+                                    onlineAppointment: appParams.onlineAppointment,
+                                    clinicsPicked,
+                                })}
                             />
                         </ThemeProvider>
                     </div>
@@ -101,14 +99,16 @@ function DoctorStep3({ step3Data, bookedTimesData, appParamsData }) {
                             {dayjs(appParams.date).format('dddd, D MMMM YYYY')}
                         </h3>
                         <div className={DoctorStep3Css.times}>
-                            {getAvailableTimesPerDocForDate(
-                                appParams.date,
-                                [doctor],
-                                bookedTimesData
-                            ).map((entry) => (
+                            {getAvailableTimesPerDocForDate({
+                                date: appParams.date,
+                                doctors: [doctor],
+                                clinicsPicked,
+                                bookedData,
+                                onlineAppointment: appParams.onlineAppointment,
+                            }).map((entry) => (
                                 <TimeList
                                     key={entry.doctor.id}
-                                    clinic={getCLinicForDate(entry, appParams, clinics)}
+                                    clinic={entry.clinic}
                                     times={entry.times}
                                     onClick={(time, clinicId) =>
                                         setAppParams({
