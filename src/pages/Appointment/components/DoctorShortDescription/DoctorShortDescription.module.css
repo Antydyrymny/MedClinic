@@ -14,11 +14,19 @@
     border: 2px solid #f1f4f9;
 }
 
+.smallPhoto {
+    width: 56px;
+    height: 56px;
+}
 
 .name {
     color: #545a66;
     font-weight: 500;
     font-size: 1.1rem;
+}
+
+.smallName {
+    font-size: 1rem;
 }
 
 .spec {

@@ -9,7 +9,12 @@ function DoctorTimeCard({ doctor, clinic, times, onClick }) {
                 <DoctorShortDescription doctor={doctor} />
             </div>
             <div className={DoctorTimeCardCSS.time}>
-                <TimeList clinic={clinic} times={times} onClick={onClick} />
+                <TimeList
+                    clinic={clinic}
+                    times={times}
+                    onClick={onClick}
+                    doctorId={doctor.id}
+                />
             </div>
         </div>
     );

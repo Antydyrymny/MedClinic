@@ -1,0 +1,39 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+    border: 1px solid #E3E9FC;
+    border-radius: 0.5rem;
+}
+
+.dateTime {
+    display: flex;
+    justify-content: space-between;
+}
+
+.timeBlock {
+    min-width: 15%;
+}
+
+.doctor {
+    margin-bottom: 1rem;
+}
+
+.info {
+    line-height: 130%;
+    color: #545a66;
+}
+
+.price {
+    color: #2f7eeb;
+}
+
+.heading {
+    font-family: 'Lato Light', sans-serif;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 160%;
+    letter-spacing: .07rem;
+    color: #a6acb4;
+}

@@ -1,0 +1,20 @@
+.wrapper {
+    width: 100%;
+    position: relative;
+    border: 1px solid #E3E9FC;
+    border-radius: 1rem;
+    color: #545a66;
+}
+
+.label {
+    position: absolute;
+    line-height: 140%;
+    color: #b5b8bd;
+    top: calc(50% - 0.5rem);
+    transition: top .2s ease, font-size .2s ease, color .2s ease;
+}
+
+.label:focus {
+    font-size: 0.7rem;
+    top: 0.1rem;
+}

@@ -125,9 +125,15 @@ function AppStep2() {
     function handleParamChoice(paramName, paramData) {
         clearAppData(appParams, setAppParams, 3);
         localStorage.removeItem(appointmentStep3State);
-        if (paramName === 'Doctor') setAppParams((p) => ({ ...p, doctorId: paramData }));
+        if (paramName === 'Doctor')
+            setAppParams((p) => ({ ...p, doctorId: paramData, step3Format: 'Doctor' }));
         else if (paramName === 'Speciality')
-            setAppParams((p) => ({ ...p, specialityId: paramData, doctorId: null }));
+            setAppParams((p) => ({
+                ...p,
+                specialityId: paramData,
+                doctorId: null,
+                step3Format: 'Speciality',
+            }));
     }
 }
 

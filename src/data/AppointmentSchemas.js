@@ -3,6 +3,7 @@ export const appointmentSchema = {
     followUp: false,
     worksWithKids: false,
     openedTab: 'Doctor',
+    step3Format: null,
     doctorId: null,
     specialityId: null,
     onlineAppointment: false,
@@ -11,5 +12,5 @@ export const appointmentSchema = {
     time: null,
 };
 export const step1Schema = ['worksWithVhi', 'followUp', 'worksWithKids'];
-export const step2Schema = ['openedTab', 'doctorId', 'specialityId'];
+export const step2Schema = ['openedTab', 'doctorId', 'specialityId', 'step3Format'];
 export const step3Schema = ['onlineAppointment', 'date', 'time', 'clinicId'];

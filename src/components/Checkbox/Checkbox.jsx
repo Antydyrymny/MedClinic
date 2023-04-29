@@ -1,12 +1,20 @@
 import CheckboxButton from './CheckboxButton';
 import CheckboxListCss from './Checkbox.module.css';
 
-function Checkbox({ label, onChange, checked, leftAligned = false, square = false }) {
+function Checkbox({
+    label,
+    onChange,
+    checked,
+    leftAligned = false,
+    square = false,
+    children = false,
+    highlight = true,
+}) {
     return leftAligned ? (
         <div className={CheckboxListCss.wrapper}>
             <label
                 className={`${CheckboxListCss.label} ${
-                    !square && checked ? CheckboxListCss.checked : null
+                    highlight && checked ? CheckboxListCss.checked : null
                 }`}
             >
                 <input
@@ -16,17 +24,17 @@ function Checkbox({ label, onChange, checked, leftAligned = false, square = fals
                     className={CheckboxListCss.input}
                 />
                 <CheckboxButton checked={checked} square={square} />
-                {label}
+                {children ? children : label}
             </label>
         </div>
     ) : (
         <div className={CheckboxListCss.wrapper}>
             <label
                 className={`${CheckboxListCss.label} ${
-                    !square && checked ? CheckboxListCss.checked : null
+                    highlight && checked ? CheckboxListCss.checked : null
                 }`}
             >
-                {label}
+                {children ? children : label}
                 <input
                     type='checkbox'
                     onChange={(e) => onChange(e.target.checked, label)}

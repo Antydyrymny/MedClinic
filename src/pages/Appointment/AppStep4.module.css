@@ -1,0 +1,24 @@
+.main,
+.footer {
+    display: flex;
+}
+
+.info {
+    width: 33%;
+}
+
+.summary {
+    width: 25%;
+    margin-right: 4rem;
+}
+
+.heading {
+    font-family: 'Lato Light', sans-serif;
+    margin-bottom: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 230%;
+    letter-spacing: .07rem;
+    text-transform: uppercase;
+    color: #a6acb4;
+}

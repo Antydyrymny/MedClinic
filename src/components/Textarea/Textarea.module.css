@@ -1,0 +1,7 @@
+.wrapper {
+    width: 100%;
+    position: relative;
+    border: 1px solid #E3E9FC;
+    border-radius: 1rem;
+    color: #545a66;
+}

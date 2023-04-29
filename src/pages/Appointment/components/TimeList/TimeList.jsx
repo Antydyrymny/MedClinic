@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import TimeListCss from './TimeList.module.css';
 
-function TimeList({ clinic, times, onClick }) {
+function TimeList({ clinic, times, onClick, doctorId = null }) {
     const navigate = useNavigate();
 
     return (
@@ -13,7 +13,7 @@ function TimeList({ clinic, times, onClick }) {
                         key={ind}
                         className={TimeListCss.time}
                         onClick={() => {
-                            onClick(time, clinic.id);
+                            onClick(time, clinic.id, doctorId);
                             navigate('/app/step4');
                         }}
                     >
