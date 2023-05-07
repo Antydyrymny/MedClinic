@@ -1,20 +1,74 @@
 .wrapper {
-    width: 100%;
     position: relative;
-    border: 1px solid #E3E9FC;
-    border-radius: 1rem;
-    color: #545a66;
+}
+
+.hasError {
+    margin-bottom: 1.8rem;
 }
 
 .label {
     position: absolute;
-    line-height: 140%;
-    color: #b5b8bd;
-    top: calc(50% - 0.5rem);
+    top: calc(50% - 0.7rem);
+    left: 0.55rem;
     transition: top .2s ease, font-size .2s ease, color .2s ease;
+    cursor: text;
+    color: #b5b8bd;
+    line-height: 140%;
+    /* Disable selection */
+    -moz-user-select: none;
+    /* firefox */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE*/
+    user-select: none;
+    /* Standard syntax */
 }
 
-.label:focus {
+.focused {
     font-size: 0.7rem;
-    top: 0.1rem;
+    top: 0.3rem;
+}
+
+.input {
+    font-size: 1rem;
+    color: #545a66;
+    border: 1px solid #E3E9FC;
+    border-radius: 0.3rem;
+    width: 100%;
+    padding: 1.3rem 0.55rem 0.8rem;
+    font-family: "lato", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.input:focus {
+    border-color: #007aff;
+}
+
+.error {
+    border-color: #ae1f31;
+}
+
+.errorText {
+    color: #ae1f31;
+}
+
+.warning {
+    border-color: #6c757d;
+}
+
+.warningText {
+    color: #6c757d;
+}
+
+.errorText,
+.warningText {
+    font-size: 0.9rem;
+    position: absolute;
+    top: 3.8rem;
+}
+
+.input:focus {
+    outline: none;
 }

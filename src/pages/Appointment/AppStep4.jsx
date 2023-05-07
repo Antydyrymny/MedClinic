@@ -6,12 +6,12 @@ import BackButton from './components/BackButton/BackButton';
 import AppStep4Css from './AppStep4.module.css';
 
 const clientSchema = {
-    surname: null,
-    name: null,
-    birthday: null,
-    email: null,
-    telephone: null,
-    comment: null,
+    surname: '',
+    name: '',
+    birthday: '',
+    email: '',
+    telephone: '',
+    comment: '',
 };
 
 function AppStep4() {

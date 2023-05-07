@@ -9,13 +9,14 @@ function Checkbox({
     square = false,
     children = false,
     highlight = true,
+    pointer = true,
 }) {
     return leftAligned ? (
         <div className={CheckboxListCss.wrapper}>
             <label
                 className={`${CheckboxListCss.label} ${
                     highlight && checked ? CheckboxListCss.checked : null
-                }`}
+                } ${!pointer ? CheckboxListCss.noPointer : null}`}
             >
                 <input
                     type='checkbox'
@@ -32,7 +33,7 @@ function Checkbox({
             <label
                 className={`${CheckboxListCss.label} ${
                     highlight && checked ? CheckboxListCss.checked : null
-                }`}
+                } ${!pointer ? CheckboxListCss.noPointer : null}`}
             >
                 {children ? children : label}
                 <input

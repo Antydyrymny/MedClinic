@@ -14,3 +14,7 @@
 .checked {
     color: #288de6;
 }
+
+.noPointer {
+    cursor: default;
+}
