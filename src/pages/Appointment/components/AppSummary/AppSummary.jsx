@@ -15,12 +15,15 @@ function AppSummary() {
     const doctors = useContext(DoctorsAllContext)[0];
     const specialities = useContext(SpecialitiesContext)[0];
     const clinics = useContext(ClinicsContext)[0];
-    const doctor = doctors.find((d) => d.id === appParams.doctorId);
-    const speciality = specialities.find((s) => s.id === appParams.specialityId);
-    const clinic = clinics.find((c) => c.id === appParams.clinicId);
-    const docExpanded = expandDoctors([doctor], specialities, clinics)[0];
+    const doctor = doctors?.find((d) => d.id === appParams.doctorId);
+    const speciality = specialities?.find((s) => s.id === appParams.specialityId);
+    const clinic = clinics?.find((c) => c.id === appParams.clinicId);
+    const docExpanded =
+        doctor && speciality && clinic
+            ? expandDoctors([doctor], specialities, clinics)[0]
+            : null;
 
-    return (
+    return !doctor || !speciality || !clinic ? null : (
         <div className={AppSummaryCss.wrapper}>
             <div className={AppSummaryCss.dateTime}>
                 <div className={AppSummaryCss.dateBlock}>

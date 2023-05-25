@@ -22,7 +22,6 @@ import Contacts from './pages/Contacts/Contacts';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
-    // const env = import.meta.env.VITE_API_URL;
     useClearLocalStorageOnURLMove(
         [appointmentKey, previousPageKey, appointmentStep3State],
         '/app'

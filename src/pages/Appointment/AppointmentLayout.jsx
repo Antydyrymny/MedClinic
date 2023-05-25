@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
     DoctorsAllContext,
     SpecialitiesContext,
@@ -42,7 +42,9 @@ function AppointmentLayout() {
     const permitStep4 = permitVisitApp4(appParams);
     useRedirect(
         '/app/step1',
-        (currentStep === 3 && !permitStep3) || (currentStep === 4 && !permitStep4)
+        (currentStep === 3 && !permitStep3) ||
+            (currentStep === 4 && !permitStep4) ||
+            (currentStep === 5 && !appParams.showSummary)
     );
 
     // Clear data on page refresh

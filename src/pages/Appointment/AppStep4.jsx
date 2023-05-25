@@ -3,6 +3,7 @@ import AppSummary from './components/AppSummary/AppSummary';
 import ClientForm from './components/ClientForm/ClientForm';
 import Button from '../../components/Button/Button';
 import BackButton from './components/BackButton/BackButton';
+import { validateClientData } from 'src/utils/ValidateClientData';
 import AppStep4Css from './AppStep4.module.css';
 
 const clientSchema = {
@@ -17,6 +18,14 @@ const clientSchema = {
 function AppStep4() {
     const [client, setClient] = useState(clientSchema);
     const [termsAccepted, setTermsAccepted] = useState(false);
+    const allowConfirm =
+        termsAccepted &&
+        validateClientData(client, {
+            surname: true,
+            name: true,
+            birthday: true,
+            telephone: true,
+        });
 
     return (
         <div className={AppStep4Css.wrapper}>
@@ -34,10 +43,32 @@ function AppStep4() {
                 </div>
             </div>
             <div className={AppStep4Css.footer}>
-                <div className={AppStep4Css.confirm}>
+                <div className={AppStep4Css.back}>
                     <BackButton to={'/app/step3'} />
                 </div>
-                <Button text={'CONFIRM'} submit={true} colored={'active'} />
+                <div className={AppStep4Css.confirm}>
+                    <Button
+                        text={'CONFIRM'}
+                        submit={true}
+                        colored={'active'}
+                        notAllowed={!allowConfirm}
+                    />
+                </div>
+            </div>
+            <div className={AppStep4Css.footerMobile}>
+                <div className={AppStep4Css.footer}>
+                    <div className={AppStep4Css.confirmMobile}>
+                        <Button
+                            text={'CONFIRM'}
+                            submit={true}
+                            colored={'active'}
+                            notAllowed={!allowConfirm}
+                        />
+                    </div>
+                </div>
+                <div className={AppStep4Css.back}>
+                    <BackButton to={'/app/step3'} />
+                </div>
             </div>
         </div>
     );

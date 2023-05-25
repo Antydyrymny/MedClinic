@@ -10,6 +10,7 @@ export const appointmentSchema = {
     clinicId: null,
     date: null,
     time: null,
+    showSummary: false,
 };
 export const step1Schema = ['worksWithVhi', 'followUp', 'worksWithKids'];
 export const step2Schema = ['openedTab', 'doctorId', 'specialityId', 'step3Format'];

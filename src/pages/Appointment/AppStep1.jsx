@@ -39,11 +39,13 @@ function AppStep1() {
                 />
             </div>
             <div className={AppStep1Css.next}>
-                <Button
-                    text={'Next step'}
-                    colored={'active'}
-                    onClick={() => navigate('/app/step2')}
-                />
+                <div className={AppStep1Css.button}>
+                    <Button
+                        text={'Next step'}
+                        colored={'active'}
+                        onClick={() => navigate('/app/step2')}
+                    />
+                </div>
             </div>
         </div>
     );

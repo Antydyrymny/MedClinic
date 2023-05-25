@@ -6,16 +6,20 @@ function ToggleSwitch({ option1, option2, right, onClick, heading }) {
         <section className={ToggleSwitchCss.wrapper}>
             {heading && <h2 className={ToggleSwitchCss.heading}>{heading}</h2>}
             <div className={ToggleSwitchCss.toggle}>
-                <Button
-                    text={option1}
-                    onClick={() => onClick(!right)}
-                    colored={!right ? 'done' : null}
-                />
-                <Button
-                    text={option2}
-                    onClick={() => onClick(!right)}
-                    colored={right ? 'done' : null}
-                />
+                <div className={ToggleSwitchCss.button}>
+                    <Button
+                        text={option1}
+                        onClick={() => onClick(!right)}
+                        colored={!right ? 'done' : null}
+                    />
+                </div>
+                <div className={ToggleSwitchCss.button}>
+                    <Button
+                        text={option2}
+                        onClick={() => onClick(!right)}
+                        colored={right ? 'done' : null}
+                    />
+                </div>
             </div>
         </section>
     );

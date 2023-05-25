@@ -3,7 +3,7 @@ import Textarea from 'src/components/Textarea/Textarea';
 import Checkbox from 'src/components/Checkbox/Checkbox';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
 import IMask from 'imask';
-import { validateClientForm } from 'src/utils/ValidateClientData';
+import { validateClientData } from 'src/utils/ValidateClientData';
 import ClientFormCss from './ClientForm.module.css';
 
 function ClientForm({ clientData, termsAcceptedData }) {
@@ -22,7 +22,7 @@ function ClientForm({ clientData, termsAcceptedData }) {
                             required={true}
                             onChange={onChange('surname')}
                             maxlength={20}
-                            valid={validateClientForm(client, { surname: true })}
+                            valid={validateClientData(client, { surname: true })}
                         />
                     </div>
                     <div className={ClientFormCss.input}>
@@ -33,7 +33,7 @@ function ClientForm({ clientData, termsAcceptedData }) {
                             required={true}
                             onChange={onChange('name')}
                             maxlength={20}
-                            valid={validateClientForm(client, { name: true })}
+                            valid={validateClientData(client, { name: true })}
                         />
                     </div>
                     <div className={ClientFormCss.input}>
@@ -45,7 +45,7 @@ function ClientForm({ clientData, termsAcceptedData }) {
                             required={true}
                             onChange={onBirthdayChange}
                             maxlength={10}
-                            valid={validateClientForm(client, { birthday: true })}
+                            valid={validateClientData(client, { birthday: true })}
                         />
                     </div>
                 </fieldset>
@@ -59,7 +59,7 @@ function ClientForm({ clientData, termsAcceptedData }) {
                             required={true}
                             onChange={onTelChange}
                             maxlength={18}
-                            valid={validateClientForm(client, { telephone: true })}
+                            valid={validateClientData(client, { telephone: true })}
                         />
                     </div>
                     <div className={ClientFormCss.input}>
@@ -68,7 +68,11 @@ function ClientForm({ clientData, termsAcceptedData }) {
                             type={'email'}
                             label={'Email'}
                             onChange={onChange('email')}
-                            valid={validateClientForm(client, { email: true })}
+                            valid={
+                                client.email.length === 0 ||
+                                validateClientData(client, { email: true })
+                            }
+                            errorMessage={'Invalid email'}
                         />
                     </div>
                 </fieldset>
@@ -79,32 +83,35 @@ function ClientForm({ clientData, termsAcceptedData }) {
                             'Describe yourPlease describe what is troubling you, your symptoms, or the purpose of your visit*'
                         }
                         onChange={onChange('commment')}
+                        rows={5}
                     />
                 </fieldset>
                 <fieldset className={ClientFormCss.fieldset}>
-                    <Checkbox
-                        checked={termsAccepted}
-                        onChange={(boolean) => setTermsAccepted(boolean)}
-                        leftAligned={true}
-                        highlight={false}
-                        pointer={false}
-                    >
-                        {
-                            <>
-                                <p className={ClientFormCss.checkbox}>
-                                    I agree to the processing of my personal data and to
-                                    the privacy policy,
-                                </p>
-                                <a
-                                    className={ClientFormCss.download}
-                                    href={termsAndConditions}
-                                    download='terms-and-conditions.txt'
-                                >
-                                    including the terms and conditions.
-                                </a>
-                            </>
-                        }
-                    </Checkbox>
+                    <div className={ClientFormCss.agree}>
+                        <Checkbox
+                            checked={termsAccepted}
+                            onChange={(boolean) => setTermsAccepted(boolean)}
+                            leftAligned={true}
+                            highlight={false}
+                            pointer={false}
+                        >
+                            {
+                                <div className={ClientFormCss.checkbox}>
+                                    <p className={ClientFormCss.checkboxText}>
+                                        {`I agree to the processing of my personal data and to
+                                    the privacy policy, `}
+                                    </p>
+                                    <a
+                                        className={ClientFormCss.checkboxDownload}
+                                        href={termsAndConditions}
+                                        download='terms-and-conditions.txt'
+                                    >
+                                        {`including the terms and conditions.`}
+                                    </a>
+                                </div>
+                            }
+                        </Checkbox>
+                    </div>
                 </fieldset>
             </form>
         </div>

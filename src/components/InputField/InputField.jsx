@@ -10,23 +10,18 @@ function InputField({
     placeholder = null,
     maxlength = null,
     valid,
+    errorMessage = 'Fill in the required field',
 }) {
     const inputRef = useRef(null);
     const allowShowError = useRef(false);
     const [isFocused, setIsFocused] = useState(false);
 
     allowShowError.current = allowShowError.current || isFocused;
-    const errorClass =
-        !valid && allowShowError.current && !isFocused
-            ? required
-                ? 'error'
-                : 'warning'
-            : null;
-
+    const error = !valid && allowShowError.current && !isFocused;
     return (
         <div
             className={`${InputFieldCss.wrapper} ${
-                errorClass ? InputFieldCss.hasError : null
+                error ? InputFieldCss.hasError : null
             }`}
             onClick={() => {
                 inputRef.current.focus();
@@ -36,13 +31,7 @@ function InputField({
                 ref={inputRef}
                 type={type}
                 required={required}
-                className={`${InputFieldCss.input} ${
-                    errorClass === 'error'
-                        ? InputFieldCss.error
-                        : errorClass === 'warning'
-                        ? InputFieldCss.warning
-                        : null
-                }`}
+                className={`${InputFieldCss.input} ${error ? InputFieldCss.error : null}`}
                 value={value}
                 onChange={(e) => {
                     onChange(e.target.value);
@@ -68,12 +57,7 @@ function InputField({
             >
                 {label}
             </p>
-            {errorClass === 'error' && (
-                <p className={InputFieldCss.errorText}>Fill in the required field</p>
-            )}
-            {errorClass === 'warning' && (
-                <p className={InputFieldCss.warningText}>Check the input field</p>
-            )}
+            {error && <p className={InputFieldCss.errorText}>{errorMessage}</p>}
         </div>
     );
 }

@@ -31,12 +31,16 @@
 }
 
 .input {
+    font-family: "Lato", sans-serif;
     font-size: 1rem;
     color: #545a66;
     border: 1px solid #E3E9FC;
     border-radius: 0.3rem;
     width: 100%;
     padding: 1.3rem 0.55rem 0.8rem;
+}
+
+.input::placeholder {
     font-family: "lato", sans-serif;
     font-weight: 300;
     font-style: normal;
@@ -44,6 +48,7 @@
 
 .input:focus {
     border-color: #007aff;
+    outline: none;
 }
 
 .error {
@@ -67,8 +72,4 @@
     font-size: 0.9rem;
     position: absolute;
     top: 3.8rem;
-}
-
-.input:focus {
-    outline: none;
 }

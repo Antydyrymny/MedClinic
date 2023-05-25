@@ -24,7 +24,9 @@ function Checkbox({
                     checked={checked}
                     className={CheckboxListCss.input}
                 />
-                <CheckboxButton checked={checked} square={square} />
+                <div className={CheckboxListCss.button}>
+                    <CheckboxButton checked={checked} square={square} />
+                </div>
                 {children ? children : label}
             </label>
         </div>
@@ -42,7 +44,9 @@ function Checkbox({
                     checked={checked}
                     className={CheckboxListCss.input}
                 />
-                <CheckboxButton checked={checked} square={square} />
+                <div className={CheckboxListCss.button}>
+                    <CheckboxButton checked={checked} square={square} />
+                </div>
             </label>
         </div>
     );

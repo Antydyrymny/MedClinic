@@ -1,7 +1,8 @@
-.btn {
+.wrapper {
+    box-sizing: border-box;
     padding: 1.1rem;
-    width: 10rem;
-    height: 1rem;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -23,7 +24,7 @@
     border: 1px solid #e1e9fc;
 }
 
-.empty:hover {
+.empty:not(.notAllowed):hover {
     border: 1px solid #5b83db;
 }
 
@@ -32,9 +33,18 @@
     color: #fff;
 }
 
+.active:not(.notAllowed):hover {
+    background: #2F7EEB;
+}
+
 .done {
     background: linear-gradient(57deg, rgb(47, 126, 235) 0%, rgb(24, 190, 231) 100%);
     color: #fff;
+}
+
+.notAllowed {
+    opacity: 0.2;
+    cursor: not-allowed !important;
 }
 
 @media (max-width: 1000px) {

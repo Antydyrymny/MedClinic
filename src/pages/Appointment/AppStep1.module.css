@@ -6,8 +6,21 @@
     margin-top: 1rem;
 }
 
-@media (max-width: 500px) {
+.button {
+    width: 12.5rem;
+}
+
+@media (max-width: 520px) {
     .wrapper {
         padding: 1.5rem 0;
+    }
+
+    .next {
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        width: 30rem;
     }
 }

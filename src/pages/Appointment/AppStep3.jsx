@@ -16,7 +16,7 @@ function AppStep3() {
     const [bookedData, setbookedData] = useState(null);
     const location = useLocation();
     const step3Data = useLocalStorageState(appointmentStep3State, location.state)[0];
-    if (!step3Data) localStorage.removeItem(appointmentStep3State);
+    // if (!step3Data) sessionStorage.removeItem(appointmentStep3State);
     const showDoctorsPage = appParams.step3Format === 'Doctor';
 
     useEffect(() => {
