@@ -1,0 +1,49 @@
+.wrapper {
+    padding-bottom: 3rem;
+    background-color: #F2F4F9;
+    color: #485052;
+}
+
+.screen1000Clinics {
+    display: none;
+}
+
+.clinicList,
+.clinicInfo {
+    margin: 0 1rem 3rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dropDown {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        padding-top: 2rem;
+    }
+
+    .dropDown {
+        display: block;
+        margin: 0 1rem 17rem 1rem;
+    }
+
+    .clinicList {
+        display: none;
+    }
+
+    .screen1000Clinics {
+        display: block;
+    }
+
+    .map {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .dropDown {
+        margin: 0 1rem 9.5rem 1rem;
+    }
+}

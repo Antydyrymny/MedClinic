@@ -82,7 +82,7 @@ function ClientForm({ clientData, termsAcceptedData }) {
                         placeholder={
                             'Describe yourPlease describe what is troubling you, your symptoms, or the purpose of your visit*'
                         }
-                        onChange={onChange('commment')}
+                        onChange={onChange('comment')}
                         rows={5}
                     />
                 </fieldset>

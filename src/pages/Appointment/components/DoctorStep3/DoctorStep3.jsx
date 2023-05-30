@@ -6,7 +6,7 @@ import { calendarTheme } from 'src/assets/CalendarTheme';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
 import TimeList from '../TimeList/TimeList';
-import SpecialSelect from '../SpecialSelect/SpecialSelect';
+import DropDown from 'src/components/DropDown/DropDown';
 import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescription';
 import { getShouldDisableDateFunc } from 'src/utils/getShouldDisableDateFunc';
 import { getAvailableTimesPerDocForDate } from 'src/utils/GetAvailableTimesPerDocForDate';
@@ -41,12 +41,16 @@ function DoctorStep3({ step3Data, bookedData, appParamsData }) {
                     {appParams.onlineAppointment ? null : (
                         <>
                             {doctor.speciality.length < 2 ? null : (
-                                <SpecialSelect
+                                <DropDown
                                     options={doctor.speciality}
                                     activeId={appParams.specialityId}
-                                    onClick={(id) =>
-                                        setAppParams({ ...appParams, specialityId: id })
-                                    }
+                                    onClick={(spec) => {
+                                        return () =>
+                                            setAppParams({
+                                                ...appParams,
+                                                specialityId: spec.id,
+                                            });
+                                    }}
                                 />
                             )}
                             <div className={DoctorStep3Css.clinics}>

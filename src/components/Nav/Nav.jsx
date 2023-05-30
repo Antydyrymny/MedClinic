@@ -15,7 +15,7 @@ function Nav() {
     return (
         <nav
             className={NavCss.navigation}
-            style={scroll > 100 ? { position: 'fixed' } : null}
+            style={scroll > 100 ? { position: 'fixed', zIndex: 100 } : null}
         >
             <ul>
                 <li>

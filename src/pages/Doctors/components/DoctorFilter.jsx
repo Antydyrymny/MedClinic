@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { DocSearchContext } from 'src/context/DocSearchContext';
 import SpecFilter from './SpecFilter';
-import DropDown from 'src/components/DropDown/DropDown';
+import Accordion from 'src/components/Accordion/Accordion';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
 import Checkbox from 'src/components/Checkbox/Checkbox';
 import DoctorFilterCss from './DoctorFilter.module.css';
@@ -39,7 +39,7 @@ function DoctorFilter({ specSearchState, specialties, clinics }) {
                         checked={searchParams.worksWithKids}
                         square={true}
                     />
-                    <DropDown label={'Clinic'}>
+                    <Accordion label={'Clinic'}>
                         <CheckboxList
                             points={clinics}
                             checkedArray={searchParams.clinic.map((c) => c.id)}
@@ -50,8 +50,8 @@ function DoctorFilter({ specSearchState, specialties, clinics }) {
                             )}
                             square={true}
                         />
-                    </DropDown>
-                    <DropDown label={'Specialization'}>
+                    </Accordion>
+                    <Accordion label={'Specialization'}>
                         <SpecFilter
                             specSearchState={specSearchState}
                             specialties={specialties}
@@ -62,7 +62,7 @@ function DoctorFilter({ specSearchState, specialties, clinics }) {
                                 searchParams
                             )}
                         />
-                    </DropDown>
+                    </Accordion>
                 </fieldset>
             </form>
         </div>

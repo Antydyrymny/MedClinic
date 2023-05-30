@@ -1,0 +1,106 @@
+.wrapper {
+    max-width: 25rem;
+    height: 38rem;
+    padding: 2rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    left: 89%;
+    top: 4%;
+    cursor: pointer;
+}
+
+.form,
+.fieldset {
+    border: none;
+    margin-bottom: 0.3rem;
+}
+
+.input {
+    margin-bottom: 0.5rem;
+
+}
+
+.textArea {
+    margin-top: 0.7rem;
+    margin-bottom: 1.2rem;
+}
+
+.agree {
+    margin-top: 2rem;
+}
+
+.checkbox {
+    font-size: 0.8rem;
+}
+
+.checkboxText,
+.checkboxDownload {
+    display: inline;
+}
+
+.checkboxDownload {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid #545A66;
+}
+
+.checkboxDownload:hover {
+    color: #0d6efd;
+}
+
+.confirm {
+    width: auto;
+}
+
+.heading,
+.text {
+    text-align: center;
+    line-height: 1.625;
+    color: #485052;
+}
+
+.heading {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.text {
+    margin-bottom: 1rem;
+}
+
+.customInput,
+.customTextArea {
+    background-color: #f3fafc;
+}
+
+@media (max-width: 800px) {
+    .wrapper {
+        min-width: 35rem;
+    }
+
+    .close {
+        left: 92%;
+    }
+}
+
+@media (max-width: 650px) {
+    .wrapper {
+        max-width: 100%;
+        min-width: 100%;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+    }
+}
+
+@media (max-width: 450px) {
+    .close {
+        top: 3%;
+        left: 89%;
+    }
+}

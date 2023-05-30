@@ -1,0 +1,113 @@
+.wrapper {
+    max-width: 1440px;
+    display: grid;
+    grid-template-columns: 5fr 2.8fr;
+    gap: 10rem;
+    color: #606364;
+}
+
+.screen1000ContactInfo {
+    display: none;
+}
+
+.descriptionBlock {
+    padding-left: 2rem;
+}
+
+.description {
+    white-space: pre-line;
+    line-height: 2;
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+.directions {
+    width: 10rem;
+    font-size: 0.9rem;
+}
+
+.directionsBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: inherit;
+    text-decoration: none;
+}
+
+.directionsText {
+    white-space: nowrap;
+}
+
+.contactBlock {
+    padding-right: 1.5rem;
+}
+
+.contactInfo {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 1400px) {
+    .wrapper {
+        gap: 8rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        gap: 6rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        display: block;
+        margin: 0 2rem;
+    }
+
+    .descriptionBlock,
+    .contactBlock {
+        padding: 0;
+    }
+
+    .description {
+        margin-bottom: 0.5rem;
+    }
+
+    .directions {
+        margin-bottom: 2rem;
+    }
+
+    .contactInfo {
+        width: 60%;
+    }
+
+    .contactInfoMain {
+        display: none;
+    }
+
+    .screen1000ContactInfo {
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        margin: 0 1rem;
+    }
+
+    .contactInfo {
+        width: 100%;
+    }
+
+    .directions {
+        width: auto;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 450px) {
+    .wrapper {
+        margin: 0 0.5rem;
+    }
+}

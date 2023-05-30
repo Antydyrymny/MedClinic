@@ -1,0 +1,80 @@
+.wrapper {
+    width: 100%;
+    background-color: white;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.wrapper,
+.options {
+    box-shadow: 0 29px 32px -25px #66a7bd;
+    -moz-box-shadow: 0 29px 32px -25px #66a7bd;
+    -webkit-box-shadow: 0 29px 32px -25px #66a7bd;
+    border: none;
+}
+
+.wrapper,
+.clinic {
+    height: 5rem;
+}
+
+.mainBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.arrow {
+    position: absolute;
+    cursor: pointer;
+    left: calc(100% - 2rem);
+    display: flex;
+    justify-content: center;
+    transition: transform .2s ease;
+}
+
+.arrowChoosing {
+    transform: rotate(180deg);
+}
+
+.options {
+    position: absolute;
+    width: 100%;
+    top: 5rem;
+    left: 0;
+    background-color: white;
+    padding-bottom: 0.5rem;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.options,
+.clinic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.optionBar:hover {
+    background-color: #dee2e6;
+}
+
+.clinic {
+    height: 5rem;
+    cursor: pointer;
+    justify-content: center;
+}
+
+.clinicName {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+.clinicName::before {
+    content: url('src/assets/Pictogram/mapMarker16px.png');
+    margin-right: 0.5rem;
+}
+
+.clinicAddress {
+    font-family: 'Lato Bold', sans-serif;
+}

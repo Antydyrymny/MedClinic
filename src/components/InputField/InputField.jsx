@@ -11,12 +11,13 @@ function InputField({
     maxlength = null,
     valid,
     errorMessage = 'Fill in the required field',
+    customStyles = null,
 }) {
     const inputRef = useRef(null);
     const allowShowError = useRef(false);
     const [isFocused, setIsFocused] = useState(false);
 
-    allowShowError.current = allowShowError.current || isFocused;
+    allowShowError.current = required && (allowShowError.current || isFocused);
     const error = !valid && allowShowError.current && !isFocused;
     return (
         <div
@@ -31,7 +32,9 @@ function InputField({
                 ref={inputRef}
                 type={type}
                 required={required}
-                className={`${InputFieldCss.input} ${error ? InputFieldCss.error : null}`}
+                className={`${InputFieldCss.input} ${
+                    error ? InputFieldCss.error : null
+                } ${customStyles ? customStyles.customInput : null}`}
                 value={value}
                 onChange={(e) => {
                     onChange(e.target.value);

@@ -1,12 +1,19 @@
 import ButtonCss from './Button.module.css';
 
-function Button({ onClick, text, colored = null, submit = false, notAllowed = false }) {
+function Button({
+    onClick,
+    text,
+    colored = null,
+    submit = false,
+    notAllowed = false,
+    customStyles = null,
+}) {
     return (
         <div
             onClick={notAllowed ? null : onClick}
             className={`${ButtonCss.wrapper} ${colored && ButtonCss[colored]} ${
                 notAllowed ? ButtonCss.notAllowed : null
-            }`}
+            } ${customStyles ? customStyles.customBtnWrapper : null}`}
         >
             <button style={{ display: 'none' }} type={submit ? 'submit' : 'button'}>
                 {text}

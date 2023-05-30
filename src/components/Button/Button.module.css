@@ -37,6 +37,18 @@
     background: #2F7EEB;
 }
 
+.lightBlue {
+    color: #9BA1AB;
+    background-color: white;
+    border: 1px solid #CDD2D9;
+    transition: all linear 0.2s;
+}
+
+.lightBlue:not(.notAllowed):hover {
+    color: #14D9CF;
+    border-color: #14D9CF;
+}
+
 .done {
     background: linear-gradient(57deg, rgb(47, 126, 235) 0%, rgb(24, 190, 231) 100%);
     color: #fff;

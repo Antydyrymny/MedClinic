@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import MapCss from './Map.module.css';
@@ -35,6 +35,20 @@ function Map({
             onDragEnd={handleCenterChange}
             onZoomChanged={handleZoomChange}
             mapContainerClassName={MapCss.wrapper}
+            options={{
+                styles: [
+                    {
+                        featureType: 'poi.business',
+                        elementType: 'labels',
+                        stylers: [{ visibility: 'off' }],
+                    },
+                ],
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: false,
+                zoomControl: false,
+                scrollwheel: true,
+            }}
         >
             {locations.map((location) => (
                 <Marker
@@ -44,7 +58,7 @@ function Map({
                     title={location.name}
                     icon={{
                         url:
-                            chosen.id === location.id
+                            chosen?.id === location.id
                                 ? 'src/assets/Pictogram/mapMarker64px.png'
                                 : 'src/assets/Pictogram/mapMarker48px.png',
                     }}
