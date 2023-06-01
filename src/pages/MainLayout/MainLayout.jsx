@@ -5,7 +5,7 @@ import { ClinicsContext } from 'src/context/FetchDataContext';
 import { clinicsKey } from 'src/data/LocalStorageKeys';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
-import Nav from 'src/components/Nav/Nav';
+import NavigationBar from '../NavigationBar/NavigationBar';
 import MainLayoutCss from './MainLayout.module.css';
 
 function MainLayout() {
@@ -28,7 +28,7 @@ function MainLayout() {
         <LoadingSpinner />
     ) : (
         <>
-            <Nav />
+            <NavigationBar />
             <ClinicsContext.Provider value={clinics}>
                 <Outlet />
             </ClinicsContext.Provider>

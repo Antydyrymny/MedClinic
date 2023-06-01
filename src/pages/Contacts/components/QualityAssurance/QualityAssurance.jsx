@@ -1,14 +1,7 @@
-import { useState, useRef } from 'react';
-import Modal from '../../../../components/Modal/Modal';
-import Feedback from '../../../../components/Feedback/Feedback';
-import Button from '../../../../components/Button/Button';
+import ModalFeedbackForm from 'src/components/Modal/ModalFeedbackForm';
 import QualityAssuranceCss from './QualityAssurance.module.css';
 
 function QualityAssurance() {
-    const [termsAccepted, setTermsAccepted] = useState(false);
-    const [isSent, setIsSent] = useState(false);
-    const modal = useRef(null);
-
     return (
         <div className={QualityAssuranceCss.wrapper}>
             <div className={QualityAssuranceCss.mainBlock}>
@@ -28,34 +21,13 @@ function QualityAssurance() {
                     </a>
                 </p>
             </div>
-
-            <Modal
-                modal={modal}
-                onClose={() => {
-                    setTermsAccepted(false);
-                    setIsSent(false);
-                }}
-                openButton={
-                    <div className={QualityAssuranceCss.button}>
-                        <Button
-                            text={'leave review'}
-                            colored={'lightBlue'}
-                            customStyles={QualityAssuranceCss}
-                        />
-                    </div>
-                }
-                content={
-                    <Feedback
-                        closeModal={() => modal.current.close()}
-                        termsAccepted={termsAccepted}
-                        setTermsAccepted={setTermsAccepted}
-                        isSent={isSent}
-                        setIsSent={setIsSent}
-                        heading={'Write a Review'}
-                        text={`If you would like to share your feedback, please provide your full
+            <ModalFeedbackForm
+                buttonText={'leave review'}
+                buttonColor={'lightBlue'}
+                feedbackHeading={'Write a Review'}
+                feedbackText={`If you would like to share your feedback, please provide your full
                         name, contact phone number, and the details of your review.`}
-                    />
-                }
+                customBtnWrapper={QualityAssuranceCss}
             />
         </div>
     );

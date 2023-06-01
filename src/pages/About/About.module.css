@@ -1,0 +1,10 @@
+.customBtnWrapper {
+    border-radius: 100px;
+    margin-top: 2rem;
+    width: 7.25rem;
+    height: 3rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    font-family: 'Lato Bold', 'sans-serif';
+}

@@ -1,5 +1,5 @@
 .wrapper {
-    max-width: 1440px;
+    max-width: 90rem;
     display: grid;
     grid-template-columns: 5fr 2.8fr;
     gap: 10rem;

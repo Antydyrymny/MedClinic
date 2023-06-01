@@ -1,0 +1,17 @@
+.navHidden,
+.navFixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: opacity .1s ease-in;
+}
+
+.navHidden {
+    opacity: 0;
+}
+
+.navFixed {
+    z-index: 100;
+    opacity: 1;
+
+}

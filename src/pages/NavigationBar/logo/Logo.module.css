@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.heading,
+.text {
+    text-transform: uppercase;
+}
+
+.heading {
+    color: #333;
+    margin-top: 0.2rem;
+    letter-spacing: 0.25rem;
+    font-size: 1rem;
+}
+
+.text {
+    font-size: 0.7rem;
+    color: #9BA1AB;
+}

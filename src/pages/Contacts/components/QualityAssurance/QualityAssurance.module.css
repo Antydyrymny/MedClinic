@@ -19,17 +19,14 @@
     text-decoration: none;
 }
 
-.button {
+.customBtnWrapper {
+    border-radius: 100px;
     margin-top: 2rem;
     width: 9.5rem;
     height: 3rem;
     font-size: 0.9rem;
     text-transform: uppercase;
     font-family: 'Lato Bold', 'sans-serif';
-}
-
-.customBtnWrapper {
-    border-radius: 100px
 }
 
 @media (max-width: 600px) {

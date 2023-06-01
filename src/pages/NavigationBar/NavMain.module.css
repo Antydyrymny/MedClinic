@@ -1,0 +1,25 @@
+.navMain {
+    height: 7rem;
+    background-color: white;
+}
+
+.navMain ul {
+    display: flex;
+    list-style: none;
+}
+
+.navMain li {
+    padding: 4px;
+}
+
+.navMain a {
+    text-decoration: none;
+}
+
+.navMain a:active {
+    color: inherit;
+}
+
+.navMain a:visited {
+    color: inherit;
+}

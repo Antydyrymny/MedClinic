@@ -1,0 +1,104 @@
+.introBlock {
+    position: relative;
+    overflow: hidden;
+}
+
+.mediaBlock {
+    height: 51rem;
+}
+
+.video,
+.img {
+    min-width: 100%;
+    height: 100%;
+    min-height: 700px;
+}
+
+.video {
+    opacity: 0.13;
+    object-fit: fill;
+}
+
+.img {
+    object-fit: cover;
+    display: none;
+}
+
+.headings {
+    padding: 0 5%;
+    position: absolute;
+    bottom: 8rem;
+}
+
+.mainTitle,
+.subTitle {
+    font-family: 'Lato Light', 'sans-serif';
+}
+
+.mainTitle {
+    font-size: 3.5rem;
+    font-weight: 500;
+    line-height: 4.5rem;
+    color: #485052;
+    margin-bottom: 3rem;
+}
+
+.subTitle {
+    font-size: 2rem;
+    line-height: 2rem;
+    color: #9BA1AB;
+    margin-bottom: 4rem;
+}
+
+.button {
+    margin-top: 7.5rem;
+}
+
+.bottomArrow {
+    width: 100%;
+    position: absolute;
+    bottom: 1.5rem;
+    scale: 1.5;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.children {
+    margin-top: 2rem;
+    padding: 0 3rem;
+}
+
+@media (max-width: 1200px) {
+    .img {
+        display: block;
+    }
+
+    .video {
+        display: none;
+    }
+}
+
+@media (max-width: 750px) {
+    .button {
+        display: flex;
+        justify-content: center;
+        margin-top: 5rem;
+    }
+
+    .mainTitle,
+    .subTitle {
+        text-align: center;
+    }
+
+    .mainTitle {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .subTitle {
+        font-size: 1.2rem;
+        line-height: 1.4rem;
+    }
+}

@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.heading {
+    color: #9BA1AB;
+    margin-top: 0.2rem;
+    letter-spacing: 0.1rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
