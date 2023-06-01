@@ -1,3 +1,7 @@
+.wrapper {
+    background-color: #F2F4F9;
+}
+
 .introBlock {
     position: relative;
     overflow: hidden;
@@ -11,7 +15,7 @@
 .img {
     min-width: 100%;
     height: 100%;
-    min-height: 700px;
+    min-height: 44rem;
 }
 
 .video {
@@ -65,8 +69,8 @@
 }
 
 .children {
-    margin-top: 2rem;
-    padding: 0 3rem;
+    width: 74rem;
+    margin: 0 auto;
 }
 
 @media (max-width: 1200px) {
@@ -76,6 +80,16 @@
 
     .video {
         display: none;
+    }
+
+    .children {
+        width: 61rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .children {
+        width: 46rem;
     }
 }
 
@@ -100,5 +114,9 @@
     .subTitle {
         font-size: 1.2rem;
         line-height: 1.4rem;
+    }
+
+    .children {
+        width: 100%;
     }
 }
