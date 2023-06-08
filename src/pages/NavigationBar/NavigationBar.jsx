@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import NavFirstBar from './NavFirstBar/NavFirstBar';
+import NavResponsiveComponent from './NavResponsiveComponent/NavResponsiveComponent';
 import NavigationBarCss from './NavigationBar.module.css';
 
 function NavigationBar() {
@@ -29,7 +29,7 @@ function NavigationBar() {
     return (
         <div className={NavigationBarCss.wrapper}>
             <div className={NavigationBarCss.navMain}>
-                <NavFirstBar
+                <NavResponsiveComponent
                     opened={scroll > heightToShowFixedBar ? false : dropDownIsActive}
                     setOpened={setDropDownIsActive}
                     screenSize={screenWidth > 1200 ? 'large' : 'small'}
@@ -40,7 +40,7 @@ function NavigationBar() {
                     scroll > heightToShowFixedBar ? NavigationBarCss.navScrolling : null
                 }`}
             >
-                <NavFirstBar
+                <NavResponsiveComponent
                     scrolling={true}
                     opened={dropDownIsActive}
                     setOpened={setDropDownIsActive}
