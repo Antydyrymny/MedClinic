@@ -1,0 +1,11 @@
+.customBtnWrapper {
+    background-image: linear-gradient(90deg, #4b35e8 9%, #3a60dc 42%, #1cb0c6 92%, #07e7b6 98%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 0.57rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    padding: 0;
+    letter-spacing: 0.07rem;
+}

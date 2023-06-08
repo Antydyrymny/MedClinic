@@ -10,8 +10,9 @@ function GenericPage({
     children,
     buttonText,
     buttonColor,
-    onBtnClick,
+    onButtonClick,
     customBtnWrapper,
+    linkTo = null,
     modalButtonText,
     modalButtonColor,
     modalFeedbackHeading,
@@ -54,12 +55,22 @@ function GenericPage({
                         <p className={PageCss.subTitle}>{subTitle}</p>
                         <div className={PageCss.button}>
                             {buttonText ? (
-                                <Button
-                                    text={buttonText}
-                                    onClick={onBtnClick}
-                                    colored={buttonColor}
-                                    customStyles={customBtnWrapper}
-                                />
+                                linkTo ? (
+                                    <a href={linkTo} className={PageCss.buttonAnchor}>
+                                        <Button
+                                            text={buttonText}
+                                            colored={buttonColor}
+                                            customStyles={customBtnWrapper}
+                                        />
+                                    </a>
+                                ) : (
+                                    <Button
+                                        text={buttonText}
+                                        onClick={onButtonClick}
+                                        colored={buttonColor}
+                                        customStyles={customBtnWrapper}
+                                    />
+                                )
                             ) : (
                                 <ModalFeedbackForm
                                     buttonText={modalButtonText}
@@ -76,12 +87,15 @@ function GenericPage({
                             to={'mainContent'}
                             spy={true}
                             smooth={true}
-                            offset={-112}
+                            offset={-70}
                             duration={800}
                         >
                             <DropDownSvg color={'#14D9CF'} />
                         </ScrollLink>
                     </div>
+                </div>
+                <div className={PageCss.bottomBar}>
+                    <a href='/app/step1'>{`schedule  an  appointment`}</a>
                 </div>
                 <div id='mainContent' className={PageCss.children}>
                     {children}

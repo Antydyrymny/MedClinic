@@ -1,5 +1,5 @@
 .navHidden,
-.navFixed {
+.navScrolling {
     position: fixed;
     top: 0;
     width: 100%;
@@ -7,10 +7,11 @@
 }
 
 .navHidden {
+    z-index: -1;
     opacity: 0;
 }
 
-.navFixed {
+.navScrolling {
     z-index: 100;
     opacity: 1;
 

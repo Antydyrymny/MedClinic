@@ -86,6 +86,10 @@
     margin-top: 0.5rem;
 }
 
+.signatureText {
+    white-space: nowrap;
+}
+
 .signatureImg {
     width: 100px;
 }
@@ -107,5 +111,9 @@
 
     .quoteBlock {
         background: none;
+    }
+
+    .signatureText {
+        white-space: normal;
     }
 }

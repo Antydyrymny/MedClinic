@@ -58,6 +58,11 @@
     margin-top: 7.5rem;
 }
 
+.buttonAnchor {
+    display: block;
+    width: max-content;
+}
+
 .bottomArrow {
     width: 100%;
     position: absolute;
@@ -73,6 +78,10 @@
     margin: 0 auto;
 }
 
+.bottomBar {
+    display: none;
+}
+
 @media (max-width: 1200px) {
     .img {
         display: block;
@@ -84,6 +93,31 @@
 
     .children {
         width: 61rem;
+    }
+
+    .bottomBar {
+        display: block;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 11;
+        height: 2.5rem;
+    }
+
+    .bottomBar a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        white-space: pre;
+        color: white;
+        background: linear-gradient(90deg, #2f7eeb, #01eec8);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        font-family: 'Lato Bold', 'sans-serif';
     }
 }
 

@@ -8,7 +8,7 @@ function ModalFeedbackForm({
     buttonColor,
     feedbackHeading,
     feedbackText,
-    customBtnWrapper,
+    customBtnWrapper = null,
 }) {
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [isSent, setIsSent] = useState(false);

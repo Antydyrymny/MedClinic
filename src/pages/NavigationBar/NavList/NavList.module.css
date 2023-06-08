@@ -1,0 +1,48 @@
+.wrapper {
+    margin: 0.65rem 0;
+    font-weight: 600;
+}
+
+.wrapper,
+.list {
+    display: flex;
+}
+
+.list {
+    list-style-type: none;
+    gap: 1.5rem;
+    margin-left: 2rem;
+}
+
+.scrollingList {
+    gap: 1rem;
+}
+
+.link {
+    display: block;
+    color: inherit;
+}
+
+@media (max-width: 1200px) {
+    .hamburger {
+        display: none;
+    }
+
+    .list {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .wrapper {
+        padding-right: 1rem;
+    }
+
+    .list {
+        width: 100%;
+        gap: 0.5rem;
+        font-size: 0.925rem;
+        justify-content: space-between;
+    }
+
+}

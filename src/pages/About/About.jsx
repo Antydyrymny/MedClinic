@@ -1,12 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 import GenericPage from '../../components/GenericPage/GenericPage';
 import AboutCss from './About.module.css';
 
 export default function About() {
-    const navigate = useNavigate();
-
     return (
         <GenericPage
+            buttonText={'schedule'}
+            buttonColor={'active'}
+            linkTo={'/app/step1'}
+            customBtnWrapper={AboutCss}
+            mainTitle='A network of state-of-the-art clinics in a vibrant city'
+            subTitle='A network of versatile medical and diagnostic centers'
             children={
                 <div className={AboutCss.wrapper}>
                     <article className={AboutCss.article}>
@@ -49,19 +52,6 @@ export default function About() {
                                 className={AboutCss.quoteImg}
                             />
                             <div className={AboutCss.quoteText}>
-                                {/* The foundation of Fullstack Clinic lies in general
-                                practice physicians. Our team of experienced and dedicated
-                                General Practitioners treat a wide range of pathologies
-                                across various domains. They work comprehensively with
-                                each individual, collaborating with specialized experts
-                                whenever necessary. These experts provide consultations to
-                                our physicians, allowing us to provide not just a
-                                collection of separate consultations and examinations, but
-                                rather an accurate diagnosis, a coordinated treatment
-                                plan, and comprehensive answers to all your questions. Our
-                                goal is to ensure you receive a seamless healthcare
-                                experience that addresses your needs and concerns
-                                effectively. */}
                                 The core of Fullstack Clinic is our team of skilled
                                 General Practitioners. With expertise and dedication, our
                                 practitioners handle diverse pathologies in various
@@ -93,12 +83,6 @@ export default function About() {
                     </div>
                 </div>
             }
-            buttonText={'schedule'}
-            buttonColor={'active'}
-            onBtnClick={() => navigate('/app/step1')}
-            customBtnWrapper={AboutCss}
-            mainTitle='A network of state-of-the-art clinics in a vibrant city'
-            subTitle='A network of versatile medical and diagnostic centers'
         />
     );
 }
