@@ -1,57 +1,38 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NavFirstBar from './NavFirstBar/NavFirstBar';
 import NavigationBarCss from './NavigationBar.module.css';
 
 function NavigationBar() {
-    const [scroll, setScroll] = useState('0px');
+    const [scroll, setScroll] = useState(0);
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const [dropDownIsActive, setDropDownIsActive] = useState(false);
-    const navigation = useRef(null);
-    const screenWidth = window.innerWidth;
     const heightToShowFixedBar = screenWidth ? 50 : 120;
 
     useEffect(() => {
         function handleScroll() {
             setScroll(document.documentElement.scrollTop);
         }
+
+        function handleResize() {
+            setScreenWidth(window.innerWidth);
+        }
+
         document.addEventListener('scroll', handleScroll);
-        return () => document.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    useLayoutEffect(() => {
-        function outOfBorder(e) {
-            if (navigation.current && dropDownIsActive) {
-                const bottom = navigation.current.getBoundingClientRect().bottom;
-                console.log(
-                    bottom,
-                    e.clientY,
-                    navigation.current.getBoundingClientRect()
-                );
-                if (e.clientY > bottom) {
-                    setDropDownIsActive(false);
-                }
-            }
-        }
-
-        if (dropDownIsActive && navigation.current) {
-            document.body.addEventListener('pointerdown', outOfBorder);
-            document.body.addEventListener('touchend', outOfBorder);
-            // document.body.style.overflow = 'hidden';
-        }
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            document.body.removeEventListener('pointerdown', outOfBorder);
-            document.body.removeEventListener('touchend', outOfBorder);
-            // document.body.style.overflow = 'visible';
+            document.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
         };
-    }, [dropDownIsActive]);
+    }, []);
 
     return (
         <div className={NavigationBarCss.wrapper}>
             <div className={NavigationBarCss.navMain}>
                 <NavFirstBar
-                    opened={dropDownIsActive}
-                    onHamburgerClick={() => setDropDownIsActive(!dropDownIsActive)}
-                    dropDownref={navigation}
+                    opened={scroll > heightToShowFixedBar ? false : dropDownIsActive}
+                    setOpened={setDropDownIsActive}
+                    screenSize={screenWidth > 1200 ? 'large' : 'small'}
                 />
             </div>
             <div
@@ -62,8 +43,8 @@ function NavigationBar() {
                 <NavFirstBar
                     scrolling={true}
                     opened={dropDownIsActive}
-                    onHamburgerClick={() => setDropDownIsActive(!dropDownIsActive)}
-                    dropDownref={navigation}
+                    setOpened={setDropDownIsActive}
+                    screenSize={screenWidth > 1200 ? 'large' : 'small'}
                 />
             </div>
         </div>

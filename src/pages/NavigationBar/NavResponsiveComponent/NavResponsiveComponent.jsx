@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import Logo from '../logo/Logo';
-import SmallLogo from '../logo/SmallLogo';
+import Logo from '../Logo/Logo';
+import SmallLogo from '../Logo/SmallLogo';
 import NavList from '../NavList/NavList';
 import NavDropDown from '../NavDropDown/NavDropDown';
 import ModalFeedbackForm from '../../../components/Modal/ModalFeedbackForm';
@@ -8,23 +8,23 @@ import HamburgerMenu from '../../../components/HamburgerMenu/HamburgerMenu';
 import TelephoneSvg from '../../../assets/Pictogram/TelephoneSvg';
 import Button from '../../../components/Button/Button';
 import ModalButtonCss from './ModalButton.module.css';
-import FirstBarCss from './NavFirstBar.module.css';
+import NavResponsiveCss from './NavResponsiveComponent.module.css';
 
-function NavFirstBar({ opened, setOpened, scrolling = false, screenSize }) {
+function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSize }) {
     const dropDownref = useRef(null);
 
     return (
-        <div className={FirstBarCss.wrapper}>
+        <div className={NavResponsiveCss.wrapper}>
             {/* Normal window size */}
             {screenSize === 'large' && (
-                <div className={FirstBarCss.largeWindow}>
-                    <div className={FirstBarCss.firstBar}>
-                        <div className={FirstBarCss.largeLeft}>
+                <div className={NavResponsiveCss.largeWindow}>
+                    <div className={NavResponsiveCss.firstBar}>
+                        <div className={NavResponsiveCss.largeLeft}>
                             <a href='/'>
                                 <Logo />
                             </a>
                             {!scrolling ? null : (
-                                <div className={FirstBarCss.scrollingSecondBar}>
+                                <div className={NavResponsiveCss.scrollingSecondBar}>
                                     <NavList
                                         scrolling={scrolling}
                                         opened={opened}
@@ -33,12 +33,15 @@ function NavFirstBar({ opened, setOpened, scrolling = false, screenSize }) {
                                 </div>
                             )}
                         </div>
-                        <div className={FirstBarCss.largeRight}>
-                            <div className={FirstBarCss.makeACall}>
-                                <a className={FirstBarCss.telephone} href={'tel:1234567'}>
+                        <div className={NavResponsiveCss.largeRight}>
+                            <div className={NavResponsiveCss.makeACall}>
+                                <a
+                                    className={NavResponsiveCss.telephone}
+                                    href={'tel:1234567'}
+                                >
                                     {'+1 (111) 123-45-67'}
                                 </a>
-                                <div className={FirstBarCss.modalButton}>
+                                <div className={NavResponsiveCss.modalButton}>
                                     <ModalFeedbackForm
                                         buttonText={'Request a call back'}
                                         customBtnWrapper={ModalButtonCss}
@@ -53,13 +56,13 @@ function NavFirstBar({ opened, setOpened, scrolling = false, screenSize }) {
                                 <Button
                                     text={'appointment'}
                                     colored={'active'}
-                                    customStyles={FirstBarCss}
+                                    customStyles={NavResponsiveCss}
                                 />
                             </a>
                         </div>
                     </div>
                     {!scrolling && (
-                        <div className={FirstBarCss.secondBar}>
+                        <div className={NavResponsiveCss.secondBar}>
                             <NavList
                                 opened={opened}
                                 onHamburgerClick={onHamburgerClick}
@@ -72,10 +75,10 @@ function NavFirstBar({ opened, setOpened, scrolling = false, screenSize }) {
 
             {/* Small window size */}
             {screenSize === 'small' && (
-                <div className={FirstBarCss.smallWindow}>
+                <div className={NavResponsiveCss.smallWindow}>
                     <div
-                        className={`${FirstBarCss.smallFirstBar} ${
-                            scrolling ? FirstBarCss.smallFirstBarScrolling : null
+                        className={`${NavResponsiveCss.smallFirstBar} ${
+                            scrolling ? NavResponsiveCss.smallFirstBarScrolling : null
                         }`}
                     >
                         <HamburgerMenu opened={opened} onClick={onHamburgerClick} />
@@ -88,7 +91,7 @@ function NavFirstBar({ opened, setOpened, scrolling = false, screenSize }) {
                     </div>
                     {opened && <NavDropDown dropDownref={dropDownref} />}
                     {!scrolling && (
-                        <div className={FirstBarCss.smallSecondBar}>
+                        <div className={NavResponsiveCss.smallSecondBar}>
                             <NavList
                                 opened={opened}
                                 onHamburgerClick={onHamburgerClick}
@@ -131,4 +134,4 @@ function NavFirstBar({ opened, setOpened, scrolling = false, screenSize }) {
     }
 }
 
-export default NavFirstBar;
+export default NavResponsiveComponent;

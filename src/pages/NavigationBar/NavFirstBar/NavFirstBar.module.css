@@ -46,7 +46,7 @@
 }
 
 .smallWindow {
-    display: none;
+    /* display: none; */
 }
 
 .smallFirstBar {
@@ -61,7 +61,7 @@
     box-shadow: 0 4px 8px 0 rgba(34, 60, 80, .2);
 }
 
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
     .largeWindow {
         display: none;
     }
@@ -69,4 +69,4 @@
     .smallWindow {
         display: block;
     }
-}
+} */
