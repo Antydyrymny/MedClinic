@@ -28,8 +28,8 @@ function MainLayout() {
         <LoadingSpinner />
     ) : (
         <>
-            <NavigationBar />
             <ClinicsContext.Provider value={clinics}>
+                <NavigationBar />
                 <Outlet />
             </ClinicsContext.Provider>
         </>

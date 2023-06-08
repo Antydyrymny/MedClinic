@@ -12,7 +12,9 @@ import ContactCss from './Contacts.module.css';
 function Contacts() {
     const clinics = useContext(ClinicsContext);
     const location = useLocation();
-    const [chosenClinic, setChosenClinic] = useState(location.state);
+    const searchParams = new URLSearchParams(location.search);
+    const clinicQuery = clinics.find((c) => c.id === +searchParams.get('clinic'));
+    const [chosenClinic, setChosenClinic] = useState(clinicQuery);
     const [center, setCenter] = useState({
         lat: 51.51724180515732,
         lng: -0.09609956165497267,
