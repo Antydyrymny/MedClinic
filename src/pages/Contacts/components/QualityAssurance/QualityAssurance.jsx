@@ -27,6 +27,8 @@ function QualityAssurance() {
                 feedbackHeading={'Write a Review'}
                 feedbackText={`If you would like to share your feedback, please provide your full
                         name, contact phone number, and the details of your review.`}
+                sendButtonText={'Send review'}
+                onSuccessMessage={'Your opinion is important to us.'}
                 customBtnWrapper={QualityAssuranceCss}
             />
         </div>

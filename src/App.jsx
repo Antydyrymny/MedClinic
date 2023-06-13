@@ -19,6 +19,8 @@ import Doc from './pages/Doctors/Doc';
 import Services from './pages/Services/Services';
 import About from './pages/About/About';
 import Contacts from './pages/Contacts/Contacts';
+import Business from './pages/Business/Business';
+import Partners from './pages/Partners/Partners';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
@@ -39,6 +41,8 @@ function App() {
                     <Route path='/services' element={<Services />} />
                     <Route path='/about' element={<About />} />
                     <Route path='/contacts' element={<Contacts />} />
+                    <Route path='/for_business' element={<Business />} />
+                    <Route path='/partners' element={<Partners />} />
                     <Route path='*' element={<NotFound />} />
                 </Route>
                 <Route element={<AppointmentLayout />}>

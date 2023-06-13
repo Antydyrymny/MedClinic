@@ -32,12 +32,12 @@ export function onClinicCheck({
         }
         setClinicsPicked(newClinicsPicked);
         // If date is set and it is an in clinic appointment and
-        // changing clinics makes chosen date unavailable -
+        // unselecting clinic makes chosen date unavailable -
         // set chosen date to null
         if (
-            !boolean &&
             appParams.date &&
             !appParams.onlineAppointment &&
+            !boolean &&
             !getAvailableTimesPerDocForDate({
                 date: appParams.date,
                 doctors,

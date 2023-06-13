@@ -17,6 +17,8 @@ function Feedback({
     setIsSent,
     heading,
     text,
+    sendButtonText,
+    onSuccessMessage,
 }) {
     const [clientData, setClientData] = useState({
         name: '',
@@ -41,7 +43,7 @@ function Feedback({
                 <img src={'src/assets/Pictogram/close20px.png'} alt={'close'} />
             </div>
             {isSent ? (
-                <FeedbackSuccess />
+                <FeedbackSuccess message={onSuccessMessage} />
             ) : (
                 <>
                     <h2 className={FeedbackCss.heading}>{heading}</h2>
@@ -85,7 +87,7 @@ function Feedback({
                     </form>
                     <div className={FeedbackCss.confirm}>
                         <Button
-                            text={'Send review'}
+                            text={sendButtonText}
                             submit={true}
                             colored={'active'}
                             notAllowed={!allowConfirm}

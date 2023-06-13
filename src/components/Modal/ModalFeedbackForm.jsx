@@ -8,6 +8,9 @@ function ModalFeedbackForm({
     buttonColor,
     feedbackHeading,
     feedbackText,
+    sendButtonText,
+    onSuccessMessage,
+    customButton = null,
     customBtnWrapper = null,
 }) {
     const [termsAccepted, setTermsAccepted] = useState(false);
@@ -22,13 +25,15 @@ function ModalFeedbackForm({
                 setIsSent(false);
             }}
             openButton={
-                <div>
-                    <Button
-                        text={buttonText}
-                        colored={buttonColor}
-                        customStyles={customBtnWrapper}
-                    />
-                </div>
+                customButton || (
+                    <div>
+                        <Button
+                            text={buttonText}
+                            colored={buttonColor}
+                            customStyles={customBtnWrapper}
+                        />
+                    </div>
+                )
             }
             content={
                 <Feedback
@@ -39,6 +44,8 @@ function ModalFeedbackForm({
                     setIsSent={setIsSent}
                     heading={feedbackHeading}
                     text={feedbackText}
+                    sendButtonText={sendButtonText}
+                    onSuccessMessage={onSuccessMessage}
                 />
             }
         />

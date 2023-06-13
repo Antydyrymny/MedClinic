@@ -19,9 +19,14 @@
     margin-bottom: 1rem;
 }
 
-.info {
+.info,
+.online {
     line-height: 130%;
     color: #545a66;
+}
+
+.online {
+    margin-bottom: 0.5rem;
 }
 
 .price {

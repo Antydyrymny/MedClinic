@@ -17,6 +17,8 @@ function GenericPage({
     modalButtonColor,
     modalFeedbackHeading,
     modalFeedbackText,
+    modalOnSuccessMessage,
+    modalSendButtonText,
     modalCustomBtnWrapper,
     mainTitle,
     subTitle,
@@ -77,6 +79,8 @@ function GenericPage({
                                     buttonColor={modalButtonColor}
                                     feedbackHeading={modalFeedbackHeading}
                                     feedbackText={modalFeedbackText}
+                                    sendButtonText={modalSendButtonText}
+                                    onSuccessMessage={modalOnSuccessMessage}
                                     customBtnWrapper={modalCustomBtnWrapper}
                                 />
                             )}

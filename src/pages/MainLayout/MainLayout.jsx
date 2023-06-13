@@ -6,6 +6,7 @@ import { clinicsKey } from 'src/data/LocalStorageKeys';
 import useLocalStorageState from 'src/hooks/useLocalStorageState';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import NavigationBar from '../NavigationBar/NavigationBar';
+import Footer from '../Footer/Footer';
 import MainLayoutCss from './MainLayout.module.css';
 
 function MainLayout() {
@@ -31,6 +32,7 @@ function MainLayout() {
             <ClinicsContext.Provider value={clinics}>
                 <NavigationBar />
                 <Outlet />
+                <Footer />
             </ClinicsContext.Provider>
         </>
     );

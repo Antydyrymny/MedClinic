@@ -1,0 +1,76 @@
+.quoteBlock {
+    background-image: url('src/assets/Images/headDoctor.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 85% 100%;
+    padding: 3rem 4rem;
+}
+
+.quoteBlock,
+.signatureBlock {
+    font-family: 'Lato Light', 'sans-serif';
+    color: #9BA1AB;
+    font-size: 1.15rem;
+    line-height: 1.7rem;
+}
+
+.quote {
+    max-width: 60%;
+}
+
+.quoteText {
+    margin-bottom: 3rem;
+}
+
+.quoteText,
+.signatureBlock {
+    padding: 1rem 0 0 3rem;
+}
+
+.signatureBlock {
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: left;
+}
+
+.signatureName {
+    font-family: 'Lato', 'sans-serif';
+    font-size: 1rem;
+    font-weight: 600;
+    color: #485052;
+    text-transform: uppercase;
+    line-height: 1rem;
+    margin-top: 0.5rem;
+}
+
+.signatureText {
+    white-space: nowrap;
+}
+
+.signatureImg {
+    width: 100px;
+}
+
+@media (max-width: 1200px) {
+    .quote {
+        max-width: 50%;
+    }
+
+    .quoteBlock {
+        background-position: 100% 100%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .quote {
+        max-width: 100%;
+    }
+
+    .quoteBlock {
+        background: none;
+    }
+
+    .signatureText {
+        white-space: normal;
+    }
+}

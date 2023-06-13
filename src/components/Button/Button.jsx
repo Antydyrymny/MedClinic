@@ -3,6 +3,7 @@ import ButtonCss from './Button.module.css';
 function Button({
     onClick,
     text,
+    children,
     colored = null,
     submit = false,
     notAllowed = false,
@@ -11,14 +12,14 @@ function Button({
     return (
         <div
             onClick={notAllowed ? null : onClick}
-            className={`${ButtonCss.wrapper} ${colored && ButtonCss[colored]} ${
+            className={`${ButtonCss.wrapper} ${colored ? ButtonCss[colored] : null} ${
                 notAllowed ? ButtonCss.notAllowed : null
             } ${customStyles ? customStyles.customBtnWrapper : null}`}
         >
             <button style={{ display: 'none' }} type={submit ? 'submit' : 'button'}>
                 {text}
             </button>
-            <p>{text}</p>
+            {children || <p>{text}</p>}
         </div>
     );
 }

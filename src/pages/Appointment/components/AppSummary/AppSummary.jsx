@@ -17,13 +17,15 @@ function AppSummary() {
     const clinics = useContext(ClinicsContext)[0];
     const doctor = doctors?.find((d) => d.id === appParams.doctorId);
     const speciality = specialities?.find((s) => s.id === appParams.specialityId);
-    const clinic = clinics?.find((c) => c.id === appParams.clinicId);
+    const clinic = appParams.onlineAppointment
+        ? null
+        : clinics?.find((c) => c.id === appParams.clinicId);
     const docExpanded =
-        doctor && speciality && clinic
+        doctor && speciality && (appParams.onlineAppointment || clinic)
             ? expandDoctors([doctor], specialities, clinics)[0]
             : null;
 
-    return !doctor || !speciality || !clinic ? null : (
+    return !doctor || !speciality || (!appParams.onlineAppointment && !clinic) ? null : (
         <div className={AppSummaryCss.wrapper}>
             <div className={AppSummaryCss.dateTime}>
                 <div className={AppSummaryCss.dateBlock}>
@@ -48,10 +50,15 @@ function AppSummary() {
             <div className={AppSummaryCss.doctor}>
                 <DoctorShortDescription doctor={docExpanded} small={true} />
             </div>
-            <div className={AppSummaryCss.clinicBlock}>
-                <div className={AppSummaryCss.info}>{clinic.address}</div>
-                <div className={AppSummaryCss.heading}>clinic address</div>
-            </div>
+            {appParams.onlineAppointment ? null : (
+                <div className={AppSummaryCss.clinicBlock}>
+                    <div className={AppSummaryCss.info}>{clinic.address}</div>
+                    <div className={AppSummaryCss.heading}>clinic address</div>
+                </div>
+            )}
+            {appParams.onlineAppointment && (
+                <div className={AppSummaryCss.online}>Online appointment</div>
+            )}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import SuccessCss from './FeedbackSuccess.module.css';
 
-function FeedbackSuccess() {
+function FeedbackSuccess({ message }) {
     return (
         <div className={SuccessCss.wrapper}>
             <img
@@ -9,7 +9,7 @@ function FeedbackSuccess() {
                 alt={'Feedback sent'}
             />
             <h2 className={SuccessCss.heading}>THANK YOU!</h2>
-            <p className={SuccessCss.text}> Your opinion is important to us.</p>
+            <p className={SuccessCss.text}>{message}</p>
         </div>
     );
 }

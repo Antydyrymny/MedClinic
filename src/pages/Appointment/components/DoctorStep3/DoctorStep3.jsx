@@ -112,6 +112,7 @@ function DoctorStep3({ step3Data, bookedData, appParamsData }) {
                             }).map((entry) => (
                                 <TimeList
                                     key={entry.doctor.id}
+                                    online={appParams.onlineAppointment}
                                     clinic={entry.clinic}
                                     times={entry.times}
                                     onClick={(time, clinicId) =>

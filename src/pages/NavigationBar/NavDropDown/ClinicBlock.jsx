@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import ClinicBlockCss from './ClinicBlock.module.css';
 
-function ClinicBlock({ clinic }) {
+function ClinicBlock({ clinic, opened, close, coloredBackground = true }) {
     const navigate = useNavigate();
 
     return (
         <div
-            className={ClinicBlockCss.wrapper}
+            className={`${ClinicBlockCss.wrapper} ${
+                coloredBackground ? ClinicBlockCss.backgroundStyle : null
+            }`}
             onClick={() => {
+                opened && close();
                 const newUrl = `/contacts?clinic=${clinic.id}`;
                 if (window.location.pathname === '/contacts') {
                     navigate(newUrl, { replace: true });

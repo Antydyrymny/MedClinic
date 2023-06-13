@@ -28,6 +28,7 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                                     <NavList
                                         scrolling={scrolling}
                                         opened={opened}
+                                        close={close}
                                         onHamburgerClick={onHamburgerClick}
                                     />
                                 </div>
@@ -49,6 +50,10 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                                         feedbackText={
                                             'Leave a request and our manager will contact you shortly'
                                         }
+                                        sendButtonText={'Send request'}
+                                        onSuccessMessage={
+                                            'We will call you back shortly.'
+                                        }
                                     />
                                 </div>
                             </div>
@@ -65,11 +70,16 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                         <div className={NavResponsiveCss.secondBar}>
                             <NavList
                                 opened={opened}
+                                close={close}
                                 onHamburgerClick={onHamburgerClick}
                             />
                         </div>
                     )}
-                    {opened && <NavDropDown dropDownref={dropDownref} />}
+                    <NavDropDown
+                        opened={opened}
+                        dropDownref={dropDownref}
+                        close={close}
+                    />
                 </div>
             )}
 
@@ -89,11 +99,16 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                             <TelephoneSvg />
                         </a>
                     </div>
-                    {opened && <NavDropDown dropDownref={dropDownref} />}
+                    <NavDropDown
+                        opened={opened}
+                        dropDownref={dropDownref}
+                        close={close}
+                    />
                     {!scrolling && (
                         <div className={NavResponsiveCss.smallSecondBar}>
                             <NavList
                                 opened={opened}
+                                close={close}
                                 onHamburgerClick={onHamburgerClick}
                             />
                         </div>
@@ -109,27 +124,27 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
         } else {
             open();
         }
+    }
 
-        function outOfBorder(e) {
-            if (!dropDownref.current) return;
-            const bottom = dropDownref.current.getBoundingClientRect().bottom;
-            if (e.clientY > bottom) {
-                close();
-            }
-        }
+    function open() {
+        setOpened(true);
+        document.body.addEventListener('pointerdown', outOfBorder);
+        document.body.addEventListener('touchend', outOfBorder);
+        document.body.style.overflow = 'hidden';
+    }
 
-        function open() {
-            setOpened(true);
-            document.body.addEventListener('pointerdown', outOfBorder);
-            document.body.addEventListener('touchend', outOfBorder);
-            document.body.style.overflow = 'hidden';
-        }
+    function close() {
+        setOpened(false);
+        document.body.removeEventListener('pointerdown', outOfBorder);
+        document.body.removeEventListener('touchend', outOfBorder);
+        document.body.style.overflow = 'visible';
+    }
 
-        function close() {
-            setOpened(false);
-            document.body.removeEventListener('pointerdown', outOfBorder);
-            document.body.removeEventListener('touchend', outOfBorder);
-            document.body.style.overflow = 'visible';
+    function outOfBorder(e) {
+        if (!dropDownref.current) return;
+        const bottom = dropDownref.current.getBoundingClientRect().bottom;
+        if (e.clientY > bottom) {
+            close();
         }
     }
 }
