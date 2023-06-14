@@ -48,7 +48,7 @@ function SpecCard({ specialityName, lowestPrice, doctors, onClick }) {
                             className={SpecCardCss.counter}
                             style={{
                                 zIndex: '4',
-                                left: '-18px',
+                                left: '-1.125rem',
                             }}
                         >{`+${doctors.length - 3}`}</div>
                     </>

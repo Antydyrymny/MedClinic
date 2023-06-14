@@ -18,9 +18,9 @@ import DoctorsCss from './Doctors.module.css';
 function Doctors() {
     const [searchParams, setSearchParams] = useContext(DocSearchContext);
     const loading = useContext(LoadingContext);
-    const [doctors, setDoctors] = useContext(DoctorsAllContext);
-    const [specialties, setSpecialties] = useContext(SpecialitiesContext);
-    const [clinics, setClinics] = useContext(ClinicsContext);
+    const doctors = useContext(DoctorsAllContext);
+    const specialties = useContext(SpecialitiesContext);
+    const clinics = useContext(ClinicsContext);
     const [specSearch, setSpecSearch] = useState('');
     const docsExpanded = useMemo(
         () => (loading ? null : expandDoctors(doctors, specialties, clinics)),
@@ -32,23 +32,27 @@ function Doctors() {
     );
 
     return (
-        <section>
-            <h1>Doctors</h1>
-            <SearchBar
-                value={searchParams.name}
-                onChange={handleSearchChange}
-                placeholder={'Find a doctor'}
-            />
+        <section className={DoctorsCss.wrapper}>
+            <h1 className={DoctorsCss.heading}>Doctors</h1>
+            <div className={DoctorsCss.searchBar}>
+                <SearchBar
+                    value={searchParams.name}
+                    onChange={handleSearchChange}
+                    placeholder={'Find a doctor'}
+                />
+            </div>
             {loading ? (
                 <LoadingSpinner />
             ) : (
                 <>
-                    <DoctorFilter
-                        specSearchState={{ specSearch, setSpecSearch }}
-                        specialties={specialties}
-                        clinics={clinics}
-                    />
-                    <ul>
+                    <div className={DoctorsCss.filter}>
+                        <DoctorFilter
+                            specSearchState={{ specSearch, setSpecSearch }}
+                            specialties={specialties}
+                            clinics={clinics}
+                        />
+                    </div>
+                    <ul className={DoctorsCss.docGallery}>
                         {docsFiltered.map((doc) => (
                             <div key={doc.id} className={DoctorsCss.doctor}>
                                 <Link to={`/doctors/${doc.name.split(' ').join('-')}`}>
@@ -57,9 +61,11 @@ function Doctors() {
                             </div>
                         ))}
                     </ul>
-                    <Button text={'Clear Filter'} onClick={clearFilter} />
+                    <div className={DoctorsCss.clearButton}>
+                        <Button text={'Clear Filter'} onClick={clearFilter} />
+                    </div>
                 </>
-            )}{' '}
+            )}
         </section>
     );
 

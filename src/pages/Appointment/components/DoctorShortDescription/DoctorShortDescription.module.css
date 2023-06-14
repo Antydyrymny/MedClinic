@@ -8,15 +8,15 @@
 }
 
 .photo {
-    width: 76px;
-    height: 76px;
+    width: 4.75rem;
+    height: 4.75rem;
     border-radius: 50%;
     border: 2px solid #f1f4f9;
 }
 
 .smallPhoto {
-    width: 56px;
-    height: 56px;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 .name {

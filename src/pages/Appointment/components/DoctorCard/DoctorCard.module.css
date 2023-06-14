@@ -27,8 +27,8 @@
 }
 
 .photo {
-    width: 66px;
-    height: 66px;
+    width: 4.125rem;
+    height: 4.125rem;
     border: 4px solid #f1f4f9;
     border-radius: 50%;
 }
@@ -71,7 +71,7 @@
 }
 
 .multipleClinics .clinic {
-    max-width: 100px;
+    max-width: 6.25rem;
 }
 
 .price {

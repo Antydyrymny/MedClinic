@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 export default function useLocalStorageState(key, initialValue) {
     const [state, setState] = useState(() => {
         const data = JSON.parse(window.sessionStorage.getItem(key));
-        return data !== null ? data : initialValue;
+        if (data === null) return initialValue;
+        else return initialValue === null ? data : initialValue;
     });
 
     useEffect(() => {

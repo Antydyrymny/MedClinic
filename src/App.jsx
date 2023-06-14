@@ -15,7 +15,7 @@ import AppStep3 from './pages/Appointment/AppStep3';
 import AppStep4 from './pages/Appointment/AppStep4';
 import DoctorsContext from './pages/Doctors/DoctorsContext';
 import Doctors from './pages/Doctors/Doctors';
-import Doc from './pages/Doctors/Doc';
+import DoctorPage from './pages/Doctors/DoctorPage';
 import Services from './pages/Services/Services';
 import About from './pages/About/About';
 import Contacts from './pages/Contacts/Contacts';
@@ -36,7 +36,7 @@ function App() {
                     <Route index element={<Home />} />
                     <Route path='/doctors' element={<DoctorsContext />}>
                         <Route index element={<Doctors />} />
-                        <Route path=':name' element={<Doc />} />
+                        <Route path=':name' element={<DoctorPage />} />
                     </Route>
                     <Route path='/services' element={<Services />} />
                     <Route path='/about' element={<About />} />

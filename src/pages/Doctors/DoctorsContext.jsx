@@ -56,9 +56,9 @@ function DoctorsContext() {
     return (
         <DocSearchContext.Provider value={[searchParams, setSearchParams]}>
             <LoadingContext.Provider value={loading}>
-                <DoctorsAllContext.Provider value={[doctors, setDoctors]}>
-                    <SpecialitiesContext.Provider value={[specialties, setSpecialties]}>
-                        <ClinicsContext.Provider value={[clinics, setClinics]}>
+                <DoctorsAllContext.Provider value={doctors}>
+                    <SpecialitiesContext.Provider value={specialties}>
+                        <ClinicsContext.Provider value={clinics}>
                             <Outlet />
                         </ClinicsContext.Provider>
                     </SpecialitiesContext.Provider>

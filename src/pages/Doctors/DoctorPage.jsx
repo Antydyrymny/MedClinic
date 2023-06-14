@@ -4,12 +4,12 @@ import { LoadingContext } from 'src/context/LoadingContext';
 import useRedirect from 'src/hooks/useRedirect';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
-import DocCss from './Doc.module.css';
+import DocCss from './DoctorPage.module.css';
 
-function Doc() {
+function DoctorPage() {
     const loading = useContext(LoadingContext);
-    const [doctors, setDoctors] = useContext(DoctorsAllContext);
-    const [specialties, setSpecialties] = useContext(SpecialitiesContext);
+    const doctors = useContext(DoctorsAllContext);
+    const specialties = useContext(SpecialitiesContext);
     const { name } = useParams();
     const doctor = loading
         ? null
@@ -62,4 +62,4 @@ function Doc() {
     );
 }
 
-export default Doc;
+export default DoctorPage;

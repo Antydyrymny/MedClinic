@@ -6,14 +6,12 @@ export const doctorsFetched = [
         clinicSchedule: [2, 2, 2, 2, 2],
         education: 'Graduated from Harvard Medical School',
         id: 1,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Alice Johnson',
         professionalInterests: 'Preventive medicine, chronic disease management',
         price: 175,
         specialtyId: [1, 14],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['11:00', '12:00', '14:00', '18:00'],
         worksWithVhi: true,
         worksWithKids: false,
@@ -27,14 +25,12 @@ export const doctorsFetched = [
         clinicSchedule: [1, 2, 1, 2, 1],
         education: 'Graduated from Stanford School of Medicine',
         id: 2,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'John Smith',
         professionalInterests: 'Primary care, health promotion and disease prevention',
         price: 125,
         specialtyId: [2, 13],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['12:00', '15:00', '17:00', '19:00'],
         worksWithVhi: true,
         worksWithKids: true,
@@ -47,14 +43,12 @@ export const doctorsFetched = [
         clinicSchedule: [2, 2, 3, 2, 3],
         education: 'Graduated from Yale School of Medicine',
         id: 3,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Emma Brown',
         professionalInterests: "Women's health, reproductive health, family planning",
         price: 225,
         specialtyId: [11],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['10:00', '11:00', '12:00', '14:00', '17:00', '18:00', '19:00'],
         worksWithVhi: false,
         worksWithKids: true,
@@ -68,15 +62,13 @@ export const doctorsFetched = [
         education:
             'Graduated from University of California, San Francisco School of Medicine',
         id: 4,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Michael Lee',
         professionalInterests:
             'Skin cancer prevention and treatment, pediatric dermatology',
         price: 175,
         specialtyId: [1, 4],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['09:00', '11:00', '15:00', '17:00', '18:00', '19:00'],
         worksWithVhi: true,
         worksWithKids: false,
@@ -90,14 +82,12 @@ export const doctorsFetched = [
         education:
             'Graduated from University of Pennsylvania Perelman School of Medicine',
         id: 5,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Jennifer Chen',
         professionalInterests: 'Pediatric ophthalmology, strabismus, amblyopia',
         price: 175,
         specialtyId: [5],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['09:00', '10:00', '16:00', '18:00'],
         worksWithVhi: false,
         worksWithKids: true,
@@ -112,15 +102,13 @@ export const doctorsFetched = [
         education:
             'Graduated from Columbia University Vagelos College of Physicians and Surgeons',
         id: 6,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'David Kim',
         professionalInterests:
             'Child and adolescent psychiatry, neurodevelopmental disorders',
         price: 150,
         specialtyId: [3, 7],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['09:00', '12:00', '13:00', '16:00', '17:00', '19:00'],
         worksWithVhi: true,
         worksWithKids: true,
@@ -134,14 +122,12 @@ export const doctorsFetched = [
         clinicSchedule: [3, 3, 4, 3, 4],
         education: 'Graduated from University of Michigan Medical School',
         id: 7,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Sarah Davis',
         professionalInterests: 'Pediatric allergy and immunology, food allergy, asthma',
         price: 125,
         specialtyId: [1, 6],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['10:00', '11:00', '12:00', '13:00', '16:00', '18:00'],
         worksWithVhi: true,
         worksWithKids: true,
@@ -155,14 +141,12 @@ export const doctorsFetched = [
         clinicSchedule: [2, 2, 2, 4, 2],
         education: 'Graduated from University of Texas Southwestern Medical School',
         id: 8,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Robert Wilson',
         professionalInterests: 'Pediatric cardiology, congenital heart disease',
         price: 175,
         specialtyId: [8],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: [
             '09:00',
             '10:00',
@@ -185,14 +169,12 @@ export const doctorsFetched = [
         education:
             'Graduated from University of California, Los Angeles David Geffen School of Medicine',
         id: 9,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Laura Martinez',
         professionalInterests: 'Pediatric emergency medicine, trauma',
         price: 225,
         specialtyId: [9, 1],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['10:00', '12:00', '15:00', '16:00', '17:00', '18:00'],
         worksWithVhi: false,
         worksWithKids: true,
@@ -206,14 +188,12 @@ export const doctorsFetched = [
         clinicSchedule: [3, 2, 2, 2, 3],
         education: 'Graduated from University of Chicago Pritzker School of Medicine',
         id: 10,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'William Yang',
         professionalInterests: 'Gastroenterology, inflammatory bowel disease, nutrition',
         price: 150,
         specialtyId: [10, 14],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['09:00', '13:00', '15:00', '16:00', '17:00'],
         worksWithVhi: true,
         worksWithKids: false,
@@ -227,14 +207,12 @@ export const doctorsFetched = [
         clinicSchedule: [2, 4, 4, 2, 4],
         education: 'Graduated from University of Washington School of Medicine',
         id: 11,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Olivia Kim',
         professionalInterests: 'Pediatric hematology/oncology, leukemia, lymphoma',
         price: 150,
         specialtyId: [11],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['09:00', '10:00', '14:00', '16:00'],
         worksWithVhi: false,
         worksWithKids: true,
@@ -248,15 +226,13 @@ export const doctorsFetched = [
         education:
             'Graduated from University of California, San Diego School of Medicine',
         id: 12,
-        largePhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2022/10/%D0%B0%D0%BB%D0%B0%D0%B8%D0%B4-683x1024-1.png',
+        largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Andrew Park',
         professionalInterests:
             'Plastic and reconstructive surgery, breast reconstruction, hand surgery',
         price: 225,
         specialtyId: [12],
-        smallPhoto:
-            'https://lahtaclinic.ru/wp-content/uploads/2017/11/docs-mini-ava-150x150.png',
+        smallPhoto: '/src/assets/Images/JohnSmithSmall.png',
         timeSchedule: ['09:00', '12:00', '13:00', '16:00', '17:00', '19:00'],
         worksWithVhi: true,
         worksWithKids: false,
