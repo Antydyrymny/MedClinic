@@ -5,10 +5,24 @@ import GithubSvg from '../../../assets/Pictogram/GithubSvg';
 import LinkedInSvg from '../../../assets/Pictogram/LinkedInSvg';
 import SocialMediaCss from './SocialMedia.module.css';
 
-function SocialMedia({ heading = 'Find Us on Social Media', personal = false }) {
+function SocialMedia({
+    heading = 'Find Us on Social Media',
+    personal = false,
+    horizontal = false,
+}) {
     return (
-        <div className={SocialMediaCss.wrapper}>
-            {heading && <div className={SocialMediaCss.heading}>{heading}</div>}
+        <div
+            className={`${SocialMediaCss.wrapper} ${
+                horizontal ? SocialMediaCss.horizontal : null
+            }`}
+        >
+            {heading && (
+                <div
+                    className={`${SocialMediaCss.heading} ${SocialMediaCss.horizontalHeading}`}
+                >
+                    {heading}
+                </div>
+            )}
             <div className={SocialMediaCss.icons}>
                 {!personal && (
                     <>
@@ -41,7 +55,7 @@ function SocialMedia({ heading = 'Find Us on Social Media', personal = false }) 
                 {personal && (
                     <>
                         <a
-                            href={'https://www.youtube.com'}
+                            href={'https://github.com/Antydyrymny'}
                             target='_blank'
                             rel='noreferrer'
                             className={SocialMediaCss.link}
@@ -49,7 +63,7 @@ function SocialMedia({ heading = 'Find Us on Social Media', personal = false }) 
                             <GithubSvg />
                         </a>
                         <a
-                            href={'https://www.instagram.com'}
+                            href={'https://www.linkedin.com/'}
                             target='_blank'
                             rel='noreferrer'
                             className={SocialMediaCss.link}
@@ -57,7 +71,7 @@ function SocialMedia({ heading = 'Find Us on Social Media', personal = false }) 
                             <LinkedInSvg />
                         </a>
                         <a
-                            href={'https://www.telegram.org'}
+                            href={'https://leetcode.com/KDanovich/'}
                             target='_blank'
                             rel='noreferrer'
                             className={SocialMediaCss.link}

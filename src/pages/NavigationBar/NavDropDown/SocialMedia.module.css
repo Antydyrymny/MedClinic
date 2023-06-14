@@ -1,6 +1,16 @@
+.horizontal {
+    display: flex;
+    align-items: center;
+}
+
 .heading {
     color: #8193b2;
     margin-bottom: 1rem;
+}
+
+.horizontalHeading {
+    margin-bottom: 0;
+    margin-right: 1rem;
 }
 
 .icons {
@@ -23,5 +33,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    .horizontalHeading {
+        margin-bottom: 0.5rem;
     }
 }

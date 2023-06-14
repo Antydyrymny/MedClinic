@@ -11,13 +11,31 @@ function Footer() {
         location.pathname === '/partners';
 
     return (
-        <div
-            className={`${FooterCss.wrapper} ${
-                onThePageWithBottomBar && FooterCss.withBottomBar
-            }`}
-        >
-            <SocialMedia personal={true} heading='Follow me on' />
-        </div>
+        <footer className={FooterCss.wrapper}>
+            <hr className={FooterCss.line} />
+            <div
+                className={`${FooterCss.content} ${
+                    onThePageWithBottomBar && FooterCss.withBottomBar
+                }`}
+            >
+                <div className={FooterCss.infoBlock}>
+                    <div className={FooterCss.info}>
+                        Project by
+                        <a href='https://www.google.com' className={FooterCss.name}>
+                            {` Danovich Konstantin`}
+                        </a>
+                    </div>
+                    <div className={FooterCss.info}>Design by LahtaClinic</div>
+                </div>
+                <div className={FooterCss.socialMedia}>
+                    <SocialMedia
+                        personal={true}
+                        horizontal={true}
+                        heading='Find me on:'
+                    />
+                </div>
+            </div>
+        </footer>
     );
 }
 
