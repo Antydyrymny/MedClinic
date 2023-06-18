@@ -8,7 +8,10 @@
     align-items: center;
     color: #545a66;
     font-size: 0.9rem;
-    cursor: pointer;
+}
+
+.labelRightAligned {
+    justify-content: space-between;
 }
 
 .checked {
@@ -17,4 +20,9 @@
 
 .noPointer {
     cursor: default;
+}
+
+.content,
+.button {
+    cursor: pointer;
 }

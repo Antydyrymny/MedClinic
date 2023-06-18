@@ -10,6 +10,8 @@ function Textarea({ placeholder, onChange, rows, customStyles = null }) {
                 }`}
                 onChange={(e) => onChange(e.target.value)}
                 rows={rows}
+                name={placeholder}
+                autoComplete='false'
             />
         </div>
     );

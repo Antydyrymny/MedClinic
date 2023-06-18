@@ -118,4 +118,53 @@ function excludePaths(obj, paths) {
 
 //   return newObj;
 // }
-console.log(Math.pow(-3, 2));
+// console.log(Math.pow(-3, 2));
+
+// function countShips(sea) {
+//     let ships = 0;
+//     for (let y = 0; y < sea.length; y++) {
+//         for (let x = 0; x < sea[0].length; x++) {
+//             if (sea[y][x] === 0) continue;
+//             drownShip(y, x);
+//             ships++;
+//         }
+//     }
+//     return ships;
+
+//     function drownShip(y, x) {
+//         sea[y][x] = 0;
+//         if (x < sea[0].length - 1 && sea[y][x + 1] === 1) drownShip(y, x + 1);
+//         if (y < sea.length - 1 && sea[y + 1][x] === 1) drownShip(y + 1, x);
+//     }
+// }
+
+function countShips2(sea) {
+    const seaSize = Math.sqrt(sea.length);
+    let ships = 0;
+    for (let i = 0; i < sea.length; i++) {
+        if (sea[i] === 0) continue;
+        drownShip(i);
+        ships++;
+    }
+    return ships;
+
+    function drownShip(i) {
+        sea[i] = 0;
+        const y = Math.floor(i / seaSize);
+        const x = i % seaSize;
+        if (y < seaSize - 1 && sea[i + seaSize] === 1) drownShip(i + seaSize);
+        if (x < seaSize - 1 && sea[i + 1] === 1) drownShip(i + 1);
+    }
+}
+
+// const a = [
+//     [0, 1, 1, 0],
+//     [1, 0, 0, 1],
+//     [0, 0, 0, 1],
+//     [0, 0, 0, 0],
+// ];
+
+const b = [0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0];
+const c = [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0];
+
+console.log(countShips2(c));

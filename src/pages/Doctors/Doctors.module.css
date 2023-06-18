@@ -1,0 +1,103 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+.content {
+    width: clamp(5rem, 90%, 102rem);
+}
+
+.heading {
+    color: #313234;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+.searchBarBlock {
+    height: 3.5rem;
+    margin-bottom: 2rem;
+}
+
+.modalFilter {
+    display: none;
+}
+
+.searchBar {
+    height: 100%;
+}
+
+.filterAndGallery {
+    display: grid;
+    grid-template-columns: 25% calc(75% - 2rem);
+    gap: 2rem;
+}
+
+.filter {
+    width: 100%;
+}
+
+.notFound,
+.docGallery {
+    min-height: 30rem;
+}
+
+.notFound {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #545a66;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.docGallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 17.5rem);
+    gap: 2rem;
+    justify-items: start;
+}
+
+.clearButton {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customBtnWrapper {
+    height: 1rem;
+    width: 12rem;
+}
+
+@media (max-width: 1200px) {
+    .searchBarBlock {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .modalFilter {
+        display: block;
+    }
+
+    .searchBar {
+        width: calc(100% - 4rem);
+    }
+
+    .filterAndGallery {
+        display: block;
+    }
+
+    .filterBlock {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .docGallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

@@ -8,3 +8,20 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.maxHeight {
+    overflow-y: scroll;
+}
+
+.fieldset::-webkit-scrollbar {
+    width: 5px;
+}
+
+.fieldset::-webkit-scrollbar-thumb {
+    background-color: #cfcfcf;
+    border-radius: 4px;
+}
+
+.fieldset::-webkit-scrollbar-thumb:hover {
+    background-color: #adadad;
+}

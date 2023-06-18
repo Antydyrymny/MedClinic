@@ -54,6 +54,19 @@
     color: #fff;
 }
 
+.blue {
+    color: #2f7eeb;
+    border: 1px solid #d3d8e1;
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 0.07rem;
+    text-transform: uppercase;
+}
+
+.blue:hover {
+    border: 1px solid #2f7eeb;
+}
+
 .notAllowed {
     opacity: 0.2;
     cursor: not-allowed !important;

@@ -42,3 +42,8 @@ body,
 body {
   font-family: 'Lato', sans-serif;
 }
+
+
+#CheckedLinearGradient {
+  background: linear-gradient(to right, #5C58F2, #2FC5EE) !important;
+}

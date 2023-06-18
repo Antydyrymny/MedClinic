@@ -1,0 +1,13 @@
+.wrapper {
+    padding: 1.5rem 1rem;
+}
+
+.border {
+    border: 1px solid #d3d8e1;
+    border-radius: 0.5rem;
+}
+
+.bar {
+    width: 100%;
+    margin-bottom: 1.25rem;
+}

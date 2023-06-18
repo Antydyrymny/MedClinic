@@ -11,10 +11,10 @@
     height: 100%;
     width: 100%;
     font-size: 1rem;
-    color: #213043;
     margin-left: 1rem;
     border: 0;
     color: inherit;
+    border-radius: 0.5rem;
 }
 
 .searchInput::placeholder {
@@ -30,4 +30,10 @@
     border: 1px solid #E3E9FC;
     border-radius: 0.5rem;
     color: #213043;
+}
+
+.black {
+    border: 1px solid #d3d8e1;
+    border-radius: 0.5rem;
+    color: #757575;
 }

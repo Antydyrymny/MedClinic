@@ -1,0 +1,29 @@
+.mainBar {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    color: #545a66;
+    font-size: 1.25rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.arrow {
+    cursor: pointer;
+    width: 1.5rem;
+    display: flex;
+    justify-content: center;
+    transition: transform .2s ease;
+}
+
+.arrowChoosing {
+    transform: rotate(180deg);
+}
+
+.children {
+    margin-top: 1rem;
+}

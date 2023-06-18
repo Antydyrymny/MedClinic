@@ -45,6 +45,10 @@
     letter-spacing: 0.07rem;
 }
 
+.modalButton {
+    margin-top: 0.1rem;
+}
+
 .smallFirstBar {
     padding: 0.5rem 1rem;
 }

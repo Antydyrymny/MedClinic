@@ -52,6 +52,8 @@ function InputField({
                     setIsFocused(false);
                 }}
                 maxLength={maxlength}
+                name={label}
+                autoComplete='false'
             />
             <p
                 className={`${InputFieldCss.label} ${

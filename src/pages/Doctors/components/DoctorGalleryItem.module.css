@@ -1,0 +1,82 @@
+.largeScreen {
+    width: 17.375rem;
+    height: 26rem;
+    background: linear-gradient(180deg, #e9f2fa 11%, #b9cddf 86%);
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.smallScreen {
+    display: none;
+    overflow: hidden;
+}
+
+.smallLink {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.largePhoto,
+.smallPhoto {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.infoBlock {
+    position: absolute;
+    z-index: 10;
+    bottom: 0.52rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    height: 5.4rem;
+    width: 94%;
+    border-radius: 0.5rem;
+    opacity: 0.92;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    line-height: 1.5;
+}
+
+.name {
+    color: #545a66;
+}
+
+.spec {
+    font-weight: 400;
+    color: #8193b3;
+}
+
+.smallPhoto {
+    object-fit: cover;
+}
+
+.smallPhotoOuter {
+    width: 6.25rem;
+    min-width: 6.25rem;
+    height: 6.25rem;
+    margin-top: 1.5rem;
+    border: 4px solid #f1f4f9;
+    border-radius: 50%;
+}
+
+.smallPhotoInner {
+    overflow: hidden;
+    height: 7.75rem;
+    width: 100%;
+    margin-top: -1.5rem;
+    border-radius: 0 0 50% 50%;
+}
+
+@media (max-width: 1200px) {
+    .largeScreen {
+        display: none;
+    }
+
+    .smallScreen {
+        display: block
+    }
+}
