@@ -1,14 +1,14 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import useClearLocalStorageOnURLMove from './hooks/useClearLocalStorageOnURLMove ';
+import useClearSessionStorageOnURLMove from './hooks/useClearSessionStorageOnURLMove ';
 import './App.css';
 import MainLayout from './pages/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
 import AppointmentLayout from './pages/Appointment/AppointmentLayout';
 import {
     appointmentKey,
-    previousPageKey,
+    lastProgressStepKey,
     appointmentStep3State,
-} from './data/LocalStorageKeys';
+} from './data/SessionStorageKeys';
 import AppStep1 from './pages/Appointment/AppStep1';
 import AppStep2 from './pages/Appointment/AppStep2';
 import AppStep3 from './pages/Appointment/AppStep3';
@@ -24,8 +24,8 @@ import Partners from './pages/Partners/Partners';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
-    useClearLocalStorageOnURLMove(
-        [appointmentKey, previousPageKey, appointmentStep3State],
+    useClearSessionStorageOnURLMove(
+        [appointmentKey, lastProgressStepKey, appointmentStep3State],
         '/app'
     );
 

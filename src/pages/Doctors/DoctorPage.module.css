@@ -1,0 +1,20 @@
+.wrapper {
+    padding-top: 1rem;
+}
+
+.titleBlock,
+.aboutBlock {
+    padding-inline: clamp(1rem, 15%, 17rem);
+}
+
+.aboutBlock {
+    background-color: #F2F4F9;
+}
+
+@media (max-width: 800px) {
+
+    .titleBlock,
+    .aboutBlock {
+        padding-inline: 5%;
+    }
+}

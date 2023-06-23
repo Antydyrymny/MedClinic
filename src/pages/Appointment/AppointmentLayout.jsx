@@ -7,7 +7,7 @@ import {
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import useLocalStorageState from 'src/hooks/useLocalStorageState';
+import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
 import { permitVisitApp3, permitVisitApp4 } from 'src/utils/PermitVisit';
 import { clearAppData } from 'src/utils/ClearAppData';
@@ -20,19 +20,19 @@ import {
     doctorsKey,
     specialitiesKey,
     clinicsKey,
-} from 'src/data/LocalStorageKeys';
+} from 'src/data/SessionStorageKeys';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-gb';
 import AppointLayoutCss from './AppointmentLayout.module.css';
 
 function AppointmentLayout() {
-    const [appParams, setAppParams] = useLocalStorageState(
+    const [appParams, setAppParams] = useSessionStorageState(
         appointmentKey,
         appointmentSchema
     );
-    const [doctors, setDoctors] = useLocalStorageState(doctorsKey, null);
-    const [specialties, setSpecialties] = useLocalStorageState(specialitiesKey, null);
-    const [clinics, setClinics] = useLocalStorageState(clinicsKey, null);
+    const [doctors, setDoctors] = useSessionStorageState(doctorsKey, null);
+    const [specialties, setSpecialties] = useSessionStorageState(specialitiesKey, null);
+    const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
 
     const location = useLocation();
     const currentStep = +location.pathname.at(-1);

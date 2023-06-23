@@ -105,6 +105,7 @@ function SpecStep3({ step3Data, bookedData, appParamsData }) {
                                     onlineAppointment: appParams.onlineAppointment,
                                 })}
                                 online={appParams.onlineAppointment}
+                                followUp={appParams.followUp}
                                 onClick={(time, clinicId, doctorId) =>
                                     setAppParams({
                                         ...appParams,

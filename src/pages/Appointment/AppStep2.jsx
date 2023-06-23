@@ -5,7 +5,7 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
-import { appointmentStep3State } from 'src/data/LocalStorageKeys';
+import { appointmentStep3State } from 'src/data/SessionStorageKeys';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import App2ParamSelect from './components/App2ParamSelect/App2ParamSelect';
 import App2Grid from './components/App2Grid/App2Grid';
@@ -108,6 +108,7 @@ function AppStep2() {
                         specsFiltered={specsFiltered}
                         docsPerSpec={docsPerSpec}
                         onClick={handleParamChoice}
+                        appParams={appParams}
                         setAppParams={setAppParams}
                     />
                     <div className={AppStep2Css.back}>
@@ -124,7 +125,7 @@ function AppStep2() {
 
     function handleParamChoice(paramName, paramData) {
         clearAppData(appParams, setAppParams, 3);
-        localStorage.removeItem(appointmentStep3State);
+        sessionStorage.removeItem(appointmentStep3State);
         if (paramName === 'Doctor')
             setAppParams((p) => ({ ...p, doctorId: paramData, step3Format: 'Doctor' }));
         else if (paramName === 'Speciality')

@@ -10,8 +10,8 @@ import {
     ClinicsContext,
 } from 'src/context/FetchDataContext';
 import { LoadingContext } from 'src/context/LoadingContext';
-import { doctorsKey, specialitiesKey, clinicsKey } from 'src/data/LocalStorageKeys';
-import useLocalStorageState from 'src/hooks/useLocalStorageState';
+import { doctorsKey, specialitiesKey, clinicsKey } from 'src/data/SessionStorageKeys';
+import useSessionStorageState from 'src/hooks/useSessionStorageState';
 
 const doctorFilterSchema = {
     name: '',
@@ -24,9 +24,9 @@ const doctorFilterSchema = {
 function DoctorsContext() {
     const [searchParams, setSearchParams] = useState(doctorFilterSchema);
     const [loading, setLoading] = useState(true);
-    const [doctors, setDoctors] = useLocalStorageState(doctorsKey, null);
-    const [specialties, setSpecialties] = useLocalStorageState(specialitiesKey, null);
-    const [clinics, setClinics] = useLocalStorageState(clinicsKey, null);
+    const [doctors, setDoctors] = useSessionStorageState(doctorsKey, null);
+    const [specialties, setSpecialties] = useSessionStorageState(specialitiesKey, null);
+    const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
     // TODO fetch data
     useEffect(() => {
         if (!doctors)

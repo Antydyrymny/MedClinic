@@ -1,0 +1,78 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 5rem 3rem;
+    gap: 3rem;
+}
+
+.block {
+    margin-bottom: 2rem;
+}
+
+.heading {
+    color: #313234;
+    font-family: 'Lato Light', 'sans-serif';
+    font-size: 1.75rem;
+    font-weight: 900;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.listItem,
+.priceTableName {
+    color: #485052;
+    line-height: 1.5;
+}
+
+.listItem {
+    margin-bottom: 1rem;
+}
+
+.listItem::before {
+    content: url(/src/assets/Pictogram/ListStyleItem.svg);
+    margin-right: 0.7rem;
+    vertical-align: 12%;
+}
+
+.table {
+    background-color: white;
+    border-collapse: collapse;
+}
+
+.row {
+    vertical-align: text-bottom;
+}
+
+.row td {
+    padding: 1.5rem 0 0 1.5rem;
+}
+
+.row td:last-child {
+    padding-right: 1.5rem;
+}
+
+.tbody tr:last-child td {
+    padding-bottom: 1.5rem;
+}
+
+.priceTableLink {
+    color: #5173F1;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.03rem;
+}
+
+.price {
+    color: rgb(179, 184, 192);
+    font-size: 1.15rem;
+}
+
+@media (max-width: 800px) {
+    .wrapper {
+        display: block;
+    }
+}

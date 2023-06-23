@@ -80,7 +80,7 @@ export const doctorsFetched = [
         certificates: 'American Board of Ophthalmology',
         clinicSchedule: [1, 1, 1, 1, 1],
         education:
-            'Graduated from University of Pennsylvania Perelman School of Medicine',
+            'Graduated from University of Pennsylvania, Perelman School of Medicine',
         id: 5,
         largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Jennifer Chen',
@@ -100,7 +100,7 @@ export const doctorsFetched = [
             'American Board of Neurology, American Board of Psychiatry and Neurology',
         clinicSchedule: [1, 1, 1, 1, 1],
         education:
-            'Graduated from Columbia University Vagelos College of Physicians and Surgeons',
+            'Graduated from Columbia University, Vagelos College of Physicians and Surgeons',
         id: 6,
         largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'David Kim',
@@ -139,7 +139,7 @@ export const doctorsFetched = [
         certificates:
             'American Board of Pediatrics, American Board of Pediatric Cardiology',
         clinicSchedule: [2, 2, 2, 4, 2],
-        education: 'Graduated from University of Texas Southwestern Medical School',
+        education: 'Graduated from University of Texas, Southwestern Medical School',
         id: 8,
         largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'Robert Wilson',
@@ -186,7 +186,7 @@ export const doctorsFetched = [
         certificates:
             'American Board of Internal Medicine, American Board of Gastroenterology',
         clinicSchedule: [3, 2, 2, 2, 3],
-        education: 'Graduated from University of Chicago Pritzker School of Medicine',
+        education: 'Graduated from University of Chicago, Pritzker School of Medicine',
         id: 10,
         largePhoto: '/src/assets/Images/JohnSmithLarge.png',
         name: 'William Yang',

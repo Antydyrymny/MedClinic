@@ -1,6 +1,11 @@
 import DocDescrCss from './DoctorShortDescription.module.css';
 
-function DoctorShortDescription({ doctor, small = false }) {
+function DoctorShortDescription({
+    doctor,
+    followUp = false,
+    small = false,
+    noPrice = false,
+}) {
     return (
         <div className={DocDescrCss.wrapper}>
             <div className={DocDescrCss.imgWrapper}>
@@ -21,7 +26,11 @@ function DoctorShortDescription({ doctor, small = false }) {
                         .split('')
                         .slice(0, -2)}
                 </p>
-                <p className={DocDescrCss.price}>{doctor.price + ' usd'}</p>
+                {!noPrice && (
+                    <p className={DocDescrCss.price}>
+                        {(followUp ? doctor.price - 20 : doctor.price) + ' usd'}
+                    </p>
+                )}
             </div>
         </div>
     );

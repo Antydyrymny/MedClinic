@@ -13,7 +13,7 @@ function Contacts() {
     const clinics = useContext(ClinicsContext);
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
-    const clinicQuery = clinics.find((c) => c.id === +searchParams.get('clinic'));
+    const clinicQuery = clinics.find((c) => c.id === +searchParams.get('clinicId'));
     const [chosenClinic, setChosenClinic] = useState(clinicQuery);
     const [center, setCenter] = useState({
         lat: 51.51724180515732,

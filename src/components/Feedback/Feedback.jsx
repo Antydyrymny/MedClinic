@@ -40,7 +40,7 @@ function Feedback({
                     closeModal();
                 }}
             >
-                <img src={'src/assets/Pictogram/close20px.png'} alt={'close'} />
+                <img src={'/src/assets/Pictogram/close20px.png'} alt={'close'} />
             </div>
             {isSent ? (
                 <FeedbackSuccess message={onSuccessMessage} />

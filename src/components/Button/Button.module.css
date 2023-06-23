@@ -9,6 +9,8 @@
     align-items: center;
     border-radius: 1.7rem;
     cursor: pointer;
+    font-weight: 700;
+    font-family: 'Lato Light', 'sans-serif';
     /* Disable selection */
     -moz-user-select: none;
     /* firefox */
@@ -26,6 +28,7 @@
 
 .empty:not(.notAllowed):hover {
     border: 1px solid #5b83db;
+    color: #545a66;
 }
 
 .active {

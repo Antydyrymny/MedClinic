@@ -36,7 +36,10 @@ function DoctorStep3({ step3Data, bookedData, appParamsData }) {
                 <div className={DoctorStep3Css.doctorSpecClinic}>
                     <h4 className={DoctorStep3Css.heading}>Chosen doctor</h4>
                     <div className={DoctorStep3Css.doctor}>
-                        <DoctorShortDescription doctor={doctor} />
+                        <DoctorShortDescription
+                            doctor={doctor}
+                            followUp={appParams.followUp}
+                        />
                     </div>
                     {appParams.onlineAppointment ? null : (
                         <>

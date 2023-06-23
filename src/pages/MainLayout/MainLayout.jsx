@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { clinicsFetched } from 'src/data/Clinics';
 import { ClinicsContext } from 'src/context/FetchDataContext';
-import { clinicsKey } from 'src/data/LocalStorageKeys';
-import useLocalStorageState from 'src/hooks/useLocalStorageState';
+import { clinicsKey } from 'src/data/SessionStorageKeys';
+import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import Footer from '../Footer/Footer';
@@ -11,7 +11,7 @@ import MainLayoutCss from './MainLayout.module.css';
 
 function MainLayout() {
     const [loading, setLoading] = useState(true);
-    const [clinics, setClinics] = useLocalStorageState(clinicsKey, null);
+    const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
     // TODO fetch data
     useEffect(() => {
         if (!clinics) {

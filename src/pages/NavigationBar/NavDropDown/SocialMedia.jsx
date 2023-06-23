@@ -18,7 +18,9 @@ function SocialMedia({
         >
             {heading && (
                 <div
-                    className={`${SocialMediaCss.heading} ${SocialMediaCss.horizontalHeading}`}
+                    className={`${SocialMediaCss.heading} ${
+                        horizontal ? SocialMediaCss.horizontalHeading : null
+                    }`}
                 >
                     {heading}
                 </div>

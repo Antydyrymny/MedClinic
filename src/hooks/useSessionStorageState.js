@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-export default function useLocalStorageState(key, initialValue) {
+export default function useSessionStorageState(key, initialValue, updatingState) {
     const [state, setState] = useState(() => {
         const data = JSON.parse(window.sessionStorage.getItem(key));
-        if (data === null) return initialValue;
-        else return initialValue === null ? data : initialValue;
+        if (data === null) return updatingState || initialValue;
+        else return updatingState || data;
     });
 
     useEffect(() => {

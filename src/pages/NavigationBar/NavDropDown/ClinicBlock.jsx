@@ -11,7 +11,7 @@ function ClinicBlock({ clinic, opened, close, coloredBackground = true }) {
             }`}
             onClick={() => {
                 opened && close();
-                const newUrl = `/contacts?clinic=${clinic.id}`;
+                const newUrl = `/contacts?clinicId=${clinic.id}`;
                 if (window.location.pathname === '/contacts') {
                     navigate(newUrl, { replace: true });
                     window.location.reload();

@@ -2,11 +2,11 @@ import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescrip
 import TimeList from '../TimeList/TimeList';
 import DoctorTimeCardCSS from './DoctorTimeCard.module.css';
 
-function DoctorTimeCard({ doctor, online, clinic, times, onClick }) {
+function DoctorTimeCard({ doctor, online, clinic, times, onClick, followUp }) {
     return (
         <div className={DoctorTimeCardCSS.wrapper}>
             <div className={DoctorTimeCardCSS.doctor}>
-                <DoctorShortDescription doctor={doctor} />
+                <DoctorShortDescription doctor={doctor} followUp={followUp} />
             </div>
             <div className={DoctorTimeCardCSS.time}>
                 <TimeList

@@ -40,7 +40,9 @@ function AppSummary() {
                 </div>
             </div>
             <div className={AppSummaryCss.priceBlock}>
-                <div className={AppSummaryCss.price}>{doctor.price}</div>
+                <div className={AppSummaryCss.price}>
+                    {appParams.followUp ? doctor.price - 20 : doctor.price}
+                </div>
                 <div className={AppSummaryCss.heading}>price</div>
             </div>
             <div className={AppSummaryCss.specBlock}>
@@ -48,7 +50,11 @@ function AppSummary() {
                 <div className={AppSummaryCss.heading}>speciality</div>
             </div>
             <div className={AppSummaryCss.doctor}>
-                <DoctorShortDescription doctor={docExpanded} small={true} />
+                <DoctorShortDescription
+                    doctor={docExpanded}
+                    followUp={appParams.followUp}
+                    small={true}
+                />
             </div>
             {appParams.onlineAppointment ? null : (
                 <div className={AppSummaryCss.clinicBlock}>

@@ -167,4 +167,78 @@ function countShips2(sea) {
 const b = [0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0];
 const c = [0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0];
 
-console.log(countShips2(c));
+// console.log(countShips2(c));
+
+function getMoney(ammount, limits = {}) {
+    const money = [5000, 1000, 500, 100, 50];
+    const result = { 5000: 0, 1000: 0, 500: 0, 100: 0, 50: 0 };
+    money.forEach((value) => {
+        while (ammount >= value) {
+            if (Array.from(limits).length !== 0) {
+                if (!limits[value] || limits[value] < 1) return;
+                limits[value]--;
+            }
+            ammount -= value;
+            result[value]++;
+        }
+    });
+    if (ammount > 0) throw new Error();
+    else return result;
+}
+
+// console.log(getMoney(300));
+
+function getMoney2(ammount, limits = {}, coins = [5000, 1000, 500, 100, 50]) {
+    const dp = Array.from(new Array(ammount + 1), () => [
+        Infinity,
+        coins.reduce((coinList, coin) => {
+            coinList[coin] = 0;
+            return coinList;
+        }, {}),
+    ]);
+    dp[0][0] = 0;
+    const minCoin = coins.reduce((min, cur) => Math.min(min, cur), Infinity);
+    for (let i = minCoin; i <= ammount; i++) {
+        let minCoinsToSumToI = Infinity;
+        let coinAdded = null;
+        for (let j = 0; j < coins.length; j++) {
+            if (coins[j] > i) continue;
+            const memorised = dp[i - coins[j]];
+            if (coins[j] in limits) {
+                const coinsLeftIfJ = limits[coins[j]] - memorised[1][coins[j]] - 1;
+                if (coinsLeftIfJ < 0) continue;
+            }
+            const totalCoinsUsedIfJ = 1 + memorised[0];
+            if (totalCoinsUsedIfJ < minCoinsToSumToI) {
+                minCoinsToSumToI = totalCoinsUsedIfJ;
+                coinAdded = coins[j];
+            }
+            if (i - coins[j] === 0) break;
+        }
+        const coinsUsedBefore = dp[i - coinAdded][1];
+        const coinsUsedForI = !isFinite(minCoinsToSumToI)
+            ? dp[i][1]
+            : { ...coinsUsedBefore, [coinAdded]: coinsUsedBefore[coinAdded] + 1 };
+        dp[i] = [minCoinsToSumToI, coinsUsedForI];
+    }
+    if (!isFinite(dp[ammount][0])) throw new Error('not possible to divide');
+    return dp[ammount][1];
+}
+
+// console.log(
+//     getMoney2(39500, {
+//         100: 20,
+//         1000: 50,
+//         50: 10,
+//         500: 0,
+//         5000: 5,
+//     })
+// );
+
+Array.prototype.newSome = function (callback) {
+    return this.reduce((res, item) => {
+        if (callback(item)) res.push(item);
+        return res;
+    }, []);
+};
+console.log([1, 2, 3].newSome((i) => i > 2));

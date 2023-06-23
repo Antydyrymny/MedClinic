@@ -32,7 +32,7 @@ function ModalFilter({
                             onClick={() => modalRef.current.close()}
                         >
                             <img
-                                src={'src/assets/Pictogram/close20px.png'}
+                                src={'/src/assets/Pictogram/close20px.png'}
                                 alt={'close'}
                             />
                         </div>
