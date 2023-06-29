@@ -11,6 +11,10 @@ body,
   height: 100%;
 }
 
+.slick-list {
+  overflow: visible !important;
+}
+
 @font-face {
   font-family: 'Lato';
   src: url('./assets/Fonts/Lato/Lato-Regular.ttf') format('truetype');

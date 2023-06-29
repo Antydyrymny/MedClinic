@@ -1,6 +1,4 @@
-.wrapper {}
-
-/* .mainBar {
+.mainBar {
     position: relative;
     width: 100%;
     height: 51rem;
@@ -63,16 +61,4 @@
 
 .aboutInfo {
     font-size: 1.3rem;
-} */
-
-/* @media (max-width: 1400px) {
-    .mainBarContent {
-        scale: 0.7;
-    }
 }
-
-@media (max-width: 1200px) {
-    .mainBarContent {
-        scale: 0.5;
-    }
-} */

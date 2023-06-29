@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { clinicsFetched } from 'src/data/Clinics';
 import { ClinicsContext } from 'src/context/FetchDataContext';
@@ -12,6 +13,7 @@ import MainLayoutCss from './MainLayout.module.css';
 function MainLayout() {
     const [loading, setLoading] = useState(true);
     const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
+    const location = useLocation();
     // TODO fetch data
     useEffect(() => {
         if (!clinics) {
@@ -24,6 +26,10 @@ function MainLayout() {
         }
         setLoading(false);
     }, [clinics, setClinics]);
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location.pathname]);
 
     return !clinics ? null : loading ? (
         <LoadingSpinner />

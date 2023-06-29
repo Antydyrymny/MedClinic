@@ -1,9 +1,12 @@
 .quoteBlock {
-    background-image: url('src/assets/Images/headDoctor.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 85% 100%;
     padding: 3rem 4rem;
+}
+
+.background {
+    background-image: url('src/assets/Images/headDoctor.png');
 }
 
 .quoteBlock,
@@ -16,6 +19,18 @@
 
 .quote {
     max-width: 60%;
+}
+
+.quoteImg {
+    /* Disable selection */
+    -moz-user-select: none;
+    /* firefox */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE*/
+    user-select: none;
+    /* Standard syntax */
 }
 
 .quoteText {
@@ -66,7 +81,7 @@
         max-width: 100%;
     }
 
-    .quoteBlock {
+    .background {
         background: none;
     }
 

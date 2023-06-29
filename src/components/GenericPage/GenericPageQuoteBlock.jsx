@@ -1,8 +1,12 @@
 import QuoteBlockCss from './GenericPageQuoteBlock.module.css';
 
-function GenericPageQuoteBlock({ quoteText }) {
+function GenericPageQuoteBlock({ quoteText, backgroundImg = true }) {
     return (
-        <div className={QuoteBlockCss.quoteBlock}>
+        <div
+            className={`${QuoteBlockCss.quoteBlock} ${
+                backgroundImg ? QuoteBlockCss.background : null
+            }`}
+        >
             <div className={QuoteBlockCss.quote}>
                 <img
                     src={'src/assets/Pictogram/quote.png'}

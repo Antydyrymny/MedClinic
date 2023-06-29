@@ -22,10 +22,7 @@ function AppStep1() {
     const [appToChosenDoc, setAppToChosenDoc] = useState(!!chosenDoc);
 
     useEffect(() => {
-        // if (followUp) setAppParams((prevParams) => ({ ...prevParams, followUp: true }));
-        if (followUp) setAppParams({ ...appParams, followUp: true });
-        // return () => setAppParams({ ...appParams, followUp: false });
-        // return () => setAppParams((prevParams) => ({ ...prevParams, followUp: false }));
+        if (followUp) setAppParams((prevParams) => ({ ...prevParams, followUp: true }));
     }, [followUp, setAppParams]);
 
     return (

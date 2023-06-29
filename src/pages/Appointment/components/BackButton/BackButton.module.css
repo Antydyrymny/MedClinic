@@ -10,6 +10,14 @@
     cursor: pointer;
 }
 
+.forward {
+    transform: rotate(180deg);
+}
+
 .wrapper:hover {
     border: 1px solid #545A66;
+}
+
+.disabled {
+    opacity: 0.4;
 }
