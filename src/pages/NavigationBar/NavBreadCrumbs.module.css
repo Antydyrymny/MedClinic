@@ -1,10 +1,17 @@
 .location {
     position: absolute;
     bottom: -1.5rem;
-    left: 1rem;
     z-index: 10000;
     color: #000;
     font-size: 0.8125rem;
+}
+
+.largeScreen {
+    left: 1.5rem;
+}
+
+.smallScreen {
+    left: 1rem;
 }
 
 .location,
@@ -15,8 +22,6 @@
 .link {
     color: inherit;
 }
-
-
 
 .dash {
     white-space: pre;

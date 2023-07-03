@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import { pathNameTable } from '../../data/PathNameTable';
 import BreadCrumbsCss from './NavBreadCrumbs.module.css';
 
-function NavBreadCrumbs() {
+function NavBreadCrumbs({ screenSize }) {
     const location = useLocation();
     const path = location.pathname.split('/');
 
     return (
         location.pathname !== '/' && (
-            <div className={BreadCrumbsCss.location}>
+            <div
+                className={`${BreadCrumbsCss.location} ${
+                    screenSize === 'small'
+                        ? BreadCrumbsCss.smallScreen
+                        : BreadCrumbsCss.largeScreen
+                }`}
+            >
                 {path.map((curPath, ind) => {
                     const linkTo =
                         ind === 0

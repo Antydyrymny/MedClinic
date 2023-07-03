@@ -10,6 +10,7 @@ function NavigationBar() {
     const scroll = useGetScroll();
     const [dropDownIsActive, setDropDownIsActive] = useState(false);
     const heightToShowFixedBar = screenWidth ? 50 : 120;
+    const screenSize = screenWidth > 1200 ? 'large' : 'small';
 
     return (
         <div className={NavigationBarCss.wrapper}>
@@ -17,10 +18,12 @@ function NavigationBar() {
                 <NavResponsiveComponent
                     opened={scroll > heightToShowFixedBar ? false : dropDownIsActive}
                     setOpened={setDropDownIsActive}
-                    screenSize={screenWidth > 1200 ? 'large' : 'small'}
+                    screenSize={screenSize}
                 />
             </div>
-            {scroll <= heightToShowFixedBar && !dropDownIsActive && <NavBreadCrumbs />}
+            {scroll <= heightToShowFixedBar && !dropDownIsActive && (
+                <NavBreadCrumbs screenSize={screenSize} />
+            )}
             <div
                 className={`${NavigationBarCss.navHidden} ${
                     scroll > heightToShowFixedBar ? NavigationBarCss.navScrolling : null
@@ -30,7 +33,7 @@ function NavigationBar() {
                     scrolling={true}
                     opened={dropDownIsActive}
                     setOpened={setDropDownIsActive}
-                    screenSize={screenWidth > 1200 ? 'large' : 'small'}
+                    screenSize={screenSize}
                 />
             </div>
         </div>

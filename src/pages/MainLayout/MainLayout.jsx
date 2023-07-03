@@ -8,7 +8,6 @@ import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import NavigationBar from '../NavigationBar/NavigationBar';
 import Footer from '../Footer/Footer';
-import MainLayoutCss from './MainLayout.module.css';
 
 function MainLayout() {
     const [loading, setLoading] = useState(true);
