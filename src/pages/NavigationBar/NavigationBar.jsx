@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import NavBreadCrumbs from './NavBreadCrumbs';
 import useGetScreenWidth from '../../hooks/useGetScreenWidth';
 import useGetScroll from '../../hooks/useGetScroll';
 import NavResponsiveComponent from './NavResponsiveComponent/NavResponsiveComponent';
@@ -19,6 +20,7 @@ function NavigationBar() {
                     screenSize={screenWidth > 1200 ? 'large' : 'small'}
                 />
             </div>
+            {scroll <= heightToShowFixedBar && !dropDownIsActive && <NavBreadCrumbs />}
             <div
                 className={`${NavigationBarCss.navHidden} ${
                     scroll > heightToShowFixedBar ? NavigationBarCss.navScrolling : null

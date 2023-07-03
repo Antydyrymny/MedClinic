@@ -1,0 +1,23 @@
+.location {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 1rem;
+    z-index: 10000;
+    color: #000;
+    font-size: 0.8125rem;
+}
+
+.location,
+.subLocation {
+    display: flex;
+}
+
+.link {
+    color: inherit;
+}
+
+
+
+.dash {
+    white-space: pre;
+}
