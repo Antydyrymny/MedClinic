@@ -1,30 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import useGetScreenWidth from '../../hooks/useGetScreenWidth';
+import useGetScroll from '../../hooks/useGetScroll';
 import NavResponsiveComponent from './NavResponsiveComponent/NavResponsiveComponent';
 import NavigationBarCss from './NavigationBar.module.css';
 
 function NavigationBar() {
-    const [scroll, setScroll] = useState(0);
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const screenWidth = useGetScreenWidth();
+    const scroll = useGetScroll();
     const [dropDownIsActive, setDropDownIsActive] = useState(false);
     const heightToShowFixedBar = screenWidth ? 50 : 120;
-
-    useEffect(() => {
-        function handleScroll() {
-            setScroll(document.documentElement.scrollTop);
-        }
-
-        function handleResize() {
-            setScreenWidth(window.innerWidth);
-        }
-
-        document.addEventListener('scroll', handleScroll);
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            document.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     return (
         <div className={NavigationBarCss.wrapper}>

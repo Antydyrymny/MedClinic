@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Link as ScrollLink } from 'react-scroll';
+import useGetScreenWidth from '../../hooks/useGetScreenWidth';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import ModalFeedbackForm from '../Modal/ModalFeedbackForm';
 import Button from '../Button/Button';
-import DropDownSvg from '../../assets/Pictogram/DropDownSvg';
+import ScrollDownArrow from '../ScrollDownArrow/ScrollDownArrow';
 import PageCss from './GenericPage.module.css';
 
 function GenericPage({
@@ -24,6 +24,7 @@ function GenericPage({
     subTitle,
 }) {
     const [loading, setLoading] = useState(true);
+    const screenWidth = useGetScreenWidth();
 
     return (
         <>
@@ -86,17 +87,10 @@ function GenericPage({
                             )}
                         </div>
                     </div>
-                    <div className={PageCss.bottomArrow} onClick={null}>
-                        <ScrollLink
-                            to={'mainContent'}
-                            spy={true}
-                            smooth={true}
-                            offset={-70}
-                            duration={800}
-                        >
-                            <DropDownSvg color={'#14D9CF'} />
-                        </ScrollLink>
-                    </div>
+                    <ScrollDownArrow
+                        to={'mainContent'}
+                        offset={screenWidth > 1200 ? -70 : -50}
+                    />
                 </div>
                 <div className={PageCss.bottomBar}>
                     <a href='/app/step1'>{`schedule  an  appointment`}</a>

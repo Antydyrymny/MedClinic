@@ -7,9 +7,11 @@ function OptionSelect({
     active,
     disabled = [],
     customStyles,
+    customRef,
 }) {
     return (
         <div
+            ref={customRef}
             className={`${OptionSelectCss.wrapper} ${
                 customStyles ? customStyles.customOptionsSelectWrapper : null
             }`}

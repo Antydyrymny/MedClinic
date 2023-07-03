@@ -63,16 +63,6 @@
     width: max-content;
 }
 
-.bottomArrow {
-    width: 100%;
-    position: absolute;
-    bottom: 1.5rem;
-    scale: 1.5;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-}
-
 .children {
     width: 74rem;
     margin: 0 auto;

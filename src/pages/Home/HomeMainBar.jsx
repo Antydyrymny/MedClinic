@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import ScrollDownArrow from '../../components/ScrollDownArrow/ScrollDownArrow';
 import Button from '../../components/Button/Button';
 import HomeCss from './HomeMainBar.module.css';
 
@@ -44,6 +45,9 @@ function HomeMainBar() {
                             </p>
                         </li>
                     </ul>
+                </div>
+                <div className={HomeCss.scrollArrow}>
+                    <ScrollDownArrow to={'mainCarousel'} offset={-50} />
                 </div>
             </div>
         </section>

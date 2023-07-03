@@ -2,7 +2,7 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { ThemeProvider } from '@emotion/react';
-import { calendarTheme } from 'src/assets/CalendarTheme';
+import { calendarTheme } from 'src/assets/calendarTheme';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
 import TimeList from '../TimeList/TimeList';

@@ -6,6 +6,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    overflow-x: hidden;
 }
 
 .mainBarContent {
@@ -61,4 +62,47 @@
 
 .aboutInfo {
     font-size: 1.3rem;
+}
+
+.scrollArrow {
+    display: none;
+    position: relative;
+    top: 4rem;
+}
+
+@media (max-width: 1200px) {
+    .mainBar {
+        height: 52.5rem;
+    }
+
+    .mainHeading {
+        font-size: 3rem;
+        margin-bottom: 7rem;
+    }
+
+    .aboutNumber {
+        font-size: 3rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .aboutInfo {
+        font-size: 1.1rem;
+    }
+
+}
+
+@media (max-width: 900px) {
+    .mainHeading {
+        padding: 0 1rem;
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .aboutList {
+        display: none;
+    }
+
+    .scrollArrow {
+        display: block;
+    }
 }
