@@ -1,13 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { WindowWidth, DocumentScroll } from '../../context/WindowDimensionsContext';
 import NavBreadCrumbs from './NavBreadCrumbs';
-import useGetScreenWidth from '../../hooks/useGetScreenWidth';
-import useGetScroll from '../../hooks/useGetScroll';
 import NavResponsiveComponent from './NavResponsiveComponent/NavResponsiveComponent';
 import NavigationBarCss from './NavigationBar.module.css';
 
 function NavigationBar() {
-    const screenWidth = useGetScreenWidth();
-    const scroll = useGetScroll();
+    const screenWidth = useContext(WindowWidth);
+    const scroll = useContext(DocumentScroll);
     const [dropDownIsActive, setDropDownIsActive] = useState(false);
     const heightToShowFixedBar = screenWidth ? 50 : 120;
     const screenSize = screenWidth > 1200 ? 'large' : 'small';

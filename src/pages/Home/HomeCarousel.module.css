@@ -86,6 +86,11 @@
     margin-bottom: 5.2rem;
 }
 
+.optionSelect {
+    min-width: 50rem;
+    position: relative;
+}
+
 .clinicName {
     margin-bottom: 0.3rem;
     font-size: 1rem;

@@ -3,6 +3,7 @@
     justify-content: center;
     background-color: #F2F4F9;
     padding-top: 1rem;
+    position: relative;
 }
 
 .content {
@@ -39,6 +40,17 @@
 .link {
     color: #17BFE8;
     text-decoration: underline;
+}
+
+@media(max-width: 1200px) {
+    .bottomBar {
+        display: block;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 11;
+        height: 2.5rem;
+    }
 }
 
 @media (max-width: 1000px) {

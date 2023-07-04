@@ -12,7 +12,6 @@ export function addDragNDrop(slider, container) {
             if (newLeft < minLeft) newLeft = minLeft;
             if (newLeft > 0) newLeft = 0;
             slider.style.left = newLeft + 'px';
-            slider.style.padding = '0';
         }
 
         function onPointerUp() {

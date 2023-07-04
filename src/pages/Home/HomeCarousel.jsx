@@ -1,15 +1,17 @@
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { ClinicsContext } from 'src/context/FetchDataContext';
+import { WindowWidth } from '../../context/WindowDimensionsContext';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import OptionSelect from '../../components/OptionSelect/OptionSelect';
 import BackButton from '../Appointment/components/BackButton/BackButton';
-import { addDragNDrop } from '../../utils/DragNDrop';
+import useGetDragNDropHandler from '../../hooks/useGetDragNDropHandler';
 import CarouselCss from './HomeCarousel.module.css';
 
 function HomeCarousel() {
     const clinics = useContext(ClinicsContext);
+    const screenWidth = useContext(WindowWidth);
     const [chosenClinic, setChosenClinic] = useState(clinics[0]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const settings = {
@@ -32,15 +34,10 @@ function HomeCarousel() {
     const clinicSelectRef = useRef(null);
     const clinicParentDivRef = useRef(null);
     const sliderRef = useRef(null);
-    const [slidingDragNDropFunc, setSlidingDragNDropFunc] = useState(null);
-
-    useEffect(() => {
-        if (clinicSelectRef.current && clinicParentDivRef.current) {
-            setSlidingDragNDropFunc(() =>
-                addDragNDrop(clinicSelectRef.current, clinicParentDivRef.current)
-            );
-        }
-    }, [clinicSelectRef, clinicParentDivRef]);
+    const slidingDragNDropFunc = useGetDragNDropHandler(
+        clinicSelectRef,
+        clinicParentDivRef
+    );
 
     return (
         <section id={'mainCarousel'} className={CarouselCss.wrapper}>
@@ -79,12 +76,12 @@ function HomeCarousel() {
                         as Global HealthCare Network, comprising Clinics and Hospitals.
                     </p>
                     <div
+                        ref={clinicSelectRef}
                         className={CarouselCss.optionSelect}
                         onDragStart={() => false}
                         onPointerDown={slidingDragNDropFunc}
                     >
                         <OptionSelect
-                            customRef={clinicSelectRef}
                             elementOptions={true}
                             options={clinics.map((clinic) => (
                                 <div id={clinic.id}>
@@ -139,10 +136,7 @@ function HomeCarousel() {
                         <BackButton
                             onClick={() => sliderRef.current.slickNext()}
                             forward={true}
-                            disabled={
-                                currentIndex ===
-                                chosenClinic.photos.length - settings.slidesToShow
-                            }
+                            disabled={isForwardDisabled()}
                             arrowCollor={'#D3DAE6'}
                             customStyles={CarouselCss}
                         />
@@ -151,6 +145,20 @@ function HomeCarousel() {
             </div>
         </section>
     );
+
+    function isForwardDisabled() {
+        const length = chosenClinic.photos.length;
+        if (screenWidth > 1200) {
+            return currentIndex === length - settings.slidesToShow;
+        } else {
+            const curSlidesToShow = settings.responsive.reduce((best, cur) => {
+                if (cur.breakpoint >= screenWidth && cur.breakpoint < best.breakpoint)
+                    best = cur;
+                return best;
+            }).settings.slidesToShow;
+            return currentIndex === length - curSlidesToShow;
+        }
+    }
 }
 
 export default HomeCarousel;

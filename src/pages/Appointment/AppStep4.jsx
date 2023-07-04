@@ -3,6 +3,7 @@ import AppSummary from './components/AppSummary/AppSummary';
 import ClientForm from './components/ClientForm/ClientForm';
 import Button from '../../components/Button/Button';
 import BackButton from './components/BackButton/BackButton';
+import HomeButton from './components/HomeButton/HomeButton';
 import { validateClientData } from 'src/utils/ValidateClientData';
 import AppStep4Css from './AppStep4.module.css';
 
@@ -54,6 +55,9 @@ function AppStep4() {
                         notAllowed={!allowConfirm}
                     />
                 </div>
+                <div className={AppStep4Css.home}>
+                    <HomeButton />
+                </div>
             </div>
             <div className={AppStep4Css.footerMobile}>
                 <div className={AppStep4Css.footer}>
@@ -68,6 +72,9 @@ function AppStep4() {
                 </div>
                 <div className={AppStep4Css.back}>
                     <BackButton to={'/app/step3'} />
+                </div>
+                <div className={AppStep4Css.home}>
+                    <HomeButton />
                 </div>
             </div>
         </div>

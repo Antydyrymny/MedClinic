@@ -10,6 +10,7 @@ import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import App2ParamSelect from './components/App2ParamSelect/App2ParamSelect';
 import App2Grid from './components/App2Grid/App2Grid';
 import BackButton from './components/BackButton/BackButton';
+import HomeButton from './components/HomeButton/HomeButton';
 import { doctorsFetched } from 'src/data/Doctors';
 import { specialtiesFetched } from 'src/data/Specialties';
 import { clinicsFetched } from 'src/data/Clinics';
@@ -113,6 +114,7 @@ function AppStep2() {
                     />
                     <div className={AppStep2Css.back}>
                         <BackButton to={'/app/step1'} />
+                        <HomeButton />
                     </div>
                 </>
             )}

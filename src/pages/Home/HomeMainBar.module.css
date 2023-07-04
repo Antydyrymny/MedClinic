@@ -1,7 +1,7 @@
 .mainBar {
     position: relative;
     width: 100%;
-    height: 51rem;
+    height: 88vh;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -72,7 +72,7 @@
 
 @media (max-width: 1200px) {
     .mainBar {
-        height: 52.5rem;
+        height: 90vh;
     }
 
     .mainHeading {
@@ -88,10 +88,13 @@
     .aboutInfo {
         font-size: 1.1rem;
     }
-
 }
 
 @media (max-width: 900px) {
+    .mainBar {
+        height: 91vh;
+    }
+
     .mainHeading {
         padding: 0 1rem;
         font-size: 2rem;
@@ -104,5 +107,11 @@
 
     .scrollArrow {
         display: block;
+    }
+}
+
+@media (max-width: 280px) {
+    .appointmentButton {
+        margin-bottom: 1.5rem;
     }
 }

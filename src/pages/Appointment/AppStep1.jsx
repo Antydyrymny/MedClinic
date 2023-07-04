@@ -7,6 +7,7 @@ import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import { clearAppData } from 'src/utils/ClearAppData';
 import ToggleSwitch from 'src/components/ToggleSwitch/ToggleSwitch';
 import Button from 'src/components/Button/Button';
+import HomeButton from './components/HomeButton/HomeButton';
 import AppStep1Css from './AppStep1.module.css';
 
 function AppStep1() {
@@ -77,6 +78,12 @@ function AppStep1() {
                         }
                     />
                 </div>
+                <div className={AppStep1Css.home}>
+                    <HomeButton />
+                </div>
+            </div>
+            <div className={AppStep1Css.homeMobile}>
+                <HomeButton />
             </div>
         </div>
     );

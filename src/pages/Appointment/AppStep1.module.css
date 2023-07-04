@@ -1,13 +1,23 @@
 .wrapper {
     padding: 1rem 0 0 1rem;
+    position: relative;
 }
 
 .next {
     margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 .button {
     width: 12.5rem;
+}
+
+.homeMobile {
+    display: none;
+    position: absolute;
+    bottom: -5.75rem;
+    right: 0;
 }
 
 @media (max-width: 520px) {
@@ -22,5 +32,13 @@
 
     .button {
         width: 30rem;
+    }
+
+    .home {
+        display: none;
+    }
+
+    .homeMobile {
+        display: block;
     }
 }

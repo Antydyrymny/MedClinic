@@ -1,21 +1,16 @@
-import { useLocation } from 'react-router-dom';
+import useGetScreenWidth from '../../hooks/useGetScreenWidth';
 import SocialMedia from '../NavigationBar/NavDropDown/SocialMedia';
 import FooterCss from './Footer.module.css';
 
 function Footer() {
-    const location = useLocation();
-    const onThePageWithBottomBar =
-        location.pathname === '/about' ||
-        location.pathname === '/services' ||
-        location.pathname === '/for_business' ||
-        location.pathname === '/partners';
+    const screenWidth = useGetScreenWidth();
 
     return (
         <footer className={FooterCss.wrapper}>
             <hr className={FooterCss.line} />
             <div
                 className={`${FooterCss.content} ${
-                    onThePageWithBottomBar && FooterCss.withBottomBar
+                    screenWidth <= 1200 ? FooterCss.withBottomBar : null
                 }`}
             >
                 <div className={FooterCss.infoBlock}>

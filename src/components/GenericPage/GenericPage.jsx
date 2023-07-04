@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import useGetScreenWidth from '../../hooks/useGetScreenWidth';
+import { useState, useContext } from 'react';
+import { WindowWidth, WindowHeight } from '../../context/WindowDimensionsContext';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import ModalFeedbackForm from '../Modal/ModalFeedbackForm';
 import Button from '../Button/Button';
@@ -24,7 +24,9 @@ function GenericPage({
     subTitle,
 }) {
     const [loading, setLoading] = useState(true);
-    const screenWidth = useGetScreenWidth();
+    const screenWidth = useContext(WindowWidth);
+    const screenHeight = useContext(WindowHeight);
+    console.log(screenHeight);
 
     return (
         <>
@@ -91,9 +93,6 @@ function GenericPage({
                         to={'mainContent'}
                         offset={screenWidth > 1200 ? -70 : -50}
                     />
-                </div>
-                <div className={PageCss.bottomBar}>
-                    <a href='/app/step1'>{`schedule  an  appointment`}</a>
                 </div>
                 <div id='mainContent' className={PageCss.children}>
                     {children}

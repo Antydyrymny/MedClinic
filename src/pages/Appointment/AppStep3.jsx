@@ -8,6 +8,7 @@ import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import DoctorStep3 from './components/DoctorStep3/DoctorStep3';
 import SpecStep3 from './components/SpecStep3/SpecStep3';
 import BackButton from './components/BackButton/BackButton';
+import HomeButton from './components/HomeButton/HomeButton';
 import AppStep3Css from './AppStep3.module.css';
 
 function AppStep3() {
@@ -56,6 +57,7 @@ function AppStep3() {
                     )}
                     <div className={AppStep3Css.back}>
                         <BackButton to={'/app/step2'} />
+                        <HomeButton />
                     </div>
                 </>
             )}

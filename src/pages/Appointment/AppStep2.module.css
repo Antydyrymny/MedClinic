@@ -1,3 +1,11 @@
 .back {
     margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width:700px) {
+    .back {
+        margin-bottom: 1.5rem;
+    }
 }

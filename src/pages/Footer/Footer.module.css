@@ -21,13 +21,17 @@
 
 @media (max-width: 1200px) {
     .withBottomBar {
-        padding-bottom: 2.5rem;
+        padding-bottom: 3rem;
     }
 }
 
 @media (max-width: 550px) {
     .content {
         display: block;
+    }
+
+    .withBottomBar {
+        padding-bottom: 3.2rem;
     }
 
     .infoBlock {

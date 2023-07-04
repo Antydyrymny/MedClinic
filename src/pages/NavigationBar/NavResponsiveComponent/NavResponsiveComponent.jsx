@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import useGetDragNDropHandler from '../../../hooks/useGetDragNDropHandler';
 import Logo from '../Logo/Logo';
 import SmallLogo from '../Logo/SmallLogo';
 import NavList from '../NavList/NavList';
@@ -12,6 +13,12 @@ import NavResponsiveCss from './NavResponsiveComponent.module.css';
 
 function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSize }) {
     const dropDownref = useRef(null);
+    const slidingNavList = useRef(null);
+    const slidingNavListParent = useRef(null);
+    const slidingDragNDropFunc = useGetDragNDropHandler(
+        slidingNavList,
+        slidingNavListParent
+    );
 
     return (
         <div className={NavResponsiveCss.wrapper}>
@@ -105,12 +112,22 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                         close={close}
                     />
                     {!scrolling && (
-                        <div className={NavResponsiveCss.smallSecondBar}>
-                            <NavList
-                                opened={opened}
-                                close={close}
-                                onHamburgerClick={onHamburgerClick}
-                            />
+                        <div
+                            ref={slidingNavListParent}
+                            className={NavResponsiveCss.smallSecondBar}
+                        >
+                            <div
+                                ref={slidingNavList}
+                                onDragStart={() => false}
+                                onPointerDown={slidingDragNDropFunc}
+                                className={NavResponsiveCss.slidingNavList}
+                            >
+                                <NavList
+                                    opened={opened}
+                                    close={close}
+                                    onHamburgerClick={onHamburgerClick}
+                                />
+                            </div>
                         </div>
                     )}
                 </div>

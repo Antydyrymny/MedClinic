@@ -11,6 +11,7 @@
     background-color: white;
     color: #545a66;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .firstBar,
@@ -63,4 +64,11 @@
 
 .smallFirstBarScrolling {
     box-shadow: 0 4px 8px 0 rgba(34, 60, 80, .2);
+}
+
+.slidingNavList {
+    touch-action: none;
+    min-width: 25rem;
+    padding-right: 1rem;
+    position: relative;
 }
