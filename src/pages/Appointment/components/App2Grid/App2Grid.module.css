@@ -17,6 +17,21 @@
     grid-auto-rows: 10rem;
 }
 
+.docWrapperNotFound,
+.specWrapperNotFound {
+    display: block;
+}
+
+.notFound {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #545a66;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
 @media (max-width: 1116px) {
     .docWrapper {
         grid-template-columns: 1fr;

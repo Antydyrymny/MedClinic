@@ -85,4 +85,16 @@ export const specialtiesFetched = [
         name: 'Oncology',
         description: 'Specializes in the diagnosis and treatment of cancer',
     },
+    {
+        id: 16,
+        name: 'Gynecology',
+        description:
+            'Specializes in the diagnosis and treatment of conditions related to the female reproductive system',
+    },
+    {
+        id: 17,
+        name: 'Andrology',
+        description:
+            'Specializes in the diagnosis and treatment of conditions related to male reproductive health',
+    },
 ];

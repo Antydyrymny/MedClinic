@@ -22,7 +22,7 @@ export function getAvailableTimesPerDocForDate({
             const targetDateBookedTimes = entry.bookedDateTime.find((dateTimeObj) => {
                 const bookedDate = dayjs(dateTimeObj.date);
                 const chosenDate = dayjs(date);
-                return bookedDate.isSame(chosenDate);
+                return bookedDate.isSame(chosenDate, 'day');
             });
             if (
                 !targetDateBookedTimes ||

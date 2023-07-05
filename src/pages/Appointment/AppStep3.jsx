@@ -25,7 +25,7 @@ function AppStep3() {
 
     // TODO fetch data
     useEffect(() => {
-        if (step3Data)
+        if (step3Data) {
             setbookedData(
                 bookedTimesFetched.filter((bookedEnrty) =>
                     step3Data.docsAvailable
@@ -33,7 +33,8 @@ function AppStep3() {
                         .includes(bookedEnrty.docId)
                 )
             );
-        setLoading(false);
+            setLoading(false);
+        }
     }, [step3Data]);
 
     return !step3Data ? null : (
