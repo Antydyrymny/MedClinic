@@ -2,7 +2,7 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { ThemeProvider } from '@emotion/react';
-import { calendarTheme } from 'src/assets/calendarTheme';
+// import { calendarTheme } from 'src/assets/calendarTheme';
 import DoctorTimeList from '../DoctorTimesList/DoctorTimeList';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
@@ -69,23 +69,23 @@ function SpecStep3({ step3Data, bookedData, appParamsData }) {
                     <div className={SpecStep3Css.date}>
                         <h4 className={SpecStep3Css.heading}>Choose appointment date</h4>
                         <div className={SpecStep3Css.datepicker}>
-                            <ThemeProvider theme={calendarTheme}>
-                                <DateCalendar
-                                    value={appParams.date ? dayjs(appParams.date) : null}
-                                    onChange={(newDate) => {
-                                        setAppParams({
-                                            ...appParams,
-                                            date: dayjs(newDate).toString(),
-                                        });
-                                    }}
-                                    shouldDisableDate={getShouldDisableDateFunc({
-                                        bookedData,
-                                        doctors: docsAvailable,
-                                        onlineAppointment: appParams.onlineAppointment,
-                                        clinicsPicked,
-                                    })}
-                                />
-                            </ThemeProvider>
+                            {/* <ThemeProvider theme={calendarTheme}> */}
+                            <DateCalendar
+                                value={appParams.date ? dayjs(appParams.date) : null}
+                                onChange={(newDate) => {
+                                    setAppParams({
+                                        ...appParams,
+                                        date: dayjs(newDate).toString(),
+                                    });
+                                }}
+                                shouldDisableDate={getShouldDisableDateFunc({
+                                    bookedData,
+                                    doctors: docsAvailable,
+                                    onlineAppointment: appParams.onlineAppointment,
+                                    clinicsPicked,
+                                })}
+                            />
+                            {/* </ThemeProvider> */}
                         </div>
                     </div>
                 </div>
