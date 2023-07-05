@@ -108,6 +108,7 @@ function AppStep1() {
         setAppParams({
             ...appParams,
             doctorId: docExpanded.id,
+            specialityId: docExpanded.speciality[0].id,
             step3Format: 'Doctor',
         });
         navigate('/app/step3', {

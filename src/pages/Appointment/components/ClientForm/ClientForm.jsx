@@ -80,7 +80,7 @@ function ClientForm({ clientData, termsAcceptedData }) {
                     <Textarea
                         value={client.comment}
                         placeholder={
-                            'Describe yourPlease describe what is troubling you, your symptoms, or the purpose of your visit*'
+                            'Please describe what is troubling you, your symptoms, or the purpose of your visit*'
                         }
                         onChange={onChange('comment')}
                         rows={5}
