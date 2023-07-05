@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import useGetDragNDropHandler from '../../../hooks/useGetDragNDropHandler';
-import Logo from '../Logo/Logo';
+import Logo from 'src/pages/NavigationBar/Logo/Logo';
 import SmallLogo from '../Logo/SmallLogo';
 import NavList from '../NavList/NavList';
 import NavDropDown from '../NavDropDown/NavDropDown';
