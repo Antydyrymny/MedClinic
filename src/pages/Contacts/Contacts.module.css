@@ -19,6 +19,10 @@
     display: none;
 }
 
+.map {
+    min-height: 43vh;
+}
+
 @media (max-width: 1000px) {
     .wrapper {
         padding-top: 2rem;
@@ -39,11 +43,16 @@
 
     .map {
         margin-bottom: 2rem;
+        min-height: 35vh;
     }
 }
 
 @media (max-width: 600px) {
     .dropDown {
         margin: 0 1rem 9.5rem 1rem;
+    }
+
+    .map {
+        min-height: 20vh;
     }
 }
