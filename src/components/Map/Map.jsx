@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
+import mapMarker64px from 'src/assets/Pictogram/mapMarker64px.png';
+import mapMarker48px from 'src/assets/Pictogram/mapMarker48px.png';
 import MapCss from './Map.module.css';
 
 function Map({
@@ -57,10 +59,7 @@ function Map({
                     onClick={handleMarkerClick(location)}
                     title={location.name}
                     icon={{
-                        url:
-                            chosen?.id === location.id
-                                ? 'src/assets/Pictogram/mapMarker64px.png'
-                                : 'src/assets/Pictogram/mapMarker48px.png',
+                        url: chosen?.id === location.id ? mapMarker64px : mapMarker48px,
                     }}
                 />
             ))}

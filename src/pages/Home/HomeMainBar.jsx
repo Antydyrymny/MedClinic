@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import ScrollDownArrow from '../../components/ScrollDownArrow/ScrollDownArrow';
 import Button from '../../components/Button/Button';
+import mainPageImg from 'src/assets/Images/MainPageImg.png';
 import HomeCss from './HomeMainBar.module.css';
 
 function HomeMainBar() {
@@ -8,7 +9,7 @@ function HomeMainBar() {
         <section
             className={HomeCss.mainBar}
             style={{
-                backgroundImage: 'url(/src/assets/Images/MainPageImg.png)',
+                backgroundImage: `url(${mainPageImg})`,
             }}
         >
             <div className={HomeCss.mainBarContent}>

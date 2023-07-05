@@ -1,3 +1,4 @@
+import whatsapp32px from 'src/assets/Pictogram/whatsapp32px.png';
 import ContactInfoCss from './ContactInfo.module.css';
 
 function ContactInfo({ clinic }) {
@@ -22,10 +23,7 @@ function ContactInfo({ clinic }) {
                     className={ContactInfoCss.link}
                     href={`whatsapp://send?phone=${clinic.telephone}/`}
                 >
-                    <img
-                        src={'src/assets/Pictogram/whatsapp32px.png'}
-                        alt={'contact via whatsapp'}
-                    />
+                    <img src={whatsapp32px} alt={'contact via whatsapp'} />
                 </a>
             </div>
             <div className={ContactInfoCss.block}>

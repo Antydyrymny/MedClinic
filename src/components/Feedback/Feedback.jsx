@@ -5,6 +5,7 @@ import Textarea from '../Textarea/Textarea';
 import Checkbox from '../Checkbox/Checkbox';
 import Button from '../Button/Button';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
+import close20px from 'src/assets/Pictogram/close20px.png';
 import IMask from 'imask';
 import { validateClientData } from 'src/utils/ValidateClientData';
 import FeedbackCss from './Feedback.module.css';
@@ -40,7 +41,7 @@ function Feedback({
                     closeModal();
                 }}
             >
-                <img src={'/src/assets/Pictogram/close20px.png'} alt={'close'} />
+                <img src={close20px} alt={'close'} />
             </div>
             {isSent ? (
                 <FeedbackSuccess message={onSuccessMessage} />

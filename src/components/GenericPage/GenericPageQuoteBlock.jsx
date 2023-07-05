@@ -1,3 +1,5 @@
+import quotePng from 'src/assets/Pictogram/quote.png';
+import headDoctorSignaturePng from 'src/assets/Images/headDoctorSignature.png';
 import QuoteBlockCss from './GenericPageQuoteBlock.module.css';
 
 function GenericPageQuoteBlock({ quoteText, backgroundImg = true }) {
@@ -8,11 +10,7 @@ function GenericPageQuoteBlock({ quoteText, backgroundImg = true }) {
             }`}
         >
             <div className={QuoteBlockCss.quote}>
-                <img
-                    src={'src/assets/Pictogram/quote.png'}
-                    alt={'quote'}
-                    className={QuoteBlockCss.quoteImg}
-                />
+                <img src={quotePng} alt={'quote'} className={QuoteBlockCss.quoteImg} />
                 <div className={QuoteBlockCss.quoteText}>{quoteText}</div>
                 <div className={QuoteBlockCss.signatureBlock}>
                     <div className={QuoteBlockCss.signatureCredentials}>
@@ -22,7 +20,7 @@ function GenericPageQuoteBlock({ quoteText, backgroundImg = true }) {
                         </div>
                     </div>
                     <img
-                        src={'src/assets/Images/headDoctorSignature.png'}
+                        src={headDoctorSignaturePng}
                         alt={'signature'}
                         className={QuoteBlockCss.signatureImg}
                     />

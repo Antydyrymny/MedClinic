@@ -14,6 +14,7 @@ import DoctorGalleryItem from './components/DoctorGalleryItem';
 import { expandDoctors } from 'src/utils/ExpandDoctors';
 import { filterDoctors } from 'src/utils/FilterDoctors';
 import ModalFilter from './components/ModalFilter';
+import doctorsBackground from 'src/assets/Images/DoctorsBackground.svg';
 import DoctorsCss from './Doctors.module.css';
 
 function Doctors() {
@@ -46,8 +47,7 @@ function Doctors() {
         <div
             className={DoctorsCss.wrapper}
             style={{
-                background:
-                    'url(src/assets/Images/DoctorsBackground.svg) 100% 0/30% no-repeat',
+                background: `url(${doctorsBackground}) 100% 0/30% no-repeat`,
             }}
         >
             <div className={DoctorsCss.content}>

@@ -3,6 +3,7 @@ import InstagramSvg from 'src/assets/Pictogram/InstagramSvg';
 import TelegramSvg from 'src/assets/Pictogram/TelegramSvg';
 import GithubSvg from '../../../assets/Pictogram/GithubSvg';
 import LinkedInSvg from '../../../assets/Pictogram/LinkedInSvg';
+import leetcode24px from '/src/assets/Pictogram/LeetcodeIcon24px.png';
 import SocialMediaCss from './SocialMedia.module.css';
 
 function SocialMedia({
@@ -78,10 +79,7 @@ function SocialMedia({
                             rel='noreferrer'
                             className={SocialMediaCss.link}
                         >
-                            <img
-                                src='/src/assets/Pictogram/LeetcodeIcon24px.png'
-                                alt='leetcode icon'
-                            />
+                            <img src={leetcode24px} alt='leetcode icon' />
                         </a>
                     </>
                 )}

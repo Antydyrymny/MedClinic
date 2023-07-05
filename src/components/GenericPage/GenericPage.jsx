@@ -1,6 +1,9 @@
 import { useState, useContext } from 'react';
-import { WindowWidth, WindowHeight } from '../../context/WindowDimensionsContext';
+import { WindowWidth } from '../../context/WindowDimensionsContext';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
+import mainIntroMP4 from 'src/assets/video/mainIntro.mp4';
+// import mainIntroOGV from 'src/assets/video/mainIntro.ogv';
+import aboutPoster from 'src/assets/images/about.png';
 import ModalFeedbackForm from '../Modal/ModalFeedbackForm';
 import Button from '../Button/Button';
 import ScrollDownArrow from '../ScrollDownArrow/ScrollDownArrow';
@@ -25,8 +28,6 @@ function GenericPage({
 }) {
     const [loading, setLoading] = useState(true);
     const screenWidth = useContext(WindowWidth);
-    const screenHeight = useContext(WindowHeight);
-    console.log(screenHeight);
 
     return (
         <>
@@ -39,18 +40,15 @@ function GenericPage({
                             autoPlay={true}
                             loop={true}
                             muted={true}
-                            poster={'src/assets/images/about.png'}
+                            poster={aboutPoster}
                             onLoad={() => setLoading(false)}
                         >
-                            <source src={'src/assets/video/mainIntro.mp4'} />
-                            <source
-                                src={'src/assets/video/mainIntro.ogv'}
-                                type={'video/ogv'}
-                            />
+                            <source src={mainIntroMP4} />
+                            {/* <source src={mainIntroOGV} type={'video/ogv'} /> */}
                         </video>
                         <img
                             className={PageCss.img}
-                            src={'src/assets/images/about.png'}
+                            src={aboutPoster}
                             alt={'main theme'}
                             onLoad={() => setLoading(false)}
                         />

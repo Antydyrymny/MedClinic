@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import FilterSvg from '../../../assets/Pictogram/FilterSvg';
 import Button from '../../../components/Button/Button';
 import Modal from '../../../components/Modal/Modal';
+import close20px from '/src/assets/Pictogram/close20px.png';
 import DoctorFilter from './DoctorFilter';
 import ClearButtonCss from './ModalClearButton.module.css';
 import ModalFilterCss from './ModalFilter.module.css';
@@ -31,10 +32,7 @@ function ModalFilter({
                             className={ModalFilterCss.closeButton}
                             onClick={() => modalRef.current.close()}
                         >
-                            <img
-                                src={'/src/assets/Pictogram/close20px.png'}
-                                alt={'close'}
-                            />
+                            <img src={close20px} alt={'close'} />
                         </div>
                         <div className={ModalFilterCss.clearButton}>
                             <Button
