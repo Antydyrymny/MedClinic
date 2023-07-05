@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { WindowWidth } from '../../context/WindowDimensionsContext';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
-import mainIntroMP4 from 'src/assets/video/mainIntro.mp4';
+// import mainIntroMP4 from 'src/assets/video/mainIntro.mp4';
 // import mainIntroOGV from 'src/assets/video/mainIntro.ogv';
 import aboutPoster from 'src/assets/images/about.png';
 import ModalFeedbackForm from '../Modal/ModalFeedbackForm';
@@ -43,7 +43,7 @@ function GenericPage({
                             poster={aboutPoster}
                             onLoad={() => setLoading(false)}
                         >
-                            <source src={mainIntroMP4} />
+                            {/* <source src={mainIntroMP4} /> */}
                             {/* <source src={mainIntroOGV} type={'video/ogv'} /> */}
                         </video>
                         <img
