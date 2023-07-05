@@ -1,8 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { doctorsKey, clinicsKey, specialitiesKey } from '../../data/SessionStorageKeys';
-import { expandDoctors } from '../../utils/expandDoctors';
+import { expandDoctors } from 'src/utils/expandDoctors';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import { clearAppData } from 'src/utils/clearAppData';
 import ToggleSwitch from 'src/components/ToggleSwitch/ToggleSwitch';
