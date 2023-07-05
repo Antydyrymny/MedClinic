@@ -30,30 +30,31 @@ function App() {
     );
 
     return (
-        <>
-            <Routes>
-                <Route path='/' element={<MainLayout />}>
-                    <Route index element={<Home />} />
-                    <Route path='/doctors' element={<DoctorsContext />}>
-                        <Route index element={<Doctors />} />
-                        <Route path=':name' element={<DoctorPage />} />
-                    </Route>
-                    <Route path='/services' element={<Services />} />
-                    <Route path='/about' element={<About />} />
-                    <Route path='/contacts' element={<Contacts />} />
-                    <Route path='/for_business' element={<Business />} />
-                    <Route path='/partners' element={<Partners />} />
-                    <Route path='*' element={<NotFound />} />
-                </Route>
-                <Route element={<AppointmentLayout />}>
-                    <Route path='/app/step1' element={<AppStep1 />} />
-                    <Route path='/app/step2' element={<AppStep2 />} />
-                    <Route path='/app/step3' element={<AppStep3 />} />
-                    <Route path='/app/step4' element={<AppStep4 />} />
-                    <Route path='/app/*' element={<Navigate to='/app/step1' replace />} />
-                </Route>
-            </Routes>
-        </>
+        <div>test</div>
+        // <>
+        //     <Routes>
+        //         <Route path='/' element={<MainLayout />}>
+        //             <Route index element={<Home />} />
+        //             <Route path='/doctors' element={<DoctorsContext />}>
+        //                 <Route index element={<Doctors />} />
+        //                 <Route path=':name' element={<DoctorPage />} />
+        //             </Route>
+        //             <Route path='/services' element={<Services />} />
+        //             <Route path='/about' element={<About />} />
+        //             <Route path='/contacts' element={<Contacts />} />
+        //             <Route path='/for_business' element={<Business />} />
+        //             <Route path='/partners' element={<Partners />} />
+        //             <Route path='*' element={<NotFound />} />
+        //         </Route>
+        //         <Route element={<AppointmentLayout />}>
+        //             <Route path='/app/step1' element={<AppStep1 />} />
+        //             <Route path='/app/step2' element={<AppStep2 />} />
+        //             <Route path='/app/step3' element={<AppStep3 />} />
+        //             <Route path='/app/step4' element={<AppStep4 />} />
+        //             <Route path='/app/*' element={<Navigate to='/app/step1' replace />} />
+        //         </Route>
+        //     </Routes>
+        // </>
     );
 }
 
