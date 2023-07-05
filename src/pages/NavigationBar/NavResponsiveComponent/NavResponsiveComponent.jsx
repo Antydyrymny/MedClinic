@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import useGetDragNDropHandler from '../../../hooks/useGetDragNDropHandler';
 import Logo from 'src/pages/NavigationBar/Logo/Logo';
-import SmallLogo from '../Logo/SmallLogo';
+import SmallLogo from 'src/pages/NavigationBar/Logo/SmallLogo';
 import NavList from '../NavList/NavList';
 import NavDropDown from '../NavDropDown/NavDropDown';
 import ModalFeedbackForm from '../../../components/Modal/ModalFeedbackForm';
