@@ -1,4 +1,4 @@
-import { getAvailableTimesPerDocForDate } from './GetAvailableTimesPerDocForDate';
+import { getAvailableTimesPerDocForDate } from './getAvailableTimesPerDocForDate';
 
 export function onOnlineChange(appParams, setAppParams) {
     return (tabName) =>

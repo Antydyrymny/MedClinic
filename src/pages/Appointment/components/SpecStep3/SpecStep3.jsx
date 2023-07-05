@@ -6,10 +6,10 @@ import { ThemeProvider } from '@emotion/react';
 import DoctorTimeList from '../DoctorTimesList/DoctorTimeList';
 import OptionSelect from 'src/components/OptionSelect/OptionSelect';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
-import { filterDoctors } from 'src/utils/FilterDoctors';
+import { filterDoctors } from 'src/utils/filterDoctors';
 import { getShouldDisableDateFunc } from 'src/utils/getShouldDisableDateFunc';
-import { getAvailableTimesPerDocForDate } from 'src/utils/GetAvailableTimesPerDocForDate';
-import { onOnlineChange, onClinicCheck } from 'src/utils/Step3Handlers';
+import { getAvailableTimesPerDocForDate } from 'src/utils/getAvailableTimesPerDocForDate';
+import { onOnlineChange, onClinicCheck } from 'src/utils/step3Handlers';
 import SpecStep3Css from './SpecStep3.module.css';
 
 function SpecStep3({ step3Data, bookedData, appParamsData }) {

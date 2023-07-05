@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import SearchBar from 'src/components/SearchBar/SearchBar';
 import CheckboxList from 'src/components/CheckboxList/CheckboxList';
-import { filterSpecialities } from 'src/utils/FilterSpecialities';
+import { filterSpecialities } from 'src/utils/filterSpecialities';
 import SmallSearchBar from './SmallSearchBar.module.css';
 
 function SpecFilter({ specialties, onChange, checkedArray, specSearchState }) {

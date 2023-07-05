@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { getAvailableTimesPerDocForDate } from './GetAvailableTimesPerDocForDate.js';
+import { getAvailableTimesPerDocForDate } from './getAvailableTimesPerDocForDate.js';
 
 export function getShouldDisableDateFunc({
     bookedData,

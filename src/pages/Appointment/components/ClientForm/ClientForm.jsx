@@ -3,7 +3,7 @@ import Textarea from 'src/components/Textarea/Textarea';
 import Checkbox from 'src/components/Checkbox/Checkbox';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
 import IMask from 'imask';
-import { validateClientData } from 'src/utils/ValidateClientData';
+import { validateClientData } from 'src/utils/validateClientData';
 import ClientFormCss from './ClientForm.module.css';
 
 function ClientForm({ clientData, termsAcceptedData }) {

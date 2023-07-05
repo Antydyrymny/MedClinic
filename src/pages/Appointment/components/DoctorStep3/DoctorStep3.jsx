@@ -9,8 +9,8 @@ import TimeList from '../TimeList/TimeList';
 import DropDown from 'src/components/DropDown/DropDown';
 import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescription';
 import { getShouldDisableDateFunc } from 'src/utils/getShouldDisableDateFunc';
-import { getAvailableTimesPerDocForDate } from 'src/utils/GetAvailableTimesPerDocForDate';
-import { onOnlineChange, onClinicCheck } from 'src/utils/Step3Handlers';
+import { getAvailableTimesPerDocForDate } from 'src/utils/getAvailableTimesPerDocForDate';
+import { onOnlineChange, onClinicCheck } from 'src/utils/step3Handlers';
 import DoctorStep3Css from './DoctorStep3.module.css';
 
 function DoctorStep3({ step3Data, bookedData, appParamsData }) {

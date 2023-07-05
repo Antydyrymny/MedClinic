@@ -6,7 +6,7 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
-import { expandDoctors } from 'src/utils/ExpandDoctors';
+import { expandDoctors } from 'src/utils/expandDoctors';
 import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescription';
 import AppSummaryCss from './AppSummary.module.css';
 

@@ -14,10 +14,10 @@ import HomeButton from './components/HomeButton/HomeButton';
 import { doctorsFetched } from 'src/data/Doctors';
 import { specialtiesFetched } from 'src/data/Specialties';
 import { clinicsFetched } from 'src/data/Clinics';
-import { expandDoctors } from 'src/utils/ExpandDoctors';
-import { filterDoctors } from 'src/utils/FilterDoctors';
-import { filterSpecialities } from 'src/utils/FilterSpecialities';
-import { clearAppData } from 'src/utils/ClearAppData';
+import { expandDoctors } from 'src/utils/expandDoctors';
+import { filterDoctors } from 'src/utils/filterDoctors';
+import { filterSpecialities } from 'src/utils/filterSpecialities';
+import { clearAppData } from 'src/utils/clearAppData';
 import AppStep2Css from './AppStep2.module.css';
 
 function AppStep2() {

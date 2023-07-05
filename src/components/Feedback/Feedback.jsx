@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
 import close20px from 'src/assets/Pictogram/close20px.png';
 import IMask from 'imask';
-import { validateClientData } from 'src/utils/ValidateClientData';
+import { validateClientData } from 'src/utils/validateClientData';
 import FeedbackCss from './Feedback.module.css';
 
 function Feedback({

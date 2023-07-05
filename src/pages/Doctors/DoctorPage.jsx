@@ -8,7 +8,7 @@ import { LoadingContext } from 'src/context/LoadingContext';
 import useRedirect from 'src/hooks/useRedirect';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
-import { expandDoctors } from '../../utils/ExpandDoctors';
+import { expandDoctors } from '../../utils/expandDoctors';
 import DoctorTitleBlock from './components/DoctorTitleBlock';
 import DoctorAboutBlock from './components/DoctorAboutBlock';
 import DocCss from './DoctorPage.module.css';

@@ -4,7 +4,7 @@ import ClientForm from './components/ClientForm/ClientForm';
 import Button from '../../components/Button/Button';
 import BackButton from './components/BackButton/BackButton';
 import HomeButton from './components/HomeButton/HomeButton';
-import { validateClientData } from 'src/utils/ValidateClientData';
+import { validateClientData } from 'src/utils/validateClientData';
 import AppStep4Css from './AppStep4.module.css';
 
 const clientSchema = {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { addDragNDrop } from '../utils/DragNDrop';
+import { addDragNDrop } from '../utils/dragNDrop';
 
 export default function useGetDragNDropHandler(sliderRef, containerRef) {
     const [slidingDragNDropFunc, setSlidingDragNDropFunc] = useState(null);
