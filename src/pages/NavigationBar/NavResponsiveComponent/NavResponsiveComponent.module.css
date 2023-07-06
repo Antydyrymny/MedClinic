@@ -68,7 +68,7 @@
 
 .slidingNavList {
     touch-action: none;
-    min-width: 25rem;
+    min-width: 26rem;
     padding-right: 1rem;
     position: relative;
 }
