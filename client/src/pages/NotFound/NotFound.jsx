@@ -19,7 +19,7 @@ function NotFound() {
                 </h3>
                 <div
                     onClick={() =>
-                        fetch(serverURL + '/api/getDocs')
+                        fetch(serverURL + 'api/getDocs')
                             .then((response) => response.json())
                             .then((data) => {
                                 // Handle the response data
