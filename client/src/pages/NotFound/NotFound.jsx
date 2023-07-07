@@ -15,6 +15,22 @@ function NotFound() {
                     <br />
                     We can't find the page
                 </h3>
+                <div
+                    onClick={() =>
+                        fetch('https://test-express-antydyrymny.vercel.app/')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                // Handle the response data
+                                console.log(data);
+                            })
+                            .catch((error) => {
+                                // Handle any errors
+                                console.error('Error:', error);
+                            })
+                    }
+                >
+                    server test
+                </div>
                 <div className={NotFoundCss.info}>
                     Please, try to start from the{' '}
                     <Link to={'/'} className={NotFoundCss.link}>
