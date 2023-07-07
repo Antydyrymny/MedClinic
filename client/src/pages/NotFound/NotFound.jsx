@@ -3,6 +3,8 @@ import NotFoundPng from 'src/assets/Images/NotFound404.png';
 import NotFoundCss from './NotFound.module.css';
 
 function NotFound() {
+    const serverURL = import.meta.env.VITE_SERVER_URL;
+
     return (
         <div className={NotFoundCss.wrapper}>
             <div
@@ -17,7 +19,7 @@ function NotFound() {
                 </h3>
                 <div
                     onClick={() =>
-                        fetch('https://test-express-antydyrymny.vercel.app/')
+                        fetch(serverURL + '/api/getDocs')
                             .then((response) => response.json())
                             .then((data) => {
                                 // Handle the response data
