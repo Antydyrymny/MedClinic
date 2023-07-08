@@ -5,6 +5,7 @@ import {
     ClinicsContext,
 } from 'src/context/FetchDataContext';
 import { LoadingContext } from 'src/context/LoadingContext';
+import { ErrorWhileLoadingContext } from '../../context/ErrorWhileLoadingContext';
 import useRedirect from 'src/hooks/useRedirect';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
@@ -15,6 +16,7 @@ import DocCss from './DoctorPage.module.css';
 
 function DoctorPage() {
     const loading = useContext(LoadingContext);
+    const errorWhileLoading = useContext(ErrorWhileLoadingContext);
     const doctors = useContext(DoctorsAllContext);
     const specialties = useContext(SpecialitiesContext);
     const clinics = useContext(ClinicsContext);
@@ -28,6 +30,8 @@ function DoctorPage() {
 
     return loading ? (
         <LoadingSpinner />
+    ) : errorWhileLoading ? (
+        <div>{`Error while loading data: ${errorWhileLoading}`}</div>
     ) : (
         <section className={DocCss.wrapper}>
             <div className={DocCss.titleBlock}>

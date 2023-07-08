@@ -6,6 +6,7 @@ import {
     ClinicsContext,
 } from 'src/context/FetchDataContext';
 import { LoadingContext } from 'src/context/LoadingContext';
+import { ErrorWhileLoadingContext } from '../../context/ErrorWhileLoadingContext';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
 import SearchBar from 'src/components/SearchBar/SearchBar';
 import Button from 'src/components/Button/Button';
@@ -20,6 +21,7 @@ import DoctorsCss from './Doctors.module.css';
 function Doctors() {
     const [searchParams, setSearchParams] = useContext(DocSearchContext);
     const loading = useContext(LoadingContext);
+    const errorWhileLoading = useContext(ErrorWhileLoadingContext);
     const doctors = useContext(DoctorsAllContext);
     const specialties = useContext(SpecialitiesContext);
     const clinics = useContext(ClinicsContext);
@@ -54,6 +56,8 @@ function Doctors() {
                 <h1 className={DoctorsCss.heading}>Doctors</h1>
                 {loading ? (
                     <LoadingSpinner />
+                ) : errorWhileLoading ? (
+                    <div>{`Error while loading data: ${errorWhileLoading}`}</div>
                 ) : (
                     <>
                         <div className={DoctorsCss.searchBarBlock}>

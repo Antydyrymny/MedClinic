@@ -24,22 +24,25 @@ export default function useLoadDocClinicSpec({
 
                 setDoctors(result.doctors);
                 setClinics(result.clinics);
-                setSpecialties(result.specialities);
+                setSpecialties(result.specialties);
                 setLoading(false);
             } catch (error) {
                 setError(error);
                 setLoading(false);
             }
         }
+
         if (!doctors || !clinics || !specialties) fetchData();
-    }, [
-        doctors,
-        setDoctors,
-        clinics,
-        setClinics,
-        specialties,
-        setSpecialties,
-        setLoading,
-        setError,
-    ]);
+    }, []);
 }
+
+// [
+//     doctors,
+//     setDoctors,
+//     clinics,
+//     setClinics,
+//     specialties,
+//     setSpecialties,
+//     setLoading,
+//     setError,
+// ];

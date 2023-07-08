@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import useLoadDocClinicSpec from '../../hooks/useLoadDocClinicSpec';
 import { Outlet } from 'react-router-dom';
 import { DocSearchContext } from 'src/context/DocSearchContext';
-import { doctorsFetched } from 'src/data/Doctors';
-import { specialtiesFetched } from 'src/data/Specialties';
-import { clinicsFetched } from 'src/data/Clinics';
 import {
     DoctorsAllContext,
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
 import { LoadingContext } from 'src/context/LoadingContext';
+import { ErrorWhileLoadingContext } from '../../context/ErrorWhileLoadingContext';
 import { doctorsKey, specialitiesKey, clinicsKey } from 'src/data/SessionStorageKeys';
 import useSessionStorageState from 'src/hooks/useSessionStorageState';
 
@@ -24,45 +23,34 @@ const doctorFilterSchema = {
 function DoctorsContext() {
     const [searchParams, setSearchParams] = useState(doctorFilterSchema);
     const [loading, setLoading] = useState(true);
+    const [errorWhileLoading, setErrorWhileLoading] = useState(null);
     const [doctors, setDoctors] = useSessionStorageState(doctorsKey, null);
     const [specialties, setSpecialties] = useSessionStorageState(specialitiesKey, null);
     const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
-    // TODO fetch data
-    useEffect(() => {
-        if (!doctors)
-            setDoctors(
-                doctorsFetched.slice().sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else return -1;
-                })
-            );
-        if (!specialties)
-            setSpecialties(
-                specialtiesFetched.slice().sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else return -1;
-                })
-            );
-        if (!clinics)
-            setClinics(
-                clinicsFetched.slice().sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else return -1;
-                })
-            );
-        setLoading(false);
-    }, [clinics, doctors, setClinics, setDoctors, setSpecialties, specialties]);
+
+    useLoadDocClinicSpec({
+        doctors,
+        setDoctors,
+        clinics,
+        setClinics,
+        specialties,
+        setSpecialties,
+        setLoading,
+        setError: setErrorWhileLoading,
+    });
 
     return (
         <DocSearchContext.Provider value={[searchParams, setSearchParams]}>
             <LoadingContext.Provider value={loading}>
-                <DoctorsAllContext.Provider value={doctors}>
-                    <SpecialitiesContext.Provider value={specialties}>
-                        <ClinicsContext.Provider value={clinics}>
-                            <Outlet />
-                        </ClinicsContext.Provider>
-                    </SpecialitiesContext.Provider>
-                </DoctorsAllContext.Provider>
+                <ErrorWhileLoadingContext.Provider value={errorWhileLoading}>
+                    <DoctorsAllContext.Provider value={doctors}>
+                        <SpecialitiesContext.Provider value={specialties}>
+                            <ClinicsContext.Provider value={clinics}>
+                                <Outlet />
+                            </ClinicsContext.Provider>
+                        </SpecialitiesContext.Provider>
+                    </DoctorsAllContext.Provider>
+                </ErrorWhileLoadingContext.Provider>
             </LoadingContext.Provider>
         </DocSearchContext.Provider>
     );

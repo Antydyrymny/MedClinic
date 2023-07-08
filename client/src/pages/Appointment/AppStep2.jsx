@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo, useEffect } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import useLoadDocClinicSpec from '../../hooks/useLoadDocClinicSpec';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import {
@@ -12,9 +12,6 @@ import App2ParamSelect from './components/App2ParamSelect/App2ParamSelect';
 import App2Grid from './components/App2Grid/App2Grid';
 import BackButton from './components/BackButton/BackButton';
 import HomeButton from './components/HomeButton/HomeButton';
-import { doctorsFetched } from 'src/data/Doctors';
-import { specialtiesFetched } from 'src/data/Specialties';
-import { clinicsFetched } from 'src/data/Clinics';
 import { expandDoctors } from 'src/utils/expandDoctors';
 import { filterDoctors } from 'src/utils/filterDoctors';
 import { filterSpecialities } from 'src/utils/filterSpecialities';
@@ -41,32 +38,6 @@ function AppStep2() {
         setLoading,
         setError: setErrorWhileLoading,
     });
-
-    // // TODO fetch data
-    // useEffect(() => {
-    //     if (!doctors)
-    //         setDoctors(
-    //             doctorsFetched.slice().sort((a, b) => {
-    //                 if (a.name > b.name) return 1;
-    //                 else return -1;
-    //             })
-    //         );
-    //     if (!specialties)
-    //         setSpecialties(
-    //             specialtiesFetched.slice().sort((a, b) => {
-    //                 if (a.name > b.name) return 1;
-    //                 else return -1;
-    //             })
-    //         );
-    //     if (!clinics)
-    //         setClinics(
-    //             clinicsFetched.slice().sort((a, b) => {
-    //                 if (a.name > b.name) return 1;
-    //                 else return -1;
-    //             })
-    //         );
-    //     setLoading(false);
-    // }, [clinics, doctors, setClinics, setDoctors, setSpecialties, specialties]);
 
     // Calculate and memo items to show
     const openedTab = appParams.openedTab;
