@@ -3,8 +3,6 @@ import NotFoundPng from 'src/assets/Images/NotFound404.png';
 import NotFoundCss from './NotFound.module.css';
 
 function NotFound() {
-    const serverURL = import.meta.env.VITE_SERVER_URL;
-
     return (
         <div className={NotFoundCss.wrapper}>
             <div

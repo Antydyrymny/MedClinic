@@ -14,6 +14,7 @@ router.post('/', async (req, res) => {
 
         res.json({ status: 'Data saved successfully' });
     } catch (error) {
+        res.status(500).json({ error });
         if (error.message.startsWith('Duplicate')) {
             const duplicates = error.message
                 .split('Duplicate values found: ')[1]

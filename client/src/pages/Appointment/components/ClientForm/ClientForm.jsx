@@ -4,11 +4,13 @@ import Checkbox from 'src/components/Checkbox/Checkbox';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
 import IMask from 'imask';
 import { validateClientData } from 'src/utils/validateClientData';
+import dayjs from 'dayjs';
 import ClientFormCss from './ClientForm.module.css';
 
 function ClientForm({ clientData, termsAcceptedData }) {
     const [client, setClient] = clientData;
     const [termsAccepted, setTermsAccepted] = termsAcceptedData;
+    // const now = dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
 
     return (
         <div className={ClientFormCss.wrapper}>
