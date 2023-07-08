@@ -3,9 +3,9 @@
     "type": "module",
     "version": "1.0.0",
     "description": "Fullstack Clinic server",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
-        "start": "nodemon index.js",
+        "start": "nodemon src/index.js",
         "vercel-build": "echo hello"
     },
     "author": "Konstantin Danovich",
