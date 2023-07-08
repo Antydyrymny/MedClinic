@@ -1,4 +1,5 @@
 import { useState, useContext, useMemo, useEffect } from 'react';
+import useLoadDocClinicSpec from '../../hooks/useLoadDocClinicSpec';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import {
     DoctorsAllContext,
@@ -23,36 +24,50 @@ import AppStep2Css from './AppStep2.module.css';
 function AppStep2() {
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
     const [loading, setLoading] = useState(true);
+    const [errorWhileLoading, setErrorWhileLoading] = useState(null);
     const [doctors, setDoctors] = useContext(DoctorsAllContext);
     const [specialties, setSpecialties] = useContext(SpecialitiesContext);
     const [clinics, setClinics] = useContext(ClinicsContext);
     const [docSearch, setDocSearch] = useState('');
     const [specSearch, setSpecSearch] = useState('');
-    // TODO fetch data
-    useEffect(() => {
-        if (!doctors)
-            setDoctors(
-                doctorsFetched.slice().sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else return -1;
-                })
-            );
-        if (!specialties)
-            setSpecialties(
-                specialtiesFetched.slice().sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else return -1;
-                })
-            );
-        if (!clinics)
-            setClinics(
-                clinicsFetched.slice().sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    else return -1;
-                })
-            );
-        setLoading(false);
-    }, [clinics, doctors, setClinics, setDoctors, setSpecialties, specialties]);
+
+    useLoadDocClinicSpec({
+        doctors,
+        setDoctors,
+        clinics,
+        setClinics,
+        specialties,
+        setSpecialties,
+        setLoading,
+        setError: setErrorWhileLoading,
+    });
+
+    // // TODO fetch data
+    // useEffect(() => {
+    //     if (!doctors)
+    //         setDoctors(
+    //             doctorsFetched.slice().sort((a, b) => {
+    //                 if (a.name > b.name) return 1;
+    //                 else return -1;
+    //             })
+    //         );
+    //     if (!specialties)
+    //         setSpecialties(
+    //             specialtiesFetched.slice().sort((a, b) => {
+    //                 if (a.name > b.name) return 1;
+    //                 else return -1;
+    //             })
+    //         );
+    //     if (!clinics)
+    //         setClinics(
+    //             clinicsFetched.slice().sort((a, b) => {
+    //                 if (a.name > b.name) return 1;
+    //                 else return -1;
+    //             })
+    //         );
+    //     setLoading(false);
+    // }, [clinics, doctors, setClinics, setDoctors, setSpecialties, specialties]);
+
     // Calculate and memo items to show
     const openedTab = appParams.openedTab;
 
@@ -95,6 +110,8 @@ function AppStep2() {
         <div className={AppStep2Css.wrapper}>
             {loading ? (
                 <LoadingSpinner />
+            ) : errorWhileLoading ? (
+                <div>{`Error while loading data: ${errorWhileLoading}`}</div>
             ) : (
                 <>
                     <App2ParamSelect
