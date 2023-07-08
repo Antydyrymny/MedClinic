@@ -7,8 +7,8 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const doctorIds = req.query.docIds.split(',');
     const onConnection = [() => findData(BookedTime, { docId: { $in: doctorIds } })];
-    const bookedTimes = await establishConnection(onConnection);
-    res.json({ bookedTimes });
+    const data = await establishConnection(onConnection);
+    res.json({ bookedTimes: data[0] });
 });
 
 export default router;

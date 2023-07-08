@@ -6,8 +6,8 @@ import { Doctor } from '../models/initialData/doctors.js';
 const router = express.Router();
 router.get('/', async (req, res) => {
     const onConnection = [() => findData(Doctor)];
-    const doctors = await establishConnection(onConnection);
-    res.json({ doctors });
+    const data = await establishConnection(onConnection);
+    res.json({ doctors: data[0] });
 });
 
 export default router;

@@ -33,7 +33,7 @@ function MainLayout() {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    return loading ? (
+    return !clinics ? null : loading ? (
         <LoadingSpinner />
     ) : errorWhileLoading ? (
         <div>{`Error while loading data: ${errorWhileLoading}`}</div>
