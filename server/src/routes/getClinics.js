@@ -1,6 +1,6 @@
 import express from 'express';
-import establishConnection from '../../establishConnection.js';
-import findData from '../models/findData.js';
+import establishConnection from '../dbRequests/establishConnection.js';
+import findData from '../dbRequests/findData.js';
 import { Clinic } from '../models/initialData/clinics.js';
 
 const router = express.Router();

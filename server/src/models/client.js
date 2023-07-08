@@ -6,6 +6,7 @@ const clientSchema = new mongoose.Schema({
     birthday: Number,
     email: { type: String, unique: true },
     telephone: { type: String, unique: true },
+    password: String,
     bookedTimes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BookedTimes' }],
 });
 
