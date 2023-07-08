@@ -19,7 +19,7 @@ export default async function establishConnection(functionsArray) {
         console.log('Operations successful!');
         return results;
     } catch (error) {
-        console.error('Error while establishing connection:', error);
+        // console.error('Error while establishing connection:', error);
         throw new Error(error);
     } finally {
         mongoose.disconnect();

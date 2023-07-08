@@ -14,19 +14,18 @@ router.post('/', async (req, res) => {
 
         res.json({ status: 'Data saved successfully' });
     } catch (error) {
-        res.status(500).json({ error });
         if (error.message.includes('Duplicate values found')) {
             const duplicates = error.message
                 .split('Duplicate values found: ')[1]
                 .split(', ');
             if (duplicates.includes('telephone') && duplicates.includes('email')) {
-                res.status(400).json({
+                res.status(200).json({
                     error: 'Telephone number and email are already in use',
                 });
             } else if (duplicates.includes('telephone')) {
-                res.status(400).json({ error: 'Telephone number already in use' });
+                res.status(200).json({ error: 'Telephone number already in use' });
             } else if (duplicates.includes('email')) {
-                res.status(400).json({ error: 'Email already in use' });
+                res.status(200).json({ error: 'Email already in use' });
             }
         } else {
             res.status(500).json({ error });
