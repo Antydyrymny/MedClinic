@@ -1,21 +1,17 @@
 import { useEffect } from 'react';
 
-export default function useLoadDocClinicSpec({
-    doctors,
-    setDoctors,
+export default function useLoadClinics({
     clinics,
     setClinics,
-    specialties,
-    setSpecialties,
     setLoading,
     setError,
-    loadCondition = !doctors || !clinics || !specialties,
+    loadCondition = !clinics,
 }) {
     useEffect(() => {
         async function fetchData() {
             try {
                 const serverURL = import.meta.env.VITE_SERVER_URL;
-                const response = await fetch(serverURL + 'api/getDocClinicSpec');
+                const response = await fetch(serverURL + 'api/getClinics');
                 if (!response.ok) {
                     throw new Error(
                         `Error connecting to server, response status: ${response.status}`
@@ -23,20 +19,8 @@ export default function useLoadDocClinicSpec({
                 }
                 const result = await response.json();
 
-                setDoctors(
-                    result.doctors.sort((a, b) => {
-                        if (a.name > b.name) return 1;
-                        else return -1;
-                    })
-                );
                 setClinics(
                     result.clinics.sort((a, b) => {
-                        if (a.name > b.name) return 1;
-                        else return -1;
-                    })
-                );
-                setSpecialties(
-                    result.specialties.sort((a, b) => {
                         if (a.name > b.name) return 1;
                         else return -1;
                     })
@@ -53,14 +37,3 @@ export default function useLoadDocClinicSpec({
         } else setLoading(false);
     }, []);
 }
-
-// [
-//     doctors,
-//     setDoctors,
-//     clinics,
-//     setClinics,
-//     specialties,
-//     setSpecialties,
-//     setLoading,
-//     setError,
-// ];

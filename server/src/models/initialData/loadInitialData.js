@@ -14,11 +14,11 @@ async function insertData(model, data) {
     }
 }
 
-const dataToInitialize = [
-    async () => insertData(Doctor, doctors),
-    async () => insertData(Clinic, clinics),
-    async () => insertData(Specialty, specialties),
-    async () => insertData(BookedTime, bookedTimes),
-];
+// const dataToInitialize = [
+//     async () => insertData(Doctor, doctors),
+//     async () => insertData(Clinic, clinics),
+//     async () => insertData(Specialty, specialties),
+//     async () => insertData(BookedTime, bookedTimes),
+// ];
 
 // establishConnection(dataToInitialize);

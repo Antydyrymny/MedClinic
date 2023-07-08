@@ -1,7 +1,7 @@
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { clinicsFetched } from 'src/data/Clinics';
+import useLoadClinics from '../../hooks/useLoadClinics';
 import { ClinicsContext } from 'src/context/FetchDataContext';
 import {
     WindowWidth,
@@ -20,30 +20,23 @@ import Footer from '../Footer/Footer';
 
 function MainLayout() {
     const [loading, setLoading] = useState(true);
+    const [errorWhileLoading, setErrorWhileLoading] = useState(null);
     const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
     const screenWidth = useGetScreenWidth();
     const screenHeigth = useGetScreenHeight();
     const scroll = useGetScroll();
     const location = useLocation();
-    // TODO fetch data
-    useEffect(() => {
-        if (!clinics) {
-            setClinics(
-                clinicsFetched.slice().sort((a, b) => {
-                    if (a.name < b.name) return 1;
-                    else return -1;
-                })
-            );
-        }
-        setLoading(false);
-    }, [clinics, setClinics]);
+
+    useLoadClinics({ clinics, setClinics, setLoading, setError: setErrorWhileLoading });
 
     useLayoutEffect(() => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    return !clinics ? null : loading ? (
+    return loading ? (
         <LoadingSpinner />
+    ) : errorWhileLoading ? (
+        <div>{`Error while loading data: ${errorWhileLoading}`}</div>
     ) : (
         <>
             <ClinicsContext.Provider value={clinics}>

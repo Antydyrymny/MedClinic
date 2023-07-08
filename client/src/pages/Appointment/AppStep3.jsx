@@ -1,7 +1,7 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
-import { bookedTimesFetched } from 'src/data/BookedTimes';
+import useLoadBookedTimes from '../../hooks/useLoadBookedTimes';
 import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import { appointmentStep3State } from 'src/data/SessionStorageKeys';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
@@ -14,6 +14,7 @@ import AppStep3Css from './AppStep3.module.css';
 function AppStep3() {
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
     const [loading, setLoading] = useState(true);
+    const [errorWhileLoading, setErrorWhileLoading] = useState(null);
     const [bookedData, setbookedData] = useState(null);
     const location = useLocation();
     const step3Data = useSessionStorageState(
@@ -22,25 +23,22 @@ function AppStep3() {
         location.state
     )[0];
     const showDoctorsPage = appParams.step3Format === 'Doctor';
+    const doctorIds = step3Data?.docsAvailable?.map((doc) => doc.id).join(',');
 
-    // TODO fetch data
-    useEffect(() => {
-        if (step3Data) {
-            setbookedData(
-                bookedTimesFetched.filter((bookedEnrty) =>
-                    step3Data.docsAvailable
-                        .map((doc) => doc.id)
-                        .includes(bookedEnrty.docId)
-                )
-            );
-            setLoading(false);
-        }
-    }, [step3Data]);
+    useLoadBookedTimes({
+        bookedTimes: bookedData,
+        setBookedTimes: setbookedData,
+        doctorIds,
+        setLoading,
+        setError: setErrorWhileLoading,
+    });
 
-    return !step3Data ? null : (
+    return (
         <div className={AppStep3Css.wrapper}>
             {loading ? (
                 <LoadingSpinner />
+            ) : errorWhileLoading ? (
+                <div>{`Error while loading data: ${errorWhileLoading}`}</div>
             ) : (
                 <>
                     {showDoctorsPage ? (

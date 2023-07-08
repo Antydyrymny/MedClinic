@@ -5,7 +5,8 @@ import { BookedTime } from '../models/initialData/bookedTimes.js';
 
 const router = express.Router();
 router.get('/', async (req, res) => {
-    const onConnection = [() => findData(BookedTime)];
+    const doctorIds = req.query.docIds.split(',');
+    const onConnection = [() => findData(BookedTime, { docId: { $in: doctorIds } })];
     const bookedTimes = await establishConnection(onConnection);
     res.json({ bookedTimes });
 });

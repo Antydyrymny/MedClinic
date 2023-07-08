@@ -33,7 +33,10 @@ export function getAvailableTimesPerDocForDate({
                 newAvailableTimesEntry.times = !targetDateBookedTimes
                     ? correspondingDoc.timeSchedule
                     : correspondingDoc.timeSchedule.filter(
-                          (timeSlot) => !targetDateBookedTimes.times.includes(timeSlot)
+                          (timeSlot) =>
+                              !targetDateBookedTimes.times
+                                  .map((appointment) => appointment.time)
+                                  .includes(timeSlot)
                       );
                 if (!onlineAppointment) {
                     newAvailableTimesEntry.clinic = clinicsPicked.find(
