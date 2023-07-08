@@ -5,10 +5,14 @@ import { BookedTime } from '../models/initialData/bookedTimes.js';
 
 const router = express.Router();
 router.get('/', async (req, res) => {
-    const doctorIds = req.query.docIds.split(',');
-    const onConnection = [() => findData(BookedTime, { docId: { $in: doctorIds } })];
-    const data = await establishConnection(onConnection);
-    res.json({ bookedTimes: data[0] });
+    try {
+        const doctorIds = req.query.docIds.split(',');
+        const onConnection = [() => findData(BookedTime, { docId: { $in: doctorIds } })];
+        const data = await establishConnection(onConnection);
+        res.status(200).json({ bookedTimes: data[0] });
+    } catch (error) {
+        res.status(500).json({ error });
+    }
 });
 
 export default router;

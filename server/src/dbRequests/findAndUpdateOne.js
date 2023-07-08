@@ -1,10 +1,11 @@
-export default async function findAndUpdateOne(model, id, rule) {
+export default async function findAndUpdateOne(Model, id, rule) {
     try {
-        const result = await model.findOneAndUpdate({ id }, rule, { new: true });
+        const result = await Model.findOneAndUpdate({ id }, rule, { new: true });
         console.log('Update successfull!');
         return result;
     } catch (error) {
         console.error('Error updating data:', error);
+        throw new Error(error);
     }
 }
 
