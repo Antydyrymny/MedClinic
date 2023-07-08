@@ -32,7 +32,9 @@ export default function useLoadDocClinicSpec({
             }
         }
 
-        if (!doctors || !clinics || !specialties) fetchData();
+        if (!doctors || !clinics || !specialties) {
+            fetchData();
+        } else setLoading(false);
     }, []);
 }
 
