@@ -20,31 +20,37 @@ router.post('/', async (req, res) => {
 
         if (!clientWithEmail) {
             res.status(401).json({ message: 'Email or password does not match' });
-        }
-
-        if (clientWithEmail.password !== password) {
+        } else if (clientWithEmail.password !== password) {
             res.status(401).json({ message: 'Email or password does not match' });
-        }
-
-        const jwtToken = jwt.sign(
-            {
-                id: clientWithEmail._id,
+        } else {
+            const jwtToken = jwt.sign(
+                {
+                    id: clientWithEmail._id,
+                    email: clientWithEmail.email,
+                },
+                process.env.JWT_SECRET
+            );
+            res.status(200).json({
+                message: 'Login successful',
+                token: jwtToken,
+                name: clientWithEmail.name,
+                surname: clientWithEmail.surname,
+                birthday: clientWithEmail.birthday,
                 email: clientWithEmail.email,
-            },
-            process.env.JWT_SECRET
-        );
-        res.status(200).json({
-            message: 'Login successful',
-            token: jwtToken,
-            name: clientWithEmail.name,
-            surname: clientWithEmail.surname,
-            birthday: clientWithEmail.birthday,
-            email: clientWithEmail.email,
-            telephone: clientWithEmail.telephone,
-        });
+                telephone: clientWithEmail.telephone,
+            });
+        }
     } catch (error) {
         res.status(500).json({ error });
     }
 });
 
 export default router;
+
+// const onConnection = [() => findData(Client, { email: 'IamHome@yourhome.boom1' }, true)];
+// try {
+//     const [clientWithEmail] = await establishConnection(onConnection);
+//     console.log(clientWithEmail);
+// } catch (error) {
+//     console.log(error);
+// }
