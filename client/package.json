@@ -17,6 +17,7 @@
         "dayjs": "^1.11.7",
         "imask": "^6.6.1",
         "react": "^18.2.0",
+        "react-auth-kit": "^2.12.3",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.10.0",
         "react-scroll": "^1.8.9",

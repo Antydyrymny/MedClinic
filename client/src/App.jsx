@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { RequireAuth } from 'react-auth-kit';
 import useClearSessionStorageOnURLMove from './hooks/useClearSessionStorageOnURLMove ';
 import './App.css';
 import MainLayout from './pages/MainLayout/MainLayout';
@@ -21,6 +22,8 @@ import About from './pages/About/About';
 import Contacts from './pages/Contacts/Contacts';
 import Business from './pages/Business/Business';
 import Partners from './pages/Partners/Partners';
+import MyProfile from './pages/MyProfile/MyProfile';
+import Login from './pages/Login/Login';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
@@ -45,6 +48,15 @@ function App() {
                     <Route path='/partners' element={<Partners />} />
                     <Route path='*' element={<NotFound />} />
                 </Route>
+                <Route path='/login' element={<Login />} />
+                <Route
+                    path={'/myProfile/*'}
+                    element={
+                        <RequireAuth loginPath={'/login'}>
+                            <MyProfile />
+                        </RequireAuth>
+                    }
+                />
                 <Route element={<AppointmentLayout />}>
                     <Route path='/app/step1' element={<AppStep1 />} />
                     <Route path='/app/step2' element={<AppStep2 />} />
