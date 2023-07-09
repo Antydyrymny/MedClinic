@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import { notFound, errorHandler } from './middleware.js';
 import mainRouter from './routes/mainRouter.js';
+import './routes/auth/auth.js';
 
 const app = express();
 

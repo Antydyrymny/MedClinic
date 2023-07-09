@@ -33,11 +33,8 @@ router.post('/', async (req, res) => {
             res.status(200).json({
                 message: 'Login successful',
                 token: jwtToken,
+                id: clientWithEmail._id,
                 name: clientWithEmail.name,
-                surname: clientWithEmail.surname,
-                birthday: clientWithEmail.birthday,
-                email: clientWithEmail.email,
-                telephone: clientWithEmail.telephone,
             });
         }
     } catch (error) {

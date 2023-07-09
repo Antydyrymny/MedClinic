@@ -30,11 +30,8 @@ router.post('/', async (req, res) => {
         res.status(200).json({
             message: 'Data saved successfully',
             token: jwtToken,
+            id: newClient._id,
             name,
-            surname,
-            birthday,
-            email,
-            telephone,
         });
     } catch (error) {
         if (error.message.includes('Duplicate values found')) {
