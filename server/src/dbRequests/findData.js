@@ -1,6 +1,6 @@
-export default async function findData(Model, rule = {}) {
+export default async function findData(Model, rule = {}, findOne = false) {
     try {
-        const result = await Model.find(rule);
+        const result = findOne ? await Model.findOne(rule) : await Model.find(rule);
         console.log('Data retrieval successfull!');
         return result;
     } catch (error) {
