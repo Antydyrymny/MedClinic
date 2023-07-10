@@ -1,0 +1,53 @@
+.wrapper,
+.container,
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    height: 100%;
+    background-color: #f8f8f8;
+    position: relative;
+    z-index: -2;
+}
+
+.container {
+    width: clamp(1rem, 100%, 22.5rem);
+    position: relative;
+    box-shadow: 0 4px 24px 0 rgba(34, 41, 47, .1);
+    background-color: white;
+    border-radius: 0.3rem;
+    padding: 1.5rem;
+}
+
+.container::before,
+.container::after {
+    position: absolute;
+    z-index: -1;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+}
+
+.container::before {
+    content: '';
+    background-image: url('src/assets/Pictogram/loginTopSvg.svg');
+    width: 244px;
+    height: 243px;
+    top: -80px !important;
+    left: -160px !important;
+}
+
+.container::after {
+    content: ' ';
+    background-image: url('src/assets/Pictogram/loginBotSvg.svg') !important;
+    width: 272px;
+    height: 272px;
+    bottom: -90px !important;
+    right: -155px !important;
+}
+
+.heading {
+    text-align: center;
+}

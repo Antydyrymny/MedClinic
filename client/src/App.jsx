@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { RequireAuth } from 'react-auth-kit';
+import { RequireAuth, useIsAuthenticated } from 'react-auth-kit';
 import useClearSessionStorageOnURLMove from './hooks/useClearSessionStorageOnURLMove ';
 import './App.css';
 import MainLayout from './pages/MainLayout/MainLayout';
@@ -32,6 +32,15 @@ function App() {
         '/app'
     );
 
+    function PrivateRoute({ Component, redirectRoute = '/login' }) {
+        const isAuthenticated = useIsAuthenticated();
+        return isAuthenticated() ? (
+            <Component />
+        ) : (
+            <Navigate to={redirectRoute} replace />
+        );
+    }
+
     return (
         <>
             <Routes>
@@ -51,17 +60,17 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route
                     path={'/myProfile/*'}
-                    element={
-                        <RequireAuth loginPath={'/login'}>
-                            <MyProfile />
-                        </RequireAuth>
-                    }
+                    element={<PrivateRoute Component={MyProfile} />}
                 />
                 <Route element={<AppointmentLayout />}>
                     <Route path='/app/step1' element={<AppStep1 />} />
                     <Route path='/app/step2' element={<AppStep2 />} />
                     <Route path='/app/step3' element={<AppStep3 />} />
                     <Route path='/app/step4' element={<AppStep4 />} />
+                    <Route
+                        path={'/app/*/step4'}
+                        element={<PrivateRoute Component={MyProfile} />}
+                    />
                     <Route path='/app/*' element={<Navigate to='/app/step1' replace />} />
                 </Route>
             </Routes>
