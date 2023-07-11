@@ -14,108 +14,109 @@ function ClientForm({ clientData, termsAcceptedData }) {
 
     return (
         <div className={ClientFormCss.wrapper}>
-            <form className={ClientFormCss.form}>
-                <fieldset className={ClientFormCss.fieldset}>
-                    <div className={ClientFormCss.input}>
-                        <InputField
-                            value={client.surname}
-                            type={'text'}
-                            label={'Surname*'}
-                            required={true}
-                            onChange={onChange('surname')}
-                            maxlength={20}
-                            valid={validateClientData(client, { surname: true })}
-                        />
-                    </div>
-                    <div className={ClientFormCss.input}>
-                        <InputField
-                            value={client.name}
-                            type={'text'}
-                            label={'Name*'}
-                            required={true}
-                            onChange={onChange('name')}
-                            maxlength={20}
-                            valid={validateClientData(client, { name: true })}
-                        />
-                    </div>
-                    <div className={ClientFormCss.input}>
-                        <InputField
-                            value={client.birthday}
-                            type={'text'}
-                            label={'Date of birth*'}
-                            placeholder={'__.__.____'}
-                            required={true}
-                            onChange={onBirthdayChange}
-                            maxlength={10}
-                            valid={validateClientData(client, { birthday: true })}
-                        />
-                    </div>
-                </fieldset>
-                <fieldset className={ClientFormCss.fieldset}>
-                    <div className={ClientFormCss.input}>
-                        <InputField
-                            value={client.telephone}
-                            type={'tel'}
-                            label={'Phone number*'}
-                            placeholder={'+1 (___) ___ __ __'}
-                            required={true}
-                            onChange={onTelChange}
-                            maxlength={18}
-                            valid={validateClientData(client, { telephone: true })}
-                        />
-                    </div>
-                    <div className={ClientFormCss.input}>
-                        <InputField
-                            value={client.email}
-                            type={'email'}
-                            label={'Email'}
-                            onChange={onChange('email')}
-                            valid={
-                                client.email.length === 0 ||
-                                validateClientData(client, { email: true })
-                            }
-                            errorMessage={'Invalid email'}
-                        />
-                    </div>
-                </fieldset>
-                <fieldset className={ClientFormCss.fieldset}>
-                    <Textarea
-                        value={client.comment}
-                        placeholder={
-                            'Please describe what is troubling you, your symptoms, or the purpose of your visit*'
-                        }
-                        onChange={onChange('comment')}
-                        rows={5}
+            <fieldset className={ClientFormCss.fieldset}>
+                <div className={ClientFormCss.input}>
+                    <InputField
+                        value={client.surname}
+                        type={'text'}
+                        label={'Surname*'}
+                        autocomplete={'family-name'}
+                        required={true}
+                        onChange={onChange('surname')}
+                        maxlength={20}
+                        valid={validateClientData(client, { surname: true })}
                     />
-                </fieldset>
-                <fieldset className={ClientFormCss.fieldset}>
-                    <div className={ClientFormCss.agree}>
-                        <Checkbox
-                            checked={termsAccepted}
-                            onChange={(boolean) => setTermsAccepted(boolean)}
-                            leftAligned={true}
-                            highlight={false}
-                            pointer={false}
-                        >
-                            {
-                                <div className={ClientFormCss.checkbox}>
-                                    <p className={ClientFormCss.checkboxText}>
-                                        {`I agree to the processing of my personal data and to
+                </div>
+                <div className={ClientFormCss.input}>
+                    <InputField
+                        value={client.name}
+                        type={'text'}
+                        label={'Name*'}
+                        autocomplete={'given-name'}
+                        required={true}
+                        onChange={onChange('name')}
+                        maxlength={20}
+                        valid={validateClientData(client, { name: true })}
+                    />
+                </div>
+                <div className={ClientFormCss.input}>
+                    <InputField
+                        value={client.birthday}
+                        type={'text'}
+                        label={'Date of birth*'}
+                        autocomplete={'bday'}
+                        placeholder={'__.__.____'}
+                        required={true}
+                        onChange={onBirthdayChange}
+                        maxlength={10}
+                        valid={validateClientData(client, { birthday: true })}
+                    />
+                </div>
+            </fieldset>
+            <fieldset className={ClientFormCss.fieldset}>
+                <div className={ClientFormCss.input}>
+                    <InputField
+                        value={client.telephone}
+                        type={'tel'}
+                        label={'Phone number*'}
+                        placeholder={'+1 (___) ___ __ __'}
+                        autocomplete={'tel'}
+                        required={true}
+                        onChange={onTelChange}
+                        maxlength={18}
+                        valid={validateClientData(client, { telephone: true })}
+                    />
+                </div>
+                <div className={ClientFormCss.input}>
+                    <InputField
+                        value={client.email}
+                        type={'email'}
+                        label={'Email'}
+                        autocomplete={'email'}
+                        required={true}
+                        onChange={onChange('email')}
+                        valid={validateClientData(client, { email: true })}
+                        errorMessage={'Invalid email'}
+                    />
+                </div>
+            </fieldset>
+            <fieldset className={ClientFormCss.fieldset}>
+                <Textarea
+                    value={client.comment}
+                    placeholder={
+                        'Please describe what is troubling you, your symptoms, or the purpose of your visit*'
+                    }
+                    onChange={onChange('comment')}
+                    rows={5}
+                />
+            </fieldset>
+            <fieldset className={ClientFormCss.fieldset}>
+                <div className={ClientFormCss.agree}>
+                    <Checkbox
+                        checked={termsAccepted}
+                        onChange={(boolean) => setTermsAccepted(boolean)}
+                        leftAligned={true}
+                        highlight={false}
+                        pointer={false}
+                    >
+                        {
+                            <div className={ClientFormCss.checkbox}>
+                                <p className={ClientFormCss.checkboxText}>
+                                    {`I agree to the processing of my personal data and to
                                     the privacy policy, `}
-                                    </p>
-                                    <a
-                                        className={ClientFormCss.checkboxDownload}
-                                        href={termsAndConditions}
-                                        download='terms-and-conditions.txt'
-                                    >
-                                        {`including the terms and conditions.`}
-                                    </a>
-                                </div>
-                            }
-                        </Checkbox>
-                    </div>
-                </fieldset>
-            </form>
+                                </p>
+                                <a
+                                    className={ClientFormCss.checkboxDownload}
+                                    href={termsAndConditions}
+                                    download='terms-and-conditions.txt'
+                                >
+                                    {`including the terms and conditions.`}
+                                </a>
+                            </div>
+                        }
+                    </Checkbox>
+                </div>
+            </fieldset>
         </div>
     );
 

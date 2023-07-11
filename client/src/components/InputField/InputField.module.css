@@ -58,6 +58,7 @@
 
 .errorText {
     color: #ae1f31;
+    padding-left: 1px;
 }
 
 .warning {

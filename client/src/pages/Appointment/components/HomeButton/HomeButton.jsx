@@ -8,6 +8,12 @@ function HomeButton() {
     return (
         <div onClick={() => navigate('/')} className={HomeButtonCss.wrapper}>
             <img src={homeImg} alt='Home' />
+            <button
+                style={{ visibility: 'hidden', position: 'absolute', zIndex: '-100' }}
+                type='button'
+            >
+                Home
+            </button>
         </div>
     );
 }

@@ -24,6 +24,7 @@ import Business from './pages/Business/Business';
 import Partners from './pages/Partners/Partners';
 import MyProfile from './pages/MyProfile/MyProfile';
 import Login from './pages/Login/Login';
+import Register from './pages/Login/Register';
 import NotFound from './pages/NotFound/NotFound';
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                     <Route path='/partners' element={<Partners />} />
                     <Route path='*' element={<NotFound />} />
                 </Route>
+                <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
                 <Route
                     path={'/myProfile/*'}

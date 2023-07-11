@@ -3,12 +3,15 @@ import InputFieldCss from './InputField.module.css';
 
 function InputField({
     type,
+    autoComplete = 'on',
     label,
     value,
     onChange,
     required = false,
     placeholder = null,
     maxlength = null,
+    min = null,
+    max = null,
     valid,
     errorMessage = 'Fill in the required field',
     customStyles = null,
@@ -23,7 +26,7 @@ function InputField({
         <div
             className={`${InputFieldCss.wrapper} ${
                 error ? InputFieldCss.hasError : null
-            }`}
+            } ${error && customStyles ? customStyles.customInputError : null}`}
             onClick={() => {
                 inputRef.current.focus();
             }}
@@ -36,6 +39,11 @@ function InputField({
                     error ? InputFieldCss.error : null
                 } ${customStyles ? customStyles.customInput : null}`}
                 value={value}
+                autoComplete={isFocused ? autoComplete : 'nope'}
+                maxLength={maxlength}
+                name={label}
+                min={min}
+                max={max}
                 onChange={(e) => {
                     onChange(e.target.value);
                 }}
@@ -51,18 +59,23 @@ function InputField({
                     }
                     setIsFocused(false);
                 }}
-                maxLength={maxlength}
-                name={label}
-                autoComplete='false'
             />
             <p
                 className={`${InputFieldCss.label} ${
-                    (isFocused || value) && InputFieldCss.focused
+                    (isFocused || value || type === 'date') && InputFieldCss.focused
                 }`}
             >
                 {label}
             </p>
-            {error && <p className={InputFieldCss.errorText}>{errorMessage}</p>}
+            {error && (
+                <p
+                    className={`${InputFieldCss.errorText} ${
+                        customStyles ? customStyles.customInputErrorMsg : null
+                    }`}
+                >
+                    {errorMessage}
+                </p>
+            )}
         </div>
     );
 }

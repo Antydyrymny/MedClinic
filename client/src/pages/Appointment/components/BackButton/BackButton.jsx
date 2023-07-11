@@ -20,7 +20,12 @@ function BackButton({
             }`}
             onClick={disabled ? null : () => (to ? navigate(to) : onClick())}
         >
-            <button style={{ display: 'none' }}>Forward</button>
+            <button
+                style={{ visibility: 'hidden', position: 'absolute', zIndex: '-100' }}
+                type='button'
+            >
+                Forward
+            </button>
             <BackArrowSvg color={arrowCollor} />
         </div>
     ) : (
@@ -32,7 +37,12 @@ function BackButton({
             }`}
             onClick={disabled ? null : () => (to ? navigate(to) : onClick())}
         >
-            <button style={{ display: 'none' }}>Back</button>
+            <button
+                style={{ visibility: 'hidden', position: 'absolute', zIndex: '-100' }}
+                type='button'
+            >
+                Back
+            </button>
             <BackArrowSvg color={arrowCollor} />
         </div>
     );
