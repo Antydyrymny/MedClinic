@@ -40,7 +40,7 @@
     border-color: #7367f0;
 }
 
-.passport {
+.password {
     position: relative;
 }
 
@@ -75,6 +75,8 @@
     text-align: left;
     position: absolute;
     bottom: -3rem;
+    display: flex;
+    gap: 0.5rem;
     cursor: pointer;
 }
 
@@ -92,12 +94,29 @@
     position: relative;
 }
 
+.loading {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.isLoading {
+    display: flex;
+}
+
+.customLoadingSpinnerWrapper {
+    position: static;
+}
+
+.customLoadingSpinner {
+    height: 0rem;
+}
+
 .submitError {
     display: none;
     color: #ae1f31;
     font-size: 0.9rem;
-    /* position: absolute; */
-    /* top: 4rem; */
     margin-top: 1rem;
     text-align: center;
 }

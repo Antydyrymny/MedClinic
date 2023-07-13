@@ -1,23 +1,38 @@
-import { useState } from 'react';
-import { useSignIn, useIsAuthenticated } from 'react-auth-kit';
+import { useState, useRef } from 'react';
+import { useSignIn } from 'react-auth-kit';
 import { useNavigate, Link } from 'react-router-dom';
-import useRedirect from '../../hooks/useRedirect';
+import useGetShowSubmitError from '../../hooks/useGetShowSubmitError';
 import LoginPageWrapperComponent from './LoginPageWrapperComponent';
 import Button from '../../components/Button/Button';
 import InputField from '../../components/InputField/InputField';
 import show from '../../assets/Pictogram/show.png';
 import hide from '../../assets/Pictogram/hide.png';
+import handPointer from '../../assets/Pictogram/hand-pointer.png';
+import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import LoginCss from './Login.module.css';
+
+const defaultError = 'Please, enter your email and password';
 
 function Login() {
     const signIn = useSignIn();
     const navigate = useNavigate();
-    const isAuthenticated = useIsAuthenticated();
-    useRedirect('/myProfile', isAuthenticated());
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordType, setPasswordType] = useState('password');
+    const allowSubmit = !!email.length && !!password.length;
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [errorMessage, setErrorMessage] = useState(defaultError);
+    const showSubmitErrorTimerRef = useRef(null);
+    const [isShowingSubmitError, setIsShowingSubmitError] = useState(false);
+    const showError = useGetShowSubmitError({
+        setErrorMessage,
+        showSubmitErrorTimerRef,
+        setIsShowingSubmitError,
+        allowSubmit,
+    });
 
     return (
         <LoginPageWrapperComponent
@@ -26,7 +41,10 @@ function Login() {
                     <p className={LoginCss.subheading}>
                         Please, enter email and password to enter personal profile
                     </p>
-                    <form className={LoginCss.form}>
+                    <form
+                        className={LoginCss.form}
+                        onSubmit={allowSubmit ? onLoginSubmit : null}
+                    >
                         <div className={LoginCss.input}>
                             <InputField
                                 value={email}
@@ -40,7 +58,7 @@ function Login() {
                                 customStyles={LoginCss}
                             />
                         </div>
-                        <div className={`${LoginCss.input} ${LoginCss.passport}`}>
+                        <div className={`${LoginCss.input} ${LoginCss.password}`}>
                             <InputField
                                 value={password}
                                 type={passwordType}
@@ -66,13 +84,30 @@ function Login() {
                                 />
                             </div>
                         </div>
-                        <div className={LoginCss.button}>
+                        <div
+                            className={LoginCss.button}
+                            onClick={allowSubmit ? null : () => showError(defaultError)}
+                        >
                             <Button
                                 text={'Sign in'}
                                 submit={true}
-                                onClick={onLoginSubmit}
+                                onClick={allowSubmit ? onLoginSubmit : null}
                                 customStyles={LoginCss}
                             />
+                            <div
+                                className={`${LoginCss.loading} ${
+                                    isLoading ? LoginCss.isLoading : null
+                                }`}
+                            >
+                                <LoadingSpinner text={false} customStyles={LoginCss} />
+                            </div>
+                            <div
+                                className={`${LoginCss.submitError} ${
+                                    isShowingSubmitError ? LoginCss.submitErrorShow : null
+                                }`}
+                            >
+                                {errorMessage}
+                            </div>
                         </div>
                         <p className={LoginCss.register}>
                             <span>No account? </span>
@@ -81,26 +116,45 @@ function Login() {
                     </form>
                     <p
                         onClick={() => {
-                            setEmail('test');
+                            setEmail('test@test.com');
                             setPassword('test');
                         }}
                         className={LoginCss.test}
                     >
-                        test account here
+                        <img src={handPointer} alt='press for test account' /> for test
+                        account
                     </p>
                 </div>
             }
         />
     );
 
-    function onLoginSubmit() {
-        signIn({
-            token: 1,
-            expiresIn: 30,
-            tokenType: 'Bearer',
-            authState: { name: 'JimBob' },
-        });
-        navigate('/myProfile', { replace: true });
+    async function onLoginSubmit() {
+        try {
+            setIsLoading(true);
+            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(serverURL + 'api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+            const result = await response.json();
+            setIsLoading(false);
+            if (response.status === 401) {
+                showError(result.message);
+            } else if (response.status === 200) {
+                signIn({
+                    token: result.token,
+                    expiresIn: 30,
+                    tokenType: 'Bearer',
+                    authState: { name: result.name, id: result.id },
+                });
+                navigate('/myProfile', { replace: true });
+            }
+        } catch (error) {
+            setIsLoading(false);
+            showError('Error connecting to login server, try again later', 4500);
+        }
     }
 }
 

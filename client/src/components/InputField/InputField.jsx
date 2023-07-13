@@ -1,27 +1,49 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import InputFieldCss from './InputField.module.css';
 
-function InputField({
-    type,
-    autoComplete = 'on',
-    label,
-    value,
-    onChange,
-    required = false,
-    placeholder = null,
-    maxlength = null,
-    min = null,
-    max = null,
-    valid,
-    errorMessage = 'Fill in the required field',
-    customStyles = null,
-}) {
+const InputField = forwardRef(function InputField(props, ref) {
+    const {
+        type,
+        autoComplete = 'on',
+        label,
+        value,
+        onChange,
+        required = false,
+        placeholder = null,
+        maxlength = null,
+        min = null,
+        max = null,
+        valid,
+        showError = true,
+        errorMessage = 'Fill in the required field',
+        customStyles = null,
+    } = props;
     const inputRef = useRef(null);
     const allowShowError = useRef(false);
     const [isFocused, setIsFocused] = useState(false);
 
-    allowShowError.current = required && (allowShowError.current || isFocused);
+    allowShowError.current =
+        showError && required && (allowShowError.current || isFocused);
     const error = !valid && allowShowError.current && !isFocused;
+
+    useImperativeHandle(
+        ref,
+        () => {
+            return {
+                focus() {
+                    inputRef.current.focus();
+                },
+                addEventListener(eventType, callback) {
+                    inputRef.current.addEventListener(eventType, callback);
+                },
+                removeEventListener(eventType, callback) {
+                    inputRef.current.removeEventListener(eventType, callback);
+                },
+            };
+        },
+        []
+    );
+
     return (
         <div
             className={`${InputFieldCss.wrapper} ${
@@ -78,6 +100,6 @@ function InputField({
             )}
         </div>
     );
-}
+});
 
 export default InputField;

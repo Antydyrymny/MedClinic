@@ -1,10 +1,26 @@
 import styles from './LoadingSpinner.module.scss';
 
-function LoadingSpinner() {
+function LoadingSpinner({
+    text = true,
+    textMessage = 'Loading Data...',
+    customStyles = null,
+}) {
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.loadingSpinner}>
-                <div className={styles.animationWrapper}>
+        <div
+            className={`${styles.wrapper} ${
+                customStyles ? customStyles.customLoadingSpinnerWrapper : null
+            }`}
+        >
+            <div
+                className={`${styles.loadingSpinner} ${
+                    customStyles ? customStyles.customLoadingSpinner : null
+                }`}
+            >
+                <div
+                    className={`${styles.animationWrapper} ${
+                        customStyles ? customStyles.customLoadingSpinnerAnimation : null
+                    }`}
+                >
                     <div className={styles.loader}>
                         <div className={styles.dot} />
                         <div className={styles.dot} />
@@ -33,7 +49,7 @@ function LoadingSpinner() {
                         <div className={styles.dot} />
                     </div>
                 </div>
-                <div className={styles.text}>Loading Data...</div>
+                {text && <div className={styles.text}>{textMessage}</div>}
             </div>
         </div>
     );

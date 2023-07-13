@@ -43,11 +43,3 @@ router.post('/', async (req, res) => {
 });
 
 export default router;
-
-// const onConnection = [() => findData(Client, { email: 'IamHome@yourhome.boom1' }, true)];
-// try {
-//     const [clientWithEmail] = await establishConnection(onConnection);
-//     console.log(clientWithEmail);
-// } catch (error) {
-//     console.log(error);
-// }

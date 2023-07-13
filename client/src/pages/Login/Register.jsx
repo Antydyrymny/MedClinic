@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { useSignIn, useIsAuthenticated } from 'react-auth-kit';
+import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
+import useGetShowSubmitError from '../../hooks/useGetShowSubmitError';
 import IMask from 'imask';
-import useRedirect from '../../hooks/useRedirect';
 import LoginPageWrapperComponent from './LoginPageWrapperComponent';
 import { validateClientData } from '../../utils/validateClientData';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
@@ -12,6 +12,7 @@ import Checkbox from '../../components/Checkbox/Checkbox';
 import show from '../../assets/Pictogram/show.png';
 import hide from '../../assets/Pictogram/hide.png';
 import dayjs from 'dayjs';
+import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import LoginCss from './Login.module.css';
 
 const clientSchema = {
@@ -22,18 +23,38 @@ const clientSchema = {
     telephone: '',
     password: '',
 };
+const defaultError = 'Please, fill all fields and agree to terms and conditions';
 
 function Register() {
     const signIn = useSignIn();
     const navigate = useNavigate();
-    const isAuthenticated = useIsAuthenticated();
-    useRedirect('/myProfile', isAuthenticated());
 
     const [client, setClient] = useState(clientSchema);
     const minBday = dayjs()
         .year(dayjs().year() - 100)
         .format('YYYY-MM-DD');
     const maxBday = dayjs().format('YYYY-MM-DD');
+    const birthdayRef = useRef(null);
+
+    useEffect(() => {
+        function onBlur() {
+            const enteredDate = dayjs(client.birthday);
+            let finalDate = enteredDate;
+            if (enteredDate.isValid && enteredDate.isBefore(minBday)) {
+                finalDate = minBday;
+            } else if (enteredDate.isValid && enteredDate.isAfter(maxBday)) {
+                finalDate = maxBday;
+            }
+            setClient((prevClient) => ({ ...prevClient, birthday: finalDate }));
+        }
+
+        let birthdayInputField = birthdayRef.current;
+        if (birthdayInputField) {
+            birthdayInputField.addEventListener('blur', onBlur);
+        }
+        return () => birthdayInputField.removeEventListener('blur', onBlur);
+    }, [client.birthday, maxBday, minBday]);
+
     const [passwordType, setPasswordType] = useState('password');
     const [termsAccepted, setTermsAccepted] = useState(false);
     const allowSubmit =
@@ -46,12 +67,21 @@ function Register() {
             telephone: true,
             password: true,
         });
-    const [isShowingError, setIsShowingError] = useState(null);
-    const showErrorTimerRef = useRef(null);
 
-    useEffect(() => {
-        if (allowSubmit) setIsShowingError(() => false);
-    }, [allowSubmit]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [errorMessage, setErrorMessage] = useState(defaultError);
+    const showSubmitErrorTimerRef = useRef(null);
+    const [isShowingSubmitError, setIsShowingSubmitError] = useState(false);
+    const showError = useGetShowSubmitError({
+        setErrorMessage,
+        showSubmitErrorTimerRef,
+        setIsShowingSubmitError,
+        allowSubmit,
+    });
+
+    const [showPasswordError, setShowPasswordError] = useState(true);
+    const passwordRef = useRef(null);
 
     return (
         <LoginPageWrapperComponent
@@ -70,7 +100,7 @@ function Register() {
                                 autoComplete={'family-name'}
                                 required={true}
                                 onChange={onChange('surname')}
-                                maxlength={20}
+                                maxlength={30}
                                 valid={validateClientData(client, { surname: true })}
                                 customStyles={LoginCss}
                             />
@@ -83,13 +113,14 @@ function Register() {
                                 autoComplete={'given-name'}
                                 required={true}
                                 onChange={onChange('name')}
-                                maxlength={20}
+                                maxlength={25}
                                 valid={validateClientData(client, { name: true })}
                                 customStyles={LoginCss}
                             />
                         </div>
                         <div className={LoginCss.input}>
                             <InputField
+                                ref={birthdayRef}
                                 value={client.birthday}
                                 type={'date'}
                                 label={'Date of birth'}
@@ -110,7 +141,7 @@ function Register() {
                                 autoComplete={'email'}
                                 required={true}
                                 onChange={onChange('email')}
-                                maxlength={20}
+                                maxlength={40}
                                 valid={validateClientData(client, { email: true })}
                                 errorMessage={'Invalid email'}
                                 customStyles={LoginCss}
@@ -130,16 +161,18 @@ function Register() {
                                 customStyles={LoginCss}
                             />
                         </div>
-                        <div className={`${LoginCss.input} ${LoginCss.passport}`}>
+                        <div className={`${LoginCss.input} ${LoginCss.password}`}>
                             <InputField
+                                ref={passwordRef}
                                 value={client.password}
                                 type={passwordType}
                                 label={'Password'}
                                 autoComplete={'off'}
                                 required={true}
                                 onChange={onChange('password')}
-                                maxlength={20}
+                                maxlength={25}
                                 valid={validateClientData(client, { password: true })}
+                                showError={showPasswordError}
                                 errorMessage={
                                     'Password must be at least 4 characters long'
                                 }
@@ -152,6 +185,14 @@ function Register() {
                                         passwordType === 'password' ? 'text' : 'password'
                                     )
                                 }
+                                onMouseDown={() => {
+                                    setShowPasswordError(false);
+                                }}
+                                onMouseUp={() => {
+                                    passwordRef.current.focus();
+                                    setShowPasswordError(true);
+                                }}
+                                onDragStart={(e) => e.preventDefault()}
                             >
                                 <img
                                     src={passwordType === 'password' ? show : hide}
@@ -187,7 +228,7 @@ function Register() {
                         </div>
                         <div
                             className={LoginCss.button}
-                            onClick={allowSubmit ? null : showError}
+                            onClick={allowSubmit ? null : () => showError(defaultError)}
                         >
                             <Button
                                 text={'Sign up'}
@@ -197,11 +238,18 @@ function Register() {
                                 customStyles={LoginCss}
                             />
                             <div
-                                className={`${LoginCss.submitError} ${
-                                    isShowingError ? LoginCss.submitErrorShow : null
+                                className={`${LoginCss.loading} ${
+                                    isLoading ? LoginCss.isLoading : null
                                 }`}
                             >
-                                Please, fill all fields and agree to terms and conditions
+                                <LoadingSpinner text={false} customStyles={LoginCss} />
+                            </div>
+                            <div
+                                className={`${LoginCss.submitError} ${
+                                    isShowingSubmitError ? LoginCss.submitErrorShow : null
+                                }`}
+                            >
+                                {errorMessage}
                             </div>
                         </div>
                     </form>
@@ -223,23 +271,40 @@ function Register() {
         onChange('telephone')(maskedValue);
     }
 
-    function onFormSubmit() {
-        signIn({
-            token: 1,
-            expiresIn: 30,
-            tokenType: 'Bearer',
-            authState: { name: 'JimBob' },
-        });
-        navigate('/myProfile', { replace: true });
-    }
-
-    function showError() {
-        clearTimeout(showErrorTimerRef.current);
-        setIsShowingError(true);
-        showErrorTimerRef.current = setTimeout(
-            () => setIsShowingError(() => false),
-            3500
-        );
+    async function onFormSubmit() {
+        try {
+            setIsLoading(true);
+            // const serverURL = import.meta.env.VITE_SERVER_URL;
+            const serverURL = 'http://localhost:3300/';
+            const response = await fetch(serverURL + 'api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    surname: client.surname,
+                    name: client.name,
+                    birthday: client.birthday,
+                    email: client.email,
+                    telephone: client.telephone.match(/\d/g).slice(1).join(''),
+                    password: client.password,
+                }),
+            });
+            const result = await response.json();
+            setIsLoading(false);
+            if (response.status === 409) {
+                showError(result.error);
+            } else if (response.status === 200) {
+                signIn({
+                    token: result.token,
+                    expiresIn: 30,
+                    tokenType: 'Bearer',
+                    authState: { name: result.name, id: result.id },
+                });
+                navigate('/myProfile', { replace: true });
+            }
+        } catch (error) {
+            setIsLoading(false);
+            showError('Error connecting to login server, try again later', 4500);
+        }
     }
 }
 
