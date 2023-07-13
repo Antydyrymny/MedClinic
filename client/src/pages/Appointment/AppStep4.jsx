@@ -40,6 +40,8 @@ function AppStep4() {
 
     const [inputErrors, setInputErrors] = useState(errorSchema);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const [errorMessage, setErrorMessage] = useState(defaultError);
     const showSubmitErrorTimerRef = useRef(null);
     const [isShowingSubmitError, setIsShowingSubmitError] = useState(false);
@@ -55,7 +57,9 @@ function AppStep4() {
         <div className={AppStep4Css.wrapper}>
             <form
                 onSubmit={
-                    allowSubmit
+                    isLoading
+                        ? null
+                        : allowSubmit
                         ? onFormSubmit
                         : () => showError(defaultError, getEmptyFields())
                 }
@@ -92,7 +96,9 @@ function AppStep4() {
                                 submit={true}
                                 colored={'active'}
                                 notAllowed={!allowSubmit}
-                                onClick={allowSubmit ? onFormSubmit : null}
+                                onClick={
+                                    isLoading ? null : allowSubmit ? onFormSubmit : null
+                                }
                             />
                             <div
                                 className={`${AppStep4Css.submitError} ${
@@ -120,7 +126,9 @@ function AppStep4() {
                                 submit={true}
                                 colored={'active'}
                                 notAllowed={!allowSubmit}
-                                onClick={allowSubmit ? onFormSubmit : null}
+                                onClick={
+                                    isLoading ? null : allowSubmit ? onFormSubmit : null
+                                }
                             />
                             <div
                                 className={`${AppStep4Css.submitErrorMobile} ${

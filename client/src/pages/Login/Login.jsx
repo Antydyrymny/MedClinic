@@ -51,7 +51,9 @@ function Login() {
                     <form
                         className={LoginCss.form}
                         onSubmit={
-                            allowSubmit
+                            isLoading
+                                ? null
+                                : allowSubmit
                                 ? onLoginSubmit
                                 : () => showError(defaultError, getEmptyFields())
                         }
@@ -110,7 +112,9 @@ function Login() {
                             <Button
                                 text={'Sign in'}
                                 submit={true}
-                                onClick={allowSubmit ? onLoginSubmit : null}
+                                onClick={
+                                    isLoading ? null : allowSubmit ? onLoginSubmit : null
+                                }
                                 customStyles={LoginCss}
                             />
                             <div

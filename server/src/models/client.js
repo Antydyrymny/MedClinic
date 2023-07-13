@@ -7,9 +7,7 @@ const clientSchema = new mongoose.Schema({
     email: { type: String, unique: true },
     telephone: { type: String, unique: true },
     password: String,
-    bookedTimes: [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'BookedTimes', default: [] },
-    ],
+    bookedTimes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BookedTime' }],
 });
 
 export const Client = mongoose.model('Client', clientSchema);

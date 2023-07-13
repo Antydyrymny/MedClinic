@@ -85,7 +85,9 @@ function Register() {
                     <form
                         className={LoginCss.form}
                         onSubmit={
-                            allowSubmit
+                            isLoading
+                                ? null
+                                : allowSubmit
                                 ? onFormSubmit
                                 : () => showError(defaultError, getEmptyFields())
                         }
@@ -248,7 +250,9 @@ function Register() {
                                 text={'Sign up'}
                                 submit={true}
                                 notAllowed={!allowSubmit}
-                                onClick={allowSubmit ? onFormSubmit : null}
+                                onClick={
+                                    isLoading ? null : allowSubmit ? onFormSubmit : null
+                                }
                                 customStyles={LoginCss}
                             />
                             <div
