@@ -34,8 +34,20 @@
 }
 
 .secondBar {
-    margin-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: 1.5rem;
     border-bottom: 1px solid #f0f4fc;
+}
+
+.myProfile {
+    padding-right: 4px;
+    font-size: 0.8rem;
+    line-height: 15.6px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #8193b3;
 }
 
 .largeRight,
@@ -56,6 +68,11 @@
 
 .smallFirstBar {
     padding: 0.5rem 1rem;
+}
+
+.smallFirstBarRightIcons {
+    display: flex;
+    gap: 1rem;
 }
 
 .smallSecondBar {

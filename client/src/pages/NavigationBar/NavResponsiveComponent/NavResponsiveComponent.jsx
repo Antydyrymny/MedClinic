@@ -1,7 +1,10 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { useAuthUser } from 'react-auth-kit';
 import useGetDragNDropHandler from '../../../hooks/useGetDragNDropHandler';
 import Logo from 'src/pages/NavigationBar/Logo/Logo';
 import SmallLogo from 'src/pages/NavigationBar/Logo/SmallLogo';
+import MyProfileSvg from '../../../assets/Pictogram/MyProfileSvg';
 import NavList from '../NavList/NavList';
 import NavDropDown from '../NavDropDown/NavDropDown';
 import ModalFeedbackForm from '../../../components/Modal/ModalFeedbackForm';
@@ -12,6 +15,8 @@ import ModalButtonCss from './ModalButton.module.css';
 import NavResponsiveCss from './NavResponsiveComponent.module.css';
 
 function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSize }) {
+    const auth = useAuthUser();
+    const userName = auth()?.name || 'my profile';
     const dropDownref = useRef(null);
     const slidingNavList = useRef(null);
     const slidingNavListParent = useRef(null);
@@ -43,12 +48,13 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                         </div>
                         <div className={NavResponsiveCss.largeRight}>
                             <div className={NavResponsiveCss.makeACall}>
-                                <a
+                                <Link
                                     className={NavResponsiveCss.telephone}
-                                    href={'tel:1234567'}
+                                    to={'tel:1234567'}
                                 >
                                     {'+1 (111) 123-45-67'}
-                                </a>
+                                </Link>
+                                <br />
                                 <div className={NavResponsiveCss.modalButton}>
                                     <ModalFeedbackForm
                                         buttonText={'Request a call back'}
@@ -64,13 +70,18 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                                     />
                                 </div>
                             </div>
-                            <a href='/app/step1'>
+                            {scrolling ? (
+                                <Link to='/myProfile'>
+                                    <MyProfileSvg />
+                                </Link>
+                            ) : null}
+                            <Link to='/app/step1'>
                                 <Button
                                     text={'appointment'}
                                     colored={'active'}
                                     customStyles={NavResponsiveCss}
                                 />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     {!scrolling && (
@@ -80,6 +91,9 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                                 close={close}
                                 onHamburgerClick={onHamburgerClick}
                             />
+                            <Link to='/myProfile' className={NavResponsiveCss.myProfile}>
+                                {userName}
+                            </Link>
                         </div>
                     )}
                     <NavDropDown
@@ -99,12 +113,17 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                         }`}
                     >
                         <HamburgerMenu opened={opened} onClick={onHamburgerClick} />
-                        <a href='/'>
+                        <Link to='/'>
                             <SmallLogo />
-                        </a>
-                        <a href={'tel:1234567'}>
-                            <TelephoneSvg />
-                        </a>
+                        </Link>
+                        <div className={NavResponsiveCss.smallFirstBarRightIcons}>
+                            <Link to='/myProfile'>
+                                <MyProfileSvg large={false} />
+                            </Link>
+                            <Link to={'tel:1234567'}>
+                                <TelephoneSvg />
+                            </Link>
+                        </div>
                     </div>
                     <NavDropDown
                         opened={opened}
