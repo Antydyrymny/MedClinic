@@ -4,13 +4,12 @@ import Checkbox from 'src/components/Checkbox/Checkbox';
 import termsAndConditions from 'src/assets/Example terms and conditions.txt';
 import IMask from 'imask';
 import { validateClientData } from 'src/utils/validateClientData';
-import dayjs from 'dayjs';
 import ClientFormCss from './ClientForm.module.css';
 
-function ClientForm({ clientData, termsAcceptedData }) {
+function ClientForm({ clientData, termsAcceptedData, inputErrorsState }) {
     const [client, setClient] = clientData;
     const [termsAccepted, setTermsAccepted] = termsAcceptedData;
-    // const now = dayjs().format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+    const [inputErrors, setInputErrors] = inputErrorsState;
 
     return (
         <div className={ClientFormCss.wrapper}>
@@ -22,8 +21,10 @@ function ClientForm({ clientData, termsAcceptedData }) {
                         label={'Surname*'}
                         autocomplete={'family-name'}
                         required={true}
+                        forceShowError={inputErrors.surname}
+                        disableForceError={disableForceError('surname')}
                         onChange={onChange('surname')}
-                        maxlength={20}
+                        maxlength={30}
                         valid={validateClientData(client, { surname: true })}
                     />
                 </div>
@@ -34,8 +35,10 @@ function ClientForm({ clientData, termsAcceptedData }) {
                         label={'Name*'}
                         autocomplete={'given-name'}
                         required={true}
+                        forceShowError={inputErrors.name}
+                        disableForceError={disableForceError('name')}
                         onChange={onChange('name')}
-                        maxlength={20}
+                        maxlength={25}
                         valid={validateClientData(client, { name: true })}
                     />
                 </div>
@@ -47,6 +50,8 @@ function ClientForm({ clientData, termsAcceptedData }) {
                         autocomplete={'bday'}
                         placeholder={'__.__.____'}
                         required={true}
+                        forceShowError={inputErrors.birthday}
+                        disableForceError={disableForceError('birthday')}
                         onChange={onBirthdayChange}
                         maxlength={10}
                         valid={validateClientData(client, { birthday: true })}
@@ -62,6 +67,8 @@ function ClientForm({ clientData, termsAcceptedData }) {
                         placeholder={'+1 (___) ___ __ __'}
                         autocomplete={'tel'}
                         required={true}
+                        forceShowError={inputErrors.telephone}
+                        disableForceError={disableForceError('telephone')}
                         onChange={onTelChange}
                         maxlength={18}
                         valid={validateClientData(client, { telephone: true })}
@@ -74,7 +81,10 @@ function ClientForm({ clientData, termsAcceptedData }) {
                         label={'Email'}
                         autocomplete={'email'}
                         required={true}
+                        forceShowError={inputErrors.email}
+                        disableForceError={disableForceError('email')}
                         onChange={onChange('email')}
+                        maxlength={40}
                         valid={validateClientData(client, { email: true })}
                         errorMessage={'Invalid email'}
                     />
@@ -142,6 +152,10 @@ function ClientForm({ clientData, termsAcceptedData }) {
         });
         const maskedValue = masked.resolve(value);
         onChange('telephone')(maskedValue);
+    }
+
+    function disableForceError(field) {
+        return () => setInputErrors((prevState) => ({ ...prevState, [field]: false }));
     }
 }
 

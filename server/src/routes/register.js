@@ -30,7 +30,6 @@ router.post('/', async (req, res) => {
         res.status(200).json({
             message: 'Data saved successfully',
             token: jwtToken,
-            id: newClient._id,
             name,
         });
     } catch (error) {

@@ -33,7 +33,6 @@ router.post('/', async (req, res) => {
             res.status(200).json({
                 message: 'Login successful',
                 token: jwtToken,
-                id: clientWithEmail._id,
                 name: clientWithEmail.name,
             });
         }

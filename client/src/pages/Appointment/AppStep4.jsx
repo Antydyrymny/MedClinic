@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import AppSummary from './components/AppSummary/AppSummary';
+import useGetShowSubmitError from '../../hooks/useGetShowSubmitError';
 import ClientForm from './components/ClientForm/ClientForm';
 import Button from '../../components/Button/Button';
 import BackButton from './components/BackButton/BackButton';
@@ -15,11 +16,18 @@ const clientSchema = {
     telephone: '',
     comment: '',
 };
+const errorSchema = {
+    surname: false,
+    name: false,
+    birthday: false,
+    email: false,
+    telephone: false,
+};
+const defaultError = 'Please, fill all fields and agree to terms and conditions';
 
 function AppStep4() {
     const [client, setClient] = useState(clientSchema);
     const [termsAccepted, setTermsAccepted] = useState(false);
-    const formRef = useRef(null);
     const allowSubmit =
         termsAccepted &&
         validateClientData(client, {
@@ -30,14 +38,27 @@ function AppStep4() {
             telephone: true,
         });
 
+    const [inputErrors, setInputErrors] = useState(errorSchema);
+
+    const [errorMessage, setErrorMessage] = useState(defaultError);
+    const showSubmitErrorTimerRef = useRef(null);
+    const [isShowingSubmitError, setIsShowingSubmitError] = useState(false);
+    const showError = useGetShowSubmitError({
+        setErrorMessage,
+        showSubmitErrorTimerRef,
+        setIsShowingSubmitError,
+        allowSubmit,
+        setInputErrors,
+    });
+
     return (
         <div className={AppStep4Css.wrapper}>
             <form
-                ref={formRef}
-                onSubmit={(e) => {
-                    console.log('submited');
-                    e.preventDefault();
-                }}
+                onSubmit={
+                    allowSubmit
+                        ? onFormSubmit
+                        : () => showError(defaultError, getEmptyFields())
+                }
             >
                 <div className={AppStep4Css.main}>
                     <div className={AppStep4Css.summary}>
@@ -49,6 +70,7 @@ function AppStep4() {
                         <ClientForm
                             clientData={[client, setClient]}
                             termsAcceptedData={[termsAccepted, setTermsAccepted]}
+                            inputErrorsState={[inputErrors, setInputErrors]}
                         />
                     </div>
                 </div>
@@ -57,13 +79,31 @@ function AppStep4() {
                         <BackButton to={'/app/step3'} />
                     </div>
                     <div className={AppStep4Css.confirm}>
-                        <Button
-                            text={'CONFIRM'}
-                            submit={true}
-                            colored={'active'}
-                            notAllowed={!allowSubmit}
-                            onClick={() => formRef.current.submit()}
-                        />
+                        <div
+                            className={AppStep4Css.confirmButton}
+                            onClick={
+                                allowSubmit
+                                    ? null
+                                    : () => showError(defaultError, getEmptyFields())
+                            }
+                        >
+                            <Button
+                                text={'CONFIRM'}
+                                submit={true}
+                                colored={'active'}
+                                notAllowed={!allowSubmit}
+                                onClick={allowSubmit ? onFormSubmit : null}
+                            />
+                            <div
+                                className={`${AppStep4Css.submitError} ${
+                                    isShowingSubmitError
+                                        ? AppStep4Css.submitErrorShow
+                                        : null
+                                }`}
+                            >
+                                {errorMessage}
+                            </div>
+                        </div>
                     </div>
                     <div className={AppStep4Css.home}>
                         <HomeButton />
@@ -71,13 +111,26 @@ function AppStep4() {
                 </div>
                 <div className={AppStep4Css.footerMobile}>
                     <div className={AppStep4Css.footer}>
-                        <div className={AppStep4Css.confirmMobile}>
+                        <div
+                            className={AppStep4Css.confirmMobile}
+                            onClick={allowSubmit ? null : () => showError(defaultError)}
+                        >
                             <Button
                                 text={'CONFIRM'}
                                 submit={true}
                                 colored={'active'}
                                 notAllowed={!allowSubmit}
+                                onClick={allowSubmit ? onFormSubmit : null}
                             />
+                            <div
+                                className={`${AppStep4Css.submitErrorMobile} ${
+                                    isShowingSubmitError
+                                        ? AppStep4Css.submitErrorShow
+                                        : null
+                                }`}
+                            >
+                                {errorMessage}
+                            </div>
                         </div>
                     </div>
                     <div className={AppStep4Css.back}>
@@ -90,6 +143,14 @@ function AppStep4() {
             </form>
         </div>
     );
+
+    function getEmptyFields() {
+        return Object.keys(client).filter(
+            (key) => !validateClientData(client, { [key]: true })
+        );
+    }
+
+    function onFormSubmit() {}
 }
 
 export default AppStep4;

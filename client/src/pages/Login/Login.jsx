@@ -11,6 +11,10 @@ import handPointer from '../../assets/Pictogram/hand-pointer.png';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import LoginCss from './Login.module.css';
 
+const errorSchema = {
+    email: false,
+    password: false,
+};
 const defaultError = 'Please, enter your email and password';
 
 function Login() {
@@ -22,6 +26,8 @@ function Login() {
     const [passwordType, setPasswordType] = useState('password');
     const allowSubmit = !!email.length && !!password.length;
 
+    const [inputErrors, setInputErrors] = useState(errorSchema);
+
     const [isLoading, setIsLoading] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState(defaultError);
@@ -32,6 +38,7 @@ function Login() {
         showSubmitErrorTimerRef,
         setIsShowingSubmitError,
         allowSubmit,
+        setInputErrors,
     });
 
     return (
@@ -43,7 +50,11 @@ function Login() {
                     </p>
                     <form
                         className={LoginCss.form}
-                        onSubmit={allowSubmit ? onLoginSubmit : null}
+                        onSubmit={
+                            allowSubmit
+                                ? onLoginSubmit
+                                : () => showError(defaultError, getEmptyFields())
+                        }
                     >
                         <div className={LoginCss.input}>
                             <InputField
@@ -52,6 +63,8 @@ function Login() {
                                 label={'Email'}
                                 autoComplete={'email'}
                                 required={true}
+                                forceShowError={inputErrors.email}
+                                disableForceError={disableForceError('email')}
                                 onChange={setEmail}
                                 maxlength={20}
                                 valid={!!email.length}
@@ -65,6 +78,8 @@ function Login() {
                                 label={'Password'}
                                 autoComplete={'off'}
                                 required={true}
+                                forceShowError={inputErrors.password}
+                                disableForceError={disableForceError('password')}
                                 onChange={setPassword}
                                 maxlength={20}
                                 valid={!!password.length}
@@ -86,7 +101,11 @@ function Login() {
                         </div>
                         <div
                             className={LoginCss.button}
-                            onClick={allowSubmit ? null : () => showError(defaultError)}
+                            onClick={
+                                allowSubmit
+                                    ? null
+                                    : () => showError(defaultError, getEmptyFields())
+                            }
                         >
                             <Button
                                 text={'Sign in'}
@@ -129,6 +148,17 @@ function Login() {
         />
     );
 
+    function disableForceError(field) {
+        return () => setInputErrors((prevState) => ({ ...prevState, [field]: false }));
+    }
+
+    function getEmptyFields() {
+        const emptyFields = [];
+        if (!email.length) emptyFields.push('email');
+        if (!password.length) emptyFields.push('password');
+        return emptyFields;
+    }
+
     async function onLoginSubmit() {
         try {
             setIsLoading(true);
@@ -147,13 +177,13 @@ function Login() {
                     token: result.token,
                     expiresIn: 30,
                     tokenType: 'Bearer',
-                    authState: { name: result.name, id: result.id },
+                    authState: { name: result.name },
                 });
                 navigate('/myProfile', { replace: true });
             }
         } catch (error) {
             setIsLoading(false);
-            showError('Error connecting to login server, try again later', 4500);
+            showError('Error connecting to login server, try again later', null, 4500);
         }
     }
 }

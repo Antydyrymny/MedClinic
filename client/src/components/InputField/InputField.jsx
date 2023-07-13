@@ -15,6 +15,8 @@ const InputField = forwardRef(function InputField(props, ref) {
         max = null,
         valid,
         showError = true,
+        forceShowError = false,
+        disableForceError = null,
         errorMessage = 'Fill in the required field',
         customStyles = null,
     } = props;
@@ -24,7 +26,7 @@ const InputField = forwardRef(function InputField(props, ref) {
 
     allowShowError.current =
         showError && required && (allowShowError.current || isFocused);
-    const error = !valid && allowShowError.current && !isFocused;
+    const error = forceShowError ? true : !valid && allowShowError.current && !isFocused;
 
     useImperativeHandle(
         ref,
@@ -70,6 +72,7 @@ const InputField = forwardRef(function InputField(props, ref) {
                     onChange(e.target.value);
                 }}
                 onFocus={() => {
+                    if (forceShowError) disableForceError();
                     if (placeholder) {
                         inputRef.current.placeholder = placeholder;
                     }

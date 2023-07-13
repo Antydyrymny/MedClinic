@@ -1,5 +1,6 @@
 .wrapper {
     position: relative;
+    margin-bottom: 0.5rem;
 }
 
 .main,
@@ -30,6 +31,30 @@
 .confirm,
 .confirmMobile {
     width: 24rem;
+}
+
+.confirmBurron {
+    position: relative;
+}
+
+.submitError,
+.submitErrorMobile {
+    display: none;
+    color: #ae1f31;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%);
+    position: absolute;
+}
+
+.submitErrorMobile {
+    margin-top: 2rem;
+}
+
+.submitErrorShow {
+    display: block;
 }
 
 .confirmMobile {
@@ -83,6 +108,10 @@
 }
 
 @media (max-width: 700px) {
+    .wrapper {
+        margin-bottom: 0;
+    }
+
     .footer {
         display: none;
     }
@@ -94,5 +123,21 @@
 
     .footerMobile>* {
         display: flex;
+    }
+}
+
+@media (max-width: 300px) {
+
+    .back,
+    .home {
+        scale: 0.7;
+    }
+
+    .back {
+        left: -0.5rem;
+    }
+
+    .home {
+        right: -1.2rem;
     }
 }

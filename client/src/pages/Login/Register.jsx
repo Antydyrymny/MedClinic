@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
 import useGetShowSubmitError from '../../hooks/useGetShowSubmitError';
+import useEditDateInputOnBlur from '../../hooks/useEditDateInputOnBlur';
 import IMask from 'imask';
 import LoginPageWrapperComponent from './LoginPageWrapperComponent';
 import { validateClientData } from '../../utils/validateClientData';
@@ -23,6 +24,14 @@ const clientSchema = {
     telephone: '',
     password: '',
 };
+const errorSchema = {
+    surname: false,
+    name: false,
+    birthday: false,
+    email: false,
+    telephone: false,
+    password: false,
+};
 const defaultError = 'Please, fill all fields and agree to terms and conditions';
 
 function Register() {
@@ -31,31 +40,16 @@ function Register() {
 
     const [client, setClient] = useState(clientSchema);
     const minBday = dayjs()
-        .year(dayjs().year() - 100)
+        .year(dayjs().year() - 120)
         .format('YYYY-MM-DD');
     const maxBday = dayjs().format('YYYY-MM-DD');
     const birthdayRef = useRef(null);
-
-    useEffect(() => {
-        function onBlur() {
-            const enteredDate = dayjs(client.birthday);
-            let finalDate = enteredDate;
-            if (enteredDate.isValid && enteredDate.isBefore(minBday)) {
-                finalDate = minBday;
-            } else if (enteredDate.isValid && enteredDate.isAfter(maxBday)) {
-                finalDate = maxBday;
-            }
-            setClient((prevClient) => ({ ...prevClient, birthday: finalDate }));
-        }
-
-        let birthdayInputField = birthdayRef.current;
-        if (birthdayInputField) {
-            birthdayInputField.addEventListener('blur', onBlur);
-        }
-        return () => birthdayInputField.removeEventListener('blur', onBlur);
-    }, [client.birthday, maxBday, minBday]);
+    useEditDateInputOnBlur(client, setClient, birthdayRef);
 
     const [passwordType, setPasswordType] = useState('password');
+    const [showPasswordError, setShowPasswordError] = useState(true);
+    const passwordRef = useRef(null);
+
     const [termsAccepted, setTermsAccepted] = useState(false);
     const allowSubmit =
         termsAccepted &&
@@ -68,6 +62,8 @@ function Register() {
             password: true,
         });
 
+    const [inputErrors, setInputErrors] = useState(errorSchema);
+
     const [isLoading, setIsLoading] = useState(false);
 
     const [errorMessage, setErrorMessage] = useState(defaultError);
@@ -78,10 +74,8 @@ function Register() {
         showSubmitErrorTimerRef,
         setIsShowingSubmitError,
         allowSubmit,
+        setInputErrors,
     });
-
-    const [showPasswordError, setShowPasswordError] = useState(true);
-    const passwordRef = useRef(null);
 
     return (
         <LoginPageWrapperComponent
@@ -90,7 +84,11 @@ function Register() {
                     <p className={LoginCss.subheading}>Sign up</p>
                     <form
                         className={LoginCss.form}
-                        onSubmit={allowSubmit ? onFormSubmit : null}
+                        onSubmit={
+                            allowSubmit
+                                ? onFormSubmit
+                                : () => showError(defaultError, getEmptyFields())
+                        }
                     >
                         <div className={LoginCss.input}>
                             <InputField
@@ -99,6 +97,8 @@ function Register() {
                                 label={'Surname'}
                                 autoComplete={'family-name'}
                                 required={true}
+                                forceShowError={inputErrors.surname}
+                                disableForceError={disableForceError('surname')}
                                 onChange={onChange('surname')}
                                 maxlength={30}
                                 valid={validateClientData(client, { surname: true })}
@@ -112,6 +112,8 @@ function Register() {
                                 label={'Name'}
                                 autoComplete={'given-name'}
                                 required={true}
+                                forceShowError={inputErrors.name}
+                                disableForceError={disableForceError('name')}
                                 onChange={onChange('name')}
                                 maxlength={25}
                                 valid={validateClientData(client, { name: true })}
@@ -126,6 +128,8 @@ function Register() {
                                 label={'Date of birth'}
                                 autoComplete={'bday'}
                                 required={true}
+                                forceShowError={inputErrors.birthday}
+                                disableForceError={disableForceError('birthday')}
                                 onChange={onChange('birthday')}
                                 min={minBday}
                                 max={maxBday}
@@ -140,6 +144,8 @@ function Register() {
                                 label={'Email'}
                                 autoComplete={'email'}
                                 required={true}
+                                forceShowError={inputErrors.email}
+                                disableForceError={disableForceError('email')}
                                 onChange={onChange('email')}
                                 maxlength={40}
                                 valid={validateClientData(client, { email: true })}
@@ -155,6 +161,8 @@ function Register() {
                                 placeholder={'+1 (___) ___ __ __'}
                                 autoComplete={'tel'}
                                 required={true}
+                                forceShowError={inputErrors.telephone}
+                                disableForceError={disableForceError('telephone')}
                                 onChange={onTelChange}
                                 maxlength={20}
                                 valid={validateClientData(client, { telephone: true })}
@@ -169,6 +177,8 @@ function Register() {
                                 label={'Password'}
                                 autoComplete={'off'}
                                 required={true}
+                                forceShowError={inputErrors.password}
+                                disableForceError={disableForceError('password')}
                                 onChange={onChange('password')}
                                 maxlength={25}
                                 valid={validateClientData(client, { password: true })}
@@ -228,7 +238,11 @@ function Register() {
                         </div>
                         <div
                             className={LoginCss.button}
-                            onClick={allowSubmit ? null : () => showError(defaultError)}
+                            onClick={
+                                allowSubmit
+                                    ? null
+                                    : () => showError(defaultError, getEmptyFields())
+                            }
                         >
                             <Button
                                 text={'Sign up'}
@@ -271,11 +285,20 @@ function Register() {
         onChange('telephone')(maskedValue);
     }
 
+    function disableForceError(field) {
+        return () => setInputErrors((prevState) => ({ ...prevState, [field]: false }));
+    }
+
+    function getEmptyFields() {
+        return Object.keys(client).filter(
+            (key) => !validateClientData(client, { [key]: true })
+        );
+    }
+
     async function onFormSubmit() {
         try {
             setIsLoading(true);
-            // const serverURL = import.meta.env.VITE_SERVER_URL;
-            const serverURL = 'http://localhost:3300/';
+            const serverURL = import.meta.env.VITE_SERVER_URL;
             const response = await fetch(serverURL + 'api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -291,19 +314,28 @@ function Register() {
             const result = await response.json();
             setIsLoading(false);
             if (response.status === 409) {
-                showError(result.error);
+                if (
+                    result.error.includes('Telephonw') &&
+                    result.error.includes('email')
+                ) {
+                    showError(result.error, ['telephone', 'email']);
+                } else if (result.error.includes('Telephone')) {
+                    showError(result.error, ['telephone']);
+                } else if (result.error.includes('email')) {
+                    showError(result.error, ['email']);
+                }
             } else if (response.status === 200) {
                 signIn({
                     token: result.token,
                     expiresIn: 30,
                     tokenType: 'Bearer',
-                    authState: { name: result.name, id: result.id },
+                    authState: { name: result.name },
                 });
                 navigate('/myProfile', { replace: true });
             }
         } catch (error) {
             setIsLoading(false);
-            showError('Error connecting to login server, try again later', 4500);
+            showError('Error connecting to login server, try again later', null, 4500);
         }
     }
 }
