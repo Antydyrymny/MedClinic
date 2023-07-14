@@ -8,6 +8,7 @@ const InputField = forwardRef(function InputField(props, ref) {
         label,
         value,
         onChange,
+        onBlur,
         required = false,
         placeholder = null,
         maxlength = null,
@@ -83,6 +84,7 @@ const InputField = forwardRef(function InputField(props, ref) {
                         inputRef.current.placeholder = '';
                     }
                     setIsFocused(false);
+                    if (onBlur) onBlur();
                 }}
             />
             <p

@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
 import useGetShowSubmitError from '../../hooks/useGetShowSubmitError';
-import useEditDateInputOnBlur from '../../hooks/useEditDateInputOnBlur';
 import IMask from 'imask';
 import LoginPageWrapperComponent from './LoginPageWrapperComponent';
 import { validateClientData } from '../../utils/validateClientData';
@@ -44,7 +43,6 @@ function Register() {
         .format('YYYY-MM-DD');
     const maxBday = dayjs().format('YYYY-MM-DD');
     const birthdayRef = useRef(null);
-    useEditDateInputOnBlur(client, setClient, birthdayRef);
 
     const [passwordType, setPasswordType] = useState('password');
     const [showPasswordError, setShowPasswordError] = useState(true);
@@ -133,6 +131,7 @@ function Register() {
                                 forceShowError={inputErrors.birthday}
                                 disableForceError={disableForceError('birthday')}
                                 onChange={onChange('birthday')}
+                                onBlur={onBirthdayBlur}
                                 min={minBday}
                                 max={maxBday}
                                 valid={validateClientData(client, { birthday: true })}
@@ -287,6 +286,15 @@ function Register() {
         });
         const maskedValue = masked.resolve(value);
         onChange('telephone')(maskedValue);
+    }
+
+    function onBirthdayBlur() {
+        const enteredDate = dayjs(client.birthday);
+        if (enteredDate.isValid && enteredDate.isBefore(minBday)) {
+            setClient((prevClient) => ({ ...prevClient, birthday: minBday }));
+        } else if (enteredDate.isValid && enteredDate.isAfter(maxBday)) {
+            setClient((prevClient) => ({ ...prevClient, birthday: maxBday }));
+        }
     }
 
     function disableForceError(field) {
