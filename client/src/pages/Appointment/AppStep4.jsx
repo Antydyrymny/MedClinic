@@ -89,7 +89,7 @@ function AppStep4() {
                     }`}
                 >
                     {isAuthenticated() ? (
-                        <>
+                        <div className={AppStep4Css.mainContentAuthenticated}>
                             <div className={AppStep4Css.summaryAuthenticated}>
                                 <h4 className={AppStep4Css.heading}>
                                     appointment summary
@@ -106,7 +106,7 @@ function AppStep4() {
                                     isAuthenticated={true}
                                 />
                             </div>
-                        </>
+                        </div>
                     ) : (
                         <>
                             <div className={AppStep4Css.summary}>
