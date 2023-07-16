@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { RequireAuth, useIsAuthenticated } from 'react-auth-kit';
+import { useIsAuthenticated } from 'react-auth-kit';
 import useClearSessionStorageOnURLMove from './hooks/useClearSessionStorageOnURLMove ';
 import './App.css';
 import MainLayout from './pages/MainLayout/MainLayout';
@@ -70,8 +70,8 @@ function App() {
                     <Route path='/app/step3' element={<AppStep3 />} />
                     <Route path='/app/step4' element={<AppStep4 />} />
                     <Route
-                        path={'/app/*/step4'}
-                        element={<PrivateRoute Component={MyProfile} />}
+                        path={'/app/:clientName/step4'}
+                        element={<PrivateRoute Component={AppStep4} />}
                     />
                     <Route path='/app/*' element={<Navigate to='/app/step1' replace />} />
                 </Route>

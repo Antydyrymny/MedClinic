@@ -31,19 +31,28 @@ const errorSchema = {
     telephone: false,
     password: false,
 };
-const defaultError = 'Please, fill all fields and agree to terms and conditions';
+const defaultSubmitError = 'Please, fill all fields and agree to terms and conditions';
+const defaultInputError = 'Fill in the required field';
 
 function Register() {
     const signIn = useSignIn();
     const navigate = useNavigate();
 
     const [client, setClient] = useState(clientSchema);
+
+    // handling min/max birthday date
     const minBday = dayjs()
         .year(dayjs().year() - 120)
         .format('YYYY-MM-DD');
     const maxBday = dayjs().format('YYYY-MM-DD');
     const birthdayRef = useRef(null);
 
+    // showing different error messages on inputs
+    const [emailErrorMsg, setEmailErrorMsg] = useState(defaultInputError);
+    const [telephoneErrorMsg, setTelephoneErrorMsg] = useState(defaultInputError);
+    const [passwordErrorMsg, setPasswordErrorMsg] = useState(defaultInputError);
+
+    // handling show/hide password button
     const [passwordType, setPasswordType] = useState('password');
     const [showPasswordError, setShowPasswordError] = useState(true);
     const passwordRef = useRef(null);
@@ -64,7 +73,7 @@ function Register() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [errorMessage, setErrorMessage] = useState(defaultError);
+    const [errorMessage, setErrorMessage] = useState(defaultSubmitError);
     const showSubmitErrorTimerRef = useRef(null);
     const [isShowingSubmitError, setIsShowingSubmitError] = useState(false);
     const showError = useGetShowSubmitError({
@@ -87,7 +96,7 @@ function Register() {
                                 ? null
                                 : allowSubmit
                                 ? onFormSubmit
-                                : () => showError(defaultError, getEmptyFields())
+                                : () => showError(defaultSubmitError, getEmptyFields())
                         }
                     >
                         <div className={LoginCss.input}>
@@ -147,10 +156,10 @@ function Register() {
                                 required={true}
                                 forceShowError={inputErrors.email}
                                 disableForceError={disableForceError('email')}
-                                onChange={onChange('email')}
+                                onChange={onEmailChange}
                                 maxlength={40}
                                 valid={validateClientData(client, { email: true })}
-                                errorMessage={'Invalid email'}
+                                errorMessage={emailErrorMsg}
                                 customStyles={LoginCss}
                             />
                         </div>
@@ -167,6 +176,7 @@ function Register() {
                                 onChange={onTelChange}
                                 maxlength={20}
                                 valid={validateClientData(client, { telephone: true })}
+                                errorMessage={telephoneErrorMsg}
                                 customStyles={LoginCss}
                             />
                         </div>
@@ -180,13 +190,11 @@ function Register() {
                                 required={true}
                                 forceShowError={inputErrors.password}
                                 disableForceError={disableForceError('password')}
-                                onChange={onChange('password')}
+                                onChange={onPasswordChange}
                                 maxlength={25}
                                 valid={validateClientData(client, { password: true })}
                                 showError={showPasswordError}
-                                errorMessage={
-                                    'Password must be at least 4 characters long'
-                                }
+                                errorMessage={passwordErrorMsg}
                                 customStyles={LoginCss}
                             />
                             <div
@@ -242,7 +250,8 @@ function Register() {
                             onClick={
                                 allowSubmit
                                     ? null
-                                    : () => showError(defaultError, getEmptyFields())
+                                    : () =>
+                                          showError(defaultSubmitError, getEmptyFields())
                             }
                         >
                             <Button
@@ -280,12 +289,26 @@ function Register() {
             setClient((prevClient) => ({ ...prevClient, [inputName]: value }));
     }
 
+    function onEmailChange(value) {
+        setEmailErrorMsg(value.length ? 'invalid email' : defaultInputError);
+        onChange('email')(value);
+    }
+
     function onTelChange(value) {
+        setTelephoneErrorMsg(defaultInputError);
         const masked = IMask.createMask({
             mask: '+1 (000) 000 00 00',
         });
         const maskedValue = masked.resolve(value);
         onChange('telephone')(maskedValue);
+    }
+
+    function onPasswordChange(value) {
+        console.log(value.length);
+        setPasswordErrorMsg(
+            value.length ? 'Password must be at least 4 symbols long' : defaultInputError
+        );
+        onChange('password')(value);
     }
 
     function onBirthdayBlur() {
@@ -332,8 +355,10 @@ function Register() {
                 ) {
                     showError(result.error, ['telephone', 'email']);
                 } else if (result.error.includes('Telephone')) {
+                    setTelephoneErrorMsg(result.error);
                     showError(result.error, ['telephone']);
-                } else if (result.error.includes('email')) {
+                } else if (result.error.includes('Email')) {
+                    setEmailErrorMsg(result.error);
                     showError(result.error, ['email']);
                 }
             } else if (response.status === 200) {
@@ -341,7 +366,7 @@ function Register() {
                     token: result.token,
                     expiresIn: 30,
                     tokenType: 'Bearer',
-                    authState: { name: result.name },
+                    authState: { name: result.name, surname: result.surname },
                 });
                 navigate('/myProfile', { replace: true });
             }

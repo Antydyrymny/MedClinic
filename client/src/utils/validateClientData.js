@@ -5,7 +5,10 @@ export function validateClientData(client, params) {
         (surname && !client.surname.length) ||
         (name && !client.name.length) ||
         (birthday && client.birthday.length < 10) ||
-        (email && !/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/.test(client.email)) ||
+        (email &&
+            !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                client.email.toLowerCase()
+            )) ||
         (telephone && client.telephone.length < 18) ||
         (password && client.password.length < 4)
     )

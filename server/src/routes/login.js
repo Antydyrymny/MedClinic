@@ -34,6 +34,7 @@ router.post('/', async (req, res) => {
                 message: 'Login successful',
                 token: jwtToken,
                 name: clientWithEmail.name,
+                surname: clientWithEmail.surname,
             });
         }
     } catch (error) {

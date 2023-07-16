@@ -22,6 +22,11 @@
     align-items: center;
 }
 
+.largeRightMyProfile {
+    display: flex;
+    gap: 1rem;
+}
+
 .firstBar,
 .smallFirstBar {
     justify-content: space-between;
@@ -33,10 +38,26 @@
     border-bottom: 1px solid #f0f4fc;
 }
 
-.secondBar {
+.secondBar,
+.secondBarMyProfile {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.secondBarMyProfile {
+    gap: 0.75rem;
+}
+
+.secondBarMyProfile a {
+    padding-top: 3px;
+}
+
+.secondBarMyProfile img {
+    cursor: pointer;
+}
+
+.secondBar {
     margin-inline: 1.5rem;
     border-bottom: 1px solid #f0f4fc;
 }
@@ -73,6 +94,13 @@
 .smallFirstBarRightIcons {
     display: flex;
     gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.smallFirstBarRightIcons img {
+    cursor: pointer;
+    scale: 0.9;
 }
 
 .smallSecondBar {

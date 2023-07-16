@@ -10,7 +10,7 @@ import { expandDoctors } from 'src/utils/expandDoctors';
 import DoctorShortDescription from '../DoctorShortDescription/DoctorShortDescription';
 import AppSummaryCss from './AppSummary.module.css';
 
-function AppSummary() {
+function AppSummary({ clientSurname = null, clientName = null }) {
     const appParams = useContext(AppointmentFilterContext)[0];
     const doctors = useContext(DoctorsAllContext)[0];
     const specialities = useContext(SpecialitiesContext)[0];
@@ -64,6 +64,14 @@ function AppSummary() {
             )}
             {appParams.onlineAppointment && (
                 <div className={AppSummaryCss.online}>Online appointment</div>
+            )}
+            {clientName && (
+                <div className={AppSummaryCss.clientBlock}>
+                    <div className={AppSummaryCss.info}>
+                        {clientSurname + ' ' + clientName}
+                    </div>
+                    <div className={AppSummaryCss.heading}>client</div>
+                </div>
             )}
         </div>
     );

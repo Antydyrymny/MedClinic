@@ -8,13 +8,27 @@
     display: flex;
 }
 
-.info {
-    width: 30%;
+.mainAuthenticated {
+    flex-direction: column;
+    align-items: center;
 }
 
 .summary {
     width: 25%;
     margin-right: 4rem;
+}
+
+.summaryAuthenticated {
+    margin-bottom: 1rem;
+    margin-right: 0;
+}
+
+.info {
+    width: 30%;
+}
+
+.infoAuthenticated {
+    width: 60%;
 }
 
 .footer {
@@ -123,6 +137,11 @@
 
     .footerMobile>* {
         display: flex;
+    }
+
+    .info,
+    .infoAuthenticated {
+        width: 100%;
     }
 }
 

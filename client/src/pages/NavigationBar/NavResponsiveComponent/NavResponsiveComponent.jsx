@@ -1,10 +1,14 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthUser } from 'react-auth-kit';
+import { useIsAuthenticated, useAuthUser } from 'react-auth-kit';
+import useGetHandleLogout from '../../../hooks/useGetHanleLogout';
 import useGetDragNDropHandler from '../../../hooks/useGetDragNDropHandler';
 import Logo from 'src/pages/NavigationBar/Logo/Logo';
 import SmallLogo from 'src/pages/NavigationBar/Logo/SmallLogo';
 import MyProfileSvg from '../../../assets/Pictogram/MyProfileSvg';
+import logout from '../../../assets/Pictogram/logout24px.png';
+import logoutSmall from '../../../assets/Pictogram/logout16px.png';
+import LogoutSvg from '../../../assets/Pictogram/LogoutSvg';
 import NavList from '../NavList/NavList';
 import NavDropDown from '../NavDropDown/NavDropDown';
 import ModalFeedbackForm from '../../../components/Modal/ModalFeedbackForm';
@@ -15,8 +19,11 @@ import ModalButtonCss from './ModalButton.module.css';
 import NavResponsiveCss from './NavResponsiveComponent.module.css';
 
 function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSize }) {
+    const isAuthenticated = useIsAuthenticated();
     const auth = useAuthUser();
-    const userName = auth()?.name || 'my profile';
+    const userName = isAuthenticated() ? auth().name : 'my profile';
+    const handleLogout = useGetHandleLogout();
+
     const dropDownref = useRef(null);
     const slidingNavList = useRef(null);
     const slidingNavListParent = useRef(null);
@@ -71,9 +78,14 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                                 </div>
                             </div>
                             {scrolling ? (
-                                <Link to='/myProfile'>
-                                    <MyProfileSvg />
-                                </Link>
+                                <div className={NavResponsiveCss.largeRightMyProfile}>
+                                    <Link to='/myProfile'>
+                                        <MyProfileSvg />
+                                    </Link>
+                                    {isAuthenticated() && (
+                                        <LogoutSvg onClick={() => handleLogout()} />
+                                    )}
+                                </div>
                             ) : null}
                             <Link to='/app/step1'>
                                 <Button
@@ -91,9 +103,21 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                                 close={close}
                                 onHamburgerClick={onHamburgerClick}
                             />
-                            <Link to='/myProfile' className={NavResponsiveCss.myProfile}>
-                                {userName}
-                            </Link>
+                            <div className={NavResponsiveCss.secondBarMyProfile}>
+                                <Link
+                                    to='/myProfile'
+                                    className={NavResponsiveCss.myProfile}
+                                >
+                                    {userName}
+                                </Link>
+                                {isAuthenticated() && (
+                                    <img
+                                        src={logout}
+                                        onClick={() => handleLogout()}
+                                        alt='logout'
+                                    />
+                                )}
+                            </div>
                         </div>
                     )}
                     <NavDropDown
@@ -120,6 +144,13 @@ function NavResponsiveComponent({ opened, setOpened, scrolling = false, screenSi
                             <Link to='/myProfile'>
                                 <MyProfileSvg large={false} />
                             </Link>
+                            {isAuthenticated() && (
+                                <img
+                                    src={logout}
+                                    onClick={() => handleLogout()}
+                                    alt='logout'
+                                />
+                            )}
                             <Link to={'tel:1234567'}>
                                 <TelephoneSvg />
                             </Link>

@@ -6,12 +6,22 @@ import IMask from 'imask';
 import { validateClientData } from 'src/utils/validateClientData';
 import ClientFormCss from './ClientForm.module.css';
 
-function ClientForm({ clientData, termsAcceptedData, inputErrorsState }) {
+function ClientForm({
+    clientData,
+    termsAcceptedData,
+    inputErrors,
+    setInputErrors,
+    emailErrorMsg,
+    setEmailErrorMsg,
+    telephoneErrorMsg,
+    setTelephoneErrorMsg,
+    defaultInputError,
+    isAuthenticated,
+}) {
     const [client, setClient] = clientData;
     const [termsAccepted, setTermsAccepted] = termsAcceptedData;
-    const [inputErrors, setInputErrors] = inputErrorsState;
 
-    return (
+    return !isAuthenticated ? (
         <div className={ClientFormCss.wrapper}>
             <fieldset className={ClientFormCss.fieldset}>
                 <div className={ClientFormCss.input}>
@@ -72,6 +82,7 @@ function ClientForm({ clientData, termsAcceptedData, inputErrorsState }) {
                         onChange={onTelChange}
                         maxlength={18}
                         valid={validateClientData(client, { telephone: true })}
+                        errorMessage={telephoneErrorMsg}
                     />
                 </div>
                 <div className={ClientFormCss.input}>
@@ -83,13 +94,53 @@ function ClientForm({ clientData, termsAcceptedData, inputErrorsState }) {
                         required={true}
                         forceShowError={inputErrors.email}
                         disableForceError={disableForceError('email')}
-                        onChange={onChange('email')}
+                        onChange={onEmailChange}
                         maxlength={40}
                         valid={validateClientData(client, { email: true })}
-                        errorMessage={'Invalid email'}
+                        errorMessage={emailErrorMsg}
                     />
                 </div>
             </fieldset>
+            <fieldset className={ClientFormCss.fieldset}>
+                <Textarea
+                    value={client.comment}
+                    placeholder={
+                        'Please describe what is troubling you, your symptoms, or the purpose of your visit*'
+                    }
+                    onChange={onChange('comment')}
+                    rows={5}
+                />
+            </fieldset>
+            <fieldset className={ClientFormCss.fieldset}>
+                <div className={ClientFormCss.agree}>
+                    <Checkbox
+                        checked={termsAccepted}
+                        onChange={(boolean) => setTermsAccepted(boolean)}
+                        leftAligned={true}
+                        highlight={false}
+                        pointer={false}
+                    >
+                        {
+                            <div className={ClientFormCss.checkbox}>
+                                <p className={ClientFormCss.checkboxText}>
+                                    {`I agree to the processing of my personal data and to
+                                    the privacy policy, `}
+                                </p>
+                                <a
+                                    className={ClientFormCss.checkboxDownload}
+                                    href={termsAndConditions}
+                                    download='terms-and-conditions.txt'
+                                >
+                                    {`including the terms and conditions.`}
+                                </a>
+                            </div>
+                        }
+                    </Checkbox>
+                </div>
+            </fieldset>
+        </div>
+    ) : (
+        <div className={ClientFormCss.wrapper}>
             <fieldset className={ClientFormCss.fieldset}>
                 <Textarea
                     value={client.comment}
@@ -147,11 +198,17 @@ function ClientForm({ clientData, termsAcceptedData, inputErrorsState }) {
     }
 
     function onTelChange(value) {
+        setTelephoneErrorMsg(defaultInputError);
         const masked = IMask.createMask({
             mask: '+1 (000) 000 00 00',
         });
         const maskedValue = masked.resolve(value);
         onChange('telephone')(maskedValue);
+    }
+
+    function onEmailChange(value) {
+        setEmailErrorMsg(value.length ? 'invalid email' : defaultInputError);
+        onChange('email')(value);
     }
 
     function disableForceError(field) {

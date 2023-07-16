@@ -8,8 +8,8 @@ function MyProfile() {
     const location = useLocation();
     const auth = useAuthUser();
     const finalLocation = `/myProfile/${auth().name}`;
-
     useRedirect(finalLocation, location.pathname !== finalLocation);
+
     const handleLogout = useGetHandleLogout();
 
     return (

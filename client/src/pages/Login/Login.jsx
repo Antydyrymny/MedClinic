@@ -181,7 +181,7 @@ function Login() {
                     token: result.token,
                     expiresIn: 30,
                     tokenType: 'Bearer',
-                    authState: { name: result.name },
+                    authState: { name: result.name, surname: result.surname },
                 });
                 navigate('/myProfile', { replace: true });
             }

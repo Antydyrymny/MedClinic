@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useSessionStorageState from './useSessionStorageState';
 import { prevPageKey } from '../data/SessionStorageKeys';
@@ -8,7 +8,7 @@ export default function useInformOfPageRefresh() {
 
     const [prevPage, setPrevPage] = useSessionStorageState(prevPageKey, null);
     const location = useLocation();
-    useEffect(() => {
+    useLayoutEffect(() => {
         window.onbeforeunload = function () {
             setPrevPage({ location: location.pathname, time: Date.now() });
         };
@@ -17,7 +17,7 @@ export default function useInformOfPageRefresh() {
         };
     }, [location.pathname, setPrevPage]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const curPath = location.pathname;
         if (
             prevPage &&
