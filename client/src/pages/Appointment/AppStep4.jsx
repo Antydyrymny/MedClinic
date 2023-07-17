@@ -1,7 +1,8 @@
-import { useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useIsAuthenticated, useAuthUser } from 'react-auth-kit';
+import { useState, useRef, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useIsAuthenticated, useAuthUser, useSignIn } from 'react-auth-kit';
 import useRedirect from '../../hooks/useRedirect';
+import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import AppSummary from './components/AppSummary/AppSummary';
 import useGetShowSubmitError from '../../hooks/useGetShowSubmitError';
 import ClientForm from './components/ClientForm/ClientForm';
@@ -9,7 +10,9 @@ import Button from '../../components/Button/Button';
 import BackButton from './components/BackButton/BackButton';
 import HomeButton from './components/HomeButton/HomeButton';
 import Modal from '../../components/Modal/Modal';
+import FeedbackSuccess from '../../components/Feedback/FeedbackSuccess';
 import { validateClientData } from 'src/utils/validateClientData';
+import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import AppStep4Css from './AppStep4.module.css';
 
 const defaultInputError = 'Fill in the required field';
@@ -30,26 +33,35 @@ const errorSchema = {
     telephone: false,
 };
 const defaultSubmitError = 'Please, fill all fields and agree to terms and conditions';
+const submitErrorIfAuthenticated = 'Please, agree to terms and conditions';
 
 function AppStep4() {
     const location = useLocation();
+    const navigate = useNavigate();
     const isAuthenticated = useIsAuthenticated();
+    const signIn = useSignIn();
     const auth = useAuthUser();
     let finalLocation = null;
     if (isAuthenticated()) finalLocation = `/app/${auth().name}/step4`;
-    useRedirect(finalLocation, isAuthenticated && location.pathname !== finalLocation);
+    const [allowRedirect, setAllowRedirect] = useState(true);
+    useRedirect(
+        finalLocation,
+        !allowRedirect && isAuthenticated && location.pathname !== finalLocation
+    );
 
+    const [appParams, setAppParams] = useContext(AppointmentFilterContext);
     const [client, setClient] = useState(clientSchema);
     const [termsAccepted, setTermsAccepted] = useState(false);
-    const allowSubmit =
-        termsAccepted &&
-        validateClientData(client, {
-            surname: true,
-            name: true,
-            birthday: true,
-            email: true,
-            telephone: true,
-        });
+    const allowSubmit = isAuthenticated()
+        ? termsAccepted
+        : termsAccepted &&
+          validateClientData(client, {
+              surname: true,
+              name: true,
+              birthday: true,
+              email: true,
+              telephone: true,
+          });
 
     const [emailErrorMsg, setEmailErrorMsg] = useState(defaultInputError);
     const [telephoneErrorMsg, setTelephoneErrorMsg] = useState(defaultInputError);
@@ -58,7 +70,9 @@ function AppStep4() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [errorMessage, setErrorMessage] = useState(defaultSubmitError);
+    const [errorMessage, setErrorMessage] = useState(
+        isAuthenticated() ? submitErrorIfAuthenticated : defaultSubmitError
+    );
     const showSubmitErrorTimerRef = useRef(null);
     const [isShowingSubmitError, setIsShowingSubmitError] = useState(false);
     const showError = useGetShowSubmitError({
@@ -71,18 +85,12 @@ function AppStep4() {
 
     const modalRef = useRef(null);
     const [timeslotAlreadyBookedError, setTimeslotAlreadyBookedError] = useState(false);
+    const [newProfileCreated, setNewProfileCreated] = useState(false);
 
     return (
         <div className={AppStep4Css.wrapper}>
-            <form
-                onSubmit={
-                    isLoading
-                        ? null
-                        : allowSubmit
-                        ? onFormSubmit
-                        : () => showError(defaultSubmitError, getEmptyFields())
-                }
-            >
+            <div onClick={() => modalRef.current.showModal()}>click</div>
+            <form onSubmit={getOnSubmitHandler()}>
                 <div
                     className={`${AppStep4Css.main} ${
                         isAuthenticated() ? AppStep4Css.mainAuthenticated : null
@@ -144,6 +152,8 @@ function AppStep4() {
                             onClick={
                                 allowSubmit
                                     ? null
+                                    : isAuthenticated()
+                                    ? () => showError(submitErrorIfAuthenticated)
                                     : () =>
                                           showError(defaultSubmitError, getEmptyFields())
                             }
@@ -153,10 +163,15 @@ function AppStep4() {
                                 submit={true}
                                 colored={'active'}
                                 notAllowed={!allowSubmit}
-                                onClick={
-                                    isLoading ? null : allowSubmit ? onFormSubmit : null
-                                }
+                                onClick={getOnSubmitHandler(true)}
                             />
+                            <div
+                                className={`${AppStep4Css.loading} ${
+                                    isLoading ? AppStep4Css.isLoading : null
+                                }`}
+                            >
+                                <LoadingSpinner text={false} customStyles={AppStep4Css} />
+                            </div>
                             <div
                                 className={`${AppStep4Css.submitError} ${
                                     isShowingSubmitError
@@ -177,7 +192,12 @@ function AppStep4() {
                         <div
                             className={AppStep4Css.confirmMobile}
                             onClick={
-                                allowSubmit ? null : () => showError(defaultSubmitError)
+                                allowSubmit
+                                    ? null
+                                    : isAuthenticated()
+                                    ? () => showError(submitErrorIfAuthenticated)
+                                    : () =>
+                                          showError(defaultSubmitError, getEmptyFields())
                             }
                         >
                             <Button
@@ -185,10 +205,15 @@ function AppStep4() {
                                 submit={true}
                                 colored={'active'}
                                 notAllowed={!allowSubmit}
-                                onClick={
-                                    isLoading ? null : allowSubmit ? onFormSubmit : null
-                                }
+                                onClick={getOnSubmitHandler(true)}
                             />
+                            <div
+                                className={`${AppStep4Css.loading} ${
+                                    isLoading ? AppStep4Css.isLoading : null
+                                }`}
+                            >
+                                <LoadingSpinner text={false} customStyles={AppStep4Css} />
+                            </div>
                             <div
                                 className={`${AppStep4Css.submitErrorMobile} ${
                                     isShowingSubmitError
@@ -210,11 +235,35 @@ function AppStep4() {
             </form>
             <Modal
                 modal={modalRef}
+                onClose={
+                    timeslotAlreadyBookedError
+                        ? onTimeslotAlreadyBookedError
+                        : () => navigate('/myProfile')
+                }
                 content={
                     timeslotAlreadyBookedError ? (
                         <div>You will be redirected</div>
+                    ) : newProfileCreated ? (
+                        <FeedbackSuccess
+                            message={'Your appointment has been successfully scheduled!'}
+                            children={
+                                <>
+                                    <p>
+                                        New Profile account was created for you with sign
+                                        in information set to your email and telephone
+                                        number
+                                    </p>
+                                    <p>You will be redirected to your Profile shortly</p>
+                                </>
+                            }
+                        />
                     ) : (
-                        <div>Final result</div>
+                        <FeedbackSuccess
+                            message={'Your appointment has been successfully scheduled!'}
+                            children={
+                                <p>You will be redirected to your Profile shortly</p>
+                            }
+                        />
                     )
                 }
             />
@@ -227,7 +276,126 @@ function AppStep4() {
         );
     }
 
-    function onFormSubmit() {}
+    function getOnSubmitHandler(button = false) {
+        if (isAuthenticated()) {
+            return allowSubmit
+                ? onAuthFormSubmit
+                : button
+                ? null
+                : () => showError(submitErrorIfAuthenticated);
+        } else
+            return allowSubmit
+                ? onNonAuthFormSubmit
+                : button
+                ? null
+                : () => showError(defaultSubmitError, getEmptyFields());
+    }
+
+    function onTimeslotAlreadyBookedError() {
+        setAppParams({ ...appParams, time: null, date: null });
+        navigate('/app/step3');
+    }
+
+    async function onNonAuthFormSubmit() {
+        try {
+            setIsLoading(true);
+            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const response = await fetch(serverURL + 'api/newClientAppointment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: client.name,
+                    surname: client.surname,
+                    birthday: client.birthday,
+                    email: client.email,
+                    telephone: client.telephone,
+                    doctorId: appParams.doctorId,
+                    date: appParams.date,
+                    time: appParams.time,
+                    followUp: appParams.followUp,
+                    specialityId: appParams.specialityId,
+                    onlineAppointment: appParams.onlineAppointment,
+                    clinicId: appParams.clinicId,
+                }),
+            });
+            const result = await response.json();
+            setIsLoading(false);
+            if (response.status === 400) {
+                showError(result.message);
+            } else if (response.status === 409) {
+                if (
+                    result.error.includes('Telephonw') &&
+                    result.error.includes('email')
+                ) {
+                    setTelephoneErrorMsg(result.error);
+                    setEmailErrorMsg(result.error);
+                    showError(result.error, ['telephone', 'email']);
+                } else if (result.error.includes('Telephone')) {
+                    setTelephoneErrorMsg(result.error);
+                    showError(result.error, ['telephone']);
+                } else if (result.error.includes('Email')) {
+                    setEmailErrorMsg(result.error);
+                    showError(result.error, ['email']);
+                } else if (result.error === 'Appointment slot is already booked') {
+                    setTimeslotAlreadyBookedError(true);
+                    modalRef.current.showModal();
+                    setTimeout(() => onTimeslotAlreadyBookedError(), 4000);
+                }
+            } else if (response.status === 200) {
+                setAllowRedirect(false);
+                setNewProfileCreated(true);
+                signIn({
+                    token: result.token,
+                    expiresIn: 30,
+                    tokenType: 'Bearer',
+                    authState: { name: result.name, surname: result.surname },
+                });
+                modalRef.current.showModal();
+                setTimeout(() => navigate('/myProfile'), 5000);
+            }
+        } catch (error) {
+            setIsLoading(false);
+            showError('Error connecting to login server, try again later', null, 4500);
+        }
+    }
+
+    async function onAuthFormSubmit() {
+        try {
+            setIsLoading(true);
+            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const headers = new Headers();
+            headers.append('Authorization', `Bearer ${auth().token}`);
+            headers.append('Content-Type', 'application/json');
+            const response = await fetch(serverURL + 'api/authAppointment', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    doctorId: appParams.doctorId,
+                    date: appParams.date,
+                    time: appParams.time,
+                    followUp: appParams.followUp,
+                    specialityId: appParams.specialityId,
+                    onlineAppointment: appParams.onlineAppointment,
+                    clinicId: appParams.clinicId,
+                }),
+            });
+            const result = await response.json();
+            setIsLoading(false);
+            if (response.status === 400) {
+                showError(result.message);
+            } else if (response.status === 409) {
+                setTimeslotAlreadyBookedError(true);
+                modalRef.current.showModal();
+                setTimeout(() => onTimeslotAlreadyBookedError(), 4000);
+            } else if (response.status === 200) {
+                modalRef.current.showModal();
+                setTimeout(() => navigate('/myProfile'), 4000);
+            }
+        } catch (error) {
+            setIsLoading(false);
+            showError('Error connecting to login server, try again later', null, 4500);
+        }
+    }
 }
 
 export default AppStep4;

@@ -45,10 +45,26 @@
 .confirm,
 .confirmMobile {
     width: 24rem;
+    position: relative;
 }
 
-.confirmBurron {
-    position: relative;
+.loading {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.isLoading {
+    display: flex;
+}
+
+.customLoadingSpinnerWrapper {
+    position: static;
+}
+
+.customLoadingSpinner {
+    height: 0rem;
 }
 
 .submitError,

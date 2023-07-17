@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
             process.env.JWT_SECRET
         );
         res.status(200).json({
-            message: 'Data saved successfully',
+            message: 'Account created',
             token: jwtToken,
             name,
             surname,

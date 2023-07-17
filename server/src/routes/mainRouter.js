@@ -6,6 +6,8 @@ import getBookedTimes from './getBokedTimes.js';
 import getDocClinicSpec from './getDocClinSpec.js';
 import register from './register.js';
 import login from './login.js';
+import authAppointment from './authAppointment.js';
+import newClientAppointment from './newClientAppointment.js';
 import protectedRoute from './testProtectedRoute.js';
 
 const router = express.Router();
@@ -17,6 +19,8 @@ router.use('/getBookedTimes', getBookedTimes);
 router.use('/getDocClinicSpec', getDocClinicSpec);
 router.use('/register', register);
 router.use('/login', login);
+router.use('/authAppointment', authAppointment);
+router.use('/newClientAppointment', newClientAppointment);
 router.use('/protected', protectedRoute);
 
 export default router;

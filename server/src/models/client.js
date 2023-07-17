@@ -7,7 +7,18 @@ const clientSchema = new mongoose.Schema({
     email: { type: String, unique: true },
     telephone: { type: String, unique: true },
     password: String,
-    bookedTimes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'BookedTime' }],
+    bookedTimes: [
+        {
+            appointmentId: { type: mongoose.Schema.Types.ObjectId, ref: 'BookedTime' },
+            date: Date,
+            time: String,
+            doctorId: Number,
+            followUp: Boolean,
+            specialityId: Number,
+            onlineAppointment: Boolean,
+            clinicId: Number,
+        },
+    ],
 });
 
 export const Client = mongoose.model('Client', clientSchema);

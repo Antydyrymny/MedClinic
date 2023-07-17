@@ -71,7 +71,12 @@ function App() {
                     <Route path='/app/step4' element={<AppStep4 />} />
                     <Route
                         path={'/app/:clientName/step4'}
-                        element={<PrivateRoute Component={AppStep4} />}
+                        element={
+                            <PrivateRoute
+                                Component={AppStep4}
+                                redirectRoute={'/app/step4'}
+                            />
+                        }
                     />
                     <Route path='/app/*' element={<Navigate to='/app/step1' replace />} />
                 </Route>

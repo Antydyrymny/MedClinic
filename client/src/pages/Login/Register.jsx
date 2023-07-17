@@ -353,6 +353,8 @@ function Register() {
                     result.error.includes('Telephonw') &&
                     result.error.includes('email')
                 ) {
+                    setTelephoneErrorMsg(result.error);
+                    setEmailErrorMsg(result.error);
                     showError(result.error, ['telephone', 'email']);
                 } else if (result.error.includes('Telephone')) {
                     setTelephoneErrorMsg(result.error);
