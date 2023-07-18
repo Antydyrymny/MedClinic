@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ScrollDownArrow from '../../components/ScrollDownArrow/ScrollDownArrow';
 import Button from '../../components/Button/Button';
-import mainPageImg from 'src/assets/Images/MainPageImg.png';
+import mainPageImg from 'src/assets/Images/MainPageImg.jpg';
 import HomeCss from './HomeMainBar.module.css';
 
 function HomeMainBar() {

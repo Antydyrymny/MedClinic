@@ -7,7 +7,6 @@ import Logo from 'src/pages/NavigationBar/Logo/Logo';
 import SmallLogo from 'src/pages/NavigationBar/Logo/SmallLogo';
 import MyProfileSvg from '../../../assets/Pictogram/MyProfileSvg';
 import logout from '../../../assets/Pictogram/logout24px.png';
-import logoutSmall from '../../../assets/Pictogram/logout16px.png';
 import LogoutSvg from '../../../assets/Pictogram/LogoutSvg';
 import NavList from '../NavList/NavList';
 import NavDropDown from '../NavDropDown/NavDropDown';

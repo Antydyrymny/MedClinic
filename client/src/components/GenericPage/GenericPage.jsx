@@ -3,7 +3,7 @@ import { WindowWidth } from '../../context/WindowDimensionsContext';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import mainIntroMP4 from 'src/assets/Video/mainIntro.mp4';
 // import mainIntroOGV from 'src/assets/Video/mainIntro.ogv';
-import aboutPoster from 'src/assets/Images/about.png';
+import aboutPoster from 'src/assets/Images/about.jpg';
 import ModalFeedbackForm from '../Modal/ModalFeedbackForm';
 import Button from '../Button/Button';
 import ScrollDownArrow from '../ScrollDownArrow/ScrollDownArrow';
