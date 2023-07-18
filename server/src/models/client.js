@@ -12,7 +12,7 @@ const clientSchema = new mongoose.Schema({
             appointmentId: { type: mongoose.Schema.Types.ObjectId, ref: 'BookedTime' },
             date: Date,
             time: String,
-            doctorId: Number,
+            docId: Number,
             followUp: Boolean,
             specialityId: Number,
             onlineAppointment: Boolean,

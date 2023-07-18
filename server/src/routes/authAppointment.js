@@ -11,17 +11,10 @@ const router = express.Router();
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const client = req.user;
     try {
-        const {
-            doctorId,
-            date,
-            time,
-            followUp,
-            specialityId,
-            onlineAppointment,
-            clinicId,
-        } = req.body;
+        const { docId, date, time, followUp, specialityId, onlineAppointment, clinicId } =
+            req.body;
 
-        let onConnection = [() => findData(BookedTime, { doctorId }, true)];
+        let onConnection = [() => findData(BookedTime, { docId }, true)];
         const [doctorAppointmentDays] = await establishConnection(onConnection);
 
         if (!doctorAppointmentDays) {
@@ -47,7 +40,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         }
         const newClientAppointment = {
             appointmentId: doctorAppointmentDays._id,
-            doctorId,
+            docId,
             date,
             time,
             followUp,
@@ -61,6 +54,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             () => saveData(Client, client),
         ];
         await establishConnection(onConnection);
+        res.status(200).json({ message: 'Appointment successfully booked' });
     } catch (error) {
         res.status(500).json({ error });
     }

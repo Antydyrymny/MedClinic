@@ -1,6 +1,7 @@
 import { useState, useRef, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useIsAuthenticated, useAuthUser, useSignIn } from 'react-auth-kit';
+import Cookies from 'js-cookie';
 import useRedirect from '../../hooks/useRedirect';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
 import AppSummary from './components/AppSummary/AppSummary';
@@ -43,10 +44,10 @@ function AppStep4() {
     const auth = useAuthUser();
     let finalLocation = null;
     if (isAuthenticated()) finalLocation = `/app/${auth().name}/step4`;
-    const [allowRedirect, setAllowRedirect] = useState(true);
+    const [newProfileCreated, setNewProfileCreated] = useState(false);
     useRedirect(
         finalLocation,
-        !allowRedirect && isAuthenticated && location.pathname !== finalLocation
+        isAuthenticated && !newProfileCreated && location.pathname !== finalLocation
     );
 
     const [appParams, setAppParams] = useContext(AppointmentFilterContext);
@@ -85,11 +86,9 @@ function AppStep4() {
 
     const modalRef = useRef(null);
     const [timeslotAlreadyBookedError, setTimeslotAlreadyBookedError] = useState(false);
-    const [newProfileCreated, setNewProfileCreated] = useState(false);
 
     return (
         <div className={AppStep4Css.wrapper}>
-            <div onClick={() => modalRef.current.showModal()}>click</div>
             <form onSubmit={getOnSubmitHandler()}>
                 <div
                     className={`${AppStep4Css.main} ${
@@ -242,18 +241,28 @@ function AppStep4() {
                 }
                 content={
                     timeslotAlreadyBookedError ? (
-                        <div>You will be redirected</div>
+                        <FeedbackSuccess
+                            message={'Unfortunately, timeslot is already booked'}
+                            children={
+                                <p className={AppStep4Css.modal}>
+                                    Redirecting to the timeslot selection step
+                                </p>
+                            }
+                            fail={true}
+                        />
                     ) : newProfileCreated ? (
                         <FeedbackSuccess
                             message={'Your appointment has been successfully scheduled!'}
                             children={
                                 <>
-                                    <p>
+                                    <p className={AppStep4Css.modal}>
                                         New Profile account was created for you with sign
                                         in information set to your email and telephone
                                         number
                                     </p>
-                                    <p>You will be redirected to your Profile shortly</p>
+                                    <p className={AppStep4Css.modal}>
+                                        You will be redirected to your Profile shortly
+                                    </p>
                                 </>
                             }
                         />
@@ -261,7 +270,9 @@ function AppStep4() {
                         <FeedbackSuccess
                             message={'Your appointment has been successfully scheduled!'}
                             children={
-                                <p>You will be redirected to your Profile shortly</p>
+                                <p className={AppStep4Css.modal}>
+                                    You will be redirected to your Profile shortly
+                                </p>
                             }
                         />
                     )
@@ -277,7 +288,8 @@ function AppStep4() {
     }
 
     function getOnSubmitHandler(button = false) {
-        if (isAuthenticated()) {
+        if (isLoading) return null;
+        else if (isAuthenticated()) {
             return allowSubmit
                 ? onAuthFormSubmit
                 : button
@@ -300,25 +312,30 @@ function AppStep4() {
         try {
             setIsLoading(true);
             const serverURL = import.meta.env.VITE_SERVER_URL;
-            const response = await fetch(serverURL + 'api/newClientAppointment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: client.name,
-                    surname: client.surname,
-                    birthday: client.birthday,
-                    email: client.email,
-                    telephone: client.telephone,
-                    doctorId: appParams.doctorId,
-                    date: appParams.date,
-                    time: appParams.time,
-                    followUp: appParams.followUp,
-                    specialityId: appParams.specialityId,
-                    onlineAppointment: appParams.onlineAppointment,
-                    clinicId: appParams.clinicId,
-                }),
-            });
+            // const response = await fetch(serverURL + 'api/newClientAppointment', {
+            const response = await fetch(
+                'http://localhost:3300/api/newClientAppointment',
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name: client.name,
+                        surname: client.surname,
+                        birthday: client.birthday,
+                        email: client.email,
+                        telephone: client.telephone.match(/\d/g).slice(1).join(''),
+                        docId: appParams.doctorId,
+                        date: appParams.date,
+                        time: appParams.time,
+                        followUp: appParams.followUp,
+                        specialityId: appParams.specialityId,
+                        onlineAppointment: appParams.onlineAppointment,
+                        clinicId: appParams.clinicId,
+                    }),
+                }
+            );
             const result = await response.json();
+
             setIsLoading(false);
             if (response.status === 400) {
                 showError(result.message);
@@ -342,7 +359,6 @@ function AppStep4() {
                     setTimeout(() => onTimeslotAlreadyBookedError(), 4000);
                 }
             } else if (response.status === 200) {
-                setAllowRedirect(false);
                 setNewProfileCreated(true);
                 signIn({
                     token: result.token,
@@ -351,7 +367,7 @@ function AppStep4() {
                     authState: { name: result.name, surname: result.surname },
                 });
                 modalRef.current.showModal();
-                setTimeout(() => navigate('/myProfile'), 5000);
+                setTimeout(() => navigate('/myProfile'), 7000);
             }
         } catch (error) {
             setIsLoading(false);
@@ -364,13 +380,15 @@ function AppStep4() {
             setIsLoading(true);
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const headers = new Headers();
-            headers.append('Authorization', `Bearer ${auth().token}`);
+
+            headers.append('Authorization', `Bearer ${Cookies.get('_auth')}`);
             headers.append('Content-Type', 'application/json');
-            const response = await fetch(serverURL + 'api/authAppointment', {
+            // const response = await fetch(serverURL + 'api/authAppointment', {
+            const response = await fetch('http://localhost:3300/api/authAppointment', {
                 method: 'POST',
-                headers,
+                headers: headers,
                 body: JSON.stringify({
-                    doctorId: appParams.doctorId,
+                    docId: appParams.doctorId,
                     date: appParams.date,
                     time: appParams.time,
                     followUp: appParams.followUp,
@@ -379,6 +397,7 @@ function AppStep4() {
                     clinicId: appParams.clinicId,
                 }),
             });
+
             const result = await response.json();
             setIsLoading(false);
             if (response.status === 400) {

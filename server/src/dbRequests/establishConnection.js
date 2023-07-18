@@ -9,13 +9,24 @@ dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 const connectionString = process.env.MONGODB_URL;
 
-export default async function establishConnection(functionsArray) {
+export default async function establishConnection(
+    functionsArray,
+    independentFunctions = true
+) {
     try {
         await mongoose.connect(connectionString, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        const results = await Promise.all(functionsArray.map(async (fn) => fn()));
+        let results;
+        if (independentFunctions) {
+            results = await Promise.all(functionsArray.map((fn) => fn()));
+        } else {
+            results = await functionsArray.reduce(
+                (promises, fn) => promises.then(fn),
+                Promise.resolve()
+            );
+        }
         console.log('Operations successful!');
         return results;
     } catch (error) {

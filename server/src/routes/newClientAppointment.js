@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
             birthday,
             email,
             telephone,
-            doctorId,
+            docId,
             date,
             time,
             followUp,
@@ -32,11 +32,12 @@ router.post('/', async (req, res) => {
             clinicId,
         } = req.body;
 
-        let onConnection = [() => findData(BookedTime, { doctorId }, true)];
+        let onConnection = [() => findData(BookedTime, { docId }, true)];
         const [doctorAppointmentDays] = await establishConnection(onConnection);
 
         if (!doctorAppointmentDays) {
             res.status(400).json({ error: 'No such doctor found' });
+            return;
         }
 
         const appointmenDay = doctorAppointmentDays.bookedDateTime.find((entry) =>
@@ -47,11 +48,12 @@ router.post('/', async (req, res) => {
             appointmenDay.times.find((appointment) => appointment.time === time)
         ) {
             res.status(409).json({ error: 'Appointment slot is already booked' });
+            return;
         }
 
         const newClientAppointment = {
             appointmentId: doctorAppointmentDays._id,
-            doctorId,
+            docId,
             date,
             time,
             followUp,
@@ -79,10 +81,10 @@ router.post('/', async (req, res) => {
             doctorAppointmentDays.bookedDateTime.push(newAppointmentDay);
         }
         onConnection = [
-            () => saveData(BookedTime, doctorAppointmentDays),
             () => saveData(Client, newClient),
+            () => saveData(BookedTime, doctorAppointmentDays),
         ];
-        await establishConnection(onConnection);
+        await establishConnection(onConnection, false);
 
         const jwtToken = jwt.sign(
             {
