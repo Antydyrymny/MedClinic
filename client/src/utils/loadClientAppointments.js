@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-export async function clientAppointments({
+export async function loadClientAppointments({
     setClientAppointments,
     setErrorWhileLoading,
 }) {

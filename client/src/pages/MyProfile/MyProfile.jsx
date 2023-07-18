@@ -55,8 +55,6 @@ function MyProfile() {
         setIsLoading,
     });
 
-    console.log(clientAppointments);
-
     return (
         <div className={MyProfileCss.wrapper}>
             <WindowWidth.Provider value={screenWidth}>
