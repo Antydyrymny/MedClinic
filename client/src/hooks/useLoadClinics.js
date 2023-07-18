@@ -19,12 +19,7 @@ export default function useLoadClinics({
                 }
                 const result = await response.json();
 
-                setClinics(
-                    result.clinics.sort((a, b) => {
-                        if (a.name > b.name) return 1;
-                        else return -1;
-                    })
-                );
+                setClinics(result.clinics.sort((a, b) => a.id - b.id));
                 setLoading(false);
             } catch (error) {
                 setError(error);
