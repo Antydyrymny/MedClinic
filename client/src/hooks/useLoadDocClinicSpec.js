@@ -29,12 +29,7 @@ export default function useLoadDocClinicSpec({
                         else return -1;
                     })
                 );
-                setClinics(
-                    result.clinics.sort((a, b) => {
-                        if (a.name > b.name) return 1;
-                        else return -1;
-                    })
-                );
+                setClinics(result.clinics.sort((a, b) => a.id - b.id));
                 setSpecialties(
                     result.specialties.sort((a, b) => {
                         if (a.name > b.name) return 1;
@@ -53,14 +48,3 @@ export default function useLoadDocClinicSpec({
         } else setLoading(false);
     }, []);
 }
-
-// [
-//     doctors,
-//     setDoctors,
-//     clinics,
-//     setClinics,
-//     specialties,
-//     setSpecialties,
-//     setLoading,
-//     setError,
-// ];

@@ -23,6 +23,9 @@ import Contacts from './pages/Contacts/Contacts';
 import Business from './pages/Business/Business';
 import Partners from './pages/Partners/Partners';
 import MyProfile from './pages/MyProfile/MyProfile';
+import MyAppointments from './pages/MyProfile/MyAppointments';
+import MyDoctors from './pages/MyProfile/MyDoctors';
+import MySettings from './pages/MyProfile/MySettings';
 import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import NotFound from './pages/NotFound/NotFound';
@@ -61,9 +64,17 @@ function App() {
                 <Route path='/register' element={<Register />} />
                 <Route path='/login' element={<Login />} />
                 <Route
-                    path={'/myProfile/*'}
+                    path={'/myProfile'}
                     element={<PrivateRoute Component={MyProfile} />}
                 />
+                <Route
+                    path={'/myProfile/:clientName'}
+                    element={<PrivateRoute Component={MyProfile} />}
+                >
+                    <Route index element={<MyAppointments />} />
+                    <Route path='myDoctors' element={<MyDoctors />} />
+                    <Route path='mySettings' element={<MySettings />} />
+                </Route>
                 <Route element={<AppointmentLayout />}>
                     <Route path='/app/step1' element={<AppStep1 />} />
                     <Route path='/app/step2' element={<AppStep2 />} />

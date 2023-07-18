@@ -312,28 +312,24 @@ function AppStep4() {
         try {
             setIsLoading(true);
             const serverURL = import.meta.env.VITE_SERVER_URL;
-            // const response = await fetch(serverURL + 'api/newClientAppointment', {
-            const response = await fetch(
-                'http://localhost:3300/api/newClientAppointment',
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        name: client.name,
-                        surname: client.surname,
-                        birthday: client.birthday,
-                        email: client.email,
-                        telephone: client.telephone.match(/\d/g).slice(1).join(''),
-                        docId: appParams.doctorId,
-                        date: appParams.date,
-                        time: appParams.time,
-                        followUp: appParams.followUp,
-                        specialityId: appParams.specialityId,
-                        onlineAppointment: appParams.onlineAppointment,
-                        clinicId: appParams.clinicId,
-                    }),
-                }
-            );
+            const response = await fetch(serverURL + 'api/newClientAppointment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: client.name,
+                    surname: client.surname,
+                    birthday: client.birthday,
+                    email: client.email,
+                    telephone: client.telephone.match(/\d/g).slice(1).join(''),
+                    docId: appParams.doctorId,
+                    date: appParams.date,
+                    time: appParams.time,
+                    followUp: appParams.followUp,
+                    specialityId: appParams.specialityId,
+                    onlineAppointment: appParams.onlineAppointment,
+                    clinicId: appParams.clinicId,
+                }),
+            });
             const result = await response.json();
 
             setIsLoading(false);
@@ -383,8 +379,7 @@ function AppStep4() {
 
             headers.append('Authorization', `Bearer ${Cookies.get('_auth')}`);
             headers.append('Content-Type', 'application/json');
-            // const response = await fetch(serverURL + 'api/authAppointment', {
-            const response = await fetch('http://localhost:3300/api/authAppointment', {
+            const response = await fetch(serverURL + 'api/authAppointment', {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({

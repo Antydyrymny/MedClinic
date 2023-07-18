@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import useLoadDocClinicSpec from '../../hooks/useLoadDocClinicSpec';
 import { Outlet } from 'react-router-dom';
+import useLoadDocClinicSpec from '../../hooks/useLoadDocClinicSpec';
 import { DocSearchContext } from 'src/context/DocSearchContext';
 import {
     DoctorsAllContext,
@@ -27,7 +27,6 @@ function DoctorsContext() {
     const [doctors, setDoctors] = useSessionStorageState(doctorsKey, null);
     const [specialties, setSpecialties] = useSessionStorageState(specialitiesKey, null);
     const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
-
     useLoadDocClinicSpec({
         doctors,
         setDoctors,
