@@ -13,9 +13,12 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
+import { ClientAppointmentsContext } from '../../context/ClientAppointmentsContext';
 import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import { doctorsKey, specialitiesKey, clinicsKey } from 'src/data/SessionStorageKeys';
 import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
+import MyNav from './components/MyNav';
+import MyMainMenu from './components/MyMainMenu';
 import MyProfileCss from './MyProfile.module.css';
 
 function MyProfile() {
@@ -55,22 +58,36 @@ function MyProfile() {
         setIsLoading,
     });
 
+    const [menuIsOpen, setMenuIsOpen] = useState(true);
+
     return (
         <div className={MyProfileCss.wrapper}>
             <WindowWidth.Provider value={screenWidth}>
-                <DoctorsAllContext.Provider value={doctors}>
-                    <SpecialitiesContext.Provider value={specialties}>
-                        <ClinicsContext.Provider value={clinics}>
-                            {isLoading ? (
-                                <LoadingSpinner />
-                            ) : errorWhileLoading ? (
-                                <div>{`Error while loading data: ${errorWhileLoading}`}</div>
-                            ) : (
-                                <Outlet />
-                            )}
-                        </ClinicsContext.Provider>
-                    </SpecialitiesContext.Provider>
-                </DoctorsAllContext.Provider>
+                <MyMainMenu
+                    open={menuIsOpen}
+                    toogleMenu={setMenuIsOpen}
+                    handleLogout={handleLogout}
+                />
+                <MyNav
+                    surname={auth().surname}
+                    name={auth().name}
+                    toogleMenu={setMenuIsOpen}
+                />
+                <ClientAppointmentsContext.Provider value={clientAppointments}>
+                    <DoctorsAllContext.Provider value={doctors}>
+                        <SpecialitiesContext.Provider value={specialties}>
+                            <ClinicsContext.Provider value={clinics}>
+                                {isLoading ? (
+                                    <LoadingSpinner />
+                                ) : errorWhileLoading ? (
+                                    <div>{`Error while loading data: ${errorWhileLoading}`}</div>
+                                ) : (
+                                    <Outlet />
+                                )}
+                            </ClinicsContext.Provider>
+                        </SpecialitiesContext.Provider>
+                    </DoctorsAllContext.Provider>
+                </ClientAppointmentsContext.Provider>
             </WindowWidth.Provider>
             <div onClick={() => handleLogout()}>Leave</div>
         </div>

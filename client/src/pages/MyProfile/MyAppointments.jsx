@@ -1,6 +1,6 @@
 import MyAppCss from './MyAppointments.module.css';
 
-function MyAppointments() {
+function MyAppointments({ data }) {
     return <div>MyAppointments</div>;
 }
 
