@@ -1,0 +1,15 @@
+.wrapper {
+    padding: 5.25rem 0 0 18rem;
+    transition: padding .25s ease;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
+
+.fullWidth {
+    padding: 5.25rem 0 0 1.75rem;
+}
+
+.content {
+    position: relative;
+    min-height: calc(100vh - 7rem);
+}

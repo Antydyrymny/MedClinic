@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import { useAuthUser } from 'react-auth-kit';
 import useRedirect from '../../hooks/useRedirect';
@@ -13,7 +13,12 @@ import {
     SpecialitiesContext,
     ClinicsContext,
 } from 'src/context/FetchDataContext';
-import { ClientAppointmentsContext } from '../../context/ClientAppointmentsContext';
+import {
+    ClientAppointmentsContext,
+    MainBarStateContext,
+} from '../../context/MyProfileContext';
+import { LoadingContext } from '../../context/LoadingContext';
+import { ErrorWhileLoadingContext } from '../../context/ErrorWhileLoadingContext';
 import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import {
     doctorsKey,
@@ -21,12 +26,10 @@ import {
     clinicsKey,
     myAppsKey,
 } from 'src/data/SessionStorageKeys';
-import LoadingSpinner from '../../assets/Pictogram/LoadingSpinner';
 import MyNav from './components/MyNav';
 import MyMainMenu from './components/MyMainMenu';
+import MyContentLayout from './components/MyContentLayout';
 import MyProfileCss from './MyProfile.module.css';
-
-export const MainBarStateContext = createContext(null);
 
 function MyProfile() {
     // redirect to path with user name
@@ -50,21 +53,24 @@ function MyProfile() {
     const [specialties, setSpecialties] = useSessionStorageState(specialitiesKey, null);
     const [clinics, setClinics] = useSessionStorageState(clinicsKey, null);
 
-    const toLoad = [
-        () => loadClientAppointments({ setClientAppointments, setErrorWhileLoading }),
-        () =>
-            loadDocClinicSpec({
-                setDoctors,
-                setClinics,
-                setSpecialties,
-                setErrorWhileLoading,
-            }),
-    ];
+    const toLoad = useMemo(() => {
+        return [
+            () => loadClientAppointments({ setClientAppointments, setErrorWhileLoading }),
+            () =>
+                loadDocClinicSpec({
+                    setDoctors,
+                    setClinics,
+                    setSpecialties,
+                    setErrorWhileLoading,
+                }),
+        ];
+    }, [setClientAppointments, setClinics, setDoctors, setSpecialties]);
+    const loadCondition =
+        location.pathname.startsWith(finalLocation) &&
+        (!clientAppointments || !doctors || !clinics || !specialties);
     useLoadData({
         functionsArray: toLoad,
-        loadCondition:
-            location.pathname.startsWith(finalLocation) &&
-            (!clientAppointments || !doctors || !clinics || !specialties),
+        loadCondition,
         setIsLoading,
     });
 
@@ -82,30 +88,44 @@ function MyProfile() {
 
     return (
         <div className={MyProfileCss.wrapper}>
+            <div onClick={() => setClientAppointments(null)}>dsds</div>
             <WindowWidth.Provider value={screenWidth}>
                 <MyMainMenu
                     open={menuIsOpen}
                     closeMenu={() => setMenuIsOpen(false)}
                     handleLogout={() => handleLogout()}
                     curActive={curActiveMenuOption}
+                    screenWidth={screenWidth}
                 />
                 <MyNav
                     surname={auth()?.surname}
                     name={auth()?.name}
                     openMenu={() => setMenuIsOpen(true)}
+                    screenWidth={screenWidth}
                 />
-                <ClientAppointmentsContext.Provider value={clientAppointments}>
+                <ClientAppointmentsContext.Provider
+                    value={[clientAppointments, setClientAppointments]}
+                >
                     <DoctorsAllContext.Provider value={doctors}>
                         <SpecialitiesContext.Provider value={specialties}>
                             <ClinicsContext.Provider value={clinics}>
                                 <MainBarStateContext.Provider value={menuIsOpen}>
-                                    {isLoading ? (
-                                        <LoadingSpinner />
-                                    ) : errorWhileLoading ? (
-                                        <div>{`Error while loading data: ${errorWhileLoading}`}</div>
-                                    ) : (
-                                        <Outlet />
-                                    )}
+                                    <LoadingContext.Provider value={isLoading}>
+                                        <ErrorWhileLoadingContext.Provider
+                                            value={errorWhileLoading}
+                                        >
+                                            <MyContentLayout
+                                                screenWidth={screenWidth}
+                                                mainMenuIsOpen={menuIsOpen}
+                                                closeMenu={() => setMenuIsOpen(false)}
+                                                aboutToLoad={loadCondition}
+                                                isLoading={isLoading}
+                                                errorWhileLoading={errorWhileLoading}
+                                            >
+                                                <Outlet />
+                                            </MyContentLayout>
+                                        </ErrorWhileLoadingContext.Provider>
+                                    </LoadingContext.Provider>
                                 </MainBarStateContext.Provider>
                             </ClinicsContext.Provider>
                         </SpecialitiesContext.Provider>

@@ -33,5 +33,5 @@ export default function useLoadBookedTimes({
         if (loadCondition) {
             fetchData();
         } else setLoading(false);
-    }, []);
+    }, [doctorIds, loadCondition, setBookedTimes, setError, setLoading]);
 }

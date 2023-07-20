@@ -9,5 +9,5 @@ export default function useLoadData({ functionsArray, loadCondition, setIsLoadin
         }
 
         if (loadCondition) fetchData();
-    }, []);
+    }, [functionsArray, loadCondition, setIsLoading]);
 }

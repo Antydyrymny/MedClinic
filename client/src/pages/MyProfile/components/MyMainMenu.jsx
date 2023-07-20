@@ -1,6 +1,4 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { WindowWidth } from '../../../context/WindowDimensionsContext';
 import SmallLogo from '../../NavigationBar/Logo/SmallLogo';
 import CloseSmallColored from '../../../assets/Pictogram/CloseSmallColored';
 import Button from '../../../components/Button/Button';
@@ -9,8 +7,7 @@ import MyDocsSvg from '../../../assets/Pictogram/MyDocsSvg';
 import MyExitSvg from '../../../assets/Pictogram/MyExitSvg';
 import MyMainMenuCss from './MyMainMenu.module.css';
 
-function MyMainMenu({ open, closeMenu, handleLogout, curActive }) {
-    const screenWidth = useContext(WindowWidth);
+function MyMainMenu({ open, closeMenu, handleLogout, curActive, screenWidth }) {
     const smallScreen = screenWidth <= 1200;
 
     return (

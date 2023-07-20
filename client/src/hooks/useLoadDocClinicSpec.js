@@ -46,5 +46,5 @@ export default function useLoadDocClinicSpec({
         if (loadCondition) {
             fetchData();
         } else setLoading(false);
-    }, []);
+    }, [loadCondition, setClinics, setDoctors, setError, setLoading, setSpecialties]);
 }

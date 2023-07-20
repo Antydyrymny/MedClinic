@@ -30,5 +30,5 @@ export default function useLoadClinics({
         if (loadCondition) {
             fetchData();
         } else setLoading(false);
-    }, []);
+    }, [loadCondition, setClinics, setError, setLoading]);
 }
