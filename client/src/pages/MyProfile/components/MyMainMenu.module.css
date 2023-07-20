@@ -1,0 +1,102 @@
+.wrapper {
+    height: 100vh;
+    width: 16.25rem;
+    box-sizing: border-box;
+    padding: 1.9rem 0.95rem;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0 0 15px 0 rgba(34, 41, 47, .05);
+    transform: translate(-16.25rem, 0);
+}
+
+.wrapper,
+.listSvg {
+    transition: transform .25s ease;
+}
+
+.logo,
+.button,
+.title,
+.list li {
+    padding: 0 0.95rem;
+}
+
+.open {
+    transform: translate(0, 0);
+}
+
+.closeIcon {
+    position: relative;
+    top: 0.2rem;
+    left: 0.7rem;
+    cursor: pointer;
+}
+
+.button {
+    margin-block: 1.7rem 2.1rem;
+}
+
+.customBtnWrapper {
+    height: 2.625rem;
+    width: 11.875rem;
+    border-radius: 0.35rem;
+    font-size: 0.925rem;
+    letter-spacing: 0.1rem;
+    color: white;
+    border-color: #7367f0;
+    background-color: #7367f0;
+}
+
+.customBtnWrapper:hover {
+    box-shadow: 0 8px 25px -8px #7367f0;
+}
+
+.logo,
+.list li,
+.list li a {
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 0.9rem;
+    color: rgb(166, 164, 176);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.08rem;
+}
+
+.list ul {
+    list-style-type: none;
+}
+
+.list li {
+    padding-block: 0.625rem;
+}
+
+.list li,
+.list li a {
+    justify-content: flex-start;
+    gap: 1.4rem;
+    cursor: pointer;
+    color: #625f6e;
+    letter-spacing: 0.03rem;
+}
+
+.listSvg {
+    position: relative;
+    top: 0.1rem;
+}
+
+.list li:hover .listSvg {
+    transform: translate(0.4rem, 0);
+}
+
+.active {
+    background-color: #f0f0f0;
+}

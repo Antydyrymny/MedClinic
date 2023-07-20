@@ -1,0 +1,46 @@
+.wrapper {
+    box-sizing: border-box;
+    width: calc(100% - 16.25rem - 3.5rem);
+    margin: 1.15rem 1.75rem 0 1.75rem;
+    padding: 0.8rem 1.4rem;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    transition: width .3s ease;
+    border-radius: 0.42rem;
+    box-shadow: 0 4px 24px 0 rgba(34, 41, 47, .1);
+}
+
+.wrapper,
+.userCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hamburger {
+    opacity: 0;
+}
+
+.hamburgerShow {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.userCard {
+    gap: 0.7rem;
+    cursor: pointer
+}
+
+.userName {
+    font-weight: 600;
+    color: rgb(110, 107, 123);
+    letter-spacing: 0.01rem;
+}
+
+@media (max-width: 1200px) {
+    .wrapper {
+        width: calc(100% - 3.5rem);
+    }
+}

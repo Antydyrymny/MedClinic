@@ -5,3 +5,4 @@ export const doctorsKey = 'DOCTORS_ALL_STORAGE_KEY';
 export const specialitiesKey = 'SPECIALITIES_STORAGE_KEY';
 export const clinicsKey = 'CLINICS_STORAGE_KEY';
 export const appointmentStep3State = 'APPOINTMENT_STEP_3_STORAGE_KEY';
+export const myAppsKey = 'MYPROFILE_APPOINTMENTS_KEY';

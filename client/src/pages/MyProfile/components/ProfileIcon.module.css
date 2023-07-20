@@ -1,0 +1,28 @@
+.wrapper {
+    height: 2.5rem;
+    width: 2.5rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(115, 103, 240, .12);
+    color: #7367f0;
+}
+
+.label {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.onlineIcon {
+    height: 0.7rem;
+    width: 0.7rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background-color: #28c76f;
+}

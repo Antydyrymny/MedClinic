@@ -9,6 +9,7 @@ import {
     appointmentKey,
     lastProgressStepKey,
     appointmentStep3State,
+    myAppsKey,
 } from './data/SessionStorageKeys';
 import AppStep1 from './pages/Appointment/AppStep1';
 import AppStep2 from './pages/Appointment/AppStep2';
@@ -35,6 +36,7 @@ function App() {
         [appointmentKey, lastProgressStepKey, appointmentStep3State],
         '/app'
     );
+    useClearSessionStorageOnURLMove([myAppsKey], '/myProfile');
 
     function PrivateRoute({ Component, redirectRoute = '/login' }) {
         const isAuthenticated = useIsAuthenticated();
