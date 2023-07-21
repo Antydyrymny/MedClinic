@@ -135,8 +135,8 @@ function MyAppointments() {
             if (response.status === 400) {
                 showNotification(result.error);
             } else if (response.status === 200) {
-                setApps(result.updatedAppointments);
-                showNotification(result.message, 2000);
+                setTimeout(() => setApps(result.updatedAppointments), 2500);
+                showNotification(result.message, 2500);
             }
         } catch (error) {
             showNotification('Error connecting to login server, try again later');
