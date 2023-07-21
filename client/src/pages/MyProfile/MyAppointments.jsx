@@ -1,5 +1,6 @@
-import { useState, useContext, useMemo, useEffect } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import dayjs from 'dayjs';
+import Cookies from 'js-cookie';
 import {
     DoctorsAllContext,
     SpecialitiesContext,
@@ -98,6 +99,41 @@ function MyAppointments() {
                 return 1;
             else return -1;
         });
+    }
+
+    async function cancelAppointment(app) {
+        // const { appointmentId, date, time } = req.body;
+        try {
+            // setIsLoading(true)
+            const serverURL = import.meta.env.VITE_SERVER_URL;
+            const headers = new Headers();
+
+            headers.append('Authorization', `Bearer ${Cookies.get('_auth')}`);
+            headers.append('Content-Type', 'application/json');
+            const response = await fetch(serverURL + 'api/cancelAppointment', {
+                method: 'PATCH',
+                headers: headers,
+                body: JSON.stringify({
+                    appointmentId: app.appointmentId,
+                    date: app.date,
+                    time: app.time,
+                }),
+            });
+
+            const result = await response.json();
+            // setIsLoading(false);
+            if (response.status === 400) {
+                // showError(result.message);
+                console.log(result.error);
+            } else if (response.status === 200) {
+                // modalRef.current.showModal();
+                console.log(result.message);
+            }
+        } catch (error) {
+            // setIsLoading(false);
+            // showError('Error connecting to login server, try again later', null, 4500);
+            console.log(error);
+        }
     }
 }
 

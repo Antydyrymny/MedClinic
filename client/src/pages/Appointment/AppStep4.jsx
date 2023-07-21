@@ -334,7 +334,7 @@ function AppStep4() {
 
             setIsLoading(false);
             if (response.status === 400) {
-                showError(result.message);
+                showError(result.error);
             } else if (response.status === 409) {
                 if (
                     result.error.includes('Telephonw') &&
@@ -396,7 +396,7 @@ function AppStep4() {
             const result = await response.json();
             setIsLoading(false);
             if (response.status === 400) {
-                showError(result.message);
+                showError(result.error);
             } else if (response.status === 409) {
                 setTimeslotAlreadyBookedError(true);
                 modalRef.current.showModal();

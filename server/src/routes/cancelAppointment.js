@@ -8,7 +8,7 @@ import { Client } from '../models/client.js';
 import { BookedTime } from '../models/initialData/bookedTimes.js';
 
 const router = express.Router();
-router.put('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.patch('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
     const client = req.user;
     try {
         const { appointmentId, date, time } = req.body;
