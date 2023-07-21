@@ -64,7 +64,7 @@ function MyAppointments() {
                             </th>
                             <th>Doctor</th>
                             <th>Status</th>
-                            <th>Address</th>
+                            <th className={MyAppCss.address}>Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>

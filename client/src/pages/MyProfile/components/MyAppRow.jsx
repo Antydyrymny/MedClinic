@@ -5,19 +5,17 @@ import RowCss from './MyAppRow.module.css';
 
 function MyAppRow({ app, cancelApp }) {
     const navigate = useNavigate();
+    const finished = dayjs(app.date).hour(app.time.slice(0, 2)).isBefore(dayjs(), 'hour');
 
-    const finished = dayjs(app.date).isBefore(dayjs(), 'date');
-    // address: clinics.find((c) => c.id === app.clinicId).address,
-    //             speciality: specialities.find((s) => s.id === app.specialityId).name,
-    //             doctorName: appDoc.name,
-    //             doctorPhoto: appDoc.smallPhoto,
     return (
         <tr>
             <td>
                 {
                     <>
                         <div className={RowCss.date}>
-                            {dayjs(app.date).format('D MMMM, YYYY')}
+                            {dayjs(app.date)
+                                .hour(app.time.slice(0, 2))
+                                .format('D MMMM, YYYY')}
                         </div>
                         <div className={RowCss.time}>{app.time}</div>
                     </>

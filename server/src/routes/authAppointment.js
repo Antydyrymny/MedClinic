@@ -19,7 +19,14 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 
         if (!doctorAppointmentDays) {
             res.status(400).json({ error: 'No such doctor found' });
+            return;
         }
+
+        // objects are serializable
+        const backupClient = JSON.parse(JSON.stringify(client));
+        const backupDoctorAppointmentDays = JSON.parse(
+            JSON.stringify(doctorAppointmentDays)
+        );
 
         const appointmenDay = doctorAppointmentDays.bookedDateTime.find((entry) =>
             dayjs(entry.date).isSame(date, 'date')
@@ -29,6 +36,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             appointmenDay.times.find((appointment) => appointment.time === time)
         ) {
             res.status(409).json({ error: 'Appointment slot is already booked' });
+            return;
         }
 
         if (appointmenDay) {
@@ -53,7 +61,12 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             () => saveData(BookedTime, doctorAppointmentDays),
             () => saveData(Client, client),
         ];
-        await establishConnection(onConnection);
+        const onFail = [
+            () => saveData(BookedTime, backupDoctorAppointmentDays),
+            () => saveData(Client, backupClient),
+        ];
+
+        await establishConnection(onConnection, onFail);
         res.status(200).json({ message: 'Appointment successfully booked' });
     } catch (error) {
         res.status(500).json({ error });

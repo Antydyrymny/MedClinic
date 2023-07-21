@@ -11,5 +11,7 @@
 
 .content {
     position: relative;
+    margin-right: 1.75rem;
+    padding-bottom: 2rem;
     min-height: calc(100vh - 7rem);
 }

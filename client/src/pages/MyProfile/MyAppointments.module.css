@@ -1,7 +1,21 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 2px;
+    border-color: gray;
+    color: #6e6b7b;
+    box-shadow: 0 4px 24px 0 rgba(34, 41, 47, .1);
+}
+
+.table th {
+    padding: 0.625rem 1.75rem;
+    text-align: left;
+}
+
 .date {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.4rem;
     cursor: pointer;
 }

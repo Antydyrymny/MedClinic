@@ -9,6 +9,7 @@ import login from './login.js';
 import authAppointment from './authAppointment.js';
 import newClientAppointment from './newClientAppointment.js';
 import getClientApps from './getClientApps.js';
+import cancelAppointment from './cancelAppointment.js';
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use('/login', login);
 router.use('/authAppointment', authAppointment);
 router.use('/newClientAppointment', newClientAppointment);
 router.use('/getClientApps', getClientApps);
+router.use('/cancelAppointment', cancelAppointment);
 
 export default router;

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import establishConnection from '../dbRequests/establishConnection.js';
 import findData from '../dbRequests/findData.js';
 import saveData from '../dbRequests/saveData.js';
+import deleteData from '../dbRequests/deleteData.js';
 import { Client } from '../models/client.js';
 import { BookedTime } from '../models/initialData/bookedTimes.js';
 
@@ -84,7 +85,8 @@ router.post('/', async (req, res) => {
             () => saveData(Client, newClient),
             () => saveData(BookedTime, doctorAppointmentDays),
         ];
-        await establishConnection(onConnection, false);
+        const onFail = [() => deleteData(Client, { _id: newClient._id })];
+        await establishConnection(onConnection, onFail, false);
 
         const jwtToken = jwt.sign(
             {

@@ -11,6 +11,7 @@ const connectionString = process.env.MONGODB_URL;
 
 export default async function establishConnection(
     functionsArray,
+    cleanupFunctionsArray,
     independentFunctions = true
 ) {
     try {
@@ -30,6 +31,11 @@ export default async function establishConnection(
         console.log('Operations successful!');
         return results;
     } catch (error) {
+        if (cleanupFunctionsArray) {
+            console.log('Performing cleanup operations');
+            await Promise.allSettled(cleanupFunctionsArray.map((fn) => fn()));
+            console.log('Cleanup successful');
+        }
         console.error('Error while establishing connection:', error);
         throw new Error(error);
     } finally {
