@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useIsAuthenticated, useAuthUser, useSignIn } from 'react-auth-kit';
 import Cookies from 'js-cookie';
@@ -86,6 +86,18 @@ function AppStep4() {
 
     const modalRef = useRef(null);
     const [timeslotAlreadyBookedError, setTimeslotAlreadyBookedError] = useState(false);
+
+    // cleanup redirect timeouts
+    const timerIdRef = useRef(null);
+    useEffect(() => {
+        function onUnload() {
+            clearTimeout(timerIdRef.current);
+            window.removeEventListener('beforeunload', onUnload);
+        }
+
+        window.addEventListener('beforeunload', onUnload);
+        return () => onUnload();
+    }, []);
 
     return (
         <div className={AppStep4Css.wrapper}>
@@ -352,7 +364,11 @@ function AppStep4() {
                 } else if (result.error === 'Appointment slot is already booked') {
                     setTimeslotAlreadyBookedError(true);
                     modalRef.current.showModal();
-                    setTimeout(() => onTimeslotAlreadyBookedError(), 4000);
+                    setTimeout(
+                        () => setAppParams({ ...appParams, time: null, date: null }),
+                        4000
+                    );
+                    timerIdRef.current = setTimeout(() => navigate('/app/step3'), 4000);
                 }
             } else if (response.status === 200) {
                 setNewProfileCreated(true);
@@ -363,7 +379,7 @@ function AppStep4() {
                     authState: { name: result.name, surname: result.surname },
                 });
                 modalRef.current.showModal();
-                setTimeout(() => navigate('/myProfile'), 7000);
+                timerIdRef.current = setTimeout(() => navigate('/myProfile'), 5000);
             }
         } catch (error) {
             setIsLoading(false);
@@ -403,7 +419,7 @@ function AppStep4() {
                 setTimeout(() => onTimeslotAlreadyBookedError(), 4000);
             } else if (response.status === 200) {
                 modalRef.current.showModal();
-                setTimeout(() => navigate('/myProfile'), 4000);
+                timerIdRef.current = setTimeout(() => navigate('/myProfile'), 4000);
             }
         } catch (error) {
             setIsLoading(false);
