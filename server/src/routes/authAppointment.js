@@ -29,14 +29,13 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         );
 
         const appointmenDay = doctorAppointmentDays.bookedDateTime.find((entry) =>
-            dayjs(entry.date).isSame(date, 'date')
+            dayjs(entry.date).isSame(date, 'day')
         );
         if (
             appointmenDay &&
             appointmenDay.times.find((appointment) => appointment.time === time)
         ) {
-            // res.status(409).json({ error: 'Appointment slot is already booked' });
-            res.status(409).json({ error: appointmenDay });
+            res.status(409).json({ error: 'Appointment slot is already booked' });
             return;
         }
 
