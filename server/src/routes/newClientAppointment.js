@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
         }
 
         const appointmenDay = doctorAppointmentDays.bookedDateTime.find((entry) =>
-            dayjs(entry.date).isSame(date, 'date')
+            dayjs(entry.date).isSame(date, 'day')
         );
         if (
             appointmenDay &&
