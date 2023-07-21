@@ -44,14 +44,14 @@ function MyAppointments() {
         return appsExpanded;
     }, [appsExpanded, sortedDescending]);
 
-    const [isLoading, setIsLoading] = useState(false);
-    const [updatingAppId, setUpdatingAppId] = useState(null);
-    const [notification, setNotification] = useState(null);
+    const [updatingState, setUpdatingState] = useState([]);
 
     return (
         <div>
             <h1 className={MyAppCss.heading}>MyAppointments</h1>
-            {smallScreen ? (
+            {!appsSorted.length ? (
+                <div className={MyAppCss.noApps}>No appointments yet</div>
+            ) : smallScreen ? (
                 <div className={MyAppCss.smallScreen}></div>
             ) : (
                 <table className={MyAppCss.table}>
@@ -79,9 +79,9 @@ function MyAppointments() {
                                 key={app._id}
                                 app={app}
                                 cancelApp={() => cancelAppointment(app)}
-                                updating={updatingAppId === app._id}
-                                isLoading={isLoading}
-                                notification={notification}
+                                updatingState={updatingState.find(
+                                    (updateData) => updateData.app === app._id
+                                )}
                             />
                         ))}
                     </tbody>
@@ -114,8 +114,10 @@ function MyAppointments() {
 
     async function cancelAppointment(app) {
         try {
-            setIsLoading(true);
-            setUpdatingAppId(app._id);
+            setUpdatingState((priorState) => [
+                ...priorState,
+                { appId: app._id, isLoading: true, message: null },
+            ]);
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const headers = new Headers();
 
@@ -133,22 +135,27 @@ function MyAppointments() {
 
             const result = await response.json();
             if (response.status === 400) {
-                showNotification(result.error);
+                showNotification(app, result.error);
             } else if (response.status === 200) {
-                setTimeout(() => setApps(result.updatedAppointments), 2500);
-                showNotification(result.message, 2500);
+                setTimeout(() => setApps(result.updatedAppointments), 3000);
+                showNotification(app, result.message);
             }
         } catch (error) {
-            showNotification('Error connecting to login server, try again later');
+            showNotification(app, 'Error connecting to login server, try again later');
         }
     }
 
-    function showNotification(message, duration = 3000) {
-        setIsLoading(false);
-        setNotification(message);
+    function showNotification(app, message, duration = 3000) {
+        setUpdatingState((priorState) =>
+            priorState.map((updateData) => {
+                if (updateData.app !== app._id) return updateData;
+                return { ...updateData, isLoading: false, message };
+            })
+        );
         setTimeout(() => {
-            setNotification(null);
-            setUpdatingAppId(null);
+            setUpdatingState((priorState) =>
+                priorState.filter((updateData) => updateData.app !== app._id)
+            );
         }, duration);
     }
 }

@@ -4,17 +4,17 @@ import Button from '../../../components/Button/Button';
 import LoadingSpinner from '../../../assets/Pictogram/LoadingSpinner';
 import RowCss from './MyAppRow.module.css';
 
-function MyAppRow({ app, cancelApp, updating, isLoading, notification }) {
+function MyAppRow({ app, cancelApp, updatingState }) {
     const navigate = useNavigate();
     const finished = dayjs(app.date).hour(app.time.slice(0, 2)).isBefore(dayjs(), 'hour');
 
-    return updating ? (
+    return updatingState ? (
         <tr className={RowCss.row}>
             <td colSpan={5}>
-                {isLoading ? (
+                {updatingState.isLoading ? (
                     <LoadingSpinner text={false} />
                 ) : (
-                    <div className={RowCss.notification}>{notification}</div>
+                    <div className={RowCss.notification}>{updatingState.message}</div>
                 )}
             </td>
         </tr>
