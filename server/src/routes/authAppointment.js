@@ -35,7 +35,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             appointmenDay &&
             appointmenDay.times.find((appointment) => appointment.time === time)
         ) {
-            res.status(409).json({ error: 'Appointment slot is already booked' });
+            // res.status(409).json({ error: 'Appointment slot is already booked' });
+            res.status(409).json({ error: appointmenDay.times });
             return;
         }
 

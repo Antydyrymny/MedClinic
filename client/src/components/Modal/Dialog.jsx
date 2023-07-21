@@ -13,7 +13,7 @@ function Dialog({
         <>
             <div
                 className={`${customStyles?.customModalButton || DialogCss.modalButton}`}
-                onClick={inactive ? null : onDialogOpen}
+                onClick={inactive ? null : () => dialog.current.show()}
             >
                 {openButton}
             </div>
