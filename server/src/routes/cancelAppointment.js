@@ -12,12 +12,11 @@ router.patch('/', passport.authenticate('jwt', { session: false }), async (req, 
     const client = req.user;
     try {
         const { appointmentId, date, time } = req.body;
-
         let onConnection = [() => findData(BookedTime, { _id: appointmentId }, true)];
         const [doctorAppointmentDays] = await establishConnection(onConnection);
 
         if (!doctorAppointmentDays) {
-            res.status(400).json({ error: 'No such doctor found' });
+            res.status(400).json({ error: 'Appointment not found' });
             return;
         }
 
@@ -32,7 +31,7 @@ router.patch('/', passport.authenticate('jwt', { session: false }), async (req, 
             return;
         }
 
-        appointmenDay.times = appointmenDay.times.filter((t) => t !== time);
+        appointmenDay.times = appointmenDay.times.filter((app) => app.time !== time);
         if (!appointmenDay.times.length) {
             doctorAppointmentDays.bookedDateTime =
                 doctorAppointmentDays.bookedDateTime.filter(
@@ -48,7 +47,10 @@ router.patch('/', passport.authenticate('jwt', { session: false }), async (req, 
             () => saveData(Client, client),
         ];
         await establishConnection(onConnection);
-        res.status(200).json({ message: 'Appointment successfully canceled' });
+        res.status(200).json({
+            message: 'Appointment successfully canceled',
+            updatedAppointments: client.bookedTimes,
+        });
     } catch (error) {
         res.status(500).json({ error });
     }

@@ -44,6 +44,10 @@ function MyAppointments() {
         return appsExpanded;
     }, [appsExpanded, sortedDescending]);
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [updatingAppId, setUpdatingAppId] = useState(null);
+    const [notification, setNotification] = useState(null);
+
     return (
         <div>
             <h1 className={MyAppCss.heading}>MyAppointments</h1>
@@ -71,7 +75,14 @@ function MyAppointments() {
                     </thead>
                     <tbody>
                         {appsSorted.map((app) => (
-                            <MyAppRow key={app._id} app={app} />
+                            <MyAppRow
+                                key={app._id}
+                                app={app}
+                                cancelApp={() => cancelAppointment(app)}
+                                updating={updatingAppId === app._id}
+                                isLoading={isLoading}
+                                notification={notification}
+                            />
                         ))}
                     </tbody>
                 </table>
@@ -102,9 +113,9 @@ function MyAppointments() {
     }
 
     async function cancelAppointment(app) {
-        // const { appointmentId, date, time } = req.body;
         try {
-            // setIsLoading(true)
+            setIsLoading(true);
+            setUpdatingAppId(app._id);
             const serverURL = import.meta.env.VITE_SERVER_URL;
             const headers = new Headers();
 
@@ -121,19 +132,24 @@ function MyAppointments() {
             });
 
             const result = await response.json();
-            // setIsLoading(false);
             if (response.status === 400) {
-                // showError(result.message);
-                console.log(result.error);
+                showNotification(result.error);
             } else if (response.status === 200) {
-                // modalRef.current.showModal();
-                console.log(result.message);
+                setApps(result.updatedAppointments);
+                showNotification(result.message, 2000);
             }
         } catch (error) {
-            // setIsLoading(false);
-            // showError('Error connecting to login server, try again later', null, 4500);
-            console.log(error);
+            showNotification('Error connecting to login server, try again later');
         }
+    }
+
+    function showNotification(message, duration = 3000) {
+        setIsLoading(false);
+        setNotification(message);
+        setTimeout(() => {
+            setNotification(null);
+            setUpdatingAppId(null);
+        }, duration);
     }
 }
 

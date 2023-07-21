@@ -1,0 +1,12 @@
+.row {
+    position: relative;
+    height: 10rem;
+}
+
+.notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}

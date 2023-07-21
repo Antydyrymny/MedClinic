@@ -1,14 +1,25 @@
 import { Navigate, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import Button from '../../../components/Button/Button';
+import LoadingSpinner from '../../../assets/Pictogram/LoadingSpinner';
 import RowCss from './MyAppRow.module.css';
 
-function MyAppRow({ app, cancelApp }) {
+function MyAppRow({ app, cancelApp, updating, isLoading, notification }) {
     const navigate = useNavigate();
     const finished = dayjs(app.date).hour(app.time.slice(0, 2)).isBefore(dayjs(), 'hour');
 
-    return (
-        <tr>
+    return updating ? (
+        <tr className={RowCss.row}>
+            <td colSpan={5}>
+                {isLoading ? (
+                    <LoadingSpinner text={false} />
+                ) : (
+                    <div className={RowCss.notification}>{notification}</div>
+                )}
+            </td>
+        </tr>
+    ) : (
+        <tr className={RowCss.row}>
             <td>
                 {
                     <>
