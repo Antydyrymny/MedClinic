@@ -1,5 +1,7 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import Dialog from '../../../components/Modal/Dialog';
 import Button from '../../../components/Button/Button';
 import LoadingSpinner from '../../../assets/Pictogram/LoadingSpinner';
 import RowCss from './MyAppRow.module.css';
@@ -7,6 +9,7 @@ import RowCss from './MyAppRow.module.css';
 function MyAppRow({ app, cancelApp, updatingState, notAllowed }) {
     const navigate = useNavigate();
     const finished = dayjs(app.date).hour(app.time.slice(0, 2)).isBefore(dayjs(), 'hour');
+    const dialogRef = useRef(null);
 
     return updatingState ? (
         <tr className={RowCss.row}>
@@ -54,12 +57,31 @@ function MyAppRow({ app, cancelApp, updatingState, notAllowed }) {
             <td>
                 {
                     <div className={RowCss.actionButton}>
-                        <Button
-                            text={finished ? 'Reschedule' : 'Cancel'}
-                            onClick={finished ? rescheduleApp : cancelApp}
-                            customStyles={RowCss}
-                            notAllowed={notAllowed}
-                        />
+                        <Dialog
+                            dialog={dialogRef}
+                            inactive={finished || notAllowed}
+                            openButton={
+                                <Button
+                                    text={finished ? 'Reschedule' : 'Cancel'}
+                                    onClick={finished ? rescheduleApp : null}
+                                    customStyles={RowCss}
+                                    notAllowed={notAllowed}
+                                />
+                            }
+                        >
+                            <div>
+                                Are you sure you want to cancel the appointment?
+                                <div
+                                    onClick={() => {
+                                        dialogRef.current.close();
+                                        cancelApp();
+                                    }}
+                                >
+                                    yes
+                                </div>
+                                <div onClick={() => dialogRef.current.close()}>no</div>
+                            </div>
+                        </Dialog>
                     </div>
                 }
             </td>

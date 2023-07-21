@@ -1,0 +1,27 @@
+.modalButton {
+    height: 100%;
+    width: 100%;
+}
+
+.dialog {
+    max-height: 100%;
+    z-index: 10;
+    border: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+    background-color: rgba(87, 209, 236, .3);
+}
+
+@media (max-width: 650px) {
+    .dialog {
+        border-radius: 0;
+    }
+
+    dialog:modal {
+        max-width: 100%;
+    }
+}

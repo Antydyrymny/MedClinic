@@ -8,7 +8,6 @@ import {
 } from 'src/context/FetchDataContext';
 import { ClientAppointmentsContext } from '../../context/MyProfileContext';
 import { WindowWidth } from '../../context/WindowDimensionsContext';
-import Modal from '../../components/Modal/Modal';
 import MyAppRow from './components/MyAppRow';
 import sortUp from '../../assets/Pictogram/sortUp.png';
 import sortDown from '../../assets/Pictogram/sortDown.png';
