@@ -4,7 +4,7 @@ import Button from '../../../components/Button/Button';
 import LoadingSpinner from '../../../assets/Pictogram/LoadingSpinner';
 import RowCss from './MyAppRow.module.css';
 
-function MyAppRow({ app, cancelApp, updatingState }) {
+function MyAppRow({ app, cancelApp, updatingState, notAllowed }) {
     const navigate = useNavigate();
     const finished = dayjs(app.date).hour(app.time.slice(0, 2)).isBefore(dayjs(), 'hour');
 
@@ -58,6 +58,7 @@ function MyAppRow({ app, cancelApp, updatingState }) {
                             text={finished ? 'Reschedule' : 'Cancel'}
                             onClick={finished ? rescheduleApp : cancelApp}
                             customStyles={RowCss}
+                            notAllowed={notAllowed}
                         />
                     </div>
                 }

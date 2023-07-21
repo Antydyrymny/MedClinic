@@ -80,8 +80,11 @@ function MyAppointments() {
                                 app={app}
                                 cancelApp={() => cancelAppointment(app)}
                                 updatingState={updatingState.find(
-                                    (updateData) => updateData.app === app._id
+                                    (updateData) => updateData.appId === app._id
                                 )}
+                                notAllowed={
+                                    !!updatingState.find((entry) => entry.isLoading)
+                                }
                             />
                         ))}
                     </tbody>
@@ -148,13 +151,13 @@ function MyAppointments() {
     function showNotification(app, message, duration = 3000) {
         setUpdatingState((priorState) =>
             priorState.map((updateData) => {
-                if (updateData.app !== app._id) return updateData;
+                if (updateData.appId !== app._id) return updateData;
                 return { ...updateData, isLoading: false, message };
             })
         );
         setTimeout(() => {
             setUpdatingState((priorState) =>
-                priorState.filter((updateData) => updateData.app !== app._id)
+                priorState.filter((updateData) => updateData.appId !== app._id)
             );
         }, duration);
     }

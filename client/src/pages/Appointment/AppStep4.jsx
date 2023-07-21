@@ -416,7 +416,11 @@ function AppStep4() {
             } else if (response.status === 409) {
                 setTimeslotAlreadyBookedError(true);
                 modalRef.current.showModal();
-                setTimeout(() => onTimeslotAlreadyBookedError(), 4000);
+                setTimeout(
+                    () => setAppParams({ ...appParams, time: null, date: null }),
+                    4000
+                );
+                timerIdRef.current = setTimeout(() => navigate('/app/step3'), 4000);
             } else if (response.status === 200) {
                 modalRef.current.showModal();
                 timerIdRef.current = setTimeout(() => navigate('/myProfile'), 4000);

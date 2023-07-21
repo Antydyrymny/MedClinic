@@ -38,6 +38,12 @@ export function getAvailableTimesPerDocForDate({
                                   .map((appointment) => appointment.time)
                                   .includes(timeSlot)
                       );
+                if (dayjs().isSame(dayjs(date), 'day')) {
+                    newAvailableTimesEntry.times = newAvailableTimesEntry.times.filter(
+                        (time) => dayjs().isBefore(dayjs().hour(time.slice(0, 2)))
+                    );
+                }
+                if (!newAvailableTimesEntry.times.length) return;
                 if (!onlineAppointment) {
                     newAvailableTimesEntry.clinic = clinicsPicked.find(
                         (clinic) =>
