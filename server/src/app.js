@@ -7,7 +7,7 @@ import { notFound, errorHandler } from './middleware.js';
 import mainRouter from './routes/mainRouter.js';
 import './routes/auth/auth.js';
 
-process.env.TZ = 'America/New_York';
+process.env.TZ = 'Europe/Moscow';
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
