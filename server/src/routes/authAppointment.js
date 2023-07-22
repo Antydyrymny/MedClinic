@@ -22,6 +22,9 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             return;
         }
 
+        res.send({ dateSent: date, dateProccessed: dayjs(date) });
+        return;
+
         // objects are serializable
         const backupClient = JSON.parse(JSON.stringify(client));
         const backupDoctorAppointmentDays = JSON.parse(
