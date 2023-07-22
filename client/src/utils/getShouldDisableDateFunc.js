@@ -32,5 +32,6 @@ export function getShouldDisableDateFunc({
                   }).length)
         )
             return true;
+        else return false;
     };
 }

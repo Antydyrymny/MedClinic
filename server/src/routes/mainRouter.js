@@ -11,7 +11,11 @@ import newClientAppointment from './newClientAppointment.js';
 import getClientApps from './getClientApps.js';
 import cancelAppointment from './cancelAppointment.js';
 
+import testTime from './testtime.js';
+
 const router = express.Router();
+
+router.use('testTime', testTime);
 
 router.use('/getDocs', getDocs);
 router.use('/getClinics', getClinics);
