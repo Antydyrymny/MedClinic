@@ -15,7 +15,7 @@ import testTime from './testtime.js';
 
 const router = express.Router();
 
-router.use('testTime', testTime);
+router.use('/testTime', testTime);
 
 router.use('/getDocs', getDocs);
 router.use('/getClinics', getClinics);
