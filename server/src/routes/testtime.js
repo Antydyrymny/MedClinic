@@ -1,6 +1,7 @@
 import express from 'express';
 import dayjs from 'dayjs';
 
+process.env.TZ = 'America/New_York';
 const router = express.Router();
 router.get('/', async (req, res) => {
     try {
