@@ -9,6 +9,11 @@ import DoctorStep3 from './components/DoctorStep3/DoctorStep3';
 import SpecStep3 from './components/SpecStep3/SpecStep3';
 import BackButton from './components/BackButton/BackButton';
 import HomeButton from './components/HomeButton/HomeButton';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import en_gb from 'dayjs/locale/en-gb.js';
+import updateLocale from 'dayjs/plugin/updateLocale';
 import AppStep3Css from './AppStep3.module.css';
 
 function AppStep3() {
@@ -33,6 +38,10 @@ function AppStep3() {
         setError: setErrorWhileLoading,
     });
 
+    dayjs.extend(updateLocale);
+    dayjs.updateLocale('en-gb', { weekStart: 1 });
+    dayjs.locale('en-gb');
+
     return (
         <div className={AppStep3Css.wrapper}>
             {loading ? (
@@ -41,23 +50,29 @@ function AppStep3() {
                 <div>{`Error while loading data: ${errorWhileLoading}`}</div>
             ) : (
                 <>
-                    {showDoctorsPage ? (
-                        <DoctorStep3
-                            step3Data={step3Data}
-                            bookedData={bookedData}
-                            appParamsData={[appParams, setAppParams]}
-                        />
-                    ) : (
-                        <SpecStep3
-                            step3Data={step3Data}
-                            bookedData={bookedData}
-                            appParamsData={[appParams, setAppParams]}
-                        />
-                    )}
-                    <div className={AppStep3Css.back}>
-                        <BackButton to={'/app/step2'} />
-                        <HomeButton />
-                    </div>
+                    <LocalizationProvider
+                        dateAdapter={AdapterDayjs}
+                        adapterLocale={en_gb}
+                        dateLibInstance={dayjs.tz}
+                    >
+                        {showDoctorsPage ? (
+                            <DoctorStep3
+                                step3Data={step3Data}
+                                bookedData={bookedData}
+                                appParamsData={[appParams, setAppParams]}
+                            />
+                        ) : (
+                            <SpecStep3
+                                step3Data={step3Data}
+                                bookedData={bookedData}
+                                appParamsData={[appParams, setAppParams]}
+                            />
+                        )}
+                        <div className={AppStep3Css.back}>
+                            <BackButton to={'/app/step2'} />
+                            <HomeButton />
+                        </div>
+                    </LocalizationProvider>
                 </>
             )}
         </div>

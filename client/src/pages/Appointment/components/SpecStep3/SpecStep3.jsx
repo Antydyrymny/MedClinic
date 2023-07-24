@@ -71,11 +71,11 @@ function SpecStep3({ step3Data, bookedData, appParamsData }) {
                         <div className={SpecStep3Css.datepicker}>
                             <ThemeProvider theme={calendarTheme}>
                                 <DateCalendar
-                                    value={appParams.date ? dayjs(appParams.date) : null}
+                                    value={appParams.date ? appParams.date : null}
                                     onChange={(newDate) => {
                                         setAppParams({
                                             ...appParams,
-                                            date: dayjs(newDate).toString(),
+                                            date: newDate,
                                         });
                                     }}
                                     shouldDisableDate={getShouldDisableDateFunc({

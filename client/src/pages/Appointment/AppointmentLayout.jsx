@@ -5,8 +5,6 @@ import {
     ClinicsContext,
 } from 'src/context/FetchDataContext';
 import { AppointmentFilterContext } from 'src/context/AppointmentFilterContext';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import useInformOfPageRefresh from 'src/hooks/useInformOfPageRefresh';
 import { permitVisitApp3, permitVisitApp4 } from 'src/utils/permitVisit';
@@ -21,8 +19,6 @@ import {
     specialitiesKey,
     clinicsKey,
 } from 'src/data/SessionStorageKeys';
-import dayjs from 'dayjs';
-import 'dayjs/locale/en-gb';
 import AppointLayoutCss from './AppointmentLayout.module.css';
 
 function AppointmentLayout() {
@@ -54,8 +50,6 @@ function AppointmentLayout() {
         }
     }, [wasRefreshed, setWasRefreshed, appParams, setAppParams, currentStep]);
 
-    dayjs.locale('en-gb');
-
     return (
         <section className={AppointLayoutCss.app}>
             <div className={AppointLayoutCss.wrapper}>
@@ -74,9 +68,7 @@ function AppointmentLayout() {
                                 value={[specialties, setSpecialties]}
                             >
                                 <ClinicsContext.Provider value={[clinics, setClinics]}>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <Outlet />
-                                    </LocalizationProvider>
+                                    <Outlet />
                                 </ClinicsContext.Provider>
                             </SpecialitiesContext.Provider>
                         </DoctorsAllContext.Provider>

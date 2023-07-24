@@ -82,24 +82,11 @@ function DoctorStep3({ step3Data, bookedData, appParamsData }) {
                     <div className={DoctorStep3Css.datepicker}>
                         <ThemeProvider theme={calendarTheme}>
                             <DateCalendar
-                                value={appParams.date ? dayjs(appParams.date) : null}
+                                value={appParams.date ? appParams.date : null}
                                 onChange={(newDate) => {
-                                    console.log(
-                                        // newDate
-                                        // dayjs(newDate),
-                                        dayjs(newDate).format('DD:MM:YYYY')
-                                        // dayjs(newDate).toString(),
-                                        // dayjs(newDate).toISOString(),
-                                        // dayjs(dayjs(newDate).toString())
-                                        // dayjs(dayjs(newDate).format('DD:MM:YYYY')),
-                                        // dayjs(dayjs(newDate).format('DD:MM:YYYY')).isSame(
-                                        //     dayjs(newDate),
-                                        //     'day'
-                                        // )
-                                    );
                                     setAppParams({
                                         ...appParams,
-                                        date: dayjs(newDate).toString(),
+                                        date: newDate,
                                     });
                                 }}
                                 shouldDisableDate={getShouldDisableDateFunc({

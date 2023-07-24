@@ -30,6 +30,13 @@ import MySettings from './pages/MyProfile/MySettings';
 import Login from './pages/Login/Login';
 import Register from './pages/Login/Register';
 import NotFound from './pages/NotFound/NotFound';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
+import timezone from 'dayjs/plugin/timezone.js';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Europe/London');
 
 function App() {
     useClearSessionStorageOnURLMove(

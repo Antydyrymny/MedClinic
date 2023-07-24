@@ -410,7 +410,6 @@ function AppStep4() {
             });
 
             const result = await response.json();
-            console.log(result);
             setIsLoading(false);
             if (response.status === 400) {
                 showError(result.error);
