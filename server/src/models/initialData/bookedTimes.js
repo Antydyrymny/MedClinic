@@ -28,6 +28,33 @@ export const bookedTimeSchema = new mongoose.Schema({
 export const BookedTime = mongoose.model('BookedTime', bookedTimeSchema);
 
 // export const bookedTimes = [
+//     { id: 1, docId: 1, bookedDateTime: [] },
+//     { id: 2, docId: 2, bookedDateTime: [] },
+//     { id: 3, docId: 3, bookedDateTime: [] },
+//     { id: 4, docId: 4, bookedDateTime: [] },
+//     { id: 5, docId: 5, bookedDateTime: [] },
+//     { id: 6, docId: 6, bookedDateTime: [] },
+//     { id: 7, docId: 7, bookedDateTime: [] },
+//     { id: 8, docId: 8, bookedDateTime: [] },
+//     { id: 9, docId: 9, bookedDateTime: [] },
+//     { id: 10, docId: 10, bookedDateTime: [] },
+//     { id: 11, docId: 11, bookedDateTime: [] },
+//     { id: 12, docId: 12, bookedDateTime: [] },
+//     { id: 13, docId: 13, bookedDateTime: [] },
+//     { id: 14, docId: 14, bookedDateTime: [] },
+//     { id: 15, docId: 15, bookedDateTime: [] },
+//     { id: 16, docId: 16, bookedDateTime: [] },
+//     { id: 17, docId: 17, bookedDateTime: [] },
+//     { id: 18, docId: 18, bookedDateTime: [] },
+//     { id: 19, docId: 19, bookedDateTime: [] },
+//     { id: 20, docId: 20, bookedDateTime: [] },
+//     { id: 21, docId: 21, bookedDateTime: [] },
+//     { id: 22, docId: 22, bookedDateTime: [] },
+//     { id: 23, docId: 23, bookedDateTime: [] },
+//     { id: 24, docId: 24, bookedDateTime: [] },
+// ];
+
+// export const bookedTimes = [
 //     {
 //         id: 0,
 //         docId: 0,

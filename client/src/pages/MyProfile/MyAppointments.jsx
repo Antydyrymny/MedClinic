@@ -29,6 +29,7 @@ function MyAppointments() {
                 const appDoc = myDocs.find((d) => d.id === app.docId);
                 return {
                     ...app,
+                    date: dayjs(app.date).tz(),
                     address: clinics.find((c) => c.id === app.clinicId).address,
                     speciality: specialities.find((s) => s.id === app.specialityId).name,
                     doctorName: appDoc.name,
@@ -94,10 +95,7 @@ function MyAppointments() {
 
     function sortDescending(arr) {
         arr.sort((a, b) => {
-            if (
-                dayjs(a.date).isBefore(dayjs(b.date)) ||
-                (dayjs(a.date).isSame(dayjs(b.date)) && a.time < b.time)
-            )
+            if (a.date.isBefore(b.date) || (a.date.isSame(b.date) && a.time < b.time))
                 return 1;
             else return -1;
         });
@@ -105,10 +103,7 @@ function MyAppointments() {
 
     function sortAscending(arr) {
         arr.sort((a, b) => {
-            if (
-                dayjs(a.date).isAfter(dayjs(b.date)) ||
-                (dayjs(a.date).isSame(dayjs(b.date)) && a.time > b.time)
-            )
+            if (a.date.isAfter(b.date) || (a.date.isSame(b.date) && a.time > b.time))
                 return 1;
             else return -1;
         });

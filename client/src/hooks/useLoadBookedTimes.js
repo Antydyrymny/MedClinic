@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
 
 export default function useLoadBookedTimes({
     bookedTimes,
@@ -21,7 +22,12 @@ export default function useLoadBookedTimes({
                     );
                 }
                 const result = await response.json();
-
+                // format timezone back
+                result.bookedTimes.forEach((docAppointments) => {
+                    docAppointments.bookedDateTime.forEach((day) => {
+                        day.date = dayjs(day.date).tz();
+                    });
+                });
                 setBookedTimes(result.bookedTimes);
                 setLoading(false);
             } catch (error) {

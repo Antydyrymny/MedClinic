@@ -16,7 +16,6 @@ export async function loadClientAppointments({
             );
         }
         const result = await response.json();
-
         setClientAppointments(result.appointments);
     } catch (error) {
         setErrorWhileLoading(error);

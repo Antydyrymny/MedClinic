@@ -10,8 +10,8 @@ export function getShouldDisableDateFunc({
     return function shouldDisableDate(date) {
         if (
             // Disable weekends
-            dayjs(date).day() === 0 ||
-            dayjs(date).day() === 6 ||
+            date.day() === 0 ||
+            date.day() === 6 ||
             // Disable dates that are fully booked,
             // if it is an in clinic appointment
             // consider if there are doctors working this day in chosen clinics

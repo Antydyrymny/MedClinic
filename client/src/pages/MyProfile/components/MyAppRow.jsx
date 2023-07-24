@@ -8,7 +8,7 @@ import RowCss from './MyAppRow.module.css';
 
 function MyAppRow({ app, cancelApp, updatingState, notAllowed }) {
     const navigate = useNavigate();
-    const finished = dayjs(app.date).hour(app.time.slice(0, 2)).isBefore(dayjs(), 'hour');
+    const finished = app.date.hour(app.time.slice(0, 2)).isBefore(dayjs.tz(), 'hour');
     const dialogRef = useRef(null);
 
     return updatingState ? (
@@ -27,9 +27,7 @@ function MyAppRow({ app, cancelApp, updatingState, notAllowed }) {
                 {
                     <>
                         <div className={RowCss.date}>
-                            {dayjs(app.date)
-                                .hour(app.time.slice(0, 2))
-                                .format('D MMMM, YYYY')}
+                            {app.date.hour(app.time.slice(0, 2)).format('D MMMM, YYYY')}
                         </div>
                         <div className={RowCss.time}>{app.time}</div>
                     </>

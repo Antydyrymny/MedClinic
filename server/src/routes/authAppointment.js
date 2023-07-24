@@ -13,7 +13,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
     try {
         const { docId, date, time, followUp, specialityId, onlineAppointment, clinicId } =
             req.body;
-
         let onConnection = [() => findData(BookedTime, { docId }, true)];
         const [doctorAppointmentDays] = await establishConnection(onConnection);
 
@@ -29,7 +28,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         );
 
         const appointmenDay = doctorAppointmentDays.bookedDateTime.find((entry) =>
-            dayjs(entry.date).isSame(date, 'day')
+            dayjs(entry.date).isSame(dayjs(date), 'day')
         );
         if (
             appointmenDay &&

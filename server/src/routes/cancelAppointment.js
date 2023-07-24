@@ -21,7 +21,7 @@ router.patch('/', passport.authenticate('jwt', { session: false }), async (req, 
         }
 
         const appointmenDay = doctorAppointmentDays.bookedDateTime.find((entry) =>
-            dayjs(entry.date).isSame(date, 'date')
+            dayjs(entry.date).isSame(dayjs(date), 'date')
         );
         if (
             !appointmenDay ||
@@ -39,7 +39,7 @@ router.patch('/', passport.authenticate('jwt', { session: false }), async (req, 
                 );
         }
         client.bookedTimes = client.bookedTimes.filter(
-            (app) => !dayjs(date).isSame(app.date, 'date') || time !== app.time
+            (app) => !dayjs(date).isSame(dayjs(app.date), 'date') || time !== app.time
         );
 
         onConnection = [

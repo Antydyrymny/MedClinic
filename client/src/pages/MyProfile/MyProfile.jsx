@@ -88,7 +88,6 @@ function MyProfile() {
 
     return (
         <div className={MyProfileCss.wrapper}>
-            <div onClick={() => setClientAppointments(null)}>dsds</div>
             <WindowWidth.Provider value={screenWidth}>
                 <MyMainMenu
                     open={menuIsOpen}

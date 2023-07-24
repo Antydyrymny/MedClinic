@@ -11,18 +11,15 @@ export function getAvailableTimesPerDocForDate({
     const docsAvailable = onlineAppointment
         ? doctors
         : doctors.filter((doc) =>
-              clinicsPicked
-                  .map((c) => c.id)
-                  .includes(doc.clinicSchedule[dayjs(date).day() - 1])
+              clinicsPicked.map((c) => c.id).includes(doc.clinicSchedule[date.day() - 1])
           );
     bookedData
         .filter((entry) => docsAvailable.map((doc) => doc.id).includes(entry.docId))
         .forEach((entry) => {
             const correspondingDoc = docsAvailable.find((doc) => doc.id === entry.docId);
             const targetDateBookedTimes = entry.bookedDateTime.find((dateTimeObj) => {
-                const bookedDate = dayjs(dateTimeObj.date);
-                const chosenDate = dayjs(date);
-                return bookedDate.isSame(chosenDate, 'day');
+                const bookedDate = dateTimeObj.date;
+                return bookedDate.isSame(date, 'day');
             });
             if (
                 !targetDateBookedTimes ||
@@ -38,17 +35,18 @@ export function getAvailableTimesPerDocForDate({
                                   .map((appointment) => appointment.time)
                                   .includes(timeSlot)
                       );
-                if (dayjs().isSame(dayjs(date), 'day')) {
+                // disable times eariler today
+                const now = dayjs().tz();
+                if (now.isSame(date, 'day')) {
                     newAvailableTimesEntry.times = newAvailableTimesEntry.times.filter(
-                        (time) => dayjs().isBefore(dayjs().hour(time.slice(0, 2)))
+                        (time) => now.isBefore(now.hour(time.slice(0, 2)))
                     );
                 }
                 if (!newAvailableTimesEntry.times.length) return;
                 if (!onlineAppointment) {
                     newAvailableTimesEntry.clinic = clinicsPicked.find(
                         (clinic) =>
-                            clinic.id ===
-                            correspondingDoc.clinicSchedule[dayjs(date).day() - 1]
+                            clinic.id === correspondingDoc.clinicSchedule[date.day() - 1]
                     );
                 }
                 availableTimesForDate.push(newAvailableTimesEntry);
