@@ -6,7 +6,7 @@ export function addDragNDrop(slider, container) {
         const shiftX = event.clientX - slider.getBoundingClientRect().left;
         const minLeft = container.getBoundingClientRect().right - slider.offsetWidth;
 
-        const onPointerMoveThrottled = throttle(onPointerMove, 50);
+        const onPointerMoveThrottled = throttle(onPointerMove, 25);
 
         document.addEventListener('pointermove', onPointerMoveThrottled);
         document.addEventListener('pointerup', onPointerUp);

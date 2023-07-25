@@ -2,20 +2,20 @@ import DialogCss from './Dialog.module.css';
 
 function Dialog({
     dialog,
-    openButton,
+    openingButton,
+    openDialog,
     children,
     inactive = false,
     customStyles = null,
-    onClose = null,
     borderRadius = '1rem',
 }) {
     return (
         <>
             <div
                 className={`${customStyles?.customModalButton || DialogCss.modalButton}`}
-                onClick={inactive ? null : () => dialog.current.show()}
+                onClick={inactive ? null : openDialog}
             >
-                {openButton}
+                {openingButton}
             </div>
             <dialog
                 ref={dialog}
@@ -26,25 +26,6 @@ function Dialog({
             </dialog>
         </>
     );
-
-    function onDialogOpen() {
-        dialog.current.show();
-        document.addEventListener('mousedown', closeModal);
-
-        function closeModal(e) {
-            const dimensions = dialog.current.getBoundingClientRect();
-            if (
-                e.clientX < dimensions.left ||
-                e.clientX > dimensions.right ||
-                e.clientY < dimensions.top ||
-                e.clientY > dimensions.bottom
-            ) {
-                dialog.current.close();
-                onClose && onClose();
-                document.removeEventListener('mousedown', closeModal);
-            }
-        }
-    }
 }
 
 export default Dialog;

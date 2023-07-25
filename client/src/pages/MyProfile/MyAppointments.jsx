@@ -9,13 +9,14 @@ import {
 import { ClientAppointmentsContext } from '../../context/MyProfileContext';
 import { WindowWidth } from '../../context/WindowDimensionsContext';
 import MyAppRow from './components/MyAppRow';
+import MyAppCard from './components/MyAppCard';
 import sortUp from '../../assets/Pictogram/sortUp.png';
 import sortDown from '../../assets/Pictogram/sortDown.png';
 import MyAppCss from './MyAppointments.module.css';
 
 function MyAppointments() {
     const screenWidth = useContext(WindowWidth);
-    const smallScreen = screenWidth <= 770;
+    const smallScreen = screenWidth <= 930;
     const doctors = useContext(DoctorsAllContext);
     const specialities = useContext(SpecialitiesContext);
     const clinics = useContext(ClinicsContext);
@@ -48,13 +49,32 @@ function MyAppointments() {
 
     return (
         <div>
-            <h1 className={MyAppCss.heading}>MyAppointments</h1>
+            <h1 className={MyAppCss.heading}>My Appointments</h1>
             {!appsSorted.length ? (
                 <div className={MyAppCss.noApps}>No appointments yet</div>
             ) : smallScreen ? (
-                <div className={MyAppCss.smallScreen}></div>
+                <div className={MyAppCss.smallScreen}>
+                    {appsSorted.map((app) => (
+                        <MyAppCard
+                            key={app._id}
+                            app={app}
+                            cancelApp={() => cancelAppointment(app)}
+                            updatingState={updatingState.find(
+                                (updateData) => updateData.appId === app._id
+                            )}
+                            notAllowed={!!updatingState.find((entry) => entry.isLoading)}
+                        />
+                    ))}
+                </div>
             ) : (
                 <table className={MyAppCss.table}>
+                    <colgroup>
+                        <col className={MyAppCss.col1} span={'1'} />
+                        <col className={MyAppCss.col2} span={'1'} />
+                        <col className={MyAppCss.col3} span={'1'} />
+                        <col className={MyAppCss.col4} span={'1'} />
+                        <col className={MyAppCss.col5} span={'1'} />
+                    </colgroup>
                     <thead>
                         <tr>
                             <th onClick={() => setSortedDescending(!sortedDescending)}>

@@ -98,6 +98,10 @@
     justify-content: center;
 }
 
+.smallFirstBarRightIcons a {
+    line-height: 0;
+}
+
 .smallFirstBarRightIcons img {
     cursor: pointer;
     scale: 0.9;

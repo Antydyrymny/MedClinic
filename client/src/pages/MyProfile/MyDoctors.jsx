@@ -2,11 +2,7 @@ import MyContentLayout from './components/MyContentLayout';
 import MyDocsCss from './MyDoctors.module.css';
 
 function MyDoctors() {
-    return (
-        <MyContentLayout>
-            <div>MyDoctors</div>
-        </MyContentLayout>
-    );
+    return <div>MyDoctors</div>;
 }
 
 export default MyDoctors;

@@ -1,5 +1,5 @@
 .wrapper {
-    height: 100vh;
+    min-height: 100vh;
     width: 16.25rem;
     box-sizing: border-box;
     padding: 1.9rem 0.95rem;

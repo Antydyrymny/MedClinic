@@ -10,7 +10,7 @@ function MyContentLayout({
     isLoading,
     errorWhileLoading,
 }) {
-    const smallScreen = screenWidth <= 770;
+    const smallScreen = screenWidth <= 1200;
 
     return (
         <div

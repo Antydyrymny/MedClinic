@@ -1,6 +1,5 @@
 .row {
     position: relative;
-    height: 10rem;
 }
 
 .notification {
@@ -9,4 +8,100 @@
     align-items: center;
     font-size: 1.1rem;
     font-weight: 600;
+}
+
+.date {
+    font-size: 0.9rem;
+    margin-bottom: 0.31rem;
+}
+
+.time {
+    font-size: 0.8rem;
+}
+
+.doctor {
+    display: flex;
+    gap: 1rem;
+}
+
+.doctor img {
+    border-radius: 50%;
+    width: 2.625rem;
+    height: 2.625rem;
+}
+
+.doctorName {
+    color: #5e5873;
+}
+
+.doctorSpec {
+    margin-top: 0.2rem;
+    color: #b9b9c3;
+    font-size: 0.9rem;
+}
+
+.status {
+    padding: 0.3rem 0.4rem;
+    border-radius: 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+}
+
+.completed {
+    color: white;
+    background-color: #82868b;
+}
+
+.upcoming {
+    border: 1px solid #82868b;
+}
+
+.address {
+    font-size: 0.9rem;
+}
+
+.actionButton {
+    position: relative;
+}
+
+.dialogContent {
+    border: 1px solid black;
+    padding: 0.7rem;
+    min-width: 12rem;
+    max-width: 12rem;
+    background-color: #f0f0f0;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.dialogButtons {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dialogButtons div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+}
+
+.dialogButtons div:hover {
+    font-weight: 600;
+    line-height: normal;
+}
+
+.customBtnWrapper {
+    height: 2.375rem;
+    width: 8rem;
+    border-radius: 0.35rem;
+    font-size: 0.925rem;
+    letter-spacing: 0.1rem;
+    color: white;
+    border-color: #7367f0;
+    background-color: #7367f0;
 }

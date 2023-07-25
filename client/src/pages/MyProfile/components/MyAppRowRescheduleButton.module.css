@@ -1,0 +1,14 @@
+.customBtnWrapper {
+    height: 2.375rem;
+    width: 8rem;
+    border-radius: 0.35rem;
+    font-size: 0.925rem;
+    letter-spacing: 0.1rem;
+    color: #7367f0;
+    border: 1px solid #7367f0;
+    border-color: #7367f0;
+}
+
+.customBtnWrapper:hover {
+    background-color: rgba(115, 103, 240, .04);
+}

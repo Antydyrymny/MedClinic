@@ -1,0 +1,80 @@
+.wrapper {
+    padding: 1.3rem;
+    border: 1px solid #7367f0;
+    border-radius: 0.5rem;
+    margin-bottom: 1.75rem;
+}
+
+.content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.3rem;
+}
+
+.content img {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+.doctorName {
+    color: #5e5873;
+    font-size: 1.05rem;
+}
+
+.doctorSpec {
+    margin-top: 0.2rem;
+    color: #b9b9c3;
+    font-size: 0.9rem;
+}
+
+.date {
+    margin-top: 0.2rem;
+    color: #6e6b7b;
+}
+
+.customBtnWrapper {
+    height: 2.375rem;
+    width: 8rem;
+    border-radius: 0.35rem;
+    font-size: 0.925rem;
+    letter-spacing: 0.1rem;
+    color: white;
+    border-color: #7367f0;
+    background-color: #7367f0;
+}
+
+.actionButton {
+    position: relative;
+}
+
+.dialogContent {
+    border: 1px solid black;
+    padding: 0.7rem;
+    min-width: 12rem;
+    max-width: 12rem;
+    background-color: #f0f0f0;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.dialogButtons {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dialogButtons div {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+}
+
+.dialogButtons div:hover {
+    font-weight: 600;
+    line-height: normal;
+}
