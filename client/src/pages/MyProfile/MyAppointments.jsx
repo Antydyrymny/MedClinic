@@ -17,6 +17,7 @@ import MyAppCss from './MyAppointments.module.css';
 function MyAppointments() {
     const screenWidth = useContext(WindowWidth);
     const smallScreen = screenWidth <= 930;
+
     const doctors = useContext(DoctorsAllContext);
     const specialities = useContext(SpecialitiesContext);
     const clinics = useContext(ClinicsContext);
@@ -49,9 +50,9 @@ function MyAppointments() {
 
     return (
         <div>
-            <h1 className={MyAppCss.heading}>My Appointments</h1>
+            <h1 className={MyAppCss.heading}>My appointments</h1>
             {!appsSorted.length ? (
-                <div className={MyAppCss.noApps}>No appointments yet</div>
+                <div className={MyAppCss.noEntries}>No appointments yet</div>
             ) : smallScreen ? (
                 <div className={MyAppCss.smallScreen}>
                     {appsSorted.map((app) => (

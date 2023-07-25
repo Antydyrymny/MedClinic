@@ -1,0 +1,12 @@
+.col1 {
+    min-width: 15rem;
+    width: 40%;
+}
+
+.col2 {
+    min-width: 10rem;
+}
+
+.col3 {
+    width: 11.25rem;
+}

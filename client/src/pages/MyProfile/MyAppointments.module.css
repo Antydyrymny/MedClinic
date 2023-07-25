@@ -6,6 +6,12 @@
     letter-spacing: 0.07rem;
 }
 
+.noEntries {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #6e6b7b;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -25,7 +31,7 @@ td {
 }
 
 .col1 {
-    min-width: 10.75rem;
+    min-width: 11.5rem;
 }
 
 .col2 {
