@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useIsAuthenticated } from 'react-auth-kit';
 import useClearSessionStorageOnURLMove from './hooks/useClearSessionStorageOnURLMove ';
 import './App.css';
+import useTitle from './hooks/useTitle';
 import MainLayout from './pages/MainLayout/MainLayout';
 import Home from './pages/Home/Home';
 import AppointmentLayout from './pages/Appointment/AppointmentLayout';
@@ -39,6 +40,7 @@ dayjs.extend(timezone);
 dayjs.tz.setDefault('Europe/London');
 
 function App() {
+    useTitle();
     useClearSessionStorageOnURLMove(
         [appointmentKey, lastProgressStepKey, appointmentStep3State],
         '/app'
