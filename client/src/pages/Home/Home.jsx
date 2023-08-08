@@ -4,14 +4,13 @@ import HomeMainBar from './HomeMainBar';
 import HomeCarousel from './HomeCarousel';
 import HomeQuote from './HomeQuote';
 import BottomBar from '../../components/BottomBar/BottomBar';
-import HomeCss from './Home.module.css';
 
 function Home() {
     const screenHeight = useContext(WindowHeight);
     const scroll = useContext(DocumentScroll);
 
     return (
-        <div className={HomeCss.wrapper}>
+        <div>
             <HomeMainBar />
             <HomeCarousel />
             <HomeQuote />

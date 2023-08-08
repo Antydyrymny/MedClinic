@@ -12,6 +12,7 @@ import {
 import useGetScreenWidth from '../../hooks/useGetScreenWidth';
 import useGetScreenHeight from '../../hooks/useGetScreenHeight';
 import useGetScroll from '../../hooks/useGetScroll';
+import useGetDocumentHeight from '../../hooks/useGetDocumentHeight';
 import { clinicsKey } from 'src/data/SessionStorageKeys';
 import useSessionStorageState from 'src/hooks/useSessionStorageState';
 import LoadingSpinner from 'src/assets/Pictogram/LoadingSpinner';
@@ -26,6 +27,7 @@ function MainLayout() {
     const screenWidth = useGetScreenWidth();
     const screenHeigth = useGetScreenHeight();
     const scroll = useGetScroll();
+    const documentHeight = useGetDocumentHeight();
     const location = useLocation();
 
     useLoadClinics({ clinics, setClinics, setLoading, setError: setErrorWhileLoading });
@@ -49,10 +51,10 @@ function MainLayout() {
                                 ) : (
                                     <>
                                         <Outlet />
-                                        {location.pathname !== '/' && <BottomBar />}
-                                        <Footer />
                                     </>
                                 )}
+                                {location.pathname !== '/' && <BottomBar />}
+                                <Footer fixed={documentHeight <= screenHeigth} />
                             </DocumentScroll.Provider>
                         </WindowHeight.Provider>
                     </WindowWidth.Provider>

@@ -2,11 +2,11 @@ import useGetScreenWidth from '../../hooks/useGetScreenWidth';
 import SocialMedia from '../NavigationBar/NavDropDown/SocialMedia';
 import FooterCss from './Footer.module.css';
 
-function Footer() {
+function Footer({ fixed = false }) {
     const screenWidth = useGetScreenWidth();
 
     return (
-        <footer className={FooterCss.wrapper}>
+        <footer className={`${fixed ? FooterCss.fixedWrapper : FooterCss.wrapper}`}>
             <hr className={FooterCss.line} />
             <div
                 className={`${FooterCss.content} ${
