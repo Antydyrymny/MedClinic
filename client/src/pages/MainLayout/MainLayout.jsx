@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import useLoadClinics from '../../hooks/useLoadClinics';
 import { ClinicsContext } from 'src/context/FetchDataContext';
+import { LoadingContext } from '../../context/LoadingContext';
 import {
     WindowWidth,
     WindowHeight,
@@ -33,24 +34,30 @@ function MainLayout() {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    return !clinics ? null : loading ? (
-        <LoadingSpinner />
-    ) : errorWhileLoading ? (
+    return errorWhileLoading ? (
         <div>{`Error while loading data: ${errorWhileLoading}`}</div>
     ) : (
         <>
-            <ClinicsContext.Provider value={clinics}>
-                <WindowWidth.Provider value={screenWidth}>
-                    <WindowHeight.Provider value={screenHeigth}>
-                        <DocumentScroll.Provider value={scroll}>
-                            <NavigationBar />
-                            <Outlet />
-                            {location.pathname !== '/' && <BottomBar />}
-                            <Footer />
-                        </DocumentScroll.Provider>
-                    </WindowHeight.Provider>
-                </WindowWidth.Provider>
-            </ClinicsContext.Provider>
+            <LoadingContext.Provider value={loading}>
+                <ClinicsContext.Provider value={clinics}>
+                    <WindowWidth.Provider value={screenWidth}>
+                        <WindowHeight.Provider value={screenHeigth}>
+                            <DocumentScroll.Provider value={scroll}>
+                                <NavigationBar />
+                                {loading ? (
+                                    <LoadingSpinner />
+                                ) : (
+                                    <>
+                                        <Outlet />
+                                        {location.pathname !== '/' && <BottomBar />}
+                                        <Footer />
+                                    </>
+                                )}
+                            </DocumentScroll.Provider>
+                        </WindowHeight.Provider>
+                    </WindowWidth.Provider>
+                </ClinicsContext.Provider>
+            </LoadingContext.Provider>
         </>
     );
 }

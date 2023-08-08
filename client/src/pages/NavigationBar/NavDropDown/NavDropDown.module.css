@@ -80,6 +80,12 @@
     flex: 1;
 }
 
+.customLoadingSpinnerWrapper {
+    position: static;
+    transform: none;
+    flex: 1;
+}
+
 @media (max-width: 1200px) {
     .largeWindow {
         display: none;

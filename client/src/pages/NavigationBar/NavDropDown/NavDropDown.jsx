@@ -1,13 +1,16 @@
 import { useContext, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { LoadingContext } from '../../../context/LoadingContext';
 import { ClinicsContext } from 'src/context/FetchDataContext';
 import ClinicBlock from './ClinicBlock';
 import SocialMedia from './SocialMedia';
 import SmallNavListElement from './SmallNavListElement';
 import SmallNavBottomBlock from './SmallNavBottomBlock';
+import LoadingSpinner from '../../../assets/Pictogram/LoadingSpinner';
 import NavDropDownCss from './NavDropDown.module.css';
 
 function NavDropDown({ opened, dropDownref, close }) {
+    const loading = useContext(LoadingContext);
     const clinics = useContext(ClinicsContext);
     const smallWindow = useRef(null);
 
@@ -58,14 +61,20 @@ function NavDropDown({ opened, dropDownref, close }) {
                 <div className={NavDropDownCss.largeClinicBlock}>
                     <h4 className={NavDropDownCss.heading}>our clinics</h4>
                     <div className={NavDropDownCss.largeClinicList}>
-                        {clinics.map((clinic) => (
-                            <ClinicBlock
-                                key={clinic.id}
-                                clinic={clinic}
-                                opened={opened}
-                                close={close}
-                            />
-                        ))}
+                        {loading ? (
+                            opened ? (
+                                <LoadingSpinner customStyles={NavDropDownCss} />
+                            ) : null
+                        ) : (
+                            clinics.map((clinic) => (
+                                <ClinicBlock
+                                    key={clinic.id}
+                                    clinic={clinic}
+                                    opened={opened}
+                                    close={close}
+                                />
+                            ))
+                        )}
                     </div>
                 </div>
                 <div className={NavDropDownCss.socialMedia}>
@@ -130,15 +139,22 @@ function NavDropDown({ opened, dropDownref, close }) {
                 <SmallNavListElement
                     title={'Our clinics'}
                     closeDropDown={closeDropDown}
-                    children={clinics.map((clinic) => (
-                        <ClinicBlock
-                            key={clinic.id}
-                            clinic={clinic}
-                            opened={opened}
-                            close={close}
-                            coloredBackground={false}
-                        />
-                    ))}
+                    loading={loading}
+                    children={
+                        loading ? (
+                            <LoadingSpinner />
+                        ) : (
+                            clinics.map((clinic) => (
+                                <ClinicBlock
+                                    key={clinic.id}
+                                    clinic={clinic}
+                                    opened={opened}
+                                    close={close}
+                                    coloredBackground={false}
+                                />
+                            ))
+                        )
+                    }
                 />
                 <SmallNavBottomBlock />
             </div>
