@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { throttle } from '../utils/throttle';
 
 export default function useGetScreenWidth() {
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -7,8 +8,9 @@ export default function useGetScreenWidth() {
         function handleWidthResize() {
             setScreenWidth(window.innerWidth);
         }
-        window.addEventListener('resize', handleWidthResize);
-        return () => window.removeEventListener('resize', handleWidthResize);
+        const handleWidthResizeThrottled = throttle(handleWidthResize, 100);
+        window.addEventListener('resize', handleWidthResizeThrottled);
+        return () => window.removeEventListener('resize', handleWidthResizeThrottled);
     }, []);
 
     return screenWidth;

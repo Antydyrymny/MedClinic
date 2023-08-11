@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { throttle } from '../utils/throttle';
 
 export default function useGetScroll() {
     const [currentScroll, setCurrentScroll] = useState(0);
@@ -7,8 +8,9 @@ export default function useGetScroll() {
         function handleScroll() {
             setCurrentScroll(document.documentElement.scrollTop);
         }
-        document.addEventListener('scroll', handleScroll);
-        return () => document.removeEventListener('scroll', handleScroll);
+        const handleScrollThrottled = throttle(handleScroll, 100);
+        document.addEventListener('scroll', handleScrollThrottled);
+        return () => document.removeEventListener('scroll', handleScrollThrottled);
     }, []);
 
     return currentScroll;

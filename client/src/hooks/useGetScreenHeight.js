@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { throttle } from '../utils/throttle';
 
 export default function useGetScreenHeight() {
     const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -7,8 +8,10 @@ export default function useGetScreenHeight() {
         function handleHeightResize() {
             setScreenHeight(window.innerHeight);
         }
-        window.addEventListener('resize', handleHeightResize);
-        return () => window.removeEventListener('resize', handleHeightResize);
+        const handleHeightResizeThrottled = throttle(handleHeightResize, 100);
+
+        window.addEventListener('resize', handleHeightResizeThrottled);
+        return () => window.removeEventListener('resize', handleHeightResizeThrottled);
     }, []);
 
     return screenHeight;
