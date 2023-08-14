@@ -12,14 +12,18 @@ function Dialog({
     return (
         <>
             <div
-                className={`${customStyles?.customModalButton || DialogCss.modalButton}`}
+                className={`${DialogCss.modalButton} ${
+                    customStyles ? customStyles.customModalButton : null
+                }`}
                 onClick={inactive ? null : openDialog}
             >
                 {openingButton}
             </div>
             <dialog
                 ref={dialog}
-                className={`${customStyles?.dialog || DialogCss.dialog}`}
+                className={`${DialogCss.dialog} ${
+                    customStyles ? customStyles.dialog : null
+                }`}
                 style={{ borderRadius: `${borderRadius}` }}
             >
                 {children}

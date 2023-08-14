@@ -50,6 +50,11 @@
     position: relative;
 }
 
+.dialog {
+    left: 0%;
+    transform: translate(0%, 1rem);
+}
+
 .dialogContent {
     border: 1px solid black;
     padding: 0.7rem;

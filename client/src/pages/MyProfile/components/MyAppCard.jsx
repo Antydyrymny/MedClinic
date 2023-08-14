@@ -39,7 +39,7 @@ function MyAppCard({ app, cancelApp, updatingState, notAllowed }) {
                     onClick={finished ? rescheduleApp : onDialogOpen}
                     customStyles={finished ? MyCardCss : RescheduleButtonCss}
                 />
-                <Dialog dialog={dialogRef}>
+                <Dialog dialog={dialogRef} customStyles={MyCardCss}>
                     <div className={MyCardCss.dialogContent}>
                         <div>Are you sure you want to cancel the appointment?</div>
                         <div className={MyCardCss.dialogButtons}>
