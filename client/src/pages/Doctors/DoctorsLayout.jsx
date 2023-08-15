@@ -20,7 +20,7 @@ const doctorFilterSchema = {
     speciality: [],
 };
 
-function DoctorsContext() {
+function DoctorsLayout() {
     const [searchParams, setSearchParams] = useState(doctorFilterSchema);
     const [loading, setLoading] = useState(true);
     const [errorWhileLoading, setErrorWhileLoading] = useState(null);
@@ -55,4 +55,4 @@ function DoctorsContext() {
     );
 }
 
-export default DoctorsContext;
+export default DoctorsLayout;
