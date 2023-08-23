@@ -24,8 +24,11 @@ export default async function establishConnection(
             results = await Promise.all(functionsArray.map((fn) => fn()));
         } else {
             results = await functionsArray.reduce(
-                (promises, fn) => promises.then(fn),
-                Promise.resolve()
+                (promiseChain, fn) =>
+                    promiseChain.then((resultsArr) =>
+                        fn().then((res) => resultsArr.concat(res))
+                    ),
+                Promise.resolve([])
             );
         }
         console.log('Operations successful!');
