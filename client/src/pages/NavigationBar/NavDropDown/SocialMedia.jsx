@@ -58,20 +58,22 @@ function SocialMedia({
                 {personal && (
                     <>
                         <a
+                            href={
+                                'https://www.linkedin.com/in/konstantin-danovich-30729b288/'
+                            }
+                            target='_blank'
+                            rel='noreferrer'
+                            className={SocialMediaCss.link}
+                        >
+                            <LinkedInSvg />
+                        </a>
+                        <a
                             href={'https://github.com/Antydyrymny'}
                             target='_blank'
                             rel='noreferrer'
                             className={SocialMediaCss.link}
                         >
                             <GithubSvg />
-                        </a>
-                        <a
-                            href={'https://www.linkedin.com/'}
-                            target='_blank'
-                            rel='noreferrer'
-                            className={SocialMediaCss.link}
-                        >
-                            <LinkedInSvg />
                         </a>
                         <a
                             href={'https://leetcode.com/KDanovich/'}

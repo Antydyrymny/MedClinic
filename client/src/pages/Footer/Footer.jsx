@@ -16,7 +16,10 @@ function Footer({ fixed = false }) {
                 <div className={FooterCss.infoBlock}>
                     <div className={FooterCss.info}>
                         Project by
-                        <a href='https://www.google.com' className={FooterCss.name}>
+                        <a
+                            href='https://konstantindanovich.vercel.app/'
+                            className={FooterCss.name}
+                        >
                             {` Danovich Konstantin`}
                         </a>
                     </div>
