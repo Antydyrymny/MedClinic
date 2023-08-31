@@ -15,29 +15,6 @@ import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
 import LoadingSpinner from './assets/Pictogram/LoadingSpinner';
 
-// import MainLayout from './pages/MainLayout/MainLayout';
-// import Home from './pages/Home/Home';
-// import AppointmentLayout from './pages/Appointment/AppointmentLayout';
-// import AppStep1 from './pages/Appointment/AppStep1';
-// import AppStep2 from './pages/Appointment/AppStep2';
-// import AppStep3 from './pages/Appointment/AppStep3';
-// import AppStep4 from './pages/Appointment/AppStep4';
-// import DoctorsLayout from './pages/Doctors/DoctorsLayout';
-// import Doctors from './pages/Doctors/Doctors';
-// import DoctorPage from './pages/Doctors/DoctorPage';
-// import Services from './pages/Services/Services';
-// import About from './pages/About/About';
-// import Contacts from './pages/Contacts/Contacts';
-// import Business from './pages/Business/Business';
-// import Partners from './pages/Partners/Partners';
-// import MyProfile from './pages/MyProfile/MyProfile';
-// import MyAppointments from './pages/MyProfile/MyAppointments';
-// import MyDoctors from './pages/MyProfile/MyDoctors';
-// import MySettings from './pages/MyProfile/MySettings';
-// import Login from './pages/Login/Login';
-// import Register from './pages/Login/Register';
-// import NotFound from './pages/NotFound/NotFound';
-
 const LazyMainLayout = React.lazy(() => import('./pages/MainLayout/MainLayout'));
 const LazyHome = React.lazy(() => import('./pages/Home/Home'));
 const LazyAppointmentLayout = React.lazy(() =>
